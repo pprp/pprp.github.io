@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="spicyCV" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+<meta name="keywords" content="python, pytorch, 深度学习, CV">
+<meta property="og:type" content="website">
+<meta property="og:title" content="spicyCV">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;page&#x2F;2&#x2F;index.html">
+<meta property="og:site_name" content="spicyCV">
+<meta property="og:description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/page/2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>spicyCV</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spicyCV</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">一个专注CV的starter</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/pprp" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/12/python%E9%AB%98%E9%98%B6%E7%94%A8%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/12/python%E9%AB%98%E9%98%B6%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">python高阶用法总结</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-12 14:54:46" itemprop="dateCreated datePublished" datetime="2019-10-12T14:54:46+08:00">2019-10-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 15:44:47" itemprop="dateModified" datetime="2019-11-11T15:44:47+08:00">2019-11-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>前言： 接触python有一段时间了，从开始的看菜鸟的python教程，看了一些视频，一些书。很多人感觉python很简单，确实相比其他语言，python可能稍微简单一点，但是不能说只学了python基础语法就说自己python水平可以了。最近在阅读YOLOv3的pytorch版本源码，就遇到很多瓶颈，很多是与python相关的。所以这篇进行总结一下，收集一下所有的问题，更深入理解python高阶用法，并且尽量每个都附上例子，做一个认真的coder,bloger。</p>
+</blockquote>
+<h2 id="1-lambda匿名函数"><a href="#1-lambda匿名函数" class="headerlink" title="1. lambda匿名函数"></a>1. lambda匿名函数</h2><p>lambda匿名函数在一些工程项目中经常出现，理解该用法是读懂项目的前提。如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lf = <span class="keyword">lambda</span> x: <span class="number">1</span> - <span class="number">10</span> ** (hyp[<span class="string">'lrf'</span>] * (<span class="number">1</span> - x / epochs))</span><br></pre></td></tr></table></figure>
+<p>匿名函数就是没有定义函数的名称，用来实现简单的功能。</p>
+<p>语法结构：<code>lambda param_list: expression</code></p>
+<blockquote>
+<p>param_list 就是参数列表，相当于函数的参数</p>
+<p>expression 就是表达式，相当于函数体，用一行进行表示</p>
+</blockquote>
+<p>举个简单的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>func=<span class="keyword">lambda</span> x, y: x+y</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>func(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="number">7</span></span><br></pre></td></tr></table></figure>
+<p>应用场景：</p>
+<h3 id="1-1-函数式编程"><a href="#1-1-函数式编程" class="headerlink" title="1.1 函数式编程"></a>1.1 函数式编程</h3><p>python提供了很多函数式编程特性，如map, reduce, filter, sorted等内置函数，都支持函数作为参数。</p>
+<ul>
+<li><p>map会根据提供的函数对指定序列做映射。</p>
+<ul>
+<li><p>map(function, iterable, …)</p>
+</li>
+<li><p>```python</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>func2=lambda x: x**x<br>L=[1,2,3]<br>map(func2, L)<br>  <map object at 0x00000218C07F0080><br>list(map(func2, L)) # 注意要显示内容需要转为list类型，因为py3中返回的是迭代器对象<br>  [1, 4, 27]</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 其中function可以使lambda函数对象，也可以是str等类型</span><br><span class="line"></span><br><span class="line">- ```python</span><br><span class="line">    &gt;&gt;&gt; L=[1,2,3,4]</span><br><span class="line">    &gt;&gt;&gt; list(map(str, L))</span><br><span class="line">    [&apos;1&apos;, &apos;2&apos;, &apos;3&apos;, &apos;4&apos;]</span><br><span class="line">    &gt;&gt;&gt; list(map(float, L))</span><br><span class="line">    [1.0, 2.0, 3.0, 4.0]</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>reduce 函数会对参数序列中元素进行累积。</p>
+<ul>
+<li><p>语法：<code>reduce(function, iterable[, initializer])</code></p>
+</li>
+<li><p>```python</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>reduce(lambda x, y: x+y, [1,2,3,4,5])  # 使用 lambda 匿名函数<br>  15</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    - 注意python3使用前要加上：from functools import reduce , reduce函数在python3中被移除，放入了functools模块。</span><br><span class="line"></span><br><span class="line">- filter内置函数用于过滤序列，过滤掉不符合条件的元素，返回由符合条件元素组成的新列表。</span><br><span class="line"></span><br><span class="line">    - ```python</span><br><span class="line">        filter(function, iterable)</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li><p>```python</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>filter(lambda x: x % 2 == 0, [1,2,3,4,5,6,7,8,9,10])<br>  <filter object at 0x00000218C07F0080><br>list(filter(lambda x: x % 2 == 0, [1,2,3,4,5,6,7,8,9,10]))<br>  [2, 4, 6, 8, 10]</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    - 这里function智能返回true or false, 将满足true的放入最终列表。</span><br><span class="line"></span><br><span class="line">- sorted函数对所有可迭代的对象进行排序操作。</span><br><span class="line"></span><br><span class="line">    - `sorted(iterable, key=None, reverse=False)`</span><br><span class="line"></span><br><span class="line">    - ```python</span><br><span class="line">        &gt;&gt;&gt; sorted([[3,4],[2,1],[5,3],[7,4],[9,0]], key=lambda x:x[0])</span><br><span class="line">        [[2, 1], [3, 4], [5, 3], [7, 4], [9, 0]]</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-应用在闭包"><a href="#1-2-应用在闭包" class="headerlink" title="1.2 应用在闭包"></a>1.2 应用在闭包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def get_y(a,b):</span><br><span class="line">     return lambda x:ax+b</span><br><span class="line">y1 = get_y(1,1)</span><br><span class="line">y1(1) # 结果为2</span><br></pre></td></tr></table></figure>
+<p>用常规函数实现闭包，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def get_y(a,b):</span><br><span class="line">    def func(x):</span><br><span class="line">        return ax+b</span><br><span class="line">    return func</span><br><span class="line">y1 = get_y(1,1)</span><br><span class="line">y1(1) # 结果为2</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>例子转载自：<a href="https://www.cnblogs.com/hf8051/p/8085424.html" target="_blank" rel="noopener">https://www.cnblogs.com/hf8051/p/8085424.html</a></p>
+</blockquote>
+<h2 id="2-列表解析式"><a href="#2-列表解析式" class="headerlink" title="2. 列表解析式"></a>2. 列表解析式</h2><p>列表解析式是Python内置的非常<strong>简单</strong>却<strong>强大</strong>的可以用来创建list的生成式。在深度学习项目中也可以经常看到这种用法。</p>
+<p>(1) 语法1：[表达式 for 变量 in 列表]，表示把得到的每一个变量值都放到 for 前面的表达式中计算 ，然后生成一个列表<br>(2) 语法2：[表达式 for 变量 in 列表 if 条件]，如果加上 if 判断，则表示把每一个变量值进行判断，如果判断正确再交给表达式进行计算，然后生成一个列表</p>
+<p>举例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>items=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[item*<span class="number">2</span> <span class="keyword">for</span> item <span class="keyword">in</span> items]</span><br><span class="line">[<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">14</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[item*<span class="number">2</span> <span class="keyword">for</span> item <span class="keyword">in</span> items <span class="keyword">if</span> item % <span class="number">2</span> == <span class="number">0</span>]</span><br><span class="line">[<span class="number">4</span>, <span class="number">8</span>, <span class="number">12</span>]</span><br></pre></td></tr></table></figure>
+<p>使用列表解析式的写法更加简短，除此之外，因为是Python内置的用法，底层使用C语言实现，相较于编写Python代码而言，运行速度更快。</p>
+<h2 id="3-enumerate内建函数"><a href="#3-enumerate内建函数" class="headerlink" title="3. enumerate内建函数"></a>3. enumerate内建函数</h2><p>对于一个列表，既要遍历索引又要遍历元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>days=[<span class="string">'mon'</span>,<span class="string">'tus'</span>,<span class="string">'wed'</span>,<span class="string">'ths'</span>,<span class="string">'fri'</span>,<span class="string">'sat'</span>,<span class="string">'sun'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i,day <span class="keyword">in</span> enumerate(days):</span><br><span class="line"><span class="meta">... </span>    print(i,day)</span><br><span class="line">...</span><br><span class="line"><span class="number">0</span> mon</span><br><span class="line"><span class="number">1</span> tus</span><br><span class="line"><span class="number">2</span> wed</span><br><span class="line"><span class="number">3</span> ths</span><br><span class="line"><span class="number">4</span> fri</span><br><span class="line"><span class="number">5</span> sat</span><br><span class="line"><span class="number">6</span> sun</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i,day <span class="keyword">in</span> enumerate(days, start=<span class="number">1</span>):</span><br><span class="line"><span class="meta">... </span>    print(i,day)</span><br><span class="line">...</span><br><span class="line"><span class="number">1</span> mon</span><br><span class="line"><span class="number">2</span> tus</span><br><span class="line"><span class="number">3</span> wed</span><br><span class="line"><span class="number">4</span> ths</span><br><span class="line"><span class="number">5</span> fri</span><br><span class="line"><span class="number">6</span> sat</span><br><span class="line"><span class="number">7</span> sun</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="4-迭代器与生成器"><a href="#4-迭代器与生成器" class="headerlink" title="4. 迭代器与生成器"></a>4. 迭代器与生成器</h2><p>有时候项目会使用到这种语法，如果不了解这两种用法，可能很难读懂代码，可能会直接懵B o((⊙﹏⊙))o。下面分别看看这两个的用法：</p>
+<h3 id="4-1-迭代器"><a href="#4-1-迭代器" class="headerlink" title="4.1 迭代器"></a>4.1 迭代器</h3><p>迭代器指的是可以使用next()方法来回调的对象，可以对可迭代对象使用iter()方法，将其转换为迭代器。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>L=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lst = iter(L)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(lst)</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">list_iterator</span>'&gt;</span></span><br><span class="line">&gt;&gt;&gt; L1=(1,2,3,4,5)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lst1 = iter(L1)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(lst1)</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">tuple_iterator</span>'&gt;</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">next</span><span class="params">(lst)</span></span></span><br><span class="line"><span class="class">1</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">next</span><span class="params">(lst1)</span></span></span><br><span class="line"><span class="class">1</span></span><br><span class="line"><span class="class">&gt;&gt;&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>迭代器优势</strong>： 所有的元素不是一次性加载的，在调用next方法才会返回，不需要考虑内存问题。next()只能往后进行访问。</p>
+<p><strong>迭代器应用场景：</strong> </p>
+<ol>
+<li>list规模过大，出于对内存的考虑使用迭代器。</li>
+<li>有规律，但是不能使用列表推导式描述</li>
+</ol>
+<p><strong>迭代器的创建：</strong></p>
+<ol>
+<li>__iter__() 方法返回一个特殊的迭代器对象， 这个迭代器对象实现了 <strong>next</strong>() 方法并通过 StopIteration 异常标识迭代的完成。</li>
+<li>__next__() 方法（Python 2 里是 next()）会返回下一个迭代器对象。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyNumbers</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">    self.a = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> self</span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></span><br><span class="line">    x = self.a</span><br><span class="line">    self.a += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"> </span><br><span class="line">myclass = MyNumbers()</span><br><span class="line">myiter = iter(myclass)</span><br><span class="line"> </span><br><span class="line">print(next(myiter))</span><br><span class="line">print(next(myiter))</span><br></pre></td></tr></table></figure>
+<p>例子来自菜鸟教程：<a href="https://www.runoob.com/python3/python3-iterator-generator.html" target="_blank" rel="noopener">https://www.runoob.com/python3/python3-iterator-generator.html</a></p>
+<h3 id="4-3-生成器"><a href="#4-3-生成器" class="headerlink" title="4.3 生成器"></a>4.3 生成器</h3><p>生成器是一个返回迭代器的函数，只能用于迭代操作，更简单点理解生成器就是一个迭代器。</p>
+<p>使用了yield的函数被称为生成器。</p>
+<p>在调用生成器运行的过程中，每次遇到 yield 时函数会暂停并保存当前所有的运行信息，返回 yield 的值, 并在下一次执行 next() 方法时从当前位置继续运行。（之前也遇见过yolo的代码中使用了这种用法，需要仔细理解并掌握）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fibonacci</span><span class="params">(n)</span>:</span> <span class="comment"># 生成器函数 - 斐波那契</span></span><br><span class="line">    a, b, counter = <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">if</span> (counter &gt; n): </span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">yield</span> a</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">        counter += <span class="number">1</span></span><br><span class="line">f = fibonacci(<span class="number">10</span>) <span class="comment"># f 是一个迭代器，由生成器返回生成</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">print</span> (next(f), end=<span class="string">" "</span>)</span><br><span class="line">    <span class="keyword">except</span> StopIteration:</span><br><span class="line">        sys.exit()</span><br></pre></td></tr></table></figure>
+<p>例子来自菜鸟教程：<a href="https://www.runoob.com/python3/python3-iterator-generator.html" target="_blank" rel="noopener">https://www.runoob.com/python3/python3-iterator-generator.html</a></p>
+<blockquote>
+<p>生成器的优点是延迟计算，一次返回一个结果，这样非常适用于大数据量的计算。但是，使用生成器必须要注意的一点是：生成器只能遍历一次。</p>
+</blockquote>
+<h2 id="5-装饰器"><a href="#5-装饰器" class="headerlink" title="5. 装饰器"></a>5. 装饰器</h2><p>装饰器本质是一个python函数，如果学过flask就知道，里边装饰器是必须的，经常用到。</p>
+<p>装饰器的<strong>作用</strong>：抽离大量和函数功能本身无关的代码进行重用</p>
+<p>一个简单的装饰器，用于计数，由于对不同的函数运行时间进行计数的需要，所以要对时间计数这部分进行处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_time</span><span class="params">(func)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">()</span>:</span></span><br><span class="line">        startTime = time.time()</span><br><span class="line">        func()</span><br><span class="line">        endTime = time.time()</span><br><span class="line">        print(<span class="string">"spend %f"</span> % (endTime-startTime))</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line">myFunction = get_time(myFunction)</span><br></pre></td></tr></table></figure>
+<p>精简一下，使用@语法来进行精简：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_time</span><span class="params">(func)</span>:</span></span><br><span class="line">    startTime = time.time()</span><br><span class="line">    func()</span><br><span class="line">    endTime = time.time()</span><br><span class="line">    processTime = (endTime - startTime) * <span class="number">1000</span></span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"The function timing is %f ms"</span> %processTime)</span><br><span class="line">    </span><br><span class="line"><span class="meta">@get_time</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myfunc</span><span class="params">()</span>:</span></span><br><span class="line">	print(<span class="string">"start"</span>)</span><br><span class="line">	time.sleep(<span class="number">0.8</span>)</span><br><span class="line">	print(<span class="string">"end"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    myfunc</span><br></pre></td></tr></table></figure>
+<p>output：</p>
+<blockquote>
+<p>start<br>end<br>The function timing is 800.058126 ms</p>
+</blockquote>
+<p>理解为：get_time(myfun()) ,将myfunc()函数包裹</p>
+<p>装饰器可以叠加使用，若多个装饰器同时装饰一个函数，那么装饰器的调用顺序和@语法糖的声明顺序相反，也就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@decorator1</span><br><span class="line">@decorator2</span><br><span class="line">def func():</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+<p>等效于：</p>
+<blockquote>
+<p>func = decorator1(decorator2(func()))</p>
+</blockquote>
+<p><strong>内置装饰器</strong></p>
+<p>Python中，常见的类装饰器包括：@staticmathod、@classmethod和@property</p>
+<ul>
+<li>@staticmethod：类的静态方法，跟成员方法的区别是没有self参数，并且可以在类不进行实例化的情况下调用。</li>
+<li>@classmethod：跟成员方法的区别是接收的第一个参数不是self，而是cls（当前类的具体类型）</li>
+<li>@property：表示可以直接通过类实例直接访问的信息。</li>
+</ul>
+<p>了解更多请看：<a href="https://www.jianshu.com/p/ee82b941772a" target="_blank" rel="noopener">https://www.jianshu.com/p/ee82b941772a</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/11/MOT%E6%AF%95%E8%AE%BE%E5%BC%80%E9%A2%98%E7%AD%94%E8%BE%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/11/MOT%E6%AF%95%E8%AE%BE%E5%BC%80%E9%A2%98%E7%AD%94%E8%BE%A9/" class="post-title-link" itemprop="url">牛及其关键部分目标检测</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-11 14:54:46" itemprop="dateCreated datePublished" datetime="2019-10-11T14:54:46+08:00">2019-10-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 15:50:20" itemprop="dateModified" datetime="2019-11-11T15:50:20+08:00">2019-11-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-牛及其关键部分目标检测"><a href="#1-牛及其关键部分目标检测" class="headerlink" title="1. 牛及其关键部分目标检测"></a>1. 牛及其关键部分目标检测</h2><p><strong>项目目标：</strong></p>
+<p>从小目标检测角度改进目标检测算法框架和神经网络结构，提升算法的检测效果。主要采用深度学习的方法检测牛的头部，眼睛，鼻子三个关键部位。</p>
+<p><strong>具体工作：</strong></p>
+<ol>
+<li><p>测试了三个主要的目标检测算法：Faster R-CNN, SSD, YOLO。</p>
+</li>
+<li><p>进行数据收集，标注，扩充，处理，完成了数据集的构建。</p>
+</li>
+</ol>
+<p><img src="../assets/1569675941284.png" alt="1569675941284"></p>
+<ol>
+<li><p>深度学习环境：pytorch, tensorflow, keras的搭建</p>
+</li>
+<li><p>一些结果：</p>
+<p> | <strong>框架</strong> | <strong>Faster R-CNN</strong> | <strong>SSD</strong> | <strong>YOLOv3</strong> | <strong>FPN</strong> | <strong>improved datasets</strong> |<br> | ———— | ———————— | ———- | ————— | ———- | ——————————- |<br> | head     | 0.8883           | 0.85946 | 0.90734    | 0.8173  | 0.82379               |<br> | nose     | 0.4272           | 0.62857 | 0.75085    | 0.2100  | 0.79441               |<br> | eye      | 0.2605           | 0.03178 | 0.74641    | 0.3399  | 0.80475               |<br> | map      | 0.5254           | 0.50660 | 0.80153    | 0.4557  | 0.80765               |</p>
+</li>
+<li><p>图示：</p>
+<p> <img src="../assets/1569676128417.png" alt="1569676128417"></p>
+<p> <img src="../assets/1569676134662.png" alt="1569676134662"></p>
+</li>
+</ol>
+<p>模型改进：</p>
+<p>在Tiny YOLOv3基础上进行改进，Tiny YOLOv3是一个轻量级的网络，基础网络比较小，比darknet-19基础网络还要小。</p>
+<ol>
+<li>对基础网络浅层部分进行改进，将普通的卷积替换为空洞卷积，这样可以提升模型的感受野。</li>
+<li>融合浅层特征进行目标检测，添加了一个检测层，使用resnet的残差结构更好地保存信息，提升小目标的检测效果。</li>
+</ol>
+<p><img src="../assets/1569676604011.png" alt="1569676604011"></p>
+<p><img src="../assets/1569676617895.png" alt="1569676617895"></p>
+<h2 id="2-肉牛目标跟踪"><a href="#2-肉牛目标跟踪" class="headerlink" title="2. 肉牛目标跟踪"></a>2. 肉牛目标跟踪</h2><p> <strong>技术路线：</strong></p>
+<p>使用针对MOT(multi-object tracking) 多目标跟踪的方法进行多个目标的跟踪, 会出现新目标进入与旧目标消失的问题。</p>
+<ol>
+<li>采用基于检测的目标跟踪策略 Detection-based-Tracking</li>
+<li>采用离线跟踪offline，或者near-online方法进行分析</li>
+<li>使用YOLOv3作为检测器，根据自己标注的数据集重新训练权重，这样对小目标的识别效果会更好一点</li>
+<li>针对目标跟踪的效果不稳定的问题，可以使用reid 重识别技术帮助我们更准确的识别一头牛，训练出Deep Association Metric权重用于重识别。</li>
+</ol>
+<p><strong>基线算法：</strong></p>
+<p>基于YOLOv3的Deep_sort算法是目前的基线</p>
+<p><strong>目前效果：</strong></p>
+<video src="D:/demooutput.mp4"></video>
+
+<p><strong>结果分析：</strong></p>
+<p>存在的问题：</p>
+<ol>
+<li>ID switch比较严重</li>
+<li>小目标无法识别</li>
+<li><p>遮挡情况下的牛无法识别</p>
+</li>
+<li><p>检测框抖动比较严重</p>
+</li>
+<li>部分出镜的牛识别效果不好</li>
+</ol>
+<p>针对问题解决方案：</p>
+<ol>
+<li>推出自己的数据集，进行针对性训练<ol>
+<li>对摄像头的方向有一定要求，尽量只拍一个牛场的牛</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/11/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E6%8E%A8%E5%AF%BC-%E5%9F%BA%E4%BA%8E%E4%BB%A3%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/11/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E6%8E%A8%E5%AF%BC-%E5%9F%BA%E4%BA%8E%E4%BB%A3%E7%A0%81/" class="post-title-link" itemprop="url">神经网络反向传播推导</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-11 14:54:46" itemprop="dateCreated datePublished" datetime="2019-10-11T14:54:46+08:00">2019-10-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 15:32:20" itemprop="dateModified" datetime="2019-11-11T15:32:20+08:00">2019-11-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>前言：最近在看《深度学习之PyTorch实战计算机视觉》这本书，里边第6章中《搭建一个简单的神经网络》中有一部分代码看不懂，经过与学长的探讨，进行了手工推导，明白了为何代码是这样写的。</p>
+</blockquote>
+<h2 id="1-代码展示"><a href="#1-代码展示" class="headerlink" title="1. 代码展示"></a>1. 代码展示</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">x = torch.randn(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">y = torch.randn(<span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">w1 = torch.randn(<span class="number">2</span>, <span class="number">4</span>)</span><br><span class="line">w2 = torch.randn(<span class="number">4</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">epoch_n = <span class="number">20</span></span><br><span class="line">learning_rate = <span class="number">1e-6</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(epoch_n):</span><br><span class="line">    h1 = x.mm(w1)</span><br><span class="line">    h1 = h1.clamp(min=<span class="number">0</span>)</span><br><span class="line">    y_pred = h1.mm(w2)</span><br><span class="line"></span><br><span class="line">    loss=(y_pred-y).pow(<span class="number">2</span>).sum()</span><br><span class="line">    print(<span class="string">"epoch:%d, loss:%.3f"</span> % (epoch, loss))</span><br><span class="line"></span><br><span class="line">    grad_y_pred = <span class="number">2</span>*(y_pred-y)</span><br><span class="line">    grad_w2 = h1.t().mm(grad_y_pred)</span><br><span class="line"></span><br><span class="line">    grad_h = grad_y_pred.clone()</span><br><span class="line">    grad_h = grad_h.mm(w2.t())</span><br><span class="line">    grad_h.clamp_(min=<span class="number">0</span>)</span><br><span class="line">    grad_w1 = x.t().mm(grad_h)</span><br><span class="line"></span><br><span class="line">    w1 -= learning_rate * grad_w1</span><br><span class="line">    w2 -= learning_rate * grad_w2</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ps: 为了debug时候的简便，改动了x,y,w1,w2的Tensor形状</p>
+</blockquote>
+<h2 id="2-推导过程"><a href="#2-推导过程" class="headerlink" title="2. 推导过程"></a>2. 推导过程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">x--w1--&gt; h1</span><br><span class="line">h1--w2--&gt;y_pred</span><br></pre></td></tr></table></figure>
+<p>loss表达式如下：</p>
+<script type="math/tex; mode=display">
+\hat{y}=x\times w_1 \times w_2
+\\
+loss = argmin(\sum{(\hat{y}-y)^2})</script><p>第一步：</p>
+<blockquote>
+<p>​    grad_y_pred = 2*(y_pred-y)</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\frac{\partial loss}{\partial \hat{y}}=2(\hat{y}-y)</script><p>第二步：</p>
+<blockquote>
+<p>​    grad_w2 = h1.t().mm(grad_y_pred)</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\frac{\partial loss}{\partial w_2} = \frac{\partial loss}{\partial \hat{y}}\times \frac{\partial \hat{y}}{\partial w_2}
+\\
+\frac{\partial \hat{y}}{\partial w_2} = \frac{\partial h_1w_2}{\partial w_2} = h_1^{T}
+\\
+\frac{\partial loss}{\partial w_2} = \frac{\partial loss}{\partial \hat{y}}\times \frac{\partial \hat{y}}{\partial w_2} = 2\times(\hat{y}-y)\times h_1^{T}</script><p>与代码相符</p>
+<p>第三步：</p>
+<blockquote>
+<p> grad_h = grad_y_pred.clone()<br> grad_h = grad_h.mm(w2.t())</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\frac{\partial loss}{\partial h_1}=\frac{\partial loss}{\partial \hat{y}}\times \frac{\partial \hat{y}}{\partial h_1} = 2\times (\hat{y}-y)\times w_2^{T}</script><p>第四步：</p>
+<blockquote>
+<p>​    grad_w1 = x.t().mm(grad_h)</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\frac{\partial loss}{\partial w_1}=\frac{\partial loss}{\partial \hat{y}}\times \frac{\partial \hat{y}}{\partial w_1}=2\times(\hat{y}-y)\times w_2^{T}\times x^{T}</script><h2 id="3-用到的公式"><a href="#3-用到的公式" class="headerlink" title="3. 用到的公式"></a>3. 用到的公式</h2><p>矩阵求导：</p>
+<script type="math/tex; mode=display">
+\frac{\partial wx}{\partial x}=w^{T}</script><hr>
+<p>目前只用到了这个公式，就可以解决，如果有不对的地方，希望大家指正。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/26/%E3%80%90%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%91%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/26/%E3%80%90%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%91%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%B3%95/" class="post-title-link" itemprop="url">朴素贝叶斯法</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-26 14:54:46" itemprop="dateCreated datePublished" datetime="2019-07-26T14:54:46+08:00">2019-07-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 15:51:12" itemprop="dateModified" datetime="2019-11-11T15:51:12+08:00">2019-11-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-基础知识"><a href="#1-基础知识" class="headerlink" title="1. 基础知识"></a>1. 基础知识</h2><h3 id="1-1-条件概率"><a href="#1-1-条件概率" class="headerlink" title="1.1 条件概率"></a>1.1 条件概率</h3><p>一个事件概率依赖于另外一个事件(已发生)的度量。</p>
+<p>$P(B|A)$的意义是在A发生的情况下B事件发生的概率。这就是条件概率。</p>
+<p>$P(AB) = P(A) \times P(B|A)​$ 代表的意义是，AB事件同时发生的概率等于事件A发生的概率乘以在A发生条件下B事件发生的概率。</p>
+<script type="math/tex; mode=display">
+P(B|A)=\frac{P(AB)}{P(A)}</script><p>事件序列发生且彼此相互依赖，所以才有条件概率，这是前提。如果A, B两个事件没有相互依赖关系，那么就是独立事件。在独立事件的情况下，两个事件不会相互影响对方。</p>
+<script type="math/tex; mode=display">
+P(B|A)=P(B) if A,B互为独立事件</script><h3 id="1-2-全概率定律"><a href="#1-2-全概率定律" class="headerlink" title="1.2 全概率定律"></a>1.2 全概率定律</h3><p>事件A1，A2，A3，…… A是相互排斥的，不能同时发生。若事件A1，A2，…构成一个完备事件组且都有正概率，则对任意一个事件B，有如下公式成立：</p>
+<script type="math/tex; mode=display">
+P(B) = P(BA_1)+P(BA_2)+...+P(BA_n) \\  =P(B|A_1)P(A_1) + P(B|A_2)P(A_2) + ... + P(B|A_n)P(A_n)</script><h3 id="1-3-贝叶斯定理"><a href="#1-3-贝叶斯定理" class="headerlink" title="1.3 贝叶斯定理"></a>1.3 贝叶斯定理</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">start--&gt;A</span><br><span class="line">A--&gt;B</span><br><span class="line">B--&gt;A</span><br><span class="line">A--&gt;start</span><br></pre></td></tr></table></figure>
+<p>最简单形式：</p>
+<blockquote>
+<p>后验概率 = 修正因子 x 先验概率 </p>
+</blockquote>
+<script type="math/tex; mode=display">
+P(A|B)=\frac{P(B|A)}{P(B)}\times P(A)</script><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">start--&gt;A1</span><br><span class="line">start--&gt;A2</span><br><span class="line">start--&gt;A3</span><br><span class="line">start--&gt;An</span><br><span class="line">A1--&gt;B</span><br><span class="line">A2--&gt;B</span><br><span class="line">A3--&gt;B</span><br><span class="line">An--&gt;B</span><br></pre></td></tr></table></figure>
+<script type="math/tex; mode=display">
+P(A_i|B) = \frac{P(B|A_i)\times P(A_i)}{\sum_1^{n}P(A_i)\times P(B|A_i)}</script><h3 id="1-4-极大似然估计"><a href="#1-4-极大似然估计" class="headerlink" title="1.4 极大似然估计"></a>1.4 极大似然估计</h3><blockquote>
+<p>极大似然估计是概率论中一个很常用的估计方法，在机器学习中的逻辑回归中就是基于它计算的损失函数</p>
+</blockquote>
+<p>极大似然估计是基于一个理论：<strong>概率最大的事件，最可能发生</strong></p>
+<p><strong>极大似然估计（maximum likelihood estimation, MLE），通俗的说就是 —— 最像估计法（最可能估计法）</strong></p>
+<p>极大似然原理与数学表示:   有n个实验结果，$A_i$到$A_n$，如果$A_j$发生了，则意味着$A_j$发生的概率最大。<strong>即，一次试验就发生的事件，这个事件本身发生概率最大</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/02/python%E5%88%87%E7%89%87%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/02/python%E5%88%87%E7%89%87%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">python切片用法总结</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-02 14:54:46" itemprop="dateCreated datePublished" datetime="2019-07-02T14:54:46+08:00">2019-07-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 15:43:54" itemprop="dateModified" datetime="2019-11-11T15:43:54+08:00">2019-11-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>在深度学习中进行张量操作的时候经常会遇到这样的切片形式，一开始总会感到头疼，所以现在总结一下用法，欢迎大家进行补充。</p>
+<p>data[x:y:z]</p>
+<p>data[::-1]</p>
+<p>data[:-1]</p>
+<p>data[-3:]</p>
+<p>data[1:4, 2:4]</p>
+<p>data[…, 1:2]</p>
+<p>data[:, None]</p>
+</blockquote>
+<p>这是最近在看的代码，进行loss的计算，用到了很多切片的知识，所以进行总结，希望看完这篇博客以后大家也能看懂类似的代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_loss</span><span class="params">(p, targets, model)</span>:</span>  <span class="comment"># predictions, targets, model</span></span><br><span class="line">    ft = torch.cuda.FloatTensor <span class="keyword">if</span> p[<span class="number">0</span>].is_cuda <span class="keyword">else</span> torch.Tensor</span><br><span class="line">    lxy, lwh, lcls, lconf = ft([<span class="number">0</span>]), ft([<span class="number">0</span>]), ft([<span class="number">0</span>]), ft([<span class="number">0</span>])</span><br><span class="line">    <span class="comment"># build_targets对targets向量进行处理</span></span><br><span class="line">    txy, twh, tcls, indices = build_targets(model, targets)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Define criteria</span></span><br><span class="line">    MSE = nn.MSELoss()</span><br><span class="line">    CE = nn.CrossEntropyLoss()  <span class="comment"># (weight=model.class_weights)</span></span><br><span class="line">    BCE = nn.BCEWithLogitsLoss()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Compute losses</span></span><br><span class="line">    h = model.hyp  <span class="comment"># hyperparameters</span></span><br><span class="line">    bs = p[<span class="number">0</span>].shape[<span class="number">0</span>]  <span class="comment"># batch size</span></span><br><span class="line">    k = bs  <span class="comment"># loss gain</span></span><br><span class="line">    <span class="keyword">for</span> i, pi0 <span class="keyword">in</span> enumerate(p):  <span class="comment"># layer i predictions, i</span></span><br><span class="line">        b, a, gj, gi = indices[i]  <span class="comment"># image, anchor, gridy, gridx</span></span><br><span class="line">        tconf = torch.zeros_like(pi0[..., <span class="number">0</span>])  <span class="comment"># conf</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Compute losses</span></span><br><span class="line">        <span class="keyword">if</span> len(b):  <span class="comment"># number of targets</span></span><br><span class="line">            pi = pi0[b, a, gj, gi]  <span class="comment"># predictions closest to anchors</span></span><br><span class="line">            tconf[b, a, gj, gi] = <span class="number">1</span>  <span class="comment"># conf</span></span><br><span class="line">            <span class="comment"># pi[..., 2:4] = torch.sigmoid(pi[..., 2:4])  # wh power loss (uncomment)</span></span><br><span class="line"></span><br><span class="line">            lxy += (k * h[<span class="string">'xy'</span>]) * MSE(torch.sigmoid(pi[..., <span class="number">0</span>:<span class="number">2</span>]), txy[i])  <span class="comment"># xy loss</span></span><br><span class="line">            lwh += (k * h[<span class="string">'wh'</span>]) * MSE(pi[..., <span class="number">2</span>:<span class="number">4</span>], twh[i])  <span class="comment"># wh yolo loss</span></span><br><span class="line">            lcls += (k * h[<span class="string">'cls'</span>]) * CE(pi[..., <span class="number">5</span>:], tcls[i])  <span class="comment"># class_conf loss</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># pos_weight = ft([gp[i] / min(gp) * 4.])</span></span><br><span class="line">        <span class="comment"># BCE = nn.BCEWithLogitsLoss(pos_weight=pos_weight)</span></span><br><span class="line">        lconf += (k * h[<span class="string">'conf'</span>]) * BCE(pi0[..., <span class="number">4</span>], tconf)  <span class="comment"># obj_conf loss</span></span><br><span class="line">    loss = lxy + lwh + lconf + lcls</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> loss, torch.cat((lxy, lwh, lconf, lcls, loss)).detach()</span><br></pre></td></tr></table></figure>
+<p>[TOC]</p>
+<h2 id="1-单列表切片"><a href="#1-单列表切片" class="headerlink" title="1. 单列表切片"></a>1. 单列表切片</h2><p>对于一个普遍形式：data[x:y:z] 讲一下他的意义：</p>
+<blockquote>
+<p>The syntax <code>[x:y:z]</code> means “take every <code>z</code>th element of a list from index <code>x</code> to index <code>y</code>“. When <code>z</code> is negative, it indicates going backwards. When <code>x</code> isn’t specified, it defaults to the first element of the list in the direction you are traversing the list. When <code>y</code> isn’t specified, it defaults to the last element of the list. So if we want to take every 2th element of a list, we use <code>[::2]</code>.</p>
+</blockquote>
+<p>— from github:python-is-cool</p>
+<p>翻译过来就是：x是起始坐标，y是结束坐标（不包含），z是代表每隔z个数取一个数,如果z是负数代表方向是从后往前。</p>
+<p>看一个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>data = list(range(<span class="number">10</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[<span class="number">1</span>:<span class="number">5</span>] <span class="comment"># 代表[1,5)</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[<span class="number">-3</span>:] <span class="comment"># 代表从倒数第3个到最后， 方向默认还是从前往后</span></span><br><span class="line">[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[:<span class="number">-3</span>] <span class="comment"># 代表从第1个到倒数第4个，方向还是默认从前向后</span></span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[<span class="number">1</span>:<span class="number">8</span>:<span class="number">2</span>] <span class="comment"># 从[1,2,3,4,5,6,7]中每两个选一个，得到[1,3,5,7]</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[<span class="number">1</span>:<span class="number">8</span>:<span class="number">-2</span>] <span class="comment"># 注意如果z是负数，那么前边也需要是负数，方向需要正确</span></span><br><span class="line">[]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[::<span class="number">-2</span>] <span class="comment"># 两个冒号代表取全体</span></span><br><span class="line">[<span class="number">9</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">1</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[<span class="number">-1</span>:<span class="number">-8</span>:<span class="number">-2</span>] </span><br><span class="line"><span class="comment"># 注意data[-1:-8:-1]=[9,8,7,6,5,4,3]意思是倒数第1个到倒数第7个数</span></span><br><span class="line"><span class="comment"># 这里的x,y依然意义是起始和结尾</span></span><br><span class="line">[<span class="number">9</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">3</span>]</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>总结：</p>
+<ol>
+<li><p>注意起始和结尾的[x,y] 实际的数学意义是[x,y), 前取到，后取不到</p>
+</li>
+<li><p>注意z是负数的情况下，整个数列方向是从后往前数的，对应的[x,y]也应该是负数，从后往前，这里的x,y意义依然是起始和结尾。</p>
+</li>
+<li><p>双冒号<code>::</code>代表取全部</p>
+</li>
+<li><p>注意整个数列方向问题，默认都是从前往后，只有z的正负性能控制方向。</p>
+</li>
+<li><p>只有一个冒号的情况是两个冒号的特殊情况，省略了最后一个冒号，如：</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[<span class="number">3</span>:]</span><br><span class="line">[<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[<span class="number">3</span>::<span class="number">1</span>] <span class="comment"># 默认方向从前往后，且z的值为1</span></span><br><span class="line">[<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="2-多维列表"><a href="#2-多维列表" class="headerlink" title="2. 多维列表"></a>2. 多维列表</h2><blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data[..., <span class="number">1</span>:<span class="number">2</span>] </span><br><span class="line">data[<span class="number">1</span>:<span class="number">2</span>, <span class="number">2</span>:<span class="number">4</span>, <span class="number">5</span>:<span class="number">9</span>]</span><br><span class="line">data[:,<span class="literal">None</span>]</span><br><span class="line">data[1:2, 2:4] == data [1:2][2:4] ? </span><br><span class="line">data[:]</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>干货：</p>
+<ol>
+<li>对于三个点的情况, 代表前边所有维度</li>
+<li>对于逗号分隔的情况，每个逗号将以上一个单独的分割开来</li>
+<li>None代表增加一个维度</li>
+<li>data[1:2, 2:4] 与 data [1:2] [2:4] 并不相等 </li>
+<li>data[:]代表取全体数据</li>
+</ol>
+<p>举例子：</p>
+<ul>
+<li>data[…, 1:2] 举例</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1 = np.arange(<span class="number">27</span>).reshape(<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1</span><br><span class="line">array([[[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>],</span><br><span class="line">        [ <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>],</span><br><span class="line">        [ <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>],</span><br><span class="line">        [<span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>],</span><br><span class="line">        [<span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">18</span>, <span class="number">19</span>, <span class="number">20</span>],</span><br><span class="line">        [<span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>],</span><br><span class="line">        [<span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[...,<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">array([[[ <span class="number">1</span>,  <span class="number">2</span>],</span><br><span class="line">        [ <span class="number">4</span>,  <span class="number">5</span>],</span><br><span class="line">        [ <span class="number">7</span>,  <span class="number">8</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">10</span>, <span class="number">11</span>],</span><br><span class="line">        [<span class="number">13</span>, <span class="number">14</span>],</span><br><span class="line">        [<span class="number">16</span>, <span class="number">17</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">19</span>, <span class="number">20</span>],</span><br><span class="line">        [<span class="number">22</span>, <span class="number">23</span>],</span><br><span class="line">        [<span class="number">25</span>, <span class="number">26</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[:,:,<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line">array([[[ <span class="number">1</span>,  <span class="number">2</span>],</span><br><span class="line">        [ <span class="number">4</span>,  <span class="number">5</span>],</span><br><span class="line">        [ <span class="number">7</span>,  <span class="number">8</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">10</span>, <span class="number">11</span>],</span><br><span class="line">        [<span class="number">13</span>, <span class="number">14</span>],</span><br><span class="line">        [<span class="number">16</span>, <span class="number">17</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">19</span>, <span class="number">20</span>],</span><br><span class="line">        [<span class="number">22</span>, <span class="number">23</span>],</span><br><span class="line">        [<span class="number">25</span>, <span class="number">26</span>]]])</span><br><span class="line"><span class="comment"># 可以看出data1[:,:,1:3]与data1[...,1:3]是等价的，三个点的存在简化了前边维度，</span></span><br><span class="line"><span class="comment"># 不管多少维度存在都可以使用，取代前边所有维度。</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>data[1:2, 2:4, 5:9]</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1 = np.arange(<span class="number">27</span>).reshape(<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">array([[[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>],</span><br><span class="line">        [ <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>],</span><br><span class="line">        [ <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>],</span><br><span class="line">        [<span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>],</span><br><span class="line">        [<span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[<span class="number">0</span>:<span class="number">2</span>,<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">array([[[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>],</span><br><span class="line">        [ <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>],</span><br><span class="line">        [<span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[<span class="number">0</span>:<span class="number">2</span>,<span class="number">0</span>:<span class="number">2</span>,<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">array([[[ <span class="number">0</span>,  <span class="number">1</span>],</span><br><span class="line">        [ <span class="number">3</span>,  <span class="number">4</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">9</span>, <span class="number">10</span>],</span><br><span class="line">        [<span class="number">12</span>, <span class="number">13</span>]]])</span><br><span class="line"><span class="comment"># 一步一步的切片可以看出，每一步都是单独的一个单列表切片，满足单列表切片原则</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>data[:,None]</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1.shape</span><br><span class="line">(<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[:,<span class="literal">None</span>].shape</span><br><span class="line">(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[...,<span class="literal">None</span>].shape</span><br><span class="line">(<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[<span class="literal">None</span>,...].shape</span><br><span class="line">(<span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line"><span class="comment"># None代表增加一个维度,通常使用在数据预处理，给图片添加batch列</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>data[1:2, 2:4] == data[1：2] [2:4] </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1 = np.arange(<span class="number">27</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1</span><br><span class="line">array([ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>,  <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>,<span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>, <span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>, <span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[<span class="number">1</span>:<span class="number">7</span>][<span class="number">3</span>:<span class="number">6</span>] <span class="comment"># 两个可以理解为切片的切片</span></span><br><span class="line">array([<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[<span class="number">1</span>:<span class="number">7</span>,<span class="number">3</span>:<span class="number">6</span>] <span class="comment"># 只有一维，所以无法运行</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">IndexError: too many indices <span class="keyword">for</span> array</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1 = np.arange(<span class="number">27</span>).reshape(<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1</span><br><span class="line">array([[[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>],</span><br><span class="line">        [ <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>],</span><br><span class="line">        [ <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>],</span><br><span class="line">        [<span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>],</span><br><span class="line">        [<span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">18</span>, <span class="number">19</span>, <span class="number">20</span>],</span><br><span class="line">        [<span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>],</span><br><span class="line">        [<span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">array([[[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>],</span><br><span class="line">        [ <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>],</span><br><span class="line">        [ <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>],</span><br><span class="line">        [<span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>],</span><br><span class="line">        [<span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[<span class="number">0</span>:<span class="number">2</span>][<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line"><span class="comment"># 切片的切片， 且过一次以后就只有0,1两个维度了，所以只能取第一维</span></span><br><span class="line">array([[[ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>],</span><br><span class="line">        [<span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>],</span><br><span class="line">        [<span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[<span class="number">0</span>:<span class="number">2</span>,<span class="number">1</span>:<span class="number">3</span>] <span class="comment"># 所有满足第一维为0,1 第二维为1,2的</span></span><br><span class="line">array([[[ <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>],</span><br><span class="line">        [ <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>],</span><br><span class="line">        [<span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>]]])</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>data[:] 表示取全体</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[:]</span><br><span class="line">array([[[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>],</span><br><span class="line">        [ <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>],</span><br><span class="line">        [ <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>],</span><br><span class="line">        [<span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>],</span><br><span class="line">        [<span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">18</span>, <span class="number">19</span>, <span class="number">20</span>],</span><br><span class="line">        [<span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>],</span><br><span class="line">        [<span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[:,:,:]</span><br><span class="line">array([[[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>],</span><br><span class="line">        [ <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>],</span><br><span class="line">        [ <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>],</span><br><span class="line">        [<span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>],</span><br><span class="line">        [<span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">18</span>, <span class="number">19</span>, <span class="number">20</span>],</span><br><span class="line">        [<span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>],</span><br><span class="line">        [<span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>]]])</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p>后记：这篇博客总结了目前常见到的问题，在深度学习中经常用到，tensor的切片常常让人有点微微头疼，所以特意总结一下，大家遇见新的切片方式可以在评论中补充，有问题的也可以提出。之后还有一些张量操作会单独出一篇博客。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/25/%E5%A4%8F%E4%BB%A4%E8%90%A5%E6%97%B6%E9%97%B4%E5%AE%89%E6%8E%92gantt%E5%9B%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/25/%E5%A4%8F%E4%BB%A4%E8%90%A5%E6%97%B6%E9%97%B4%E5%AE%89%E6%8E%92gantt%E5%9B%BE/" class="post-title-link" itemprop="url">2019年夏令营甘特图</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-25 12:39:05" itemprop="dateCreated datePublished" datetime="2019-06-25T12:39:05+08:00">2019-06-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 16:05:53" itemprop="dateModified" datetime="2019-11-11T16:05:53+08:00">2019-11-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">gantt</span><br><span class="line">    title 2019夏令营</span><br><span class="line">    dateFormat  YY-MM-DD</span><br><span class="line">    section 西交</span><br><span class="line">    确认参加     :a2,19-06-18, 1d</span><br><span class="line">    公布名单     :after a2, 5d</span><br><span class="line">    夏令营时间   :19-07-11,19-07-12</span><br><span class="line">    section 南大</span><br><span class="line">    系统时间     :done,19-05-20,19-06-10</span><br><span class="line">    确认参加     :19-06-24,1d</span><br><span class="line">    夏令营时间   :19-07-12,19-07-14</span><br><span class="line">    section 复旦</span><br><span class="line">    系统报名     :done,a3,19-05-10, 19-06-15</span><br><span class="line">    夏令营时间   :19-07-10,19-07-12</span><br><span class="line">    section 川大</span><br><span class="line">    系统报名     :19-05-18,19-06-16</span><br><span class="line">    入营公布     :19-06-21,1d</span><br><span class="line">    夏令营时间     :19-07-08,19-07-10</span><br><span class="line">    section 北航</span><br><span class="line">    系统报名     :19-05-28,19-06-25</span><br><span class="line">    夏令营时间   :19-07-05,19-07-07</span><br><span class="line">    section 上交</span><br><span class="line">    系统报名     :done,19-05-1,19-06-20</span><br><span class="line">    西安面试     :19-06-15,19-06-16</span><br><span class="line">    section 北理工</span><br><span class="line">    系统报名    : 19-05-24,19-06-02</span><br><span class="line">    通知确认    : 19-06-13,19-06-17</span><br><span class="line">    夏令营时间    :19-07-08,19-07-10</span><br><span class="line">    section 天大</span><br><span class="line">    通过     :19-06-15,1d</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/23/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%B2%97%E4%BD%8D%E9%9C%80%E6%B1%82%E9%9C%80%E8%A6%81%E5%9F%B9%E5%85%BB%E7%9A%84%E8%83%BD%E5%8A%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/23/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%B2%97%E4%BD%8D%E9%9C%80%E6%B1%82%E9%9C%80%E8%A6%81%E5%9F%B9%E5%85%BB%E7%9A%84%E8%83%BD%E5%8A%9B/" class="post-title-link" itemprop="url">人工智能岗位需求需要培养的能力</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-23 17:11:13" itemprop="dateCreated datePublished" datetime="2019-06-23T17:11:13+08:00">2019-06-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-27 15:24:37" itemprop="dateModified" datetime="2019-10-27T15:24:37+08:00">2019-10-27</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <hr>
+<p>date:2019-06-23</p>
+<h2 id="title-”人工智能图像相关岗位需求”"><a href="#title-”人工智能图像相关岗位需求”" class="headerlink" title="title:”人工智能图像相关岗位需求”"></a>title:”人工智能图像相关岗位需求”</h2><blockquote>
+<p>人工智能图像岗位需要具备的技能</p>
+</blockquote>
+<h3 id="任职资格"><a href="#任职资格" class="headerlink" title="任职资格"></a>任职资格</h3><ul>
+<li>图像处理和模式识别相关知识</li>
+<li>C/C++，OpenCV编程和项目经验，熟悉脚本语言python</li>
+<li>熟悉tensorflow, caffe , pytorch等开源框架</li>
+<li>跟踪国内外最新的图像处理算法发展方向和相应技术</li>
+<li>会视频识别相关图像算法的设计与研究</li>
+<li>图像处理，机器学习，深度学习等算法的研究和实现</li>
+<li>实现目标检测，识别，跟踪，语义分割等相关项目开发</li>
+<li>优化产品功能，解决实际问题</li>
+<li>熟悉机器学习常用算法：adaboost, svm，决策树，神经网络等</li>
+<li>会底层代码优化加速经验优先</li>
+<li>会使用intel神经计算棒或华为麒麟神经计算硬件加速</li>
+<li>能够写出所研发的软件的设计文档，具备严谨的文档撰写能力</li>
+<li>能够独立实现模型代码开发</li>
+<li>熟悉使用git , svn, redmine, project 等系统，了解ISO9001,CMMI等质量体系</li>
+</ul>
+<h3 id="现阶段需要培养的能力"><a href="#现阶段需要培养的能力" class="headerlink" title="现阶段需要培养的能力"></a>现阶段需要培养的能力</h3><ul>
+<li>C/C++开发能力</li>
+<li>opencv使用能力</li>
+<li>python开发能力</li>
+<li>学习图像处理和模式识别相关知识</li>
+<li>熟悉tensorflow,caffe,pytorch等，并且使用tensorflow框架开发产品</li>
+<li>学习机器学习常用算法，并且会手动推导</li>
+<li>提升文档撰写能力</li>
+</ul>
+<h3 id="近期目标"><a href="#近期目标" class="headerlink" title="近期目标"></a>近期目标</h3><ul>
+<li>提升C/C++开发能力，算法编程水平</li>
+<li>继续锻炼python</li>
+<li>学习tensorflow，keras等框架</li>
+<li>在七月在线平台上进行知识学习</li>
+<li>面试准备</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/YOLO%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/20/YOLO%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">YOLO经验总结</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-20 14:54:46" itemprop="dateCreated datePublished" datetime="2019-06-20T14:54:46+08:00">2019-06-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 15:21:43" itemprop="dateModified" datetime="2019-11-11T15:21:43+08:00">2019-11-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/YOLOv3/" itemprop="url" rel="index">
+                    <span itemprop="name">YOLOv3</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>YOLO 网络架构方法</p>
+<p>YOLO参数计算</p>
+<p>YOLO调参经验</p>
+<p>学习博客总结</p>
+</blockquote>
+<h3 id="网络更改经验"><a href="#网络更改经验" class="headerlink" title="网络更改经验"></a>网络更改经验</h3><p>输出图像的计算方法：</p>
+<center>output = （input-filter_size+2*padding）/（stride）+ 1</center>
+
+<p>yolo层的前一层filter计算方法：</p>
+<center>filters = (classes + 5) * 预测框的个数</center>
+
+<p>特征融合一般操作：</p>
+<ol>
+<li>Route from previous layer</li>
+<li>Conv it for 1~ times</li>
+<li>Do upsample</li>
+<li>Route from the corresponding layer with same size of feature map</li>
+<li>Continue</li>
+</ol>
+<ul>
+<li>res结构：</li>
+</ul>
+<p>filter: 128-&gt;256-&gt;128-&gt;256…..</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[convolutional]</span><br><span class="line">batch_normalize=1</span><br><span class="line">filters=128</span><br><span class="line">size=1</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">activation=leaky</span><br><span class="line"></span><br><span class="line">[convolutional]</span><br><span class="line">batch_normalize=1</span><br><span class="line">filters=256</span><br><span class="line">size=3</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">activation=leaky</span><br><span class="line"></span><br><span class="line">[shortcut]</span><br><span class="line">from=-3</span><br><span class="line">activation=linear</span><br></pre></td></tr></table></figure>
+<ul>
+<li>只改filter不改feature大小：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[convolutional]</span><br><span class="line">batch_normalize=1</span><br><span class="line">filters=512</span><br><span class="line">size=1</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">activation=leaky</span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[convolutional]</span><br><span class="line">batch_normalize=1</span><br><span class="line">filters=1024</span><br><span class="line">size=3</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">activation=leaky</span><br></pre></td></tr></table></figure>
+<ul>
+<li>feature减半：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[maxpool]</span><br><span class="line">size=2</span><br><span class="line">stride=2</span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[convolutional]</span><br><span class="line">batch_normalize=1</span><br><span class="line">filters=128</span><br><span class="line">size=3</span><br><span class="line">stride=2</span><br><span class="line">pad=1</span><br><span class="line">activation=leaky</span><br></pre></td></tr></table></figure>
+<ul>
+<li>普通的filter变大变小：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[convolutional]</span><br><span class="line">batch_normalize=1</span><br><span class="line">filters=256</span><br><span class="line">size=3</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">activation=leaky</span><br><span class="line"></span><br><span class="line">[convolutional]</span><br><span class="line">batch_normalize=1</span><br><span class="line">filters=128</span><br><span class="line">size=1</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">activation=leaky</span><br></pre></td></tr></table></figure>
+<ul>
+<li>feature扩大为原来二倍：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[upsample]</span><br><span class="line">stride=2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>不改变任何参数：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[maxpool]</span><br><span class="line">size=2</span><br><span class="line">stride=1</span><br></pre></td></tr></table></figure>
+<h4 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h4><ul>
+<li><p>batch_normalize:<a href="https://blog.csdn.net/yujianmin1990/article/details/78764597" target="_blank" rel="noopener">了解链接</a></p>
+</li>
+<li><p>filter: 卷积核个数，也是输出通道个数</p>
+</li>
+<li><p>size: 卷积核尺寸</p>
+</li>
+<li><p>stride: 卷积步长</p>
+</li>
+<li><p>pad: 补0</p>
+</li>
+</ul>
+<h3 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h3><ul>
+<li>yolo <a href="./tricks.md">配置文件总结</a></li>
+</ul>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>测试mAP,画图</li>
+<li>看论文，准备论文相关的内容<ul>
+<li>画loss图</li>
+<li>跑实验</li>
+<li>跑一下</li>
+</ul>
+</li>
+<li>通过加大 w, h 的值提升小目标检测效果</li>
+<li>学习率的设置，先大后小效果比较好</li>
+<li>模型剪枝</li>
+<li>创造更改网络</li>
+<li>更改v3_improved网络，将maxpooling换成conv</li>
+<li>训练集中增加小目标可以提高小目标的检测效果</li>
+<li>目前抛弃模型压缩这种想法先将基础网络部分搞懂</li>
+</ul>
+<h3 id="改进的Point"><a href="#改进的Point" class="headerlink" title="改进的Point"></a>改进的Point</h3><ol>
+<li>基础网络的选择tiny, yolov2-tiny?</li>
+<li>input Size的增大： 增大最大到672</li>
+<li>anchor的选择，6,7,9个anchor，查看效果</li>
+<li>改进 激活函数 Leaky RELU 尝试一下，ELU, RELU</li>
+</ol>
+<h3 id="靠谱的思路"><a href="#靠谱的思路" class="headerlink" title="靠谱的思路"></a>靠谱的思路</h3><blockquote>
+<p>注意调参的时候将尺度关闭，batch改大，图片正常</p>
+<p>投论文尽量投CCF上有分类的</p>
+<p>写论文的时候如果设计一个自己的网络要进行数学上的证明</p>
+</blockquote>
+<p>大小目标只是一个卷积的感受野的问题，yolo这方面做得还不够好，yolo是一个三分类的目标等级做的，SSD的结构更适合小目标，里边是特征金字塔，将Yolo, SSD的优点融合然后再自己网络的构造。高级做法是细粒度（待看）。</p>
+<p>下一阶段工作：</p>
+<ol>
+<li>FPN论文阅读+网络结构梳理</li>
+<li>SSD论文阅读+网络结构梳理</li>
+<li>有时间再看一下细粒度方面的</li>
+<li>yolo源码-对具体使用以及内容理解有帮助</li>
+</ol>
+<p>几个小的点：</p>
+<ol>
+<li>batch 32 64</li>
+<li>max替换为conv</li>
+<li>使用有切割图片的训练集进行进一步的测试</li>
+<li>可视化研究</li>
+</ol>
+<h3 id="调参经验"><a href="#调参经验" class="headerlink" title="调参经验"></a>调参经验</h3><ol>
+<li><p>learning-rate 学习速率：学习速率越小，模型收敛花费的时间就越长，但是可以提高模型精确度。一般初始设置为0.1，然后每次除以0.2或者0.5来改进，得到最终值；</p>
+</li>
+<li><p>batchsize 样本批次容量：影响模型的优化程度和收敛速度，需要参考你的数据集大小来设置，具体问题具体分析</p>
+</li>
+<li><p>weightdecay 权重衰减：用来在反向传播中更新权重和偏置，一般设置为0.005；</p>
+</li>
+<li><p>epoch-number 训练次数：包括所有训练样本的一个正向传递和一个反向传递，训练至模型收敛即可；（注：和迭代周期iteration不一样）</p>
+</li>
+<li><p>经过交叉验证，dropout率等于0.5的时候效果最好，原因是0.5的时候dropout随机生成的网络结构最多。</p>
+</li>
+</ol>
+<p>ref:</p>
+<p><a href="https://blog.csdn.net/weixin_38437404/article/details/74927694" target="_blank" rel="noopener">https://blog.csdn.net/weixin_38437404/article/details/74927694</a></p>
+<p><a href="https://blog.csdn.net/weixin_38437404/article/details/78837176" target="_blank" rel="noopener">https://blog.csdn.net/weixin_38437404/article/details/78837176</a></p>
+<h3 id="学习博客总结"><a href="#学习博客总结" class="headerlink" title="学习博客总结"></a>学习博客总结</h3><p><a href="https://blog.csdn.net/phinoo/article/details/83022101" target="_blank" rel="noopener">yolov3实战理解cfg文件</a></p>
+<p><a href="https://blog.csdn.net/qian99/article/details/79008053" target="_blank" rel="noopener">卷积网络参数计算方法</a></p>
+<p><a href="https://blog.csdn.net/phinoo/article/details/83025690" target="_blank" rel="noopener">YOLOV3实战5：利用三方工具绘制P-R曲线</a></p>
+<p><a href="https://blog.csdn.net/qq_34806812/article/details/81459982" target="_blank" rel="noopener">YOLOV3可视化</a></p>
+<p><a href="https://blog.csdn.net/oTengYue/article/details/81365185" target="_blank" rel="noopener">Yolov3可视化2</a></p>
+<p><a href="https://blog.csdn.net/qq_27158179/article/details/81915740?tdsourcetag=s_pctim_aiomsg" target="_blank" rel="noopener">Opencv yolov3</a></p>
+<p><a href="https://blog.csdn.net/haoqimao_hard/article/details/82081285" target="_blank" rel="noopener">OPENCV YOLOv3 实践</a></p>
+<p><a href="https://pjreddie.com/darknet/imagenet/#darknet19_448" target="_blank" rel="noopener">darknet 预训练模型与cfg文件</a></p>
+<p><a href="https://www.deeplearning.ai/" target="_blank" rel="noopener">deeplearning.ai</a></p>
+<p><a href="https://www.youtube.com/results?search_query=fast.ai" target="_blank" rel="noopener">Fast. ai</a></p>
+<p><a href="https://blog.csdn.net/cgt19910923/article/details/83176997?tdsourcetag=s_pctim_aiomsg" target="_blank" rel="noopener">Yolov3修改基础网络darknet19</a></p>
+<p><a href="https://blog.csdn.net/sum_nap/article/details/80781587" target="_blank" rel="noopener">Yolov3网络改进以及修改</a></p>
+<p><a href="https://www.cnblogs.com/Zhi-Z/p/8728168.html" target="_blank" rel="noopener">准确率召回率的理解</a></p>
+<p><a href="https://blog.csdn.net/sum_nap/article/details/80781587" target="_blank" rel="noopener">YOLOv3增加网络结构</a></p>
+<p><a href="https://www.youtube.com/watch?v=GBu2jofRJtk" target="_blank" rel="noopener">yotube yolo9000</a></p>
+<p><a href="https://www.kancloud.cn/aollo/aolloopencv/269602" target="_blank" rel="noopener">Opencv-python教程</a></p>
+<p><a href="https://blog.csdn.net/m_buddy/article/details/82926024" target="_blank" rel="noopener">darknet anchor设计</a></p>
+<p><a href="https://blog.csdn.net/cgt19910923/article/details/80784525" target="_blank" rel="noopener">Yolov2 可视化研究</a></p>
+<p><a href="https://jacobgil.github.io/deeplearning/pruning-deep-learning" target="_blank" rel="noopener">模型剪枝总结</a></p>
+<p><a href="https://medium.com/@monocasero/object-detection-with-yolo-implementations-and-how-to-use-them-5da928356035" target="_blank" rel="noopener">一个比较详细的yolo指南</a></p>
+<p><a href="https://www.coursera.org/learn/convolutional-neural-networks/lecture/4Trod/edge-detection-example" target="_blank" rel="noopener">coursera 课程</a></p>
+<p><a href="https://www.leiphone.com/news/201708/7pRPkwvzEG1jgimW.html" target="_blank" rel="noopener">yolov2 yolo9000</a></p>
+<p><a href="https://blog.csdn.net/ghw15221836342/article/details/84427923" target="_blank" rel="noopener">YOLO LITE轻量级</a></p>
+<p><a href="https://blog.csdn.net/qq_20657717/article/details/81669006" target="_blank" rel="noopener">YOLO实验总结</a></p>
+<p><a href="https://blog.csdn.net/u012554092/article/details/78594425" target="_blank" rel="noopener">YOLOv3 darknet源码细节上优化</a></p>
+<p><a href="https://github.com/GZHermit/darknet-visualization_script/tree/master" target="_blank" rel="noopener">github darknet 可视化1</a></p>
+<p><a href="https://github.com/xueeinstein/darknet-vis" target="_blank" rel="noopener">github darknet 可视化2</a></p>
+<p><a href="https://blog.csdn.net/u013228894/article/details/79544109" target="_blank" rel="noopener">调参模型方法</a></p>
+<p><a href="https://blog.csdn.net/weixin_33860450/article/details/84890877" target="_blank" rel="noopener">c++调用模型</a></p>
+<p><a href="https://blog.csdn.net/qq_34199326/article/details/84109828?tdsourcetag=s_pctim_aiomsg" target="_blank" rel="noopener">详细解释YOLOv3边框预测分析</a></p>
+<p><a href="https://www.kancloud.cn/aollo/aolloopencv/259610" target="_blank" rel="noopener">opencv-python教程</a></p>
+<p><a href="https://oldpan.me/archives/pytorch-conmon-problem-in-training" target="_blank" rel="noopener">pytorch使用遇到的问题以及技巧</a></p>
+<p><a href="https://nanfei.xyz/2018/01/23/YOLOv2%E8%B0%83%E5%8F%82%E6%80%BB%E7%BB%93/#more" target="_blank" rel="noopener">learning Rate 相关调参</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/python%20%E5%8C%85%E5%8F%8A%E6%A8%A1%E5%9D%97%E5%BC%95%E7%94%A8%E6%A2%B3%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/20/python%20%E5%8C%85%E5%8F%8A%E6%A8%A1%E5%9D%97%E5%BC%95%E7%94%A8%E6%A2%B3%E7%90%86/" class="post-title-link" itemprop="url">python包以及模块引用梳理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-20 14:54:46" itemprop="dateCreated datePublished" datetime="2019-06-20T14:54:46+08:00">2019-06-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 15:43:00" itemprop="dateModified" datetime="2019-11-11T15:43:00+08:00">2019-11-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>前言：在查看一些工程性代码的时候，总是会发现类似：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> .util <span class="keyword">import</span> utils</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> datasets</span><br></pre></td></tr></table></figure>
+<p>这样的引用语句, 这让我比较困惑，所以趁这次机会，花点时间，好好整理一下相关的知识</p>
+</blockquote>
+<h2 id="1-python包机制"><a href="#1-python包机制" class="headerlink" title="1. python包机制"></a>1. python包机制</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 包</span><br><span class="line">- 模块</span><br><span class="line">- 框架： 如何组织包和模块</span><br></pre></td></tr></table></figure>
+<p>python提供了包的概念，是一个有层次的文件目录结构，用于管理多个模块源文件。</p>
+<ul>
+<li>包就是文件夹，这个文件夹下有__init__.py文件，并且该文件夹可以包括其他模块</li>
+<li><p>多个相关联的模块组成一个包，以便于维护和使用，同时能有限的避免命名空间的冲突。</p>
+</li>
+<li><p>在导入一个包的时候，会先调用这个包的__init__.py文件</p>
+</li>
+</ul>
+<p>层次问题：从小到大</p>
+<ul>
+<li>语句</li>
+<li>函数 def</li>
+<li>类 class</li>
+<li>模块 module， 物理上是一个python文件</li>
+<li>包 package， 物理上是一个文件夹， 包中可以含有模块和包</li>
+</ul>
+<p>包和模块的作用：</p>
+<blockquote>
+<ul>
+<li><p>编写好轮子，工具类，供其他模块进行使用</p>
+</li>
+<li><p>有效地对程序进行分解，方便代码的管理和维护</p>
+</li>
+<li>防止同一模块内命名重复的问题(module1.name, module2.name)</li>
+</ul>
+</blockquote>
+<p>— from bilibili <a href="https://www.bilibili.com/video/av65157512?p=2" target="_blank" rel="noopener">https://www.bilibili.com/video/av65157512?p=2</a></p>
+<p>包和模块基本信息</p>
+<ul>
+<li>包和模块名称<ul>
+<li><code>__name__</code> </li>
+<li><code>__package__</code></li>
+</ul>
+</li>
+<li>存放位置<ul>
+<li><code>__file__</code></li>
+</ul>
+</li>
+<li>查看包和模块的内容<ul>
+<li>dir(os)</li>
+<li><code>__dict__</code></li>
+</ul>
+</li>
+</ul>
+<p>导入包/模块的方式：</p>
+<ul>
+<li><p>常规导入：</p>
+<ul>
+<li>import M<ul>
+<li>同级目录直接导入import M</li>
+<li>不同级目录使用点语法import pkg1.pkg2.M</li>
+</ul>
+</li>
+<li>import M1, M2</li>
+<li>import M as m</li>
+<li>from A import B as b, C as c<ul>
+<li>A 的范围要大于B,C<ul>
+<li>范围：包&gt;模块&gt;资源</li>
+</ul>
+</li>
+<li>B，C这部分要尽可能简单<ul>
+<li>正确：from A.A1 import aa </li>
+<li>错误：from A import A1.aa</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>from 模块 import *<ul>
+<li>那么会去该模块对应的python文件中找<code>__all__</code>变量对应的内容</li>
+</ul>
+</li>
+<li>from 包 import *<ul>
+<li>那么就会去该包对应的<code>__init__.py</code>文件中找<code>__all__</code>变量对应内容</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>注意：</p>
+<ul>
+<li><p>使用时，导入的对象应该是模块，而不是包</p>
+</li>
+<li><p>如果导入的是一个包，默认不会导入任何模块</p>
+</li>
+<li><p>解决方案：</p>
+<ul>
+<li><p>在该包中的<code>__init__.py</code>中导入所有需要的模块</p>
+</li>
+<li><p>以from 包/文件夹 import 模块/子包 的形式导入</p>
+<ul>
+<li>from p1 import Tool1 as t1, Tool2 as t2</li>
+<li>from p1.sub_p import sub_xx<ul>
+<li>from模块 import 资源名 的形式导入</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>        - from other import num
+</code></pre><ul>
+<li><p>遇到no module named xxx</p>
+<ul>
+<li>```python<br>  import sys<br>  sys.path.append(‘rc:\Desktop\xxx_dir’)<br>  import xxx<h1 id="比较强硬的解决方法"><a href="#比较强硬的解决方法" class="headerlink" title="比较强硬的解决方法"></a>比较强硬的解决方法</h1>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 模块查找顺序：</span><br><span class="line"></span><br><span class="line">    - 内建&gt; 自定义&gt; sys.path</span><br><span class="line"></span><br><span class="line">## 2. python模块相对引用</span><br><span class="line"></span><br><span class="line">很多时候会遇见以下错误：</span><br></pre></td></tr></table></figure>
+ValueError: attempted relative import beyond top-level package<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这通常是由于相对引用的使用而出现的问题。</span><br><span class="line"></span><br><span class="line">需要明确：</span><br><span class="line"></span><br><span class="line">1. 相对引用不是相对于文件结构！！</span><br><span class="line">2. 相对引用是相对于`__name__`</span><br><span class="line"></span><br><span class="line">举个例子：</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">- rootdir</span><br><span class="line">  - subdir1</span><br><span class="line">    - __init__.py</span><br><span class="line">  	- subfile1.py</span><br><span class="line">  - subdir2 </span><br><span class="line">    - __init__.py</span><br><span class="line">    - subfile2.py</span><br><span class="line">- test.py</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>test.py中调用subfile1.py的内容：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_mod1</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'__name__: &#123;&#125;'</span>.format(__name__))</span><br><span class="line">    print(<span class="string">'__package__: &#123;&#125;'</span>.format(__package__))</span><br><span class="line">    print(<span class="string">'Import Successfully!'</span>)</span><br></pre></td></tr></table></figure>
+<p>输出为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__name__: subdir1.subfile1</span><br><span class="line">__package__: subfile1</span><br><span class="line">Import Successfully!</span><br></pre></td></tr></table></figure>
+<p>所以这个相对位置就是相对于<code>__name__</code>变量，比如：</p>
+<p>一个点：<code>.</code> 就代表当前是subdir1</p>
+<p>两个点：<code>..</code>就不存在，就会报错<code>beyond top-level package</code>, 这里的top-level package 也很容易理解，那就是当前的subdir1。</p>
+<p>更多内容可以查看：<a href="https://www.cnblogs.com/jay54520/p/8438228.html" target="_blank" rel="noopener">https://www.cnblogs.com/jay54520/p/8438228.html</a></p>
+<h2 id="3-举例"><a href="#3-举例" class="headerlink" title="3. 举例"></a>3. 举例</h2><p>目录结构如下：</p>
+<p><img src="assets/1572056109473.png" alt="1572056109473"></p>
+<ol>
+<li>model文件夹下：</li>
+</ol>
+<p><code>__init__.py</code> ·文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'-'</span>*<span class="number">5</span>,<span class="string">"init for model folder"</span>,<span class="string">'-'</span>*<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p><code>models.py</code>文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mm</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"this is rootpkg/model/models/model"</span>)</span><br><span class="line">    print(<span class="string">'__name__: &#123;&#125;'</span>.format(__name__))</span><br><span class="line">    print(<span class="string">'__package__: &#123;&#125;'</span>.format(__package__))</span><br></pre></td></tr></table></figure>
+<ol>
+<li>src文件夹下：</li>
+</ol>
+<p><code>__init__.py</code> ·文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'-'</span>*<span class="number">5</span>,<span class="string">"init for src folder"</span>,<span class="string">'-'</span>*<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p><code>source.py</code>文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ss</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"this is rootpkg/src/source/src"</span>)</span><br><span class="line">    print(<span class="string">'__name__: &#123;&#125;'</span>.format(__name__))</span><br><span class="line">    print(<span class="string">'__package__: &#123;&#125;'</span>.format(__package__))</span><br></pre></td></tr></table></figure>
+<ol>
+<li>RootPkg文件夹下：</li>
+</ol>
+<p><code>__init__.py</code> ·文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'-'</span>*<span class="number">5</span>,<span class="string">"init for rootpkg folder"</span>,<span class="string">'-'</span>*<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p><code>main.py</code>文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> model <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> src <span class="keyword">import</span> source</span><br><span class="line"><span class="keyword">from</span> 模块/文件夹 <span class="keyword">import</span> 具体某个python文件名</span><br><span class="line"></span><br><span class="line">source.ss()</span><br><span class="line">models.mm()</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>运行结果如下：</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">----- init <span class="keyword">for</span> model folder -----  </span><br><span class="line">----- init <span class="keyword">for</span> src folder ----- </span><br><span class="line"><span class="comment"># 这两个是在import模块的时候执行的__init__.py文件</span></span><br><span class="line">this <span class="keyword">is</span> rootpkg/src/source/src</span><br><span class="line">__name__: src.source</span><br><span class="line">__package__: src</span><br><span class="line">this <span class="keyword">is</span> rootpkg/model/models/model</span><br><span class="line">__name__: model.models</span><br><span class="line">__package__: model</span><br></pre></td></tr></table></figure>
+<p> 运行完以后会出现<code>__pycache__</code>文件夹</p>
+<p> <img src="assets/1572056618738.png" alt="1572056618738"></p>
+</li>
+</ol>
+<p>运行成功，但是Tommy-Yu的最佳实践那部分没有直行通过，大家可以查看一下第一个reference的博客，如果有谁能跑通，欢迎联系我。（ps: 个人感觉这个博客没有讲的很清楚，实际运行确实会出错）</p>
+<hr>
+<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ul>
+<li><p><a href="https://www.cnblogs.com/Tommy-Yu/p/5794829.html?spm=a2c4e.10696291.0.0.289619a41CBdwB" target="_blank" rel="noopener">https://www.cnblogs.com/Tommy-Yu/p/5794829.html?spm=a2c4e.10696291.0.0.289619a41CBdwB</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/jay54520/p/8438228.html" target="_blank" rel="noopener">https://www.cnblogs.com/jay54520/p/8438228.html</a></p>
+</li>
+<li><p><a href="https://www.bilibili.com/video/av65157512?from=search&amp;seid=6677976813026578695" target="_blank" rel="noopener">https://www.bilibili.com/video/av65157512?from=search&amp;seid=6677976813026578695</a></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/%E5%B8%B8%E7%94%A8%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5%E5%88%86%E4%BA%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/20/%E5%B8%B8%E7%94%A8%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5%E5%88%86%E4%BA%AB/" class="post-title-link" itemprop="url">常用学习教程链接分享</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-20 07:04:02" itemprop="dateCreated datePublished" datetime="2019-06-20T07:04:02+08:00">2019-06-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 16:09:48" itemprop="dateModified" datetime="2019-11-11T16:09:48+08:00">2019-11-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><p><a href="https://zhuanlan.zhihu.com/p/59507137" target="_blank" rel="noopener">Tensorflow 2.0 教程</a></p>
+</li>
+<li><p><a href="https://pytorch.apachecn.org/docs/1.0/blitz_neural_networks_tutorial.html" target="_blank" rel="noopener">Pytorch 教程</a></p>
+</li>
+<li><p><a href="https://keras.io/zh/" target="_blank" rel="noopener">Keras中文文档</a></p>
+</li>
+<li><a href="https://docs.fast.ai/" target="_blank" rel="noopener">fastai 官方文档</a></li>
+</ul>
+<hr>
+<h3 id="keras流程"><a href="#keras流程" class="headerlink" title="keras流程"></a>keras流程</h3><ol>
+<li>数据准备</li>
+<li>模型构建</li>
+<li>模型编译(loss，optimizer，评价指标)</li>
+<li>模型训练(fit，数据，步数，batch, lr, valid数据集)</li>
+</ol>
+<h3 id="pytorch流程"><a href="#pytorch流程" class="headerlink" title="pytorch流程"></a>pytorch流程</h3><ol>
+<li>数据集需要构造dataloader类</li>
+<li>训练模型构造Module类</li>
+<li>创建优化器(optimizer)</li>
+<li>循环中<ol>
+<li>优化器清零</li>
+<li>正向走一遍模型，得到输出</li>
+<li>计算loss</li>
+<li>loss进行反向传播</li>
+<li>优化器step()更新参数</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="pprp"
+      src="/images/log.png">
+  <p class="site-author-name" itemprop="name">pprp</p>
+  <div class="site-description" itemprop="description">涉猎编程语言主要为python, 深度学习框架以pytorch为主</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pprp</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+
+  
+
+  
+
+  
+
+
+    </div>
+</body>
+</html>

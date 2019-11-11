@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="spicyCV" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="前言：在查看一些工程性代码的时候，总是会发现类似： 12from .util import utilsfrom . import datasets 这样的引用语句, 这让我比较困惑，所以趁这次机会，花点时间，好好整理一下相关的知识  1. python包机制123- 包- 模块- 框架： 如何组织包和模块 python提供了包的概念，是一个有层次的文件目录结构，用于管理多个模块源文件。  包就是">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python包以及模块引用梳理">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;06&#x2F;20&#x2F;python%20%E5%8C%85%E5%8F%8A%E6%A8%A1%E5%9D%97%E5%BC%95%E7%94%A8%E6%A2%B3%E7%90%86&#x2F;index.html">
+<meta property="og:site_name" content="spicyCV">
+<meta property="og:description" content="前言：在查看一些工程性代码的时候，总是会发现类似： 12from .util import utilsfrom . import datasets 这样的引用语句, 这让我比较困惑，所以趁这次机会，花点时间，好好整理一下相关的知识  1. python包机制123- 包- 模块- 框架： 如何组织包和模块 python提供了包的概念，是一个有层次的文件目录结构，用于管理多个模块源文件。  包就是">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;06&#x2F;20&#x2F;python%20%E5%8C%85%E5%8F%8A%E6%A8%A1%E5%9D%97%E5%BC%95%E7%94%A8%E6%A2%B3%E7%90%86&#x2F;assets&#x2F;1572056109473.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;06&#x2F;20&#x2F;python%20%E5%8C%85%E5%8F%8A%E6%A8%A1%E5%9D%97%E5%BC%95%E7%94%A8%E6%A2%B3%E7%90%86&#x2F;assets&#x2F;1572056618738.png">
+<meta property="og:updated_time" content="2019-11-11T07:43:00.550Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;06&#x2F;20&#x2F;python%20%E5%8C%85%E5%8F%8A%E6%A8%A1%E5%9D%97%E5%BC%95%E7%94%A8%E6%A2%B3%E7%90%86&#x2F;assets&#x2F;1572056109473.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/06/20/python%20%E5%8C%85%E5%8F%8A%E6%A8%A1%E5%9D%97%E5%BC%95%E7%94%A8%E6%A2%B3%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>python包以及模块引用梳理 | spicyCV</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spicyCV</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">一个专注CV的starter</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/pprp" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/python%20%E5%8C%85%E5%8F%8A%E6%A8%A1%E5%9D%97%E5%BC%95%E7%94%A8%E6%A2%B3%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python包以及模块引用梳理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-20 14:54:46" itemprop="dateCreated datePublished" datetime="2019-06-20T14:54:46+08:00">2019-06-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 15:43:00" itemprop="dateModified" datetime="2019-11-11T15:43:00+08:00">2019-11-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>前言：在查看一些工程性代码的时候，总是会发现类似：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> .util <span class="keyword">import</span> utils</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> datasets</span><br></pre></td></tr></table></figure>
+<p>这样的引用语句, 这让我比较困惑，所以趁这次机会，花点时间，好好整理一下相关的知识</p>
+</blockquote>
+<h2 id="1-python包机制"><a href="#1-python包机制" class="headerlink" title="1. python包机制"></a>1. python包机制</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 包</span><br><span class="line">- 模块</span><br><span class="line">- 框架： 如何组织包和模块</span><br></pre></td></tr></table></figure>
+<p>python提供了包的概念，是一个有层次的文件目录结构，用于管理多个模块源文件。</p>
+<ul>
+<li>包就是文件夹，这个文件夹下有__init__.py文件，并且该文件夹可以包括其他模块</li>
+<li><p>多个相关联的模块组成一个包，以便于维护和使用，同时能有限的避免命名空间的冲突。</p>
+</li>
+<li><p>在导入一个包的时候，会先调用这个包的__init__.py文件</p>
+</li>
+</ul>
+<p>层次问题：从小到大</p>
+<ul>
+<li>语句</li>
+<li>函数 def</li>
+<li>类 class</li>
+<li>模块 module， 物理上是一个python文件</li>
+<li>包 package， 物理上是一个文件夹， 包中可以含有模块和包</li>
+</ul>
+<p>包和模块的作用：</p>
+<blockquote>
+<ul>
+<li><p>编写好轮子，工具类，供其他模块进行使用</p>
+</li>
+<li><p>有效地对程序进行分解，方便代码的管理和维护</p>
+</li>
+<li>防止同一模块内命名重复的问题(module1.name, module2.name)</li>
+</ul>
+</blockquote>
+<p>— from bilibili <a href="https://www.bilibili.com/video/av65157512?p=2" target="_blank" rel="noopener">https://www.bilibili.com/video/av65157512?p=2</a></p>
+<p>包和模块基本信息</p>
+<ul>
+<li>包和模块名称<ul>
+<li><code>__name__</code> </li>
+<li><code>__package__</code></li>
+</ul>
+</li>
+<li>存放位置<ul>
+<li><code>__file__</code></li>
+</ul>
+</li>
+<li>查看包和模块的内容<ul>
+<li>dir(os)</li>
+<li><code>__dict__</code></li>
+</ul>
+</li>
+</ul>
+<p>导入包/模块的方式：</p>
+<ul>
+<li><p>常规导入：</p>
+<ul>
+<li>import M<ul>
+<li>同级目录直接导入import M</li>
+<li>不同级目录使用点语法import pkg1.pkg2.M</li>
+</ul>
+</li>
+<li>import M1, M2</li>
+<li>import M as m</li>
+<li>from A import B as b, C as c<ul>
+<li>A 的范围要大于B,C<ul>
+<li>范围：包&gt;模块&gt;资源</li>
+</ul>
+</li>
+<li>B，C这部分要尽可能简单<ul>
+<li>正确：from A.A1 import aa </li>
+<li>错误：from A import A1.aa</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>from 模块 import *<ul>
+<li>那么会去该模块对应的python文件中找<code>__all__</code>变量对应的内容</li>
+</ul>
+</li>
+<li>from 包 import *<ul>
+<li>那么就会去该包对应的<code>__init__.py</code>文件中找<code>__all__</code>变量对应内容</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>注意：</p>
+<ul>
+<li><p>使用时，导入的对象应该是模块，而不是包</p>
+</li>
+<li><p>如果导入的是一个包，默认不会导入任何模块</p>
+</li>
+<li><p>解决方案：</p>
+<ul>
+<li><p>在该包中的<code>__init__.py</code>中导入所有需要的模块</p>
+</li>
+<li><p>以from 包/文件夹 import 模块/子包 的形式导入</p>
+<ul>
+<li>from p1 import Tool1 as t1, Tool2 as t2</li>
+<li>from p1.sub_p import sub_xx<ul>
+<li>from模块 import 资源名 的形式导入</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>        - from other import num
+</code></pre><ul>
+<li><p>遇到no module named xxx</p>
+<ul>
+<li>```python<br>  import sys<br>  sys.path.append(‘rc:\Desktop\xxx_dir’)<br>  import xxx<h1 id="比较强硬的解决方法"><a href="#比较强硬的解决方法" class="headerlink" title="比较强硬的解决方法"></a>比较强硬的解决方法</h1>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 模块查找顺序：</span><br><span class="line"></span><br><span class="line">    - 内建&gt; 自定义&gt; sys.path</span><br><span class="line"></span><br><span class="line">## 2. python模块相对引用</span><br><span class="line"></span><br><span class="line">很多时候会遇见以下错误：</span><br></pre></td></tr></table></figure>
+ValueError: attempted relative import beyond top-level package<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这通常是由于相对引用的使用而出现的问题。</span><br><span class="line"></span><br><span class="line">需要明确：</span><br><span class="line"></span><br><span class="line">1. 相对引用不是相对于文件结构！！</span><br><span class="line">2. 相对引用是相对于`__name__`</span><br><span class="line"></span><br><span class="line">举个例子：</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">- rootdir</span><br><span class="line">  - subdir1</span><br><span class="line">    - __init__.py</span><br><span class="line">  	- subfile1.py</span><br><span class="line">  - subdir2 </span><br><span class="line">    - __init__.py</span><br><span class="line">    - subfile2.py</span><br><span class="line">- test.py</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>test.py中调用subfile1.py的内容：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_mod1</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'__name__: &#123;&#125;'</span>.format(__name__))</span><br><span class="line">    print(<span class="string">'__package__: &#123;&#125;'</span>.format(__package__))</span><br><span class="line">    print(<span class="string">'Import Successfully!'</span>)</span><br></pre></td></tr></table></figure>
+<p>输出为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__name__: subdir1.subfile1</span><br><span class="line">__package__: subfile1</span><br><span class="line">Import Successfully!</span><br></pre></td></tr></table></figure>
+<p>所以这个相对位置就是相对于<code>__name__</code>变量，比如：</p>
+<p>一个点：<code>.</code> 就代表当前是subdir1</p>
+<p>两个点：<code>..</code>就不存在，就会报错<code>beyond top-level package</code>, 这里的top-level package 也很容易理解，那就是当前的subdir1。</p>
+<p>更多内容可以查看：<a href="https://www.cnblogs.com/jay54520/p/8438228.html" target="_blank" rel="noopener">https://www.cnblogs.com/jay54520/p/8438228.html</a></p>
+<h2 id="3-举例"><a href="#3-举例" class="headerlink" title="3. 举例"></a>3. 举例</h2><p>目录结构如下：</p>
+<p><img src="assets/1572056109473.png" alt="1572056109473"></p>
+<ol>
+<li>model文件夹下：</li>
+</ol>
+<p><code>__init__.py</code> ·文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'-'</span>*<span class="number">5</span>,<span class="string">"init for model folder"</span>,<span class="string">'-'</span>*<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p><code>models.py</code>文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mm</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"this is rootpkg/model/models/model"</span>)</span><br><span class="line">    print(<span class="string">'__name__: &#123;&#125;'</span>.format(__name__))</span><br><span class="line">    print(<span class="string">'__package__: &#123;&#125;'</span>.format(__package__))</span><br></pre></td></tr></table></figure>
+<ol>
+<li>src文件夹下：</li>
+</ol>
+<p><code>__init__.py</code> ·文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'-'</span>*<span class="number">5</span>,<span class="string">"init for src folder"</span>,<span class="string">'-'</span>*<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p><code>source.py</code>文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ss</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"this is rootpkg/src/source/src"</span>)</span><br><span class="line">    print(<span class="string">'__name__: &#123;&#125;'</span>.format(__name__))</span><br><span class="line">    print(<span class="string">'__package__: &#123;&#125;'</span>.format(__package__))</span><br></pre></td></tr></table></figure>
+<ol>
+<li>RootPkg文件夹下：</li>
+</ol>
+<p><code>__init__.py</code> ·文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'-'</span>*<span class="number">5</span>,<span class="string">"init for rootpkg folder"</span>,<span class="string">'-'</span>*<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p><code>main.py</code>文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> model <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> src <span class="keyword">import</span> source</span><br><span class="line"><span class="keyword">from</span> 模块/文件夹 <span class="keyword">import</span> 具体某个python文件名</span><br><span class="line"></span><br><span class="line">source.ss()</span><br><span class="line">models.mm()</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>运行结果如下：</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">----- init <span class="keyword">for</span> model folder -----  </span><br><span class="line">----- init <span class="keyword">for</span> src folder ----- </span><br><span class="line"><span class="comment"># 这两个是在import模块的时候执行的__init__.py文件</span></span><br><span class="line">this <span class="keyword">is</span> rootpkg/src/source/src</span><br><span class="line">__name__: src.source</span><br><span class="line">__package__: src</span><br><span class="line">this <span class="keyword">is</span> rootpkg/model/models/model</span><br><span class="line">__name__: model.models</span><br><span class="line">__package__: model</span><br></pre></td></tr></table></figure>
+<p> 运行完以后会出现<code>__pycache__</code>文件夹</p>
+<p> <img src="assets/1572056618738.png" alt="1572056618738"></p>
+</li>
+</ol>
+<p>运行成功，但是Tommy-Yu的最佳实践那部分没有直行通过，大家可以查看一下第一个reference的博客，如果有谁能跑通，欢迎联系我。（ps: 个人感觉这个博客没有讲的很清楚，实际运行确实会出错）</p>
+<hr>
+<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ul>
+<li><p><a href="https://www.cnblogs.com/Tommy-Yu/p/5794829.html?spm=a2c4e.10696291.0.0.289619a41CBdwB" target="_blank" rel="noopener">https://www.cnblogs.com/Tommy-Yu/p/5794829.html?spm=a2c4e.10696291.0.0.289619a41CBdwB</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/jay54520/p/8438228.html" target="_blank" rel="noopener">https://www.cnblogs.com/jay54520/p/8438228.html</a></p>
+</li>
+<li><p><a href="https://www.bilibili.com/video/av65157512?from=search&amp;seid=6677976813026578695" target="_blank" rel="noopener">https://www.bilibili.com/video/av65157512?from=search&amp;seid=6677976813026578695</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/06/20/%E5%B8%B8%E7%94%A8%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5%E5%88%86%E4%BA%AB/" rel="next" title="常用学习教程链接分享">
+                  <i class="fa fa-chevron-left"></i> 常用学习教程链接分享
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/06/20/YOLO%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" rel="prev" title="YOLO经验总结">
+                  YOLO经验总结 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-python包机制"><span class="nav-number">1.</span> <span class="nav-text">1. python包机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比较强硬的解决方法"><span class="nav-number"></span> <span class="nav-text">比较强硬的解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-举例"><span class="nav-number">1.</span> <span class="nav-text">3. 举例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">2.</span> <span class="nav-text">reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="pprp"
+      src="/images/log.png">
+  <p class="site-author-name" itemprop="name">pprp</p>
+  <div class="site-description" itemprop="description">涉猎编程语言主要为python, 深度学习框架以pytorch为主</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pprp</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '510ce8b06c45bdef1d58',
+      clientSecret: 'df992456e87a7ff04b9f002b27de9caf70cd0d6f',
+      repo: 'pprp.github.io',
+      owner: 'pprp',
+      admin: ['pprp'],
+      id: '69924b321054d41a865c4efae2fbe4c0',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
