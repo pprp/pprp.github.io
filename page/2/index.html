@@ -299,7 +299,7 @@
 <blockquote>
 <blockquote>
 <blockquote>
-<p>func2=lambda x: x**x<br>L=[1,2,3]<br>map(func2, L)<br>  <map object at 0x00000218C07F0080><br>list(map(func2, L)) # 注意要显示内容需要转为list类型，因为py3中返回的是迭代器对象<br>  [1, 4, 27]</p>
+<p>func2=lambda x: x**x<br>L=[1,2,3]<br>map(func2, L)<br>  <map object at 0x00000218c07f0080><br>list(map(func2, L)) # 注意要显示内容需要转为list类型，因为py3中返回的是迭代器对象<br>  [1, 4, 27]</map></p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 其中function可以使lambda函数对象，也可以是str等类型</span><br><span class="line"></span><br><span class="line">- ```python</span><br><span class="line">    &gt;&gt;&gt; L=[1,2,3,4]</span><br><span class="line">    &gt;&gt;&gt; list(map(str, L))</span><br><span class="line">    [&apos;1&apos;, &apos;2&apos;, &apos;3&apos;, &apos;4&apos;]</span><br><span class="line">    &gt;&gt;&gt; list(map(float, L))</span><br><span class="line">    [1.0, 2.0, 3.0, 4.0]</span><br></pre></td></tr></table></figure>
 </blockquote>
 </blockquote>
@@ -325,7 +325,7 @@
 <blockquote>
 <blockquote>
 <blockquote>
-<p>filter(lambda x: x % 2 == 0, [1,2,3,4,5,6,7,8,9,10])<br>  <filter object at 0x00000218C07F0080><br>list(filter(lambda x: x % 2 == 0, [1,2,3,4,5,6,7,8,9,10]))<br>  [2, 4, 6, 8, 10]</p>
+<p>filter(lambda x: x % 2 == 0, [1,2,3,4,5,6,7,8,9,10])<br>  <filter object at 0x00000218c07f0080><br>list(filter(lambda x: x % 2 == 0, [1,2,3,4,5,6,7,8,9,10]))<br>  [2, 4, 6, 8, 10]</filter></p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    - 这里function智能返回true or false, 将满足true的放入最终列表。</span><br><span class="line"></span><br><span class="line">- sorted函数对所有可迭代的对象进行排序操作。</span><br><span class="line"></span><br><span class="line">    - `sorted(iterable, key=None, reverse=False)`</span><br><span class="line"></span><br><span class="line">    - ```python</span><br><span class="line">        &gt;&gt;&gt; sorted([[3,4],[2,1],[5,3],[7,4],[9,0]], key=lambda x:x[0])</span><br><span class="line">        [[2, 1], [3, 4], [5, 3], [7, 4], [9, 0]]</span><br></pre></td></tr></table></figure>
 </blockquote>
 </blockquote>
@@ -469,7 +469,7 @@
 <li><p>进行数据收集，标注，扩充，处理，完成了数据集的构建。</p>
 </li>
 </ol>
-<p><img src="../assets/1569675941284.png" alt="1569675941284"></p>
+<p><img src="/.com//assets/1569675941284.png" alt="1569675941284"></p>
 <ol>
 <li><p>深度学习环境：pytorch, tensorflow, keras的搭建</p>
 </li>
@@ -477,8 +477,8 @@
 <p> | <strong>框架</strong> | <strong>Faster R-CNN</strong> | <strong>SSD</strong> | <strong>YOLOv3</strong> | <strong>FPN</strong> | <strong>improved datasets</strong> |<br> | ———— | ———————— | ———- | ————— | ———- | ——————————- |<br> | head     | 0.8883           | 0.85946 | 0.90734    | 0.8173  | 0.82379               |<br> | nose     | 0.4272           | 0.62857 | 0.75085    | 0.2100  | 0.79441               |<br> | eye      | 0.2605           | 0.03178 | 0.74641    | 0.3399  | 0.80475               |<br> | map      | 0.5254           | 0.50660 | 0.80153    | 0.4557  | 0.80765               |</p>
 </li>
 <li><p>图示：</p>
-<p> <img src="../assets/1569676128417.png" alt="1569676128417"></p>
-<p> <img src="../assets/1569676134662.png" alt="1569676134662"></p>
+<p> <img src="/.com//assets/1569676128417.png" alt="1569676128417"></p>
+<p> <img src="/.com//assets/1569676134662.png" alt="1569676134662"></p>
 </li>
 </ol>
 <p>模型改进：</p>
@@ -487,8 +487,8 @@
 <li>对基础网络浅层部分进行改进，将普通的卷积替换为空洞卷积，这样可以提升模型的感受野。</li>
 <li>融合浅层特征进行目标检测，添加了一个检测层，使用resnet的残差结构更好地保存信息，提升小目标的检测效果。</li>
 </ol>
-<p><img src="../assets/1569676604011.png" alt="1569676604011"></p>
-<p><img src="../assets/1569676617895.png" alt="1569676617895"></p>
+<p><img src="/.com//assets/1569676604011.png" alt="1569676604011"></p>
+<p><img src="/.com//assets/1569676617895.png" alt="1569676617895"></p>
 <h2 id="2-肉牛目标跟踪"><a href="#2-肉牛目标跟踪" class="headerlink" title="2. 肉牛目标跟踪"></a>2. 肉牛目标跟踪</h2><p> <strong>技术路线：</strong></p>
 <p>使用针对MOT(multi-object tracking) 多目标跟踪的方法进行多个目标的跟踪, 会出现新目标进入与旧目标消失的问题。</p>
 <ol>
@@ -1464,7 +1464,7 @@ ValueError: attempted relative import beyond top-level package<figure class="hig
 <p>两个点：<code>..</code>就不存在，就会报错<code>beyond top-level package</code>, 这里的top-level package 也很容易理解，那就是当前的subdir1。</p>
 <p>更多内容可以查看：<a href="https://www.cnblogs.com/jay54520/p/8438228.html" target="_blank" rel="noopener">https://www.cnblogs.com/jay54520/p/8438228.html</a></p>
 <h2 id="3-举例"><a href="#3-举例" class="headerlink" title="3. 举例"></a>3. 举例</h2><p>目录结构如下：</p>
-<p><img src="assets/1572056109473.png" alt="1572056109473"></p>
+<p><img src="/.com//1572056109473.png" alt="1572056109473"></p>
 <ol>
 <li>model文件夹下：</li>
 </ol>
@@ -1490,7 +1490,7 @@ ValueError: attempted relative import beyond top-level package<figure class="hig
 <li><p>运行结果如下：</p>
  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">----- init <span class="keyword">for</span> model folder -----  </span><br><span class="line">----- init <span class="keyword">for</span> src folder ----- </span><br><span class="line"><span class="comment"># 这两个是在import模块的时候执行的__init__.py文件</span></span><br><span class="line">this <span class="keyword">is</span> rootpkg/src/source/src</span><br><span class="line">__name__: src.source</span><br><span class="line">__package__: src</span><br><span class="line">this <span class="keyword">is</span> rootpkg/model/models/model</span><br><span class="line">__name__: model.models</span><br><span class="line">__package__: model</span><br></pre></td></tr></table></figure>
 <p> 运行完以后会出现<code>__pycache__</code>文件夹</p>
-<p> <img src="assets/1572056618738.png" alt="1572056618738"></p>
+<p> <img src="/.com//1572056618738.png" alt="1572056618738"></p>
 </li>
 </ol>
 <p>运行成功，但是Tommy-Yu的最佳实践那部分没有直行通过，大家可以查看一下第一个reference的博客，如果有谁能跑通，欢迎联系我。（ps: 个人感觉这个博客没有讲的很清楚，实际运行确实会出错）</p>

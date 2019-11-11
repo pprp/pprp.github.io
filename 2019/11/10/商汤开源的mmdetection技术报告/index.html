@@ -59,12 +59,12 @@
 <meta property="og:site_name" content="spicyCV">
 <meta property="og:description" content="商汤开源的mmdetection技术报告  前言：让我惊艳的几个库：  ultralytics的yolov3，在一众yolov3的pytorch版本实现算法中脱颖而出，收到开发人员的欢迎，比别的库明显好的点在于，与darknet相似度达到极高的水平，支持自定义cfg文件的加载，简直完美。 michuanhaohao的reid-strong-baseline, 这个库很严谨的将代码划分为几个部分，每">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;10&#x2F;%E5%95%86%E6%B1%A4%E5%BC%80%E6%BA%90%E7%9A%84mmdetection%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A&#x2F;assets&#x2F;1573351733657.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;10&#x2F;%E5%95%86%E6%B1%A4%E5%BC%80%E6%BA%90%E7%9A%84mmdetection%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A&#x2F;assets&#x2F;1573352295312.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;10&#x2F;%E5%95%86%E6%B1%A4%E5%BC%80%E6%BA%90%E7%9A%84mmdetection%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A&#x2F;assets&#x2F;1573356583316.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;1573351733657.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;1573352295312.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;1573356583316.png">
 <meta property="og:updated_time" content="2019-11-11T08:17:27.950Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;10&#x2F;%E5%95%86%E6%B1%A4%E5%BC%80%E6%BA%90%E7%9A%84mmdetection%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A&#x2F;assets&#x2F;1573351733657.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;1573351733657.png">
 
 <link rel="canonical" href="http://yoursite.com/2019/11/10/%E5%95%86%E6%B1%A4%E5%BC%80%E6%BA%90%E7%9A%84mmdetection%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A/">
 
@@ -343,7 +343,7 @@
 <li>RoIHead  (BBoxHead/MaskHead): 将ROI提取得到的feature作为输入， 进行基于任务的预测，如：预测坐标和类别，bbox预测与回归，mask预测。</li>
 </ol>
 <p>示意图如下：</p>
-<p><img src="./assets/1573351733657.png" alt="1573351733657"></p>
+<p><img src="/.com//1573351733657.png" alt="1573351733657"></p>
 <ul>
 <li><p><strong>单阶段检测器</strong></p>
 <p>  主要看SSD, RetinaNet, YOLO等思想，端到端的解决方案。</p>
@@ -357,7 +357,7 @@
 <li><p><strong>两阶段检测器</strong></p>
 <p>  经典例子是Faster R-CNN, 这里附上一个cascade R-CNN论文中的图示。（最左侧就是Faster R-CNN）</p>
 <p>   R-CNN细节讲解博客：<a href="http://www.telesens.co/2018/03/11/object-detection-and-classification-using-r-cnns/" target="_blank" rel="noopener">http://www.telesens.co/2018/03/11/object-detection-and-classification-using-r-cnns/</a></p>
-<p>  <img src="./assets/1573352295312.png" alt="1573352295312"></p>
+<p>  <img src="/.com//1573352295312.png" alt="1573352295312"></p>
 <ul>
 <li>conv : 代表backbone, 进行特征提取操作。</li>
 <li>H0, C0, B0 组成的整体： 代表DenseHead,对特征图的密集位置进行操作</li>
@@ -375,7 +375,7 @@
 |  DenseHead   | 类似RPN,也类似yololayer, 从特征图中得到框的信息，类的信息 |
 | ROIExtractor |    结合DenseHead提出的框以及Neck得到的特征进行特征提取    |
 |   RoIHead    |      将从ROIExtractor中提取得到的内容进行任务的预测       |
-</code></pre><h2 id="4-训练pipline"><a href="#4-训练pipline" class="headerlink" title="4. 训练pipline"></a>4. 训练pipline</h2><p><img src="./assets/1573356583316.png" alt="1573356583316"></p>
+</code></pre><h2 id="4-训练pipline"><a href="#4-训练pipline" class="headerlink" title="4. 训练pipline"></a>4. 训练pipline</h2><p><img src="/.com//1573356583316.png" alt="1573356583316"></p>
 <p>技术报告中提出了一个可供目标检测，图像分类，语义分割使用的训练pipline。为了让这个pipline更加灵活和简单，首先定义了一个最小的训练流程，然后提供了挂钩机制（hooking mechanism）,可以将上图右侧的一些功能加载到基础训练流程中。挂载到几个时间点上:</p>
 <ul>
 <li>before run</li>
