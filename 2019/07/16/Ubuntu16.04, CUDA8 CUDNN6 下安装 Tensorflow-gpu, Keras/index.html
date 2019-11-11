@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.0.0">
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -51,13 +52,13 @@
   };
 </script>
 
-  <meta name="description" content="如何访问tensorflow官方网站tensorflow官方网站变为：https:&#x2F;&#x2F;tensorflow.google.cn&#x2F; 安装深度学习框架0. ubuntu查看CUDA和cuDNN版本CUDA:   1cat &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;version.txt cuDNN: 1cat &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;include&#x2F;cudnn.h | grep CUDNN_MAJOR">
+  <meta name="description" content="如何访问tensorflow官方网站 tensorflow官方网站变为：https:&#x2F;&#x2F;tensorflow.google.cn&#x2F;  安装深度学习框架  0. ubuntu查看CUDA和cuDNN版本 CUDA: 1cat &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;version.txt cuDNN: 1cat &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;include&#x2F;cudnn.h | grep CUDNN_MA">
 <meta name="keywords" content="ubuntu16.04,,cuda,cudnn,kears,tensorflow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu16.04, CUDA8 CUDNN6 下安装 Tensorflow-gpu, Keras, Pytorch, fastai">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;07&#x2F;16&#x2F;Ubuntu16.04,%20CUDA8%20CUDNN6%20%E4%B8%8B%E5%AE%89%E8%A3%85%20Tensorflow-gpu,%20Keras&#x2F;index.html">
 <meta property="og:site_name" content="spicyCV">
-<meta property="og:description" content="如何访问tensorflow官方网站tensorflow官方网站变为：https:&#x2F;&#x2F;tensorflow.google.cn&#x2F; 安装深度学习框架0. ubuntu查看CUDA和cuDNN版本CUDA:   1cat &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;version.txt cuDNN: 1cat &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;include&#x2F;cudnn.h | grep CUDNN_MAJOR">
+<meta property="og:description" content="如何访问tensorflow官方网站 tensorflow官方网站变为：https:&#x2F;&#x2F;tensorflow.google.cn&#x2F;  安装深度学习框架  0. ubuntu查看CUDA和cuDNN版本 CUDA: 1cat &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;version.txt cuDNN: 1cat &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;include&#x2F;cudnn.h | grep CUDNN_MA">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-11-11T14:07:21.674Z">
 <meta name="twitter:card" content="summary">
@@ -105,12 +106,12 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
     <div class="headband"></div>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -275,13 +276,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="如何访问tensorflow官方网站"><a href="#如何访问tensorflow官方网站" class="headerlink" title="如何访问tensorflow官方网站"></a>如何访问tensorflow官方网站</h2><p>tensorflow官方网站变为：<a href="https://tensorflow.google.cn/" target="_blank" rel="noopener">https://tensorflow.google.cn/</a></p>
-<h2 id="安装深度学习框架"><a href="#安装深度学习框架" class="headerlink" title="安装深度学习框架"></a>安装深度学习框架</h2><h3 id="0-ubuntu查看CUDA和cuDNN版本"><a href="#0-ubuntu查看CUDA和cuDNN版本" class="headerlink" title="0. ubuntu查看CUDA和cuDNN版本"></a>0. ubuntu查看CUDA和cuDNN版本</h3><p>CUDA:  </p>
+        <h2 id="如何访问tensorflow官方网站"><a class="markdownIt-Anchor" href="#如何访问tensorflow官方网站"></a> 如何访问tensorflow官方网站</h2>
+<p>tensorflow官方网站变为：<a href="https://tensorflow.google.cn/" target="_blank" rel="noopener">https://tensorflow.google.cn/</a></p>
+<h2 id="安装深度学习框架"><a class="markdownIt-Anchor" href="#安装深度学习框架"></a> 安装深度学习框架</h2>
+<h3 id="0-ubuntu查看cuda和cudnn版本"><a class="markdownIt-Anchor" href="#0-ubuntu查看cuda和cudnn版本"></a> 0. ubuntu查看CUDA和cuDNN版本</h3>
+<p>CUDA:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/local/cuda/version.txt</span><br></pre></td></tr></table></figure>
 <p>cuDNN:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2</span><br></pre></td></tr></table></figure>
-<h3 id="1-keras"><a href="#1-keras" class="headerlink" title="1. keras"></a>1. keras</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tensorflow 1.5 和 keras 2.1.4搭配</span><br><span class="line">tensorflow 1.4 和 keras2.1.3搭配</span><br><span class="line">tensorflow 1.3 和keras 2.1.2 搭配</span><br><span class="line">tensorflow 1.2 和keras 2.1.1搭配</span><br></pre></td></tr></table></figure>
-<div class="table-container">
+<h3 id="1-keras"><a class="markdownIt-Anchor" href="#1-keras"></a> 1. keras</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tensorflow 1.5 和 keras 2.1.4搭配</span><br><span class="line">tensorflow 1.4 和 keras2.1.3搭配</span><br><span class="line">tensorflow 1.3 和keras 2.1.2 搭配</span><br><span class="line">tensorflow 1.2 和keras 2.1.1搭配</span><br></pre></td></tr></table></figure>
 <table>
 <thead>
 <tr>
@@ -416,36 +420,37 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>本地环境安装的是CUDA8和CUDNN5，所以采用以下命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorflow-gpu==1.2.0 -i https://mirrors.aliyun.com/pypi/simple</span><br><span class="line">pip install keras==2.1.1</span><br></pre></td></tr></table></figure>
-<h3 id="2-fastai"><a href="#2-fastai" class="headerlink" title="2. fastai"></a>2. fastai</h3><p>安装比较人性化：</p>
+<h3 id="2-fastai"><a class="markdownIt-Anchor" href="#2-fastai"></a> 2. fastai</h3>
+<p>安装比较人性化：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install fastai</span><br></pre></td></tr></table></figure>
 <p>测试：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> fastai</span><br><span class="line"><span class="keyword">import</span> torch</span><br></pre></td></tr></table></figure>
 <p>如果没有报错就说明正常，一般配合jupyter notebook进行使用，比较方便。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install jupter</span><br></pre></td></tr></table></figure>
-<h2 id="报错解决"><a href="#报错解决" class="headerlink" title="报错解决"></a>报错解决</h2><ol>
+<h2 id="报错解决"><a class="markdownIt-Anchor" href="#报错解决"></a> 报错解决</h2>
+<ol>
 <li>TypeError: softmax</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: softmax() got an unexpected keyword argument &apos;axis&apos;</span><br></pre></td></tr></table></figure>
-<p>当前keras版本是2.2 退回到2.1 </p>
+<p>当前keras版本是2.2 退回到2.1</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install keras==2.1</span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="2">
 <li>TypeError: validation_split</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: __init__() got an unexpected keyword argument &apos;validation_split&apos;</span><br></pre></td></tr></table></figure>
 <p>将validation_split删除</p>
-<ol>
+<ol start="3">
 <li>TypeError: fit_generator() missing 1 required positional argument: ‘steps_per_epoch’</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: fit_generator() missing 1 required positional argument: &apos;steps_per_epoch&apos;</span><br></pre></td></tr></table></figure>
 <p>添加上steps_pers_epoch参数，这是一个必要参数，但是不同版本keras要求不太一样。</p>
-<ol>
+<ol start="4">
 <li>RemoveError: ‘setuptools’ is a dependency of conda and cannot be removed from</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda update conda</span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="5">
 <li>jupyter notebook no module named xxx</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">which jupyter # 查看使用的是哪个jupyter，通常情况下这种情况出现一般用的是系统的jupyter而不是anaconda中的jupyter</span><br></pre></td></tr></table></figure>
@@ -454,7 +459,7 @@
 <p>再次查看使用的是哪个jupyter</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">which jupter</span><br></pre></td></tr></table></figure>
 <p>如果发现使用的是anaconda中的路径那就说明成功了，问题解决。</p>
-<ol>
+<ol start="6">
 <li>ValueError: <code>validation_steps=None</code> is only valid for a generator based on the <code>keras.utils.Sequence</code> class. Please specify <code>validation_steps</code> or use the <code>keras.utils.Sequence</code> class.</li>
 </ol>
 
@@ -527,7 +532,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何访问tensorflow官方网站"><span class="nav-number">1.</span> <span class="nav-text">如何访问tensorflow官方网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装深度学习框架"><span class="nav-number">2.</span> <span class="nav-text">安装深度学习框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-ubuntu查看CUDA和cuDNN版本"><span class="nav-number">2.1.</span> <span class="nav-text">0. ubuntu查看CUDA和cuDNN版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-keras"><span class="nav-number">2.2.</span> <span class="nav-text">1. keras</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-fastai"><span class="nav-number">2.3.</span> <span class="nav-text">2. fastai</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#报错解决"><span class="nav-number">3.</span> <span class="nav-text">报错解决</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何访问tensorflow官方网站"><span class="nav-number">1.</span> <span class="nav-text"> 如何访问tensorflow官方网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装深度学习框架"><span class="nav-number">2.</span> <span class="nav-text"> 安装深度学习框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-ubuntu查看cuda和cudnn版本"><span class="nav-number">2.1.</span> <span class="nav-text"> 0. ubuntu查看CUDA和cuDNN版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-keras"><span class="nav-number">2.2.</span> <span class="nav-text"> 1. keras</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-fastai"><span class="nav-number">2.3.</span> <span class="nav-text"> 2. fastai</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#报错解决"><span class="nav-number">3.</span> <span class="nav-text"> 报错解决</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -737,6 +742,54 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 
@@ -758,6 +811,6 @@ if (document.querySelectorAll('pre.mermaid').length) {
   }, window.Gitalk);
 </script>
 
-    </div>
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.0.0">
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -51,13 +52,13 @@
   };
 </script>
 
-  <meta name="description" content="1. 环境搭建 将github库download下来。  1git clone https:&#x2F;&#x2F;github.com&#x2F;ultralytics&#x2F;yolov3-fcos.git  建议在linux环境下使用anaconda进行搭建  1conda create -n yolov3 python=3.7  安装需要的软件  1pip install -r requirements.txt 环境要求：">
+  <meta name="description" content="1. 环境搭建  将github库download下来。  1git clone https:&#x2F;&#x2F;github.com&#x2F;ultralytics&#x2F;yolov3-fcos.git  建议在linux环境下使用anaconda进行搭建  1conda create -n yolov3 python=3.7  安装需要的软件  1pip install -r requirements.txt 环境要求：">
 <meta name="keywords" content="配置,过程记录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pytorch版本yolov3训练自己的数据集">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;05&#x2F;14&#x2F;pytorch%E7%89%88yolov3%E8%AE%AD%E7%BB%83%E8%87%AA%E5%B7%B1%E6%95%B0%E6%8D%AE%E9%9B%86&#x2F;index.html">
 <meta property="og:site_name" content="spicyCV">
-<meta property="og:description" content="1. 环境搭建 将github库download下来。  1git clone https:&#x2F;&#x2F;github.com&#x2F;ultralytics&#x2F;yolov3-fcos.git  建议在linux环境下使用anaconda进行搭建  1conda create -n yolov3 python=3.7  安装需要的软件  1pip install -r requirements.txt 环境要求：">
+<meta property="og:description" content="1. 环境搭建  将github库download下来。  1git clone https:&#x2F;&#x2F;github.com&#x2F;ultralytics&#x2F;yolov3-fcos.git  建议在linux环境下使用anaconda进行搭建  1conda create -n yolov3 python=3.7  安装需要的软件  1pip install -r requirements.txt 环境要求：">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;.com&#x2F;&#x2F;1557826254445.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;user-images.githubusercontent.com&#x2F;26833433&#x2F;56207787-ec9e7000-604f-11e9-94dd-e1fcc374270f.png">
@@ -108,12 +109,12 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
     <div class="headband"></div>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -267,15 +268,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1. 环境搭建"></a>1. 环境搭建</h3><ol>
+        <h3 id="1-环境搭建"><a class="markdownIt-Anchor" href="#1-环境搭建"></a> 1. 环境搭建</h3>
+<ol>
 <li>将github库download下来。</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ultralytics/yolov3-fcos.git</span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="2">
 <li>建议在linux环境下使用anaconda进行搭建</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n yolov3 python=3.7</span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="3">
 <li>安装需要的软件</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
@@ -291,13 +293,17 @@
 <p>到<a href="https://pytorch.org/" target="_blank" rel="noopener">https://pytorch.org/</a>中根据操作系统，python版本，cuda版本等选择命令即可。</p>
 <p>关于深度学习环境搭建请参看：<a href="https://www.cnblogs.com/pprp/p/9463974.html" target="_blank" rel="noopener">https://www.cnblogs.com/pprp/p/9463974.html</a></p>
 <p>anaconda常用用法：<a href="https://www.cnblogs.com/pprp/p/9463124.html" target="_blank" rel="noopener">https://www.cnblogs.com/pprp/p/9463124.html</a></p>
-<h3 id="2-数据集构建"><a href="#2-数据集构建" class="headerlink" title="2. 数据集构建"></a>2. 数据集构建</h3><h4 id="1-xml文件生成需要Labelimg软件"><a href="#1-xml文件生成需要Labelimg软件" class="headerlink" title="1. xml文件生成需要Labelimg软件"></a>1. xml文件生成需要Labelimg软件</h4><pre><code>在Windows下使用：
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/pprp/DeepLearning/blob/master/windows_v1.5.1/labelImg.exe</span><br></pre></td></tr></table></figure>
+<h3 id="2-数据集构建"><a class="markdownIt-Anchor" href="#2-数据集构建"></a> 2. 数据集构建</h3>
+<h4 id="1-xml文件生成需要labelimg软件"><a class="markdownIt-Anchor" href="#1-xml文件生成需要labelimg软件"></a> 1. xml文件生成需要Labelimg软件</h4>
+<pre><code>在Windows下使用：
+</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/pprp/DeepLearning/blob/master/windows_v1.5.1/labelImg.exe</span><br></pre></td></tr></table></figure>
 <ul>
 <li>使用快捷键：</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + u  加载目录中的所有图像，鼠标点击Open dir同功能</span><br><span class="line">Ctrl + r  更改默认注释目标目录(xml文件保存的地址) </span><br><span class="line">Ctrl + s  保存</span><br><span class="line">Ctrl + d  复制当前标签和矩形框</span><br><span class="line">space     将当前图像标记为已验证</span><br><span class="line">w         创建一个矩形框</span><br><span class="line">d         下一张图片</span><br><span class="line">a         上一张图片</span><br><span class="line">del       删除选定的矩形框</span><br><span class="line">Ctrl++    放大</span><br><span class="line">Ctrl--    缩小</span><br><span class="line">↑→↓←        键盘箭头移动选定的矩形框</span><br></pre></td></tr></table></figure>
-<h4 id="2-VOC2007-数据集格式"><a href="#2-VOC2007-数据集格式" class="headerlink" title="2. VOC2007 数据集格式"></a>2. VOC2007 数据集格式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-data</span><br><span class="line">    - VOCdevkit2007</span><br><span class="line">        - VOC2007</span><br><span class="line">            - Annotations (标签XML文件，用对应的图片处理工具人工生成的)</span><br><span class="line">            - ImageSets (生成的方法是用sh或者MATLAB语言生成)</span><br><span class="line">                - Main</span><br><span class="line">                    - test.txt</span><br><span class="line">                    - train.txt</span><br><span class="line">                    - trainval.txt</span><br><span class="line">                    - val.txt</span><br><span class="line">            - JPEGImages(原始文件)</span><br><span class="line">            - labels (xml文件对应的txt文件)</span><br></pre></td></tr></table></figure>
+<h4 id="2-voc2007-数据集格式"><a class="markdownIt-Anchor" href="#2-voc2007-数据集格式"></a> 2. VOC2007 数据集格式</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-data</span><br><span class="line">    - VOCdevkit2007</span><br><span class="line">        - VOC2007</span><br><span class="line">            - Annotations (标签XML文件，用对应的图片处理工具人工生成的)</span><br><span class="line">            - ImageSets (生成的方法是用sh或者MATLAB语言生成)</span><br><span class="line">                - Main</span><br><span class="line">                    - test.txt</span><br><span class="line">                    - train.txt</span><br><span class="line">                    - trainval.txt</span><br><span class="line">                    - val.txt</span><br><span class="line">            - JPEGImages(原始文件)</span><br><span class="line">            - labels (xml文件对应的txt文件)</span><br></pre></td></tr></table></figure>
 <p>通过以上软件主要构造好JPEGImages和Annotations文件夹中内容,Main文件夹中的txt文件可以通过python脚本生成：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">import os  </span><br><span class="line">import random  </span><br><span class="line">  </span><br><span class="line">trainval_percent = 0.8</span><br><span class="line">train_percent = 0.8  </span><br><span class="line">xmlfilepath = &apos;Annotations&apos;  </span><br><span class="line">txtsavepath = &apos;ImageSets\Main&apos;  </span><br><span class="line">total_xml = os.listdir(xmlfilepath)  </span><br><span class="line">  </span><br><span class="line">num=len(total_xml)  </span><br><span class="line">list=range(num)  </span><br><span class="line">tv=int(num*trainval_percent)  </span><br><span class="line">tr=int(tv*train_percent)  </span><br><span class="line">trainval= random.sample(list,tv)  </span><br><span class="line">train=random.sample(trainval,tr)  </span><br><span class="line">  </span><br><span class="line">ftrainval = open(&apos;ImageSets/Main/trainval.txt&apos;, &apos;w&apos;)  </span><br><span class="line">ftest = open(&apos;ImageSets/Main/test.txt&apos;, &apos;w&apos;)  </span><br><span class="line">ftrain = open(&apos;ImageSets/Main/train.txt&apos;, &apos;w&apos;)  </span><br><span class="line">fval = open(&apos;ImageSets/Main/val.txt&apos;, &apos;w&apos;)  </span><br><span class="line">  </span><br><span class="line">for i  in list:  </span><br><span class="line">    name=total_xml[i][:-4]+&apos;\n&apos;  </span><br><span class="line">    if i in trainval:  </span><br><span class="line">        ftrainval.write(name)  </span><br><span class="line">        if i in train:  </span><br><span class="line">            ftrain.write(name)  </span><br><span class="line">        else:  </span><br><span class="line">            fval.write(name)  </span><br><span class="line">    else:  </span><br><span class="line">        ftest.write(name)  </span><br><span class="line">  </span><br><span class="line">ftrainval.close()  </span><br><span class="line">ftrain.close()  </span><br><span class="line">fval.close()  </span><br><span class="line">ftest.close()</span><br></pre></td></tr></table></figure>
 <p>生成labels文件，voc_label.py文件具体内容如下：</p>
@@ -305,17 +311,21 @@
 <p>到底为止，VOC格式数据集构造完毕，但是还需要继续构造符合darknet格式的数据集。</p>
 <p>（运行<code>bash yolov3/data/get_coco_dataset.sh</code>,仿照格式将数据放到其中）</p>
 <p>但是这个库还需要其他模型：</p>
-<h4 id="3-创建-names-file"><a href="#3-创建-names-file" class="headerlink" title="3. 创建*.names file,"></a>3. 创建*.names file,</h4><p>其中保存的是你的所有的类别，每行一个类别，如data/coco.names：</p>
+<h4 id="3-创建names-file"><a class="markdownIt-Anchor" href="#3-创建names-file"></a> 3. 创建*.names file,</h4>
+<p>其中保存的是你的所有的类别，每行一个类别，如data/coco.names：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">head</span><br><span class="line">eye</span><br><span class="line">nose</span><br></pre></td></tr></table></figure>
-<h4 id="4-更新data-coco-data-其中保存的是很多配置信息"><a href="#4-更新data-coco-data-其中保存的是很多配置信息" class="headerlink" title="4. 更新data/coco.data,其中保存的是很多配置信息"></a>4. 更新data/coco.data,其中保存的是很多配置信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">classes = 3 # 改成你的数据集的类别个数</span><br><span class="line">train = ./data/2007_train.txt # 通过voc_label.py文件生成的txt文件</span><br><span class="line">valid = ./data/2007_test.txt # 通过voc_label.py文件生成的txt文件</span><br><span class="line">names = data/coco.names # 记录类别</span><br><span class="line">backup = backup/ # 记录checkpoint存放位置</span><br><span class="line">eval = coco # 选择map计算方式</span><br></pre></td></tr></table></figure>
-<h4 id="5-更新cfg文件，修改类别相关信息"><a href="#5-更新cfg文件，修改类别相关信息" class="headerlink" title="5. 更新cfg文件，修改类别相关信息"></a>5. 更新cfg文件，修改类别相关信息</h4><p>打开cfg文件夹下的yolov3.cfg文件，大体而言，cfg文件记录的是整个网络的结构，是核心部分，具体内容讲解请见：<a href="https://pprp.github.io/2018/09/20/tricks.html" target="_blank" rel="noopener">https://pprp.github.io/2018/09/20/tricks.html</a></p>
+<h4 id="4-更新datacocodata其中保存的是很多配置信息"><a class="markdownIt-Anchor" href="#4-更新datacocodata其中保存的是很多配置信息"></a> 4. 更新data/coco.data,其中保存的是很多配置信息</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">classes = 3 # 改成你的数据集的类别个数</span><br><span class="line">train = ./data/2007_train.txt # 通过voc_label.py文件生成的txt文件</span><br><span class="line">valid = ./data/2007_test.txt # 通过voc_label.py文件生成的txt文件</span><br><span class="line">names = data/coco.names # 记录类别</span><br><span class="line">backup = backup/ # 记录checkpoint存放位置</span><br><span class="line">eval = coco # 选择map计算方式</span><br></pre></td></tr></table></figure>
+<h4 id="5-更新cfg文件修改类别相关信息"><a class="markdownIt-Anchor" href="#5-更新cfg文件修改类别相关信息"></a> 5. 更新cfg文件，修改类别相关信息</h4>
+<p>打开cfg文件夹下的yolov3.cfg文件，大体而言，cfg文件记录的是整个网络的结构，是核心部分，具体内容讲解请见：<a href="https://pprp.github.io/2018/09/20/tricks.html" target="_blank" rel="noopener">https://pprp.github.io/2018/09/20/tricks.html</a></p>
 <p>只需要更改每个[yolo]层前边卷积层的filter个数即可：</p>
 <blockquote>
 <p>每一个[region/yolo]层前的最后一个卷积层中的 filters=num(yolo层个数)*(classes+5) ,5的意义是5个坐标，论文中的tx,ty,tw,th,po</p>
 </blockquote>
 <p>举个例子：我有三个类，n = 3, 那么filter  = 3 * (3+5) = 21</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[convolutional]</span><br><span class="line">size=1</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">filters=255 # 改为 21</span><br><span class="line">activation=linear</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[yolo]</span><br><span class="line">mask = 6,7,8</span><br><span class="line">anchors = 10,13,  16,30,  33,23,  30,61,  62,45,  59,119,  116,90,  156,198,  373,326</span><br><span class="line">classes=80 # 改为 3</span><br><span class="line">num=9</span><br><span class="line">jitter=.3</span><br><span class="line">ignore_thresh = .7</span><br><span class="line">truth_thresh = 1</span><br><span class="line">random=1</span><br></pre></td></tr></table></figure>
-<h3 id="3-训练模型"><a href="#3-训练模型" class="headerlink" title="3. 训练模型"></a>3. 训练模型</h3><p>预训练模型：</p>
+<h3 id="3-训练模型"><a class="markdownIt-Anchor" href="#3-训练模型"></a> 3. 训练模型</h3>
+<p>预训练模型：</p>
 <ul>
 <li>Darknet <code>*.weights</code> format: <a href="https://pjreddie.com/media/files/yolov3.weights" target="_blank" rel="noopener">https://pjreddie.com/media/files/yolov3.weights</a></li>
 <li>PyTorch <code>*.pt</code> format: <a href="https://drive.google.com/drive/folders/1uxgUBemJVw9wZsdpboYbzUN4bcRhsuAI" target="_blank" rel="noopener">https://drive.google.com/drive/folders/1uxgUBemJVw9wZsdpboYbzUN4bcRhsuAI</a></li>
@@ -326,16 +336,20 @@
 <p><img src="/.com//1557826254445.png" alt="1557826254445"></p>
 <p>如果中断了，可以恢复训练</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py --data data/coco.data --cfg cfg/yolov3.cfg --resume</span><br></pre></td></tr></table></figure>
-<h3 id="4-测试模型"><a href="#4-测试模型" class="headerlink" title="4. 测试模型"></a>4. 测试模型</h3><p>将待测试图片放到data/samples中，然后运行</p>
+<h3 id="4-测试模型"><a class="markdownIt-Anchor" href="#4-测试模型"></a> 4. 测试模型</h3>
+<p>将待测试图片放到data/samples中，然后运行</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python detect.py --weights weights/best.pt</span><br></pre></td></tr></table></figure>
-<h3 id="5-评估模型"><a href="#5-评估模型" class="headerlink" title="5. 评估模型"></a>5. 评估模型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python test.py --weights weights/latest.pt</span><br></pre></td></tr></table></figure>
+<h3 id="5-评估模型"><a class="markdownIt-Anchor" href="#5-评估模型"></a> 5. 评估模型</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python test.py --weights weights/latest.pt</span><br></pre></td></tr></table></figure>
 <p>如果使用cocoAPI使用以下命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/cocodataset/cocoapi &amp;&amp; cd cocoapi/PythonAPI &amp;&amp; make &amp;&amp; cd ../.. &amp;&amp; cp -r cocoapi/PythonAPI/pycocotools yolov3</span><br><span class="line">cd yolov3</span><br><span class="line"> </span><br><span class="line">python3 test.py --save-json --img-size 416</span><br><span class="line">Namespace(batch_size=32, cfg=&apos;cfg/yolov3-spp.cfg&apos;, conf_thres=0.001, data_cfg=&apos;data/coco.data&apos;, img_size=416, iou_thres=0.5, nms_thres=0.5, save_json=True, weights=&apos;weights/yolov3-spp.weights&apos;)</span><br><span class="line">Using CUDA device0 _CudaDeviceProperties(name=&apos;Tesla V100-SXM2-16GB&apos;, total_memory=16130MB)</span><br><span class="line">               Class    Images   Targets         P         R       mAP        F1</span><br><span class="line">Calculating mAP: 100%|█████████████████████████████████████████| 157/157 [05:59&lt;00:00,  1.71s/it]</span><br><span class="line">                 all     5e+03  3.58e+04     0.109     0.773      0.57     0.186</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.335</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.565</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.349</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.151</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.360</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.493</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.280</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.432</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.458</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.255</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.494</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.620</span><br><span class="line"></span><br><span class="line">python3 test.py --save-json --img-size 608 --batch-size 16</span><br><span class="line">Namespace(batch_size=16, cfg=&apos;cfg/yolov3-spp.cfg&apos;, conf_thres=0.001, data_cfg=&apos;data/coco.data&apos;, img_size=608, iou_thres=0.5, nms_thres=0.5, save_json=True, weights=&apos;weights/yolov3-spp.weights&apos;)</span><br><span class="line">Using CUDA device0 _CudaDeviceProperties(name=&apos;Tesla V100-SXM2-16GB&apos;, total_memory=16130MB)</span><br><span class="line">               Class    Images   Targets         P         R       mAP        F1</span><br><span class="line">Computing mAP: 100%|█████████████████████████████████████████| 313/313 [06:11&lt;00:00,  1.01it/s]</span><br><span class="line">                 all     5e+03  3.58e+04      0.12      0.81     0.611     0.203</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.366</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.607</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.386</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.207</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.391</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.485</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.296</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.464</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.494</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.331</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.517</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.618</span><br></pre></td></tr></table></figure>
-<h3 id="6-可视化"><a href="#6-可视化" class="headerlink" title="6. 可视化"></a>6. 可视化</h3><p>可以使用<code>python -c from utils import utils;utils.plot_results()</code></p>
-<p>创建drawLog.py</p>
+<h3 id="6-可视化"><a class="markdownIt-Anchor" href="#6-可视化"></a> 6. 可视化</h3>
+<p>可以使用<code>python -c from utils import utils;utils.plot_results()</code></p>
+<p><a href="http://xn--drawLog-dp0lt07g.py" target="_blank" rel="noopener">创建drawLog.py</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_results</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># Plot YOLO training results file 'results.txt'</span></span><br><span class="line">    <span class="keyword">import</span> glob</span><br><span class="line">    <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">    <span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">    <span class="comment">#import os; os.system('rm -rf results.txt &amp;&amp; wget https://storage.googleapis.com/ultralytics/results_v1_0.txt')</span></span><br><span class="line"></span><br><span class="line">    plt.figure(figsize=(<span class="number">16</span>, <span class="number">8</span>))</span><br><span class="line">    s = [<span class="string">'X'</span>, <span class="string">'Y'</span>, <span class="string">'Width'</span>, <span class="string">'Height'</span>, <span class="string">'Objectness'</span>, <span class="string">'Classification'</span>, <span class="string">'Total Loss'</span>, <span class="string">'Precision'</span>, <span class="string">'Recall'</span>, <span class="string">'mAP'</span>]</span><br><span class="line">    files = sorted(glob.glob(<span class="string">'results.txt'</span>))</span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> files:</span><br><span class="line">        results = np.loadtxt(f, usecols=[<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">16</span>]).T  <span class="comment"># column 16 is mAP</span></span><br><span class="line">        n = results.shape[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">            plt.subplot(<span class="number">2</span>, <span class="number">5</span>, i + <span class="number">1</span>)</span><br><span class="line">            plt.plot(range(<span class="number">1</span>, n), results[i, <span class="number">1</span>:], marker=<span class="string">'.'</span>, label=f)</span><br><span class="line">            plt.title(s[i])</span><br><span class="line">            <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">                plt.legend()</span><br><span class="line">    plt.savefig(<span class="string">'./plot.png'</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    plot_results()</span><br></pre></td></tr></table></figure>
 <p><img src="https://user-images.githubusercontent.com/26833433/56207787-ec9e7000-604f-11e9-94dd-e1fcc374270f.png" alt></p>
-<h3 id="7-高级进阶-网络结构更改"><a href="#7-高级进阶-网络结构更改" class="headerlink" title="7. 高级进阶-网络结构更改"></a>7. 高级进阶-网络结构更改</h3><p>详细cfg文件讲解：<a href="https://pprp.github.io/2018/09/20/tricks.html" target="_blank" rel="noopener">https://pprp.github.io/2018/09/20/tricks.html</a></p>
+<h3 id="7-高级进阶-网络结构更改"><a class="markdownIt-Anchor" href="#7-高级进阶-网络结构更改"></a> 7. 高级进阶-网络结构更改</h3>
+<p>详细cfg文件讲解：<a href="https://pprp.github.io/2018/09/20/tricks.html" target="_blank" rel="noopener">https://pprp.github.io/2018/09/20/tricks.html</a></p>
 <p>参考资料以及网络更改经验：<a href="https://pprp.github.io/2018/06/20/yolo.html" target="_blank" rel="noopener">https://pprp.github.io/2018/06/20/yolo.html</a></p>
 
     </div>
@@ -404,7 +418,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-环境搭建"><span class="nav-number">1.</span> <span class="nav-text">1. 环境搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-数据集构建"><span class="nav-number">2.</span> <span class="nav-text">2. 数据集构建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-xml文件生成需要Labelimg软件"><span class="nav-number">2.1.</span> <span class="nav-text">1. xml文件生成需要Labelimg软件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-VOC2007-数据集格式"><span class="nav-number">2.2.</span> <span class="nav-text">2. VOC2007 数据集格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-创建-names-file"><span class="nav-number">2.3.</span> <span class="nav-text">3. 创建*.names file,</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-更新data-coco-data-其中保存的是很多配置信息"><span class="nav-number">2.4.</span> <span class="nav-text">4. 更新data/coco.data,其中保存的是很多配置信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-更新cfg文件，修改类别相关信息"><span class="nav-number">2.5.</span> <span class="nav-text">5. 更新cfg文件，修改类别相关信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-训练模型"><span class="nav-number">3.</span> <span class="nav-text">3. 训练模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-测试模型"><span class="nav-number">4.</span> <span class="nav-text">4. 测试模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-评估模型"><span class="nav-number">5.</span> <span class="nav-text">5. 评估模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-可视化"><span class="nav-number">6.</span> <span class="nav-text">6. 可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-高级进阶-网络结构更改"><span class="nav-number">7.</span> <span class="nav-text">7. 高级进阶-网络结构更改</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-环境搭建"><span class="nav-number">1.</span> <span class="nav-text"> 1. 环境搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-数据集构建"><span class="nav-number">2.</span> <span class="nav-text"> 2. 数据集构建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-xml文件生成需要labelimg软件"><span class="nav-number">2.1.</span> <span class="nav-text"> 1. xml文件生成需要Labelimg软件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-voc2007-数据集格式"><span class="nav-number">2.2.</span> <span class="nav-text"> 2. VOC2007 数据集格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-创建names-file"><span class="nav-number">2.3.</span> <span class="nav-text"> 3. 创建*.names file,</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-更新datacocodata其中保存的是很多配置信息"><span class="nav-number">2.4.</span> <span class="nav-text"> 4. 更新data/coco.data,其中保存的是很多配置信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-更新cfg文件修改类别相关信息"><span class="nav-number">2.5.</span> <span class="nav-text"> 5. 更新cfg文件，修改类别相关信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-训练模型"><span class="nav-number">3.</span> <span class="nav-text"> 3. 训练模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-测试模型"><span class="nav-number">4.</span> <span class="nav-text"> 4. 测试模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-评估模型"><span class="nav-number">5.</span> <span class="nav-text"> 5. 评估模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-可视化"><span class="nav-number">6.</span> <span class="nav-text"> 6. 可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-高级进阶-网络结构更改"><span class="nav-number">7.</span> <span class="nav-text"> 7. 高级进阶-网络结构更改</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -614,6 +628,54 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 
@@ -635,6 +697,6 @@ if (document.querySelectorAll('pre.mermaid').length) {
   }, window.Gitalk);
 </script>
 
-    </div>
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>

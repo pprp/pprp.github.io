@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.0.0">
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -51,13 +52,13 @@
   };
 </script>
 
-  <meta name="description" content="1. 新建文章先打开git-bash，在git-bash中进行操作 新建： 1hexo new &quot;文章题目&quot; 文章头部添加信息： 12345678910---title: hexo搭建博客常用命令date: 2019-11-11 14:54:46tags: - hexo- github- blogcategories:- hexo--- 2. 部署脚本123hexo cleanhexo gener">
+  <meta name="description" content="1. 新建文章 先打开git-bash，在git-bash中进行操作 新建： 1hexo new &quot;文章题目&quot; 文章头部添加信息： 12345678910---title: hexo搭建博客常用命令date: 2019-11-11 14:54:46tags: - hexo- github- blogcategories:- hexo---  2. 部署脚本 123hexo cleanhexo g">
 <meta name="keywords" content="hexo,github,blog">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo搭建博客常用命令">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;11&#x2F;hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4&#x2F;index.html">
 <meta property="og:site_name" content="spicyCV">
-<meta property="og:description" content="1. 新建文章先打开git-bash，在git-bash中进行操作 新建： 1hexo new &quot;文章题目&quot; 文章头部添加信息： 12345678910---title: hexo搭建博客常用命令date: 2019-11-11 14:54:46tags: - hexo- github- blogcategories:- hexo--- 2. 部署脚本123hexo cleanhexo gener">
+<meta property="og:description" content="1. 新建文章 先打开git-bash，在git-bash中进行操作 新建： 1hexo new &quot;文章题目&quot; 文章头部添加信息： 12345678910---title: hexo搭建博客常用命令date: 2019-11-11 14:54:46tags: - hexo- github- blogcategories:- hexo---  2. 部署脚本 123hexo cleanhexo g">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-11-11T07:27:58.150Z">
 <meta name="twitter:card" content="summary">
@@ -105,12 +106,12 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
     <div class="headband"></div>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -269,14 +270,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-新建文章"><a href="#1-新建文章" class="headerlink" title="1. 新建文章"></a>1. 新建文章</h2><p>先打开git-bash，在git-bash中进行操作</p>
+        <h2 id="1-新建文章"><a class="markdownIt-Anchor" href="#1-新建文章"></a> 1. 新建文章</h2>
+<p>先打开git-bash，在git-bash中进行操作</p>
 <p>新建：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new "文章题目"</span><br></pre></td></tr></table></figure>
 <p>文章头部添加信息：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: hexo搭建博客常用命令</span><br><span class="line">date: 2019-11-11 14:54:46</span><br><span class="line">tags: </span><br><span class="line">- hexo</span><br><span class="line">- github</span><br><span class="line">- blog</span><br><span class="line">categories:</span><br><span class="line">- hexo</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-<h2 id="2-部署脚本"><a href="#2-部署脚本" class="headerlink" title="2. 部署脚本"></a>2. 部署脚本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy # 部署到github</span><br></pre></td></tr></table></figure>
-<h2 id="3-参考文献"><a href="#3-参考文献" class="headerlink" title="3. 参考文献"></a>3. 参考文献</h2><p><a href="https://realfavicongenerator.net/" target="_blank" rel="noopener">https://realfavicongenerator.net/</a></p>
-<p><a href="https://mp.weixin.qq.com/s?__biz=MzI5NDY1MjQzNA==&amp;mid=2247490820&amp;idx=7&amp;sn=04c2b6d37f06ffdccde73191ff991a1b&amp;chksm=ec5ec279%E2%80%A6" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzI5NDY1MjQzNA==&amp;mid=2247490820&amp;idx=7&amp;sn=04c2b6d37f06ffdccde73191ff991a1b&amp;chksm=ec5ec279%E2%80%A6</a></p>
+<h2 id="2-部署脚本"><a class="markdownIt-Anchor" href="#2-部署脚本"></a> 2. 部署脚本</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy # 部署到github</span><br></pre></td></tr></table></figure>
+<h2 id="3-参考文献"><a class="markdownIt-Anchor" href="#3-参考文献"></a> 3. 参考文献</h2>
+<p><a href="https://realfavicongenerator.net/" target="_blank" rel="noopener">https://realfavicongenerator.net/</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzI5NDY1MjQzNA==&amp;mid=2247490820&amp;idx=7&amp;sn=04c2b6d37f06ffdccde73191ff991a1b&amp;chksm=ec5ec279%E2%80%A6" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzI5NDY1MjQzNA==&amp;mid=2247490820&amp;idx=7&amp;sn=04c2b6d37f06ffdccde73191ff991a1b&amp;chksm=ec5ec279…</a></p>
 
     </div>
 
@@ -345,7 +349,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-新建文章"><span class="nav-number">1.</span> <span class="nav-text">1. 新建文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-部署脚本"><span class="nav-number">2.</span> <span class="nav-text">2. 部署脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-参考文献"><span class="nav-number">3.</span> <span class="nav-text">3. 参考文献</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-新建文章"><span class="nav-number">1.</span> <span class="nav-text"> 1. 新建文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-部署脚本"><span class="nav-number">2.</span> <span class="nav-text"> 2. 部署脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-参考文献"><span class="nav-number">3.</span> <span class="nav-text"> 3. 参考文献</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -555,6 +559,54 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 
@@ -576,6 +628,6 @@ if (document.querySelectorAll('pre.mermaid').length) {
   }, window.Gitalk);
 </script>
 
-    </div>
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>

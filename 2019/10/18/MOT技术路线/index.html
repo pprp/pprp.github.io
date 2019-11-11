@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.0.0">
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -51,13 +52,13 @@
   };
 </script>
 
-  <meta name="description" content="数据集收集，数据集主要来源是宁夏项目中来自肉牛养殖场的视频，视频质量参差不齐，存在夜间光线过弱，光照过于强烈，遮挡过于严重，视频模糊等情况，需要进行初步筛选，并从中提取关键帧作为数据集。 挑选满足要求的视频，光照适宜，没有明显视频模糊 处理视频，提取关键帧，要求清晰，帧与帧之间重复较小，具有代表性 处理关键帧，将关键帧图像分辨率统一到1240*720, 剔除不合要求关键帧并且每隔几张取一张关键帧">
+  <meta name="description" content="数据集收集，数据集主要来源是宁夏项目中来自肉牛养殖场的视频，视频质量参差不齐，存在夜间光线过弱，光照过于强烈，遮挡过于严重，视频模糊等情况，需要进行初步筛选，并从中提取关键帧作为数据集。  挑选满足要求的视频，光照适宜，没有明显视频模糊 处理视频，提取关键帧，要求清晰，帧与帧之间重复较小，具有代表性 处理关键帧，将关键帧图像分辨率统一到1240*720, 剔除不合要求关键帧并且每隔几张取一张关键">
 <meta name="keywords" content="MOT,技术路线">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MOT技术路线">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;18&#x2F;MOT%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF&#x2F;index.html">
 <meta property="og:site_name" content="spicyCV">
-<meta property="og:description" content="数据集收集，数据集主要来源是宁夏项目中来自肉牛养殖场的视频，视频质量参差不齐，存在夜间光线过弱，光照过于强烈，遮挡过于严重，视频模糊等情况，需要进行初步筛选，并从中提取关键帧作为数据集。 挑选满足要求的视频，光照适宜，没有明显视频模糊 处理视频，提取关键帧，要求清晰，帧与帧之间重复较小，具有代表性 处理关键帧，将关键帧图像分辨率统一到1240*720, 剔除不合要求关键帧并且每隔几张取一张关键帧">
+<meta property="og:description" content="数据集收集，数据集主要来源是宁夏项目中来自肉牛养殖场的视频，视频质量参差不齐，存在夜间光线过弱，光照过于强烈，遮挡过于严重，视频模糊等情况，需要进行初步筛选，并从中提取关键帧作为数据集。  挑选满足要求的视频，光照适宜，没有明显视频模糊 处理视频，提取关键帧，要求清晰，帧与帧之间重复较小，具有代表性 处理关键帧，将关键帧图像分辨率统一到1240*720, 剔除不合要求关键帧并且每隔几张取一张关键">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-11-11T09:03:43.456Z">
 <meta name="twitter:card" content="summary">
@@ -105,12 +106,12 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
     <div class="headband"></div>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -276,15 +277,18 @@
 
       
         <ol>
-<li>数据集收集，数据集主要来源是宁夏项目中来自肉牛养殖场的视频，视频质量参差不齐，存在夜间光线过弱，光照过于强烈，遮挡过于严重，视频模糊等情况，需要进行初步筛选，并从中提取关键帧作为数据集。<ol>
+<li>数据集收集，数据集主要来源是宁夏项目中来自肉牛养殖场的视频，视频质量参差不齐，存在夜间光线过弱，光照过于强烈，遮挡过于严重，视频模糊等情况，需要进行初步筛选，并从中提取关键帧作为数据集。
+<ol>
 <li>挑选满足要求的视频，光照适宜，没有明显视频模糊</li>
 <li>处理视频，提取关键帧，要求清晰，帧与帧之间重复较小，具有代表性</li>
 <li>处理关键帧，将关键帧图像分辨率统一到1240*720, 剔除不合要求关键帧并且每隔几张取一张关键帧作为最终数据集中的图片</li>
 </ol>
 </li>
-<li>数据集构造，我们采用detection-based-tracking方法进行多目标检测，所以目标检测是基础，拟采用的deep sort方法是基于yolov3进行检测的，所以需要训练高效检测器，才能为多目标检测服务。<ol>
+<li>数据集构造，我们采用detection-based-tracking方法进行多目标检测，所以目标检测是基础，拟采用的deep sort方法是基于yolov3进行检测的，所以需要训练高效检测器，才能为多目标检测服务。
+<ol>
 <li>处理挑选的关键帧，进行模糊检测，对清晰度不合要求的图片删除</li>
-<li>使用labelimg软件进行标注，制定了标注的标准：<ol>
+<li>使用labelimg软件进行标注，制定了标注的标准：
+<ol>
 <li>不止标注完整牛，牛身体的一部分也进行标注，不能只标注图像中完整的目标，被遮挡的目标，只要人眼能看清是啥的都应该被标注，并且矩形框只需要包含看得见的部分即可</li>
 <li>遮挡不超过50%，远处目标如果人眼无法识别，那就先不要标注</li>
 <li>标注方框大小合适，矩形方框应该刚好将目标包围住，之间的间隙不能太大，也不能太小，防止出现抖动</li>
@@ -295,7 +299,8 @@
 <li>着手构建标准数据集如 VOC2007, MS COCO等， 按照官方要求进行构造，完成后进行复查，确保数据集完整性和正确性。</li>
 </ol>
 </li>
-<li>训练YOLOv3，设计新型网络模型进行目标检测训练，尽可能提升检测器的表现。<ol>
+<li>训练YOLOv3，设计新型网络模型进行目标检测训练，尽可能提升检测器的表现。
+<ol>
 <li>配置深度学习服务器，如CUDA, cuDnn加速环境，以及深度学习环境，如pytorch, keras , tensorflow等。</li>
 <li>进行服务器环境配置，配置好环境变量，保证命令行下正常运行。</li>
 <li>使用官方提供的darknet模型进行训练，对原始模型（即yolov3）进行训练，查看模型提升效果，测试其他网络模型，比如轻量级网络Tiny YOLOv3等。</li>
@@ -582,6 +587,54 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 
@@ -603,6 +656,6 @@ if (document.querySelectorAll('pre.mermaid').length) {
   }, window.Gitalk);
 </script>
 
-    </div>
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>

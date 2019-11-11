@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.0.0">
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -104,12 +105,12 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
     <div class="headband"></div>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -264,8 +265,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-四种情况"><a href="#1-四种情况" class="headerlink" title="1. 四种情况"></a>1. 四种情况</h2><p>Precision精确率， Recall召回率，是二分类问题常用的评价指标。混淆矩阵如下：</p>
-<div class="table-container">
+          <h2 id="1-四种情况"><a class="markdownIt-Anchor" href="#1-四种情况"></a> 1. 四种情况</h2>
+<p>Precision精确率， Recall召回率，是二分类问题常用的评价指标。混淆矩阵如下：</p>
 <table>
 <thead>
 <tr>
@@ -287,9 +288,7 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>通常关注的类为正类，其他类为负类。（以猫狗二分类为例，现在关注狗的precision和recall）</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -312,23 +311,26 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>T, F 代表的是图片对应的标签</p>
 <p>P, N 代表的是图片预测出来的结果</p>
-<h2 id="2-Precision"><a href="#2-Precision" class="headerlink" title="2. Precision"></a>2. Precision</h2><p>精确率计算公式：</p>
-<script type="math/tex; mode=display">
-P=\frac{TP}{TP+FP}</script><p>理解：</p>
+<h2 id="2-precision"><a class="markdownIt-Anchor" href="#2-precision"></a> 2. Precision</h2>
+<p>精确率计算公式：</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>P</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">P=\frac{TP}{TP+FP}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.1296600000000003em;vertical-align:-0.7693300000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>理解：</p>
 <p>TP+FP: 也就是全体Positive， 也就是预测的图片中是正类的图片的数目</p>
 <p>TP: 也就是正类也被预测为正类的图片的个数</p>
 <p>总之：预测正确的图片个数占总的正类预测个数的比例（从预测结果角度看，有多少预测是准确的）</p>
-<h2 id="3-Recall"><a href="#3-Recall" class="headerlink" title="3. Recall"></a>3. Recall</h2><p>召回率计算公式：</p>
-<script type="math/tex; mode=display">
-R=\frac{TP}{TP+FN}</script><p>理解：</p>
+<h2 id="3-recall"><a class="markdownIt-Anchor" href="#3-recall"></a> 3. Recall</h2>
+<p>召回率计算公式：</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>N</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">R=\frac{TP}{TP+FN}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.1296600000000003em;vertical-align:-0.7693300000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>理解：</p>
 <p>TP+FN: 也就是全体完全满足图片标注的图片的个数</p>
 <p>TP：正类被预测为正类的图片个数</p>
 <p>总之：确定了正类被预测为正类图片占所有标注图片的个数（从标注角度看，有多少被召回）</p>
-<h2 id="4-二分类举例"><a href="#4-二分类举例" class="headerlink" title="4. 二分类举例"></a>4. 二分类举例</h2><p>还是以猫狗二分类为例，测试集一共有20张狗， 20张猫的图片的标注图片（狗为正例），模型预测出其中有16张图片是狗，其中14张图片标注确实为狗，剩下两张图片标注为猫。</p>
-<div class="table-container">
+<h2 id="4-二分类举例"><a class="markdownIt-Anchor" href="#4-二分类举例"></a> 4. 二分类举例</h2>
+<p>还是以猫狗二分类为例，测试集一共有20张狗， 20张猫的图片的标注图片（狗为正例），模型预测出其中有16张图片是狗，其中14张图片标注确实为狗，剩下两张图片标注为猫。</p>
 <table>
 <thead>
 <tr>
@@ -355,15 +357,17 @@ R=\frac{TP}{TP+FN}</script><p>理解：</p>
 <td>All</td>
 <td>16</td>
 <td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-</div>
 <p>所以可以进行计算了</p>
-<script type="math/tex; mode=display">
-precision = \frac{TP}{TP+FP} = \frac{14}{14+2}</script><script type="math/tex; mode=display">
-recall = \frac{TP}{TP+FN} = \frac{14}{40}</script><h2 id="5-多分类举例"><a href="#5-多分类举例" class="headerlink" title="5. 多分类举例"></a>5. 多分类举例</h2><p>该例引用自：<a href="https://www.itcodemonkey.com/article/9521.html" target="_blank" rel="noopener">https://www.itcodemonkey.com/article/9521.html</a></p>
-<div class="table-container">
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mi>r</mi><mi>e</mi><mi>c</mi><mi>i</mi><mi>s</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>P</mi></mrow></mfrac><mo>=</mo><mfrac><mn>14</mn><mrow><mn>14</mn><mo>+</mo><mn>2</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">precision = \frac{TP}{TP+FP} = \frac{14}{14+2}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.1296600000000003em;vertical-align:-0.7693300000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.09077em;vertical-align:-0.7693300000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mord">4</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>l</mi><mi>l</mi><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>N</mi></mrow></mfrac><mo>=</mo><mfrac><mn>14</mn><mn>40</mn></mfrac></mrow><annotation encoding="application/x-tex">recall = \frac{TP}{TP+FN} = \frac{14}{40}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.1296600000000003em;vertical-align:-0.7693300000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">4</span><span class="mord">0</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mord">4</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<h2 id="5-多分类举例"><a class="markdownIt-Anchor" href="#5-多分类举例"></a> 5. 多分类举例</h2>
+<p>该例引用自：<a href="https://www.itcodemonkey.com/article/9521.html" target="_blank" rel="noopener">https://www.itcodemonkey.com/article/9521.html</a></p>
 <table>
 <thead>
 <tr>
@@ -394,16 +398,18 @@ recall = \frac{TP}{TP+FN} = \frac{14}{40}</script><h2 id="5-多分类举例"><a 
 </tr>
 </tbody>
 </table>
-</div>
 <p>比如我们对class2进行计算：</p>
 <p>class2-TP：标签为class2, 预测为class2  = 60</p>
 <p>class2-TN:  标签为class2, 预测不是class2 = 20+20 = 40</p>
 <p>class2-FP: 标签不为class2, 预测为class2 = 50 + 10 = 60</p>
 <p>class2-FN: 标签不为class2, 预测也不是class2 = 30+10+20+80 = 140</p>
-<h2 id="6-其他指标"><a href="#6-其他指标" class="headerlink" title="6. 其他指标"></a>6. 其他指标</h2><p>F1 值是precision和recall调和平均值：</p>
-<script type="math/tex; mode=display">
-\frac{2}{F_1} = \frac{1}{P} + \frac{1}{R}</script><script type="math/tex; mode=display">
-F_1 = \frac{2TP}{2TP+FP+FN}</script>
+<h2 id="6-其他指标"><a class="markdownIt-Anchor" href="#6-其他指标"></a> 6. 其他指标</h2>
+<p>F1 值是precision和recall调和平均值：</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mn>2</mn><msub><mi>F</mi><mn>1</mn></msub></mfrac><mo>=</mo><mfrac><mn>1</mn><mi>P</mi></mfrac><mo>+</mo><mfrac><mn>1</mn><mi>R</mi></mfrac></mrow><annotation encoding="application/x-tex">\frac{2}{F_1} = \frac{1}{P} + \frac{1}{R}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.1574400000000002em;vertical-align:-0.8360000000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.3139999999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8360000000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>F</mi><mn>1</mn></msub><mo>=</mo><mfrac><mrow><mn>2</mn><mi>T</mi><mi>P</mi></mrow><mrow><mn>2</mn><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>N</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">F_1 = \frac{2TP}{2TP+FP+FN}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.1296600000000003em;vertical-align:-0.7693300000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+
       
     </div>
 
@@ -478,13 +484,16 @@ F_1 = \frac{2TP}{2TP+FP+FN}</script>
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="如何访问tensorflow官方网站"><a href="#如何访问tensorflow官方网站" class="headerlink" title="如何访问tensorflow官方网站"></a>如何访问tensorflow官方网站</h2><p>tensorflow官方网站变为：<a href="https://tensorflow.google.cn/" target="_blank" rel="noopener">https://tensorflow.google.cn/</a></p>
-<h2 id="安装深度学习框架"><a href="#安装深度学习框架" class="headerlink" title="安装深度学习框架"></a>安装深度学习框架</h2><h3 id="0-ubuntu查看CUDA和cuDNN版本"><a href="#0-ubuntu查看CUDA和cuDNN版本" class="headerlink" title="0. ubuntu查看CUDA和cuDNN版本"></a>0. ubuntu查看CUDA和cuDNN版本</h3><p>CUDA:  </p>
+          <h2 id="如何访问tensorflow官方网站"><a class="markdownIt-Anchor" href="#如何访问tensorflow官方网站"></a> 如何访问tensorflow官方网站</h2>
+<p>tensorflow官方网站变为：<a href="https://tensorflow.google.cn/" target="_blank" rel="noopener">https://tensorflow.google.cn/</a></p>
+<h2 id="安装深度学习框架"><a class="markdownIt-Anchor" href="#安装深度学习框架"></a> 安装深度学习框架</h2>
+<h3 id="0-ubuntu查看cuda和cudnn版本"><a class="markdownIt-Anchor" href="#0-ubuntu查看cuda和cudnn版本"></a> 0. ubuntu查看CUDA和cuDNN版本</h3>
+<p>CUDA:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/local/cuda/version.txt</span><br></pre></td></tr></table></figure>
 <p>cuDNN:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2</span><br></pre></td></tr></table></figure>
-<h3 id="1-keras"><a href="#1-keras" class="headerlink" title="1. keras"></a>1. keras</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tensorflow 1.5 和 keras 2.1.4搭配</span><br><span class="line">tensorflow 1.4 和 keras2.1.3搭配</span><br><span class="line">tensorflow 1.3 和keras 2.1.2 搭配</span><br><span class="line">tensorflow 1.2 和keras 2.1.1搭配</span><br></pre></td></tr></table></figure>
-<div class="table-container">
+<h3 id="1-keras"><a class="markdownIt-Anchor" href="#1-keras"></a> 1. keras</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tensorflow 1.5 和 keras 2.1.4搭配</span><br><span class="line">tensorflow 1.4 和 keras2.1.3搭配</span><br><span class="line">tensorflow 1.3 和keras 2.1.2 搭配</span><br><span class="line">tensorflow 1.2 和keras 2.1.1搭配</span><br></pre></td></tr></table></figure>
 <table>
 <thead>
 <tr>
@@ -619,36 +628,37 @@ F_1 = \frac{2TP}{2TP+FP+FN}</script>
 </tr>
 </tbody>
 </table>
-</div>
 <p>本地环境安装的是CUDA8和CUDNN5，所以采用以下命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorflow-gpu==1.2.0 -i https://mirrors.aliyun.com/pypi/simple</span><br><span class="line">pip install keras==2.1.1</span><br></pre></td></tr></table></figure>
-<h3 id="2-fastai"><a href="#2-fastai" class="headerlink" title="2. fastai"></a>2. fastai</h3><p>安装比较人性化：</p>
+<h3 id="2-fastai"><a class="markdownIt-Anchor" href="#2-fastai"></a> 2. fastai</h3>
+<p>安装比较人性化：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install fastai</span><br></pre></td></tr></table></figure>
 <p>测试：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> fastai</span><br><span class="line"><span class="keyword">import</span> torch</span><br></pre></td></tr></table></figure>
 <p>如果没有报错就说明正常，一般配合jupyter notebook进行使用，比较方便。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install jupter</span><br></pre></td></tr></table></figure>
-<h2 id="报错解决"><a href="#报错解决" class="headerlink" title="报错解决"></a>报错解决</h2><ol>
+<h2 id="报错解决"><a class="markdownIt-Anchor" href="#报错解决"></a> 报错解决</h2>
+<ol>
 <li>TypeError: softmax</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: softmax() got an unexpected keyword argument &apos;axis&apos;</span><br></pre></td></tr></table></figure>
-<p>当前keras版本是2.2 退回到2.1 </p>
+<p>当前keras版本是2.2 退回到2.1</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install keras==2.1</span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="2">
 <li>TypeError: validation_split</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: __init__() got an unexpected keyword argument &apos;validation_split&apos;</span><br></pre></td></tr></table></figure>
 <p>将validation_split删除</p>
-<ol>
+<ol start="3">
 <li>TypeError: fit_generator() missing 1 required positional argument: ‘steps_per_epoch’</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: fit_generator() missing 1 required positional argument: &apos;steps_per_epoch&apos;</span><br></pre></td></tr></table></figure>
 <p>添加上steps_pers_epoch参数，这是一个必要参数，但是不同版本keras要求不太一样。</p>
-<ol>
+<ol start="4">
 <li>RemoveError: ‘setuptools’ is a dependency of conda and cannot be removed from</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda update conda</span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="5">
 <li>jupyter notebook no module named xxx</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">which jupyter # 查看使用的是哪个jupyter，通常情况下这种情况出现一般用的是系统的jupyter而不是anaconda中的jupyter</span><br></pre></td></tr></table></figure>
@@ -657,7 +667,7 @@ F_1 = \frac{2TP}{2TP+FP+FN}</script>
 <p>再次查看使用的是哪个jupyter</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">which jupter</span><br></pre></td></tr></table></figure>
 <p>如果发现使用的是anaconda中的路径那就说明成功了，问题解决。</p>
-<ol>
+<ol start="6">
 <li>ValueError: <code>validation_steps=None</code> is only valid for a generator based on the <code>keras.utils.Sequence</code> class. Please specify <code>validation_steps</code> or use the <code>keras.utils.Sequence</code> class.</li>
 </ol>
 
@@ -748,29 +758,36 @@ F_1 = \frac{2TP}{2TP+FP+FN}</script>
 <p>这是最近在看的代码，进行loss的计算，用到了很多切片的知识，所以进行总结，希望看完这篇博客以后大家也能看懂类似的代码</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_loss</span><span class="params">(p, targets, model)</span>:</span>  <span class="comment"># predictions, targets, model</span></span><br><span class="line">    ft = torch.cuda.FloatTensor <span class="keyword">if</span> p[<span class="number">0</span>].is_cuda <span class="keyword">else</span> torch.Tensor</span><br><span class="line">    lxy, lwh, lcls, lconf = ft([<span class="number">0</span>]), ft([<span class="number">0</span>]), ft([<span class="number">0</span>]), ft([<span class="number">0</span>])</span><br><span class="line">    <span class="comment"># build_targets对targets向量进行处理</span></span><br><span class="line">    txy, twh, tcls, indices = build_targets(model, targets)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Define criteria</span></span><br><span class="line">    MSE = nn.MSELoss()</span><br><span class="line">    CE = nn.CrossEntropyLoss()  <span class="comment"># (weight=model.class_weights)</span></span><br><span class="line">    BCE = nn.BCEWithLogitsLoss()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Compute losses</span></span><br><span class="line">    h = model.hyp  <span class="comment"># hyperparameters</span></span><br><span class="line">    bs = p[<span class="number">0</span>].shape[<span class="number">0</span>]  <span class="comment"># batch size</span></span><br><span class="line">    k = bs  <span class="comment"># loss gain</span></span><br><span class="line">    <span class="keyword">for</span> i, pi0 <span class="keyword">in</span> enumerate(p):  <span class="comment"># layer i predictions, i</span></span><br><span class="line">        b, a, gj, gi = indices[i]  <span class="comment"># image, anchor, gridy, gridx</span></span><br><span class="line">        tconf = torch.zeros_like(pi0[..., <span class="number">0</span>])  <span class="comment"># conf</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Compute losses</span></span><br><span class="line">        <span class="keyword">if</span> len(b):  <span class="comment"># number of targets</span></span><br><span class="line">            pi = pi0[b, a, gj, gi]  <span class="comment"># predictions closest to anchors</span></span><br><span class="line">            tconf[b, a, gj, gi] = <span class="number">1</span>  <span class="comment"># conf</span></span><br><span class="line">            <span class="comment"># pi[..., 2:4] = torch.sigmoid(pi[..., 2:4])  # wh power loss (uncomment)</span></span><br><span class="line"></span><br><span class="line">            lxy += (k * h[<span class="string">'xy'</span>]) * MSE(torch.sigmoid(pi[..., <span class="number">0</span>:<span class="number">2</span>]), txy[i])  <span class="comment"># xy loss</span></span><br><span class="line">            lwh += (k * h[<span class="string">'wh'</span>]) * MSE(pi[..., <span class="number">2</span>:<span class="number">4</span>], twh[i])  <span class="comment"># wh yolo loss</span></span><br><span class="line">            lcls += (k * h[<span class="string">'cls'</span>]) * CE(pi[..., <span class="number">5</span>:], tcls[i])  <span class="comment"># class_conf loss</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># pos_weight = ft([gp[i] / min(gp) * 4.])</span></span><br><span class="line">        <span class="comment"># BCE = nn.BCEWithLogitsLoss(pos_weight=pos_weight)</span></span><br><span class="line">        lconf += (k * h[<span class="string">'conf'</span>]) * BCE(pi0[..., <span class="number">4</span>], tconf)  <span class="comment"># obj_conf loss</span></span><br><span class="line">    loss = lxy + lwh + lconf + lcls</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> loss, torch.cat((lxy, lwh, lconf, lcls, loss)).detach()</span><br></pre></td></tr></table></figure>
 <p>[TOC]</p>
-<h2 id="1-单列表切片"><a href="#1-单列表切片" class="headerlink" title="1. 单列表切片"></a>1. 单列表切片</h2><p>对于一个普遍形式：data[x:y:z] 讲一下他的意义：</p>
+<h2 id="1-单列表切片"><a class="markdownIt-Anchor" href="#1-单列表切片"></a> 1. 单列表切片</h2>
+<p>对于一个普遍形式：data[x:y:z] 讲一下他的意义：</p>
 <blockquote>
-<p>The syntax <code>[x:y:z]</code> means “take every <code>z</code>th element of a list from index <code>x</code> to index <code>y</code>“. When <code>z</code> is negative, it indicates going backwards. When <code>x</code> isn’t specified, it defaults to the first element of the list in the direction you are traversing the list. When <code>y</code> isn’t specified, it defaults to the last element of the list. So if we want to take every 2th element of a list, we use <code>[::2]</code>.</p>
+<p>The syntax <code>[x:y:z]</code> means &quot;take every <code>z</code>th element of a list from index <code>x</code> to index <code>y</code>&quot;. When <code>z</code> is negative, it indicates going backwards. When <code>x</code> isn’t specified, it defaults to the first element of the list in the direction you are traversing the list. When <code>y</code> isn’t specified, it defaults to the last element of the list. So if we want to take every 2th element of a list, we use <code>[::2]</code>.</p>
 </blockquote>
-<p>— from github:python-is-cool</p>
+<p>– from github:python-is-cool</p>
 <p>翻译过来就是：x是起始坐标，y是结束坐标（不包含），z是代表每隔z个数取一个数,如果z是负数代表方向是从后往前。</p>
 <p>看一个例子：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>data = list(range(<span class="number">10</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[<span class="number">1</span>:<span class="number">5</span>] <span class="comment"># 代表[1,5)</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[<span class="number">-3</span>:] <span class="comment"># 代表从倒数第3个到最后， 方向默认还是从前往后</span></span><br><span class="line">[<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[:<span class="number">-3</span>] <span class="comment"># 代表从第1个到倒数第4个，方向还是默认从前向后</span></span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[<span class="number">1</span>:<span class="number">8</span>:<span class="number">2</span>] <span class="comment"># 从[1,2,3,4,5,6,7]中每两个选一个，得到[1,3,5,7]</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[<span class="number">1</span>:<span class="number">8</span>:<span class="number">-2</span>] <span class="comment"># 注意如果z是负数，那么前边也需要是负数，方向需要正确</span></span><br><span class="line">[]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[::<span class="number">-2</span>] <span class="comment"># 两个冒号代表取全体</span></span><br><span class="line">[<span class="number">9</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">1</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[<span class="number">-1</span>:<span class="number">-8</span>:<span class="number">-2</span>] </span><br><span class="line"><span class="comment"># 注意data[-1:-8:-1]=[9,8,7,6,5,4,3]意思是倒数第1个到倒数第7个数</span></span><br><span class="line"><span class="comment"># 这里的x,y依然意义是起始和结尾</span></span><br><span class="line">[<span class="number">9</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">3</span>]</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
 <p>总结：</p>
 <ol>
-<li><p>注意起始和结尾的[x,y] 实际的数学意义是[x,y), 前取到，后取不到</p>
+<li>
+<p>注意起始和结尾的[x,y] 实际的数学意义是[x,y), 前取到，后取不到</p>
 </li>
-<li><p>注意z是负数的情况下，整个数列方向是从后往前数的，对应的[x,y]也应该是负数，从后往前，这里的x,y意义依然是起始和结尾。</p>
+<li>
+<p>注意z是负数的情况下，整个数列方向是从后往前数的，对应的[x,y]也应该是负数，从后往前，这里的x,y意义依然是起始和结尾。</p>
 </li>
-<li><p>双冒号<code>::</code>代表取全部</p>
+<li>
+<p>双冒号<code>::</code>代表取全部</p>
 </li>
-<li><p>注意整个数列方向问题，默认都是从前往后，只有z的正负性能控制方向。</p>
+<li>
+<p>注意整个数列方向问题，默认都是从前往后，只有z的正负性能控制方向。</p>
 </li>
-<li><p>只有一个冒号的情况是两个冒号的特殊情况，省略了最后一个冒号，如：</p>
+<li>
+<p>只有一个冒号的情况是两个冒号的特殊情况，省略了最后一个冒号，如：</p>
  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[<span class="number">3</span>:]</span><br><span class="line">[<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data[<span class="number">3</span>::<span class="number">1</span>] <span class="comment"># 默认方向从前往后，且z的值为1</span></span><br><span class="line">[<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="2-多维列表"><a href="#2-多维列表" class="headerlink" title="2. 多维列表"></a>2. 多维列表</h2><blockquote>
+<h2 id="2-多维列表"><a class="markdownIt-Anchor" href="#2-多维列表"></a> 2. 多维列表</h2>
+<blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data[..., <span class="number">1</span>:<span class="number">2</span>] </span><br><span class="line">data[<span class="number">1</span>:<span class="number">2</span>, <span class="number">2</span>:<span class="number">4</span>, <span class="number">5</span>:<span class="number">9</span>]</span><br><span class="line">data[:,<span class="literal">None</span>]</span><br><span class="line">data[1:2, 2:4] == data [1:2][2:4] ? </span><br><span class="line">data[:]</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>干货：</p>
@@ -778,7 +795,7 @@ F_1 = \frac{2TP}{2TP+FP+FN}</script>
 <li>对于三个点的情况, 代表前边所有维度</li>
 <li>对于逗号分隔的情况，每个逗号将以上一个单独的分割开来</li>
 <li>None代表增加一个维度</li>
-<li>data[1:2, 2:4] 与 data [1:2] [2:4] 并不相等 </li>
+<li>data[1:2, 2:4] 与 data [1:2] [2:4] 并不相等</li>
 <li>data[:]代表取全体数据</li>
 </ol>
 <p>举例子：</p>
@@ -795,7 +812,7 @@ F_1 = \frac{2TP}{2TP+FP+FN}</script>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1.shape</span><br><span class="line">(<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[:,<span class="literal">None</span>].shape</span><br><span class="line">(<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[...,<span class="literal">None</span>].shape</span><br><span class="line">(<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[<span class="literal">None</span>,...].shape</span><br><span class="line">(<span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line"><span class="comment"># None代表增加一个维度,通常使用在数据预处理，给图片添加batch列</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>data[1:2, 2:4] == data[1：2] [2:4] </li>
+<li>data[1:2, 2:4] == data[1：2] [2:4]</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1 = np.arange(<span class="number">27</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1</span><br><span class="line">array([ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>,  <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>,<span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>, <span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>, <span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[<span class="number">1</span>:<span class="number">7</span>][<span class="number">3</span>:<span class="number">6</span>] <span class="comment"># 两个可以理解为切片的切片</span></span><br><span class="line">array([<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[<span class="number">1</span>:<span class="number">7</span>,<span class="number">3</span>:<span class="number">6</span>] <span class="comment"># 只有一维，所以无法运行</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">IndexError: too many indices <span class="keyword">for</span> array</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1 = np.arange(<span class="number">27</span>).reshape(<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1</span><br><span class="line">array([[[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>],</span><br><span class="line">        [ <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>],</span><br><span class="line">        [ <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>],</span><br><span class="line">        [<span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>],</span><br><span class="line">        [<span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">18</span>, <span class="number">19</span>, <span class="number">20</span>],</span><br><span class="line">        [<span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>],</span><br><span class="line">        [<span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">array([[[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>],</span><br><span class="line">        [ <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>],</span><br><span class="line">        [ <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>],</span><br><span class="line">        [<span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>],</span><br><span class="line">        [<span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[<span class="number">0</span>:<span class="number">2</span>][<span class="number">1</span>:<span class="number">3</span>]</span><br><span class="line"><span class="comment"># 切片的切片， 且过一次以后就只有0,1两个维度了，所以只能取第一维</span></span><br><span class="line">array([[[ <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>],</span><br><span class="line">        [<span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>],</span><br><span class="line">        [<span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1[<span class="number">0</span>:<span class="number">2</span>,<span class="number">1</span>:<span class="number">3</span>] <span class="comment"># 所有满足第一维为0,1 第二维为1,2的</span></span><br><span class="line">array([[[ <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>],</span><br><span class="line">        [ <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>],</span><br><span class="line">        [<span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>]]])</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
 <ul>
@@ -871,11 +888,13 @@ F_1 = \frac{2TP}{2TP+FP+FN}</script>
 
       
           <hr>
-<p>date:2019-06-23</p>
-<h2 id="title-”人工智能图像相关岗位需求”"><a href="#title-”人工智能图像相关岗位需求”" class="headerlink" title="title:”人工智能图像相关岗位需求”"></a>title:”人工智能图像相关岗位需求”</h2><blockquote>
+<h2 id="date2019-06-23title人工智能图像相关岗位需求"><a class="markdownIt-Anchor" href="#date2019-06-23title人工智能图像相关岗位需求"></a> date:2019-06-23<br>
+title:“人工智能图像相关岗位需求”</h2>
+<blockquote>
 <p>人工智能图像岗位需要具备的技能</p>
 </blockquote>
-<h3 id="任职资格"><a href="#任职资格" class="headerlink" title="任职资格"></a>任职资格</h3><ul>
+<h3 id="任职资格"><a class="markdownIt-Anchor" href="#任职资格"></a> 任职资格</h3>
+<ul>
 <li>图像处理和模式识别相关知识</li>
 <li>C/C++，OpenCV编程和项目经验，熟悉脚本语言python</li>
 <li>熟悉tensorflow, caffe , pytorch等开源框架</li>
@@ -891,7 +910,8 @@ F_1 = \frac{2TP}{2TP+FP+FN}</script>
 <li>能够独立实现模型代码开发</li>
 <li>熟悉使用git , svn, redmine, project 等系统，了解ISO9001,CMMI等质量体系</li>
 </ul>
-<h3 id="现阶段需要培养的能力"><a href="#现阶段需要培养的能力" class="headerlink" title="现阶段需要培养的能力"></a>现阶段需要培养的能力</h3><ul>
+<h3 id="现阶段需要培养的能力"><a class="markdownIt-Anchor" href="#现阶段需要培养的能力"></a> 现阶段需要培养的能力</h3>
+<ul>
 <li>C/C++开发能力</li>
 <li>opencv使用能力</li>
 <li>python开发能力</li>
@@ -900,7 +920,8 @@ F_1 = \frac{2TP}{2TP+FP+FN}</script>
 <li>学习机器学习常用算法，并且会手动推导</li>
 <li>提升文档撰写能力</li>
 </ul>
-<h3 id="近期目标"><a href="#近期目标" class="headerlink" title="近期目标"></a>近期目标</h3><ul>
+<h3 id="近期目标"><a class="markdownIt-Anchor" href="#近期目标"></a> 近期目标</h3>
+<ul>
 <li>提升C/C++开发能力，算法编程水平</li>
 <li>继续锻炼python</li>
 <li>学习tensorflow，keras等框架</li>
@@ -988,12 +1009,11 @@ F_1 = \frac{2TP}{2TP+FP+FN}</script>
 <p>YOLO调参经验</p>
 <p>学习博客总结</p>
 </blockquote>
-<h3 id="网络更改经验"><a href="#网络更改经验" class="headerlink" title="网络更改经验"></a>网络更改经验</h3><p>输出图像的计算方法：</p>
+<h3 id="网络更改经验"><a class="markdownIt-Anchor" href="#网络更改经验"></a> 网络更改经验</h3>
+<p>输出图像的计算方法：</p>
 <center>output = （input-filter_size+2*padding）/（stride）+ 1</center>
-
 <p>yolo层的前一层filter计算方法：</p>
 <center>filters = (classes + 5) * 预测框的个数</center>
-
 <p>特征融合一般操作：</p>
 <ol>
 <li>Route from previous layer</li>
@@ -1005,7 +1025,7 @@ F_1 = \frac{2TP}{2TP+FP+FN}</script>
 <ul>
 <li>res结构：</li>
 </ul>
-<p>filter: 128-&gt;256-&gt;128-&gt;256…..</p>
+<p>filter: 128-&gt;256-&gt;128-&gt;256…</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[convolutional]</span><br><span class="line">batch_normalize=1</span><br><span class="line">filters=128</span><br><span class="line">size=1</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">activation=leaky</span><br><span class="line"></span><br><span class="line">[convolutional]</span><br><span class="line">batch_normalize=1</span><br><span class="line">filters=256</span><br><span class="line">size=3</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">activation=leaky</span><br><span class="line"></span><br><span class="line">[shortcut]</span><br><span class="line">from=-3</span><br><span class="line">activation=linear</span><br></pre></td></tr></table></figure>
 <ul>
 <li>只改filter不改feature大小：</li>
@@ -1031,24 +1051,33 @@ F_1 = \frac{2TP}{2TP+FP+FN}</script>
 <li>不改变任何参数：</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[maxpool]</span><br><span class="line">size=2</span><br><span class="line">stride=1</span><br></pre></td></tr></table></figure>
-<h4 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h4><ul>
-<li><p>batch_normalize:<a href="https://blog.csdn.net/yujianmin1990/article/details/78764597" target="_blank" rel="noopener">了解链接</a></p>
+<h4 id="参数说明"><a class="markdownIt-Anchor" href="#参数说明"></a> 参数说明</h4>
+<ul>
+<li>
+<p>batch_normalize:<a href="https://blog.csdn.net/yujianmin1990/article/details/78764597" target="_blank" rel="noopener">了解链接</a></p>
 </li>
-<li><p>filter: 卷积核个数，也是输出通道个数</p>
+<li>
+<p>filter: 卷积核个数，也是输出通道个数</p>
 </li>
-<li><p>size: 卷积核尺寸</p>
+<li>
+<p>size: 卷积核尺寸</p>
 </li>
-<li><p>stride: 卷积步长</p>
+<li>
+<p>stride: 卷积步长</p>
 </li>
-<li><p>pad: 补0</p>
+<li>
+<p>pad: 补0</p>
 </li>
 </ul>
-<h3 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h3><ul>
+<h3 id="教程"><a class="markdownIt-Anchor" href="#教程"></a> 教程</h3>
+<ul>
 <li>yolo <a href="./tricks.md">配置文件总结</a></li>
 </ul>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<h3 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h3>
+<ul>
 <li>测试mAP,画图</li>
-<li>看论文，准备论文相关的内容<ul>
+<li>看论文，准备论文相关的内容
+<ul>
 <li>画loss图</li>
 <li>跑实验</li>
 <li>跑一下</li>
@@ -1062,13 +1091,15 @@ F_1 = \frac{2TP}{2TP+FP+FN}</script>
 <li>训练集中增加小目标可以提高小目标的检测效果</li>
 <li>目前抛弃模型压缩这种想法先将基础网络部分搞懂</li>
 </ul>
-<h3 id="改进的Point"><a href="#改进的Point" class="headerlink" title="改进的Point"></a>改进的Point</h3><ol>
+<h3 id="改进的point"><a class="markdownIt-Anchor" href="#改进的point"></a> 改进的Point</h3>
+<ol>
 <li>基础网络的选择tiny, yolov2-tiny?</li>
 <li>input Size的增大： 增大最大到672</li>
 <li>anchor的选择，6,7,9个anchor，查看效果</li>
 <li>改进 激活函数 Leaky RELU 尝试一下，ELU, RELU</li>
 </ol>
-<h3 id="靠谱的思路"><a href="#靠谱的思路" class="headerlink" title="靠谱的思路"></a>靠谱的思路</h3><blockquote>
+<h3 id="靠谱的思路"><a class="markdownIt-Anchor" href="#靠谱的思路"></a> 靠谱的思路</h3>
+<blockquote>
 <p>注意调参的时候将尺度关闭，batch改大，图片正常</p>
 <p>投论文尽量投CCF上有分类的</p>
 <p>写论文的时候如果设计一个自己的网络要进行数学上的证明</p>
@@ -1088,22 +1119,29 @@ F_1 = \frac{2TP}{2TP+FP+FN}</script>
 <li>使用有切割图片的训练集进行进一步的测试</li>
 <li>可视化研究</li>
 </ol>
-<h3 id="调参经验"><a href="#调参经验" class="headerlink" title="调参经验"></a>调参经验</h3><ol>
-<li><p>learning-rate 学习速率：学习速率越小，模型收敛花费的时间就越长，但是可以提高模型精确度。一般初始设置为0.1，然后每次除以0.2或者0.5来改进，得到最终值；</p>
+<h3 id="调参经验"><a class="markdownIt-Anchor" href="#调参经验"></a> 调参经验</h3>
+<ol>
+<li>
+<p>learning-rate 学习速率：学习速率越小，模型收敛花费的时间就越长，但是可以提高模型精确度。一般初始设置为0.1，然后每次除以0.2或者0.5来改进，得到最终值；</p>
 </li>
-<li><p>batchsize 样本批次容量：影响模型的优化程度和收敛速度，需要参考你的数据集大小来设置，具体问题具体分析</p>
+<li>
+<p>batchsize 样本批次容量：影响模型的优化程度和收敛速度，需要参考你的数据集大小来设置，具体问题具体分析</p>
 </li>
-<li><p>weightdecay 权重衰减：用来在反向传播中更新权重和偏置，一般设置为0.005；</p>
+<li>
+<p>weightdecay 权重衰减：用来在反向传播中更新权重和偏置，一般设置为0.005；</p>
 </li>
-<li><p>epoch-number 训练次数：包括所有训练样本的一个正向传递和一个反向传递，训练至模型收敛即可；（注：和迭代周期iteration不一样）</p>
+<li>
+<p>epoch-number 训练次数：包括所有训练样本的一个正向传递和一个反向传递，训练至模型收敛即可；（注：和迭代周期iteration不一样）</p>
 </li>
-<li><p>经过交叉验证，dropout率等于0.5的时候效果最好，原因是0.5的时候dropout随机生成的网络结构最多。</p>
+<li>
+<p>经过交叉验证，dropout率等于0.5的时候效果最好，原因是0.5的时候dropout随机生成的网络结构最多。</p>
 </li>
 </ol>
 <p>ref:</p>
 <p><a href="https://blog.csdn.net/weixin_38437404/article/details/74927694" target="_blank" rel="noopener">https://blog.csdn.net/weixin_38437404/article/details/74927694</a></p>
 <p><a href="https://blog.csdn.net/weixin_38437404/article/details/78837176" target="_blank" rel="noopener">https://blog.csdn.net/weixin_38437404/article/details/78837176</a></p>
-<h3 id="学习博客总结"><a href="#学习博客总结" class="headerlink" title="学习博客总结"></a>学习博客总结</h3><p><a href="https://blog.csdn.net/phinoo/article/details/83022101" target="_blank" rel="noopener">yolov3实战理解cfg文件</a></p>
+<h3 id="学习博客总结"><a class="markdownIt-Anchor" href="#学习博客总结"></a> 学习博客总结</h3>
+<p><a href="https://blog.csdn.net/phinoo/article/details/83022101" target="_blank" rel="noopener">yolov3实战理解cfg文件</a></p>
 <p><a href="https://blog.csdn.net/qian99/article/details/79008053" target="_blank" rel="noopener">卷积网络参数计算方法</a></p>
 <p><a href="https://blog.csdn.net/phinoo/article/details/83025690" target="_blank" rel="noopener">YOLOV3实战5：利用三方工具绘制P-R曲线</a></p>
 <p><a href="https://blog.csdn.net/qq_34806812/article/details/81459982" target="_blank" rel="noopener">YOLOV3可视化</a></p>
@@ -1216,13 +1254,18 @@ F_1 = \frac{2TP}{2TP+FP+FN}</script>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> .util <span class="keyword">import</span> utils</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> datasets</span><br></pre></td></tr></table></figure>
 <p>这样的引用语句, 这让我比较困惑，所以趁这次机会，花点时间，好好整理一下相关的知识</p>
 </blockquote>
-<h2 id="1-python包机制"><a href="#1-python包机制" class="headerlink" title="1. python包机制"></a>1. python包机制</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 包</span><br><span class="line">- 模块</span><br><span class="line">- 框架： 如何组织包和模块</span><br></pre></td></tr></table></figure>
+<h2 id="1-python包机制"><a class="markdownIt-Anchor" href="#1-python包机制"></a> 1. python包机制</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 包</span><br><span class="line">- 模块</span><br><span class="line">- 框架： 如何组织包和模块</span><br></pre></td></tr></table></figure>
 <p>python提供了包的概念，是一个有层次的文件目录结构，用于管理多个模块源文件。</p>
 <ul>
-<li>包就是文件夹，这个文件夹下有__init__.py文件，并且该文件夹可以包括其他模块</li>
-<li><p>多个相关联的模块组成一个包，以便于维护和使用，同时能有限的避免命名空间的冲突。</p>
+<li>
+<p>包就是文件夹，这个文件夹下有__init__.py文件，并且该文件夹可以包括其他模块</p>
 </li>
-<li><p>在导入一个包的时候，会先调用这个包的__init__.py文件</p>
+<li>
+<p>多个相关联的模块组成一个包，以便于维护和使用，同时能有限的避免命名空间的冲突。</p>
+</li>
+<li>
+<p>在导入一个包的时候，会先调用这个包的__init__.py文件</p>
 </li>
 </ul>
 <p>层次问题：从小到大</p>
@@ -1236,26 +1279,33 @@ F_1 = \frac{2TP}{2TP+FP+FN}</script>
 <p>包和模块的作用：</p>
 <blockquote>
 <ul>
-<li><p>编写好轮子，工具类，供其他模块进行使用</p>
+<li>
+<p>编写好轮子，工具类，供其他模块进行使用</p>
 </li>
-<li><p>有效地对程序进行分解，方便代码的管理和维护</p>
+<li>
+<p>有效地对程序进行分解，方便代码的管理和维护</p>
 </li>
-<li>防止同一模块内命名重复的问题(module1.name, module2.name)</li>
+<li>
+<p>防止同一模块内命名重复的问题(<a href="http://module1.name" target="_blank" rel="noopener">module1.name</a>, <a href="http://module2.name" target="_blank" rel="noopener">module2.name</a>)</p>
+</li>
 </ul>
 </blockquote>
-<p>— from bilibili <a href="https://www.bilibili.com/video/av65157512?p=2" target="_blank" rel="noopener">https://www.bilibili.com/video/av65157512?p=2</a></p>
+<p>– from bilibili <a href="https://www.bilibili.com/video/av65157512?p=2" target="_blank" rel="noopener">https://www.bilibili.com/video/av65157512?p=2</a></p>
 <p>包和模块基本信息</p>
 <ul>
-<li>包和模块名称<ul>
-<li><code>__name__</code> </li>
+<li>包和模块名称
+<ul>
+<li><code>__name__</code></li>
 <li><code>__package__</code></li>
 </ul>
 </li>
-<li>存放位置<ul>
+<li>存放位置
+<ul>
 <li><code>__file__</code></li>
 </ul>
 </li>
-<li>查看包和模块的内容<ul>
+<li>查看包和模块的内容
+<ul>
 <li>dir(os)</li>
 <li><code>__dict__</code></li>
 </ul>
@@ -1263,71 +1313,92 @@ F_1 = \frac{2TP}{2TP+FP+FN}</script>
 </ul>
 <p>导入包/模块的方式：</p>
 <ul>
-<li><p>常规导入：</p>
+<li>
+<p>常规导入：</p>
 <ul>
-<li>import M<ul>
+<li>import M
+<ul>
 <li>同级目录直接导入import M</li>
 <li>不同级目录使用点语法import pkg1.pkg2.M</li>
 </ul>
 </li>
 <li>import M1, M2</li>
 <li>import M as m</li>
-<li>from A import B as b, C as c<ul>
-<li>A 的范围要大于B,C<ul>
+<li>from A import B as b, C as c
+<ul>
+<li>A 的范围要大于B,C
+<ul>
 <li>范围：包&gt;模块&gt;资源</li>
 </ul>
 </li>
-<li>B，C这部分要尽可能简单<ul>
-<li>正确：from A.A1 import aa </li>
+<li>B，C这部分要尽可能简单
+<ul>
+<li>正确：from A.A1 import aa</li>
 <li>错误：from A import A1.aa</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>from 模块 import *<ul>
+<li>from 模块 import *
+<ul>
 <li>那么会去该模块对应的python文件中找<code>__all__</code>变量对应的内容</li>
 </ul>
 </li>
-<li>from 包 import *<ul>
+<li>from 包 import *
+<ul>
 <li>那么就会去该包对应的<code>__init__.py</code>文件中找<code>__all__</code>变量对应内容</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>注意：</p>
+<li>
+<p>注意：</p>
 <ul>
-<li><p>使用时，导入的对象应该是模块，而不是包</p>
+<li>
+<p>使用时，导入的对象应该是模块，而不是包</p>
 </li>
-<li><p>如果导入的是一个包，默认不会导入任何模块</p>
+<li>
+<p>如果导入的是一个包，默认不会导入任何模块</p>
 </li>
-<li><p>解决方案：</p>
+<li>
+<p>解决方案：</p>
 <ul>
-<li><p>在该包中的<code>__init__.py</code>中导入所有需要的模块</p>
+<li>
+<p>在该包中的<code>__init__.py</code>中导入所有需要的模块</p>
 </li>
-<li><p>以from 包/文件夹 import 模块/子包 的形式导入</p>
+<li>
+<p>以from 包/文件夹 import 模块/子包 的形式导入</p>
 <ul>
 <li>from p1 import Tool1 as t1, Tool2 as t2</li>
-<li>from p1.sub_p import sub_xx<ul>
-<li>from模块 import 资源名 的形式导入</li>
+<li>from p1.sub_p import sub_xx</li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<pre><code>        - from other import num
-</code></pre><ul>
-<li><p>遇到no module named xxx</p>
+<li>
+<p>from模块 import 资源名 的形式导入</p>
 <ul>
-<li>```python<br>  import sys<br>  sys.path.append(‘rc:\Desktop\xxx_dir’)<br>  import xxx<h1 id="比较强硬的解决方法"><a href="#比较强硬的解决方法" class="headerlink" title="比较强硬的解决方法"></a>比较强硬的解决方法</h1>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 模块查找顺序：</span><br><span class="line"></span><br><span class="line">    - 内建&gt; 自定义&gt; sys.path</span><br><span class="line"></span><br><span class="line">## 2. python模块相对引用</span><br><span class="line"></span><br><span class="line">很多时候会遇见以下错误：</span><br></pre></td></tr></table></figure>
-ValueError: attempted relative import beyond top-level package<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这通常是由于相对引用的使用而出现的问题。</span><br><span class="line"></span><br><span class="line">需要明确：</span><br><span class="line"></span><br><span class="line">1. 相对引用不是相对于文件结构！！</span><br><span class="line">2. 相对引用是相对于`__name__`</span><br><span class="line"></span><br><span class="line">举个例子：</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">- rootdir</span><br><span class="line">  - subdir1</span><br><span class="line">    - __init__.py</span><br><span class="line">  	- subfile1.py</span><br><span class="line">  - subdir2 </span><br><span class="line">    - __init__.py</span><br><span class="line">    - subfile2.py</span><br><span class="line">- test.py</span><br></pre></td></tr></table></figure>
+<li>from other import num</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>遇到no module named xxx</p>
+<ul>
+<li>
+<pre class="highlight"><code class="python">  <span class="keyword">import</span> sys
+  sys.path.append(<span class="string">'rc:\Desktop\xxx_dir'</span>)
+  <span class="keyword">import</span> xxx
+  <span class="comment"># 比较强硬的解决方法</span>
+  &lt;!--￼<span class="number">2</span>--&gt;
+</code></pre>
 </li>
 </ul>
 </li>
 </ul>
+<p>ValueError: attempted relative import beyond top-level package</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这通常是由于相对引用的使用而出现的问题。</span><br><span class="line"></span><br><span class="line">需要明确：</span><br><span class="line"></span><br><span class="line">1. 相对引用不是相对于文件结构！！</span><br><span class="line">2. 相对引用是相对于`__name__`</span><br><span class="line"></span><br><span class="line">举个例子：</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">- rootdir</span><br><span class="line">  - subdir1</span><br><span class="line">    - __init__.py</span><br><span class="line">  	- subfile1.py</span><br><span class="line">  - subdir2 </span><br><span class="line">    - __init__.py</span><br><span class="line">    - subfile2.py</span><br><span class="line">- test.py</span><br></pre></td></tr></table></figure>
 <p>test.py中调用subfile1.py的内容：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_mod1</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'__name__: &#123;&#125;'</span>.format(__name__))</span><br><span class="line">    print(<span class="string">'__package__: &#123;&#125;'</span>.format(__package__))</span><br><span class="line">    print(<span class="string">'Import Successfully!'</span>)</span><br></pre></td></tr></table></figure>
 <p>输出为：</p>
@@ -1336,7 +1407,8 @@ ValueError: attempted relative import beyond top-level package<figure class="hig
 <p>一个点：<code>.</code> 就代表当前是subdir1</p>
 <p>两个点：<code>..</code>就不存在，就会报错<code>beyond top-level package</code>, 这里的top-level package 也很容易理解，那就是当前的subdir1。</p>
 <p>更多内容可以查看：<a href="https://www.cnblogs.com/jay54520/p/8438228.html" target="_blank" rel="noopener">https://www.cnblogs.com/jay54520/p/8438228.html</a></p>
-<h2 id="3-举例"><a href="#3-举例" class="headerlink" title="3. 举例"></a>3. 举例</h2><p>目录结构如下：</p>
+<h2 id="3-举例"><a class="markdownIt-Anchor" href="#3-举例"></a> 3. 举例</h2>
+<p>目录结构如下：</p>
 <p><img src="/.com//1572056109473.png" alt="1572056109473"></p>
 <ol>
 <li>model文件夹下：</li>
@@ -1345,35 +1417,40 @@ ValueError: attempted relative import beyond top-level package<figure class="hig
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'-'</span>*<span class="number">5</span>,<span class="string">"init for model folder"</span>,<span class="string">'-'</span>*<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
 <p><code>models.py</code>文件内容如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mm</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"this is rootpkg/model/models/model"</span>)</span><br><span class="line">    print(<span class="string">'__name__: &#123;&#125;'</span>.format(__name__))</span><br><span class="line">    print(<span class="string">'__package__: &#123;&#125;'</span>.format(__package__))</span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="2">
 <li>src文件夹下：</li>
 </ol>
 <p><code>__init__.py</code> ·文件内容如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'-'</span>*<span class="number">5</span>,<span class="string">"init for src folder"</span>,<span class="string">'-'</span>*<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
 <p><code>source.py</code>文件内容如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ss</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"this is rootpkg/src/source/src"</span>)</span><br><span class="line">    print(<span class="string">'__name__: &#123;&#125;'</span>.format(__name__))</span><br><span class="line">    print(<span class="string">'__package__: &#123;&#125;'</span>.format(__package__))</span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="3">
 <li>RootPkg文件夹下：</li>
 </ol>
 <p><code>__init__.py</code> ·文件内容如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'-'</span>*<span class="number">5</span>,<span class="string">"init for rootpkg folder"</span>,<span class="string">'-'</span>*<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
 <p><code>main.py</code>文件内容如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> model <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> src <span class="keyword">import</span> source</span><br><span class="line"><span class="keyword">from</span> 模块/文件夹 <span class="keyword">import</span> 具体某个python文件名</span><br><span class="line"></span><br><span class="line">source.ss()</span><br><span class="line">models.mm()</span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>运行结果如下：</p>
+<ol start="4">
+<li>
+<p>运行结果如下：</p>
  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">----- init <span class="keyword">for</span> model folder -----  </span><br><span class="line">----- init <span class="keyword">for</span> src folder ----- </span><br><span class="line"><span class="comment"># 这两个是在import模块的时候执行的__init__.py文件</span></span><br><span class="line">this <span class="keyword">is</span> rootpkg/src/source/src</span><br><span class="line">__name__: src.source</span><br><span class="line">__package__: src</span><br><span class="line">this <span class="keyword">is</span> rootpkg/model/models/model</span><br><span class="line">__name__: model.models</span><br><span class="line">__package__: model</span><br></pre></td></tr></table></figure>
-<p> 运行完以后会出现<code>__pycache__</code>文件夹</p>
-<p> <img src="/.com//1572056618738.png" alt="1572056618738"></p>
+<p>运行完以后会出现<code>__pycache__</code>文件夹</p>
+<p><img src="/.com//1572056618738.png" alt="1572056618738"></p>
 </li>
 </ol>
 <p>运行成功，但是Tommy-Yu的最佳实践那部分没有直行通过，大家可以查看一下第一个reference的博客，如果有谁能跑通，欢迎联系我。（ps: 个人感觉这个博客没有讲的很清楚，实际运行确实会出错）</p>
 <hr>
-<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ul>
-<li><p><a href="https://www.cnblogs.com/Tommy-Yu/p/5794829.html?spm=a2c4e.10696291.0.0.289619a41CBdwB" target="_blank" rel="noopener">https://www.cnblogs.com/Tommy-Yu/p/5794829.html?spm=a2c4e.10696291.0.0.289619a41CBdwB</a></p>
+<h2 id="reference"><a class="markdownIt-Anchor" href="#reference"></a> reference</h2>
+<ul>
+<li>
+<p><a href="https://www.cnblogs.com/Tommy-Yu/p/5794829.html?spm=a2c4e.10696291.0.0.289619a41CBdwB" target="_blank" rel="noopener">https://www.cnblogs.com/Tommy-Yu/p/5794829.html?spm=a2c4e.10696291.0.0.289619a41CBdwB</a></p>
 </li>
-<li><p><a href="https://www.cnblogs.com/jay54520/p/8438228.html" target="_blank" rel="noopener">https://www.cnblogs.com/jay54520/p/8438228.html</a></p>
+<li>
+<p><a href="https://www.cnblogs.com/jay54520/p/8438228.html" target="_blank" rel="noopener">https://www.cnblogs.com/jay54520/p/8438228.html</a></p>
 </li>
-<li><p><a href="https://www.bilibili.com/video/av65157512?from=search&amp;seid=6677976813026578695" target="_blank" rel="noopener">https://www.bilibili.com/video/av65157512?from=search&amp;seid=6677976813026578695</a></p>
+<li>
+<p><a href="https://www.bilibili.com/video/av65157512?from=search&amp;seid=6677976813026578695" target="_blank" rel="noopener">https://www.bilibili.com/video/av65157512?from=search&amp;seid=6677976813026578695</a></p>
 </li>
 </ul>
 
@@ -1441,26 +1518,34 @@ ValueError: attempted relative import beyond top-level package<figure class="hig
 
       
           <ul>
-<li><p><a href="https://zhuanlan.zhihu.com/p/59507137" target="_blank" rel="noopener">Tensorflow 2.0 教程</a></p>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/59507137" target="_blank" rel="noopener">Tensorflow 2.0 教程</a></p>
 </li>
-<li><p><a href="https://pytorch.apachecn.org/docs/1.0/blitz_neural_networks_tutorial.html" target="_blank" rel="noopener">Pytorch 教程</a></p>
+<li>
+<p><a href="https://pytorch.apachecn.org/docs/1.0/blitz_neural_networks_tutorial.html" target="_blank" rel="noopener">Pytorch 教程</a></p>
 </li>
-<li><p><a href="https://keras.io/zh/" target="_blank" rel="noopener">Keras中文文档</a></p>
+<li>
+<p><a href="https://keras.io/zh/" target="_blank" rel="noopener">Keras中文文档</a></p>
 </li>
-<li><a href="https://docs.fast.ai/" target="_blank" rel="noopener">fastai 官方文档</a></li>
+<li>
+<p><a href="https://docs.fast.ai/" target="_blank" rel="noopener">fastai 官方文档</a></p>
+</li>
 </ul>
 <hr>
-<h3 id="keras流程"><a href="#keras流程" class="headerlink" title="keras流程"></a>keras流程</h3><ol>
+<h3 id="keras流程"><a class="markdownIt-Anchor" href="#keras流程"></a> keras流程</h3>
+<ol>
 <li>数据准备</li>
 <li>模型构建</li>
 <li>模型编译(loss，optimizer，评价指标)</li>
 <li>模型训练(fit，数据，步数，batch, lr, valid数据集)</li>
 </ol>
-<h3 id="pytorch流程"><a href="#pytorch流程" class="headerlink" title="pytorch流程"></a>pytorch流程</h3><ol>
+<h3 id="pytorch流程"><a class="markdownIt-Anchor" href="#pytorch流程"></a> pytorch流程</h3>
+<ol>
 <li>数据集需要构造dataloader类</li>
 <li>训练模型构造Module类</li>
 <li>创建优化器(optimizer)</li>
-<li>循环中<ol>
+<li>循环中
+<ol>
 <li>优化器清零</li>
 <li>正向走一遍模型，得到输出</li>
 <li>计算loss</li>
@@ -1545,27 +1630,33 @@ ValueError: attempted relative import beyond top-level package<figure class="hig
 
       
           <p>2019年夏令营机试编程复习常识及入门</p>
-<h2 id="1-常识"><a href="#1-常识" class="headerlink" title="1. 常识"></a>1. 常识</h2><h3 id="1-1-评判结构"><a href="#1-1-评判结构" class="headerlink" title="1.1 评判结构"></a>1.1 评判结构</h3><ol>
-<li><p>Accepted: 正确</p>
+<h2 id="1-常识"><a class="markdownIt-Anchor" href="#1-常识"></a> 1. 常识</h2>
+<h3 id="11-评判结构"><a class="markdownIt-Anchor" href="#11-评判结构"></a> 1.1 评判结构</h3>
+<ol>
+<li>
+<p>Accepted: 正确</p>
 </li>
-<li><p>WA: wrong answer</p>
+<li>
+<p>WA: wrong answer</p>
 </li>
 </ol>
 <ul>
 <li>考虑代码健壮性比如边界条件，溢出等</li>
 <li>重新设计算法</li>
 </ul>
-<ol>
-<li><p>Presentation Error: 格式错误</p>
+<ol start="3">
+<li>
+<p>Presentation Error: 格式错误</p>
 </li>
-<li><p>TLE: Time Limit Exceeded</p>
+<li>
+<p>TLE: Time Limit Exceeded</p>
 </li>
 </ol>
 <ul>
 <li>出现死循环，查看边界条件</li>
 <li>设计的算法的复杂度比较高，优化算法</li>
 </ul>
-<ol>
+<ol start="5">
 <li>Runtime Error: 运行时错误</li>
 </ol>
 <ul>
@@ -1573,21 +1664,27 @@ ValueError: attempted relative import beyond top-level package<figure class="hig
 <li>除以0</li>
 <li>递归过深导致了栈溢出</li>
 </ul>
-<ol>
-<li><p>compile Error: 编译错误</p>
+<ol start="6">
+<li>
+<p>compile Error: 编译错误</p>
 </li>
-<li><p>Memory Limit Exceeded: 内存超限，空间复杂度过高，或出现死循环</p>
+<li>
+<p>Memory Limit Exceeded: 内存超限，空间复杂度过高，或出现死循环</p>
 </li>
-<li><p>Output Limit Exceeded: 输出超出限制</p>
+<li>
+<p>Output Limit Exceeded: 输出超出限制</p>
 </li>
 </ol>
 <ul>
 <li>可能是忘记了关闭调试信息</li>
 </ul>
-<h3 id="1-2-复杂度估计"><a href="#1-2-复杂度估计" class="headerlink" title="1.2 复杂度估计"></a>1.2 复杂度估计</h3><p>1s的时间限制：复杂度不能超过百万级别：100,0000.</p>
-<p>比如$O(n^2)$, n&lt;3000.</p>
+<h3 id="12-复杂度估计"><a class="markdownIt-Anchor" href="#12-复杂度估计"></a> 1.2 复杂度估计</h3>
+<p>1s的时间限制：复杂度不能超过百万级别：100,0000.</p>
+<p>比如<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>, n&lt;3000.</p>
 <p>空间限制：32MB,不能超过使用32M的内存。</p>
-<h2 id="2-经典入门"><a href="#2-经典入门" class="headerlink" title="2. 经典入门"></a>2. 经典入门</h2><h3 id="2-1-排序"><a href="#2-1-排序" class="headerlink" title="2.1 排序"></a>2.1 排序</h3><p>冒泡排序：    </p>
+<h2 id="2-经典入门"><a class="markdownIt-Anchor" href="#2-经典入门"></a> 2. 经典入门</h2>
+<h3 id="21-排序"><a class="markdownIt-Anchor" href="#21-排序"></a> 2.1 排序</h3>
+<p>冒泡排序：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">100</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> arr[maxN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;N);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; N ; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = N<span class="number">-1</span> ; i &gt; <span class="number">1</span> ; i--)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span> ; j &lt;= i ; j++)&#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(arr[j]&lt;arr[j<span class="number">-1</span>])&#123;</span><br><span class="line">                tmp = arr[j<span class="number">-1</span>];</span><br><span class="line">                arr[j<span class="number">-1</span>] = arr[j];</span><br><span class="line">                arr[j] = tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; N ; i++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d,"</span>,arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>官方给的代码：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">100</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> arr[maxN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;N)!=EOF)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; N ; i++)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; N ; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; N<span class="number">-1</span>-i; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>])&#123;</span><br><span class="line">                    <span class="keyword">int</span> tp = arr[j+<span class="number">1</span>];</span><br><span class="line">                    arr[j+<span class="number">1</span>] = arr[j];</span><br><span class="line">                    arr[j] = tp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; N ; i++)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d "</span>,arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1595,7 +1692,8 @@ ValueError: attempted relative import beyond top-level package<figure class="hig
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">100</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> arr[maxN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">com</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x &lt; y;<span class="comment">//从小到大,相反则是从大到小</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;N)!=EOF) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(arr, arr + N, com);<span class="comment">//greater&lt;type&gt;() 从大到小，less&lt;type&gt;()从小到大</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d "</span>, arr[j]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>学生成绩排序：结构体排序典型例题</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stu</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">int</span> grade;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">1000</span>+<span class="number">10</span>;</span><br><span class="line">stu STU[maxN];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(stu s1, stu s2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s1.grade != s2.grade)&#123;</span><br><span class="line">        <span class="keyword">return</span> s1.grade &lt; s2.grade;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">strcmp</span>(s1.name,s2.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n)!=EOF)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%s %d %d"</span>,&amp;STU[i].name,&amp;STU[i].age,&amp;STU[i].grade);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(STU,STU+n,cmp);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%s-%d-%d\n"</span>,STU[i].name,STU[i].age,STU[i].grade);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="2-2-日期计算"><a href="#2-2-日期计算" class="headerlink" title="2.2 日期计算"></a>2.2 日期计算</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ISYEAR(x) x%100!=0 &amp;&amp; x%4 == 0 || x%400 == 0 ? 1: 0</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> dayofMonth[<span class="number">13</span>][<span class="number">2</span>] = &#123;</span><br><span class="line">        <span class="number">0</span>,<span class="number">0</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">28</span>,<span class="number">29</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">30</span>,<span class="number">30</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">30</span>,<span class="number">30</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">30</span>,<span class="number">30</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">30</span>,<span class="number">30</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Date</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> day;</span><br><span class="line">    <span class="keyword">int</span> month;</span><br><span class="line">    <span class="keyword">int</span> year;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">nextDay</span><span class="params">()</span></span>&#123;</span><br><span class="line">        day++;</span><br><span class="line">        <span class="keyword">if</span>(day &gt; dayofMonth[month][ISYEAR(year)])&#123;</span><br><span class="line">            day = <span class="number">1</span>;</span><br><span class="line">            month++;</span><br><span class="line">            <span class="keyword">if</span>(month&gt;<span class="number">12</span>)&#123;</span><br><span class="line">                month=<span class="number">1</span>;</span><br><span class="line">                year++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> buff[<span class="number">5002</span>][<span class="number">13</span>][<span class="number">32</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ABS</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> -x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Date tmp;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    tmp.day=<span class="number">1</span>;</span><br><span class="line">    tmp.month=<span class="number">1</span>;</span><br><span class="line">    tmp.year=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(tmp.year!=<span class="number">5001</span>)&#123;</span><br><span class="line">        buff[tmp.year][tmp.month][tmp.day] = cnt;</span><br><span class="line">        tmp.nextDay();</span><br><span class="line">        cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> d1,m1,y1,d2,m2,y2;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%4d%2d%2d"</span>,&amp;y1,&amp;m1,&amp;d1)!=EOF)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%4d%2d%2d"</span>,&amp;y2,&amp;m2,&amp;d2);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ABS(buff[y2][m2][d2]-buff[y1][m1][d1]+<span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="22-日期计算"><a class="markdownIt-Anchor" href="#22-日期计算"></a> 2.2 日期计算</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ISYEAR(x) x%100!=0 &amp;&amp; x%4 == 0 || x%400 == 0 ? 1: 0</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> dayofMonth[<span class="number">13</span>][<span class="number">2</span>] = &#123;</span><br><span class="line">        <span class="number">0</span>,<span class="number">0</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">28</span>,<span class="number">29</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">30</span>,<span class="number">30</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">30</span>,<span class="number">30</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">30</span>,<span class="number">30</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">30</span>,<span class="number">30</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Date</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> day;</span><br><span class="line">    <span class="keyword">int</span> month;</span><br><span class="line">    <span class="keyword">int</span> year;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">nextDay</span><span class="params">()</span></span>&#123;</span><br><span class="line">        day++;</span><br><span class="line">        <span class="keyword">if</span>(day &gt; dayofMonth[month][ISYEAR(year)])&#123;</span><br><span class="line">            day = <span class="number">1</span>;</span><br><span class="line">            month++;</span><br><span class="line">            <span class="keyword">if</span>(month&gt;<span class="number">12</span>)&#123;</span><br><span class="line">                month=<span class="number">1</span>;</span><br><span class="line">                year++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> buff[<span class="number">5002</span>][<span class="number">13</span>][<span class="number">32</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ABS</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> -x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Date tmp;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    tmp.day=<span class="number">1</span>;</span><br><span class="line">    tmp.month=<span class="number">1</span>;</span><br><span class="line">    tmp.year=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(tmp.year!=<span class="number">5001</span>)&#123;</span><br><span class="line">        buff[tmp.year][tmp.month][tmp.day] = cnt;</span><br><span class="line">        tmp.nextDay();</span><br><span class="line">        cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> d1,m1,y1,d2,m2,y2;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%4d%2d%2d"</span>,&amp;y1,&amp;m1,&amp;d1)!=EOF)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%4d%2d%2d"</span>,&amp;y2,&amp;m2,&amp;d2);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ABS(buff[y2][m2][d2]-buff[y1][m1][d1]+<span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1660,16 +1758,19 @@ ValueError: attempted relative import beyond top-level package<figure class="hig
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过这次的面试，感觉到自己还是有很多地方没有准备充分。</p>
+          <h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<p>通过这次的面试，感觉到自己还是有很多地方没有准备充分。</p>
 <ul>
-<li>来的时候没有打听好，没有进行准备<ul>
+<li>来的时候没有打听好，没有进行准备
+<ul>
 <li>自我介绍</li>
 <li>没有提前准备纸质版材料</li>
 <li>可能问题的回答</li>
 <li>没有论文</li>
 </ul>
 </li>
-<li>时间安排不够合理<ul>
+<li>时间安排不够合理
+<ul>
 <li>火车票购买问题</li>
 </ul>
 </li>
@@ -1680,21 +1781,34 @@ ValueError: attempted relative import beyond top-level package<figure class="hig
 <li>学会如何礼貌地对待老师</li>
 <li>需要赶快提高编程和英语面试能力</li>
 </ul>
-<h2 id="询问的问题"><a href="#询问的问题" class="headerlink" title="询问的问题"></a>询问的问题</h2><p>reference：<a href="https://mp.weixin.qq.com/s?__biz=MzIxNjA4NTUwMQ==&amp;mid=2247485813&amp;idx=1&amp;sn=5c701592c82e7156e15867e86be4428d&amp;chksm=978f2fe7a0f8a6f1c0953fc81ccf5f93976ca6e9fbe03655443ab816164eb3759bf23aca953d&amp;mpshare=1&amp;scene=1&amp;srcid=#rd" target="_blank" rel="noopener">未来研究生</a></p>
+<h2 id="询问的问题"><a class="markdownIt-Anchor" href="#询问的问题"></a> 询问的问题</h2>
+<p>reference：<a href="https://mp.weixin.qq.com/s?__biz=MzIxNjA4NTUwMQ==&amp;mid=2247485813&amp;idx=1&amp;sn=5c701592c82e7156e15867e86be4428d&amp;chksm=978f2fe7a0f8a6f1c0953fc81ccf5f93976ca6e9fbe03655443ab816164eb3759bf23aca953d&amp;mpshare=1&amp;scene=1&amp;srcid=#rd" target="_blank" rel="noopener">未来研究生</a></p>
 <ol>
-<li>请进行自我介绍</li>
-<li>你是如何学习计算机视觉的？</li>
-<li>计算机视觉讲的是什么？</li>
-<li>这个比赛具体是什么方案？</li>
-<li>你除了python还熟悉哪种编程语言？</li>
-<li><p>你用改语言做过什么项目？是课设还是感兴趣？</p>
+<li>
+<p>请进行自我介绍</p>
 </li>
-<li><p>你为什么要报考我们学校？我们专业？</p>
+<li>
+<p>你是如何学习计算机视觉的？</p>
+</li>
+<li>
+<p>计算机视觉讲的是什么？</p>
+</li>
+<li>
+<p>这个比赛具体是什么方案？</p>
+</li>
+<li>
+<p>你除了python还熟悉哪种编程语言？</p>
+</li>
+<li>
+<p>你用改语言做过什么项目？是课设还是感兴趣？</p>
+</li>
+<li>
+<p>你为什么要报考我们学校？我们专业？</p>
 </li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">解析：这个问题是很多学校在夏令营面试过程中都会问到的问题，针对这个问题一定要提前做好功课，准备充分，对本专业要有比较深入的理解。老师问这个问题的目的主要是看你是否真的对本院系感兴趣，而不是随便海投前来面试，其次则是看你是否真的对这个专业感兴趣（尤其是针对跨专业的考生）。</span><br></pre></td></tr></table></figure>
-<ol>
-<li>你读过哪些专业方面的文献？请举例说明作者的观点以及你的想法。 </li>
+<ol start="8">
+<li>你读过哪些专业方面的文献？请举例说明作者的观点以及你的想法。</li>
 <li>谈谈你已经发表的论文，或者本科毕业论文的选题与思路</li>
 <li>你是否打算读博士?</li>
 <li>如果你被录取，你打算做哪一方向的研究？</li>
@@ -1765,15 +1879,16 @@ ValueError: attempted relative import beyond top-level package<figure class="hig
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1. 环境搭建"></a>1. 环境搭建</h3><ol>
+          <h3 id="1-环境搭建"><a class="markdownIt-Anchor" href="#1-环境搭建"></a> 1. 环境搭建</h3>
+<ol>
 <li>将github库download下来。</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ultralytics/yolov3-fcos.git</span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="2">
 <li>建议在linux环境下使用anaconda进行搭建</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n yolov3 python=3.7</span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="3">
 <li>安装需要的软件</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
@@ -1789,13 +1904,17 @@ ValueError: attempted relative import beyond top-level package<figure class="hig
 <p>到<a href="https://pytorch.org/" target="_blank" rel="noopener">https://pytorch.org/</a>中根据操作系统，python版本，cuda版本等选择命令即可。</p>
 <p>关于深度学习环境搭建请参看：<a href="https://www.cnblogs.com/pprp/p/9463974.html" target="_blank" rel="noopener">https://www.cnblogs.com/pprp/p/9463974.html</a></p>
 <p>anaconda常用用法：<a href="https://www.cnblogs.com/pprp/p/9463124.html" target="_blank" rel="noopener">https://www.cnblogs.com/pprp/p/9463124.html</a></p>
-<h3 id="2-数据集构建"><a href="#2-数据集构建" class="headerlink" title="2. 数据集构建"></a>2. 数据集构建</h3><h4 id="1-xml文件生成需要Labelimg软件"><a href="#1-xml文件生成需要Labelimg软件" class="headerlink" title="1. xml文件生成需要Labelimg软件"></a>1. xml文件生成需要Labelimg软件</h4><pre><code>在Windows下使用：
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/pprp/DeepLearning/blob/master/windows_v1.5.1/labelImg.exe</span><br></pre></td></tr></table></figure>
+<h3 id="2-数据集构建"><a class="markdownIt-Anchor" href="#2-数据集构建"></a> 2. 数据集构建</h3>
+<h4 id="1-xml文件生成需要labelimg软件"><a class="markdownIt-Anchor" href="#1-xml文件生成需要labelimg软件"></a> 1. xml文件生成需要Labelimg软件</h4>
+<pre><code>在Windows下使用：
+</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/pprp/DeepLearning/blob/master/windows_v1.5.1/labelImg.exe</span><br></pre></td></tr></table></figure>
 <ul>
 <li>使用快捷键：</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + u  加载目录中的所有图像，鼠标点击Open dir同功能</span><br><span class="line">Ctrl + r  更改默认注释目标目录(xml文件保存的地址) </span><br><span class="line">Ctrl + s  保存</span><br><span class="line">Ctrl + d  复制当前标签和矩形框</span><br><span class="line">space     将当前图像标记为已验证</span><br><span class="line">w         创建一个矩形框</span><br><span class="line">d         下一张图片</span><br><span class="line">a         上一张图片</span><br><span class="line">del       删除选定的矩形框</span><br><span class="line">Ctrl++    放大</span><br><span class="line">Ctrl--    缩小</span><br><span class="line">↑→↓←        键盘箭头移动选定的矩形框</span><br></pre></td></tr></table></figure>
-<h4 id="2-VOC2007-数据集格式"><a href="#2-VOC2007-数据集格式" class="headerlink" title="2. VOC2007 数据集格式"></a>2. VOC2007 数据集格式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-data</span><br><span class="line">    - VOCdevkit2007</span><br><span class="line">        - VOC2007</span><br><span class="line">            - Annotations (标签XML文件，用对应的图片处理工具人工生成的)</span><br><span class="line">            - ImageSets (生成的方法是用sh或者MATLAB语言生成)</span><br><span class="line">                - Main</span><br><span class="line">                    - test.txt</span><br><span class="line">                    - train.txt</span><br><span class="line">                    - trainval.txt</span><br><span class="line">                    - val.txt</span><br><span class="line">            - JPEGImages(原始文件)</span><br><span class="line">            - labels (xml文件对应的txt文件)</span><br></pre></td></tr></table></figure>
+<h4 id="2-voc2007-数据集格式"><a class="markdownIt-Anchor" href="#2-voc2007-数据集格式"></a> 2. VOC2007 数据集格式</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-data</span><br><span class="line">    - VOCdevkit2007</span><br><span class="line">        - VOC2007</span><br><span class="line">            - Annotations (标签XML文件，用对应的图片处理工具人工生成的)</span><br><span class="line">            - ImageSets (生成的方法是用sh或者MATLAB语言生成)</span><br><span class="line">                - Main</span><br><span class="line">                    - test.txt</span><br><span class="line">                    - train.txt</span><br><span class="line">                    - trainval.txt</span><br><span class="line">                    - val.txt</span><br><span class="line">            - JPEGImages(原始文件)</span><br><span class="line">            - labels (xml文件对应的txt文件)</span><br></pre></td></tr></table></figure>
 <p>通过以上软件主要构造好JPEGImages和Annotations文件夹中内容,Main文件夹中的txt文件可以通过python脚本生成：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">import os  </span><br><span class="line">import random  </span><br><span class="line">  </span><br><span class="line">trainval_percent = 0.8</span><br><span class="line">train_percent = 0.8  </span><br><span class="line">xmlfilepath = &apos;Annotations&apos;  </span><br><span class="line">txtsavepath = &apos;ImageSets\Main&apos;  </span><br><span class="line">total_xml = os.listdir(xmlfilepath)  </span><br><span class="line">  </span><br><span class="line">num=len(total_xml)  </span><br><span class="line">list=range(num)  </span><br><span class="line">tv=int(num*trainval_percent)  </span><br><span class="line">tr=int(tv*train_percent)  </span><br><span class="line">trainval= random.sample(list,tv)  </span><br><span class="line">train=random.sample(trainval,tr)  </span><br><span class="line">  </span><br><span class="line">ftrainval = open(&apos;ImageSets/Main/trainval.txt&apos;, &apos;w&apos;)  </span><br><span class="line">ftest = open(&apos;ImageSets/Main/test.txt&apos;, &apos;w&apos;)  </span><br><span class="line">ftrain = open(&apos;ImageSets/Main/train.txt&apos;, &apos;w&apos;)  </span><br><span class="line">fval = open(&apos;ImageSets/Main/val.txt&apos;, &apos;w&apos;)  </span><br><span class="line">  </span><br><span class="line">for i  in list:  </span><br><span class="line">    name=total_xml[i][:-4]+&apos;\n&apos;  </span><br><span class="line">    if i in trainval:  </span><br><span class="line">        ftrainval.write(name)  </span><br><span class="line">        if i in train:  </span><br><span class="line">            ftrain.write(name)  </span><br><span class="line">        else:  </span><br><span class="line">            fval.write(name)  </span><br><span class="line">    else:  </span><br><span class="line">        ftest.write(name)  </span><br><span class="line">  </span><br><span class="line">ftrainval.close()  </span><br><span class="line">ftrain.close()  </span><br><span class="line">fval.close()  </span><br><span class="line">ftest.close()</span><br></pre></td></tr></table></figure>
 <p>生成labels文件，voc_label.py文件具体内容如下：</p>
@@ -1803,17 +1922,21 @@ ValueError: attempted relative import beyond top-level package<figure class="hig
 <p>到底为止，VOC格式数据集构造完毕，但是还需要继续构造符合darknet格式的数据集。</p>
 <p>（运行<code>bash yolov3/data/get_coco_dataset.sh</code>,仿照格式将数据放到其中）</p>
 <p>但是这个库还需要其他模型：</p>
-<h4 id="3-创建-names-file"><a href="#3-创建-names-file" class="headerlink" title="3. 创建*.names file,"></a>3. 创建*.names file,</h4><p>其中保存的是你的所有的类别，每行一个类别，如data/coco.names：</p>
+<h4 id="3-创建names-file"><a class="markdownIt-Anchor" href="#3-创建names-file"></a> 3. 创建*.names file,</h4>
+<p>其中保存的是你的所有的类别，每行一个类别，如data/coco.names：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">head</span><br><span class="line">eye</span><br><span class="line">nose</span><br></pre></td></tr></table></figure>
-<h4 id="4-更新data-coco-data-其中保存的是很多配置信息"><a href="#4-更新data-coco-data-其中保存的是很多配置信息" class="headerlink" title="4. 更新data/coco.data,其中保存的是很多配置信息"></a>4. 更新data/coco.data,其中保存的是很多配置信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">classes = 3 # 改成你的数据集的类别个数</span><br><span class="line">train = ./data/2007_train.txt # 通过voc_label.py文件生成的txt文件</span><br><span class="line">valid = ./data/2007_test.txt # 通过voc_label.py文件生成的txt文件</span><br><span class="line">names = data/coco.names # 记录类别</span><br><span class="line">backup = backup/ # 记录checkpoint存放位置</span><br><span class="line">eval = coco # 选择map计算方式</span><br></pre></td></tr></table></figure>
-<h4 id="5-更新cfg文件，修改类别相关信息"><a href="#5-更新cfg文件，修改类别相关信息" class="headerlink" title="5. 更新cfg文件，修改类别相关信息"></a>5. 更新cfg文件，修改类别相关信息</h4><p>打开cfg文件夹下的yolov3.cfg文件，大体而言，cfg文件记录的是整个网络的结构，是核心部分，具体内容讲解请见：<a href="https://pprp.github.io/2018/09/20/tricks.html" target="_blank" rel="noopener">https://pprp.github.io/2018/09/20/tricks.html</a></p>
+<h4 id="4-更新datacocodata其中保存的是很多配置信息"><a class="markdownIt-Anchor" href="#4-更新datacocodata其中保存的是很多配置信息"></a> 4. 更新data/coco.data,其中保存的是很多配置信息</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">classes = 3 # 改成你的数据集的类别个数</span><br><span class="line">train = ./data/2007_train.txt # 通过voc_label.py文件生成的txt文件</span><br><span class="line">valid = ./data/2007_test.txt # 通过voc_label.py文件生成的txt文件</span><br><span class="line">names = data/coco.names # 记录类别</span><br><span class="line">backup = backup/ # 记录checkpoint存放位置</span><br><span class="line">eval = coco # 选择map计算方式</span><br></pre></td></tr></table></figure>
+<h4 id="5-更新cfg文件修改类别相关信息"><a class="markdownIt-Anchor" href="#5-更新cfg文件修改类别相关信息"></a> 5. 更新cfg文件，修改类别相关信息</h4>
+<p>打开cfg文件夹下的yolov3.cfg文件，大体而言，cfg文件记录的是整个网络的结构，是核心部分，具体内容讲解请见：<a href="https://pprp.github.io/2018/09/20/tricks.html" target="_blank" rel="noopener">https://pprp.github.io/2018/09/20/tricks.html</a></p>
 <p>只需要更改每个[yolo]层前边卷积层的filter个数即可：</p>
 <blockquote>
 <p>每一个[region/yolo]层前的最后一个卷积层中的 filters=num(yolo层个数)*(classes+5) ,5的意义是5个坐标，论文中的tx,ty,tw,th,po</p>
 </blockquote>
 <p>举个例子：我有三个类，n = 3, 那么filter  = 3 * (3+5) = 21</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[convolutional]</span><br><span class="line">size=1</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">filters=255 # 改为 21</span><br><span class="line">activation=linear</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[yolo]</span><br><span class="line">mask = 6,7,8</span><br><span class="line">anchors = 10,13,  16,30,  33,23,  30,61,  62,45,  59,119,  116,90,  156,198,  373,326</span><br><span class="line">classes=80 # 改为 3</span><br><span class="line">num=9</span><br><span class="line">jitter=.3</span><br><span class="line">ignore_thresh = .7</span><br><span class="line">truth_thresh = 1</span><br><span class="line">random=1</span><br></pre></td></tr></table></figure>
-<h3 id="3-训练模型"><a href="#3-训练模型" class="headerlink" title="3. 训练模型"></a>3. 训练模型</h3><p>预训练模型：</p>
+<h3 id="3-训练模型"><a class="markdownIt-Anchor" href="#3-训练模型"></a> 3. 训练模型</h3>
+<p>预训练模型：</p>
 <ul>
 <li>Darknet <code>*.weights</code> format: <a href="https://pjreddie.com/media/files/yolov3.weights" target="_blank" rel="noopener">https://pjreddie.com/media/files/yolov3.weights</a></li>
 <li>PyTorch <code>*.pt</code> format: <a href="https://drive.google.com/drive/folders/1uxgUBemJVw9wZsdpboYbzUN4bcRhsuAI" target="_blank" rel="noopener">https://drive.google.com/drive/folders/1uxgUBemJVw9wZsdpboYbzUN4bcRhsuAI</a></li>
@@ -1824,16 +1947,20 @@ ValueError: attempted relative import beyond top-level package<figure class="hig
 <p><img src="/.com//1557826254445.png" alt="1557826254445"></p>
 <p>如果中断了，可以恢复训练</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py --data data/coco.data --cfg cfg/yolov3.cfg --resume</span><br></pre></td></tr></table></figure>
-<h3 id="4-测试模型"><a href="#4-测试模型" class="headerlink" title="4. 测试模型"></a>4. 测试模型</h3><p>将待测试图片放到data/samples中，然后运行</p>
+<h3 id="4-测试模型"><a class="markdownIt-Anchor" href="#4-测试模型"></a> 4. 测试模型</h3>
+<p>将待测试图片放到data/samples中，然后运行</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python detect.py --weights weights/best.pt</span><br></pre></td></tr></table></figure>
-<h3 id="5-评估模型"><a href="#5-评估模型" class="headerlink" title="5. 评估模型"></a>5. 评估模型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python test.py --weights weights/latest.pt</span><br></pre></td></tr></table></figure>
+<h3 id="5-评估模型"><a class="markdownIt-Anchor" href="#5-评估模型"></a> 5. 评估模型</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python test.py --weights weights/latest.pt</span><br></pre></td></tr></table></figure>
 <p>如果使用cocoAPI使用以下命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/cocodataset/cocoapi &amp;&amp; cd cocoapi/PythonAPI &amp;&amp; make &amp;&amp; cd ../.. &amp;&amp; cp -r cocoapi/PythonAPI/pycocotools yolov3</span><br><span class="line">cd yolov3</span><br><span class="line"> </span><br><span class="line">python3 test.py --save-json --img-size 416</span><br><span class="line">Namespace(batch_size=32, cfg=&apos;cfg/yolov3-spp.cfg&apos;, conf_thres=0.001, data_cfg=&apos;data/coco.data&apos;, img_size=416, iou_thres=0.5, nms_thres=0.5, save_json=True, weights=&apos;weights/yolov3-spp.weights&apos;)</span><br><span class="line">Using CUDA device0 _CudaDeviceProperties(name=&apos;Tesla V100-SXM2-16GB&apos;, total_memory=16130MB)</span><br><span class="line">               Class    Images   Targets         P         R       mAP        F1</span><br><span class="line">Calculating mAP: 100%|█████████████████████████████████████████| 157/157 [05:59&lt;00:00,  1.71s/it]</span><br><span class="line">                 all     5e+03  3.58e+04     0.109     0.773      0.57     0.186</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.335</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.565</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.349</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.151</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.360</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.493</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.280</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.432</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.458</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.255</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.494</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.620</span><br><span class="line"></span><br><span class="line">python3 test.py --save-json --img-size 608 --batch-size 16</span><br><span class="line">Namespace(batch_size=16, cfg=&apos;cfg/yolov3-spp.cfg&apos;, conf_thres=0.001, data_cfg=&apos;data/coco.data&apos;, img_size=608, iou_thres=0.5, nms_thres=0.5, save_json=True, weights=&apos;weights/yolov3-spp.weights&apos;)</span><br><span class="line">Using CUDA device0 _CudaDeviceProperties(name=&apos;Tesla V100-SXM2-16GB&apos;, total_memory=16130MB)</span><br><span class="line">               Class    Images   Targets         P         R       mAP        F1</span><br><span class="line">Computing mAP: 100%|█████████████████████████████████████████| 313/313 [06:11&lt;00:00,  1.01it/s]</span><br><span class="line">                 all     5e+03  3.58e+04      0.12      0.81     0.611     0.203</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.366</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.607</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.386</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.207</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.391</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.485</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.296</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.464</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.494</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.331</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.517</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.618</span><br></pre></td></tr></table></figure>
-<h3 id="6-可视化"><a href="#6-可视化" class="headerlink" title="6. 可视化"></a>6. 可视化</h3><p>可以使用<code>python -c from utils import utils;utils.plot_results()</code></p>
-<p>创建drawLog.py</p>
+<h3 id="6-可视化"><a class="markdownIt-Anchor" href="#6-可视化"></a> 6. 可视化</h3>
+<p>可以使用<code>python -c from utils import utils;utils.plot_results()</code></p>
+<p><a href="http://xn--drawLog-dp0lt07g.py" target="_blank" rel="noopener">创建drawLog.py</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_results</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># Plot YOLO training results file 'results.txt'</span></span><br><span class="line">    <span class="keyword">import</span> glob</span><br><span class="line">    <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">    <span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">    <span class="comment">#import os; os.system('rm -rf results.txt &amp;&amp; wget https://storage.googleapis.com/ultralytics/results_v1_0.txt')</span></span><br><span class="line"></span><br><span class="line">    plt.figure(figsize=(<span class="number">16</span>, <span class="number">8</span>))</span><br><span class="line">    s = [<span class="string">'X'</span>, <span class="string">'Y'</span>, <span class="string">'Width'</span>, <span class="string">'Height'</span>, <span class="string">'Objectness'</span>, <span class="string">'Classification'</span>, <span class="string">'Total Loss'</span>, <span class="string">'Precision'</span>, <span class="string">'Recall'</span>, <span class="string">'mAP'</span>]</span><br><span class="line">    files = sorted(glob.glob(<span class="string">'results.txt'</span>))</span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> files:</span><br><span class="line">        results = np.loadtxt(f, usecols=[<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">16</span>]).T  <span class="comment"># column 16 is mAP</span></span><br><span class="line">        n = results.shape[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">            plt.subplot(<span class="number">2</span>, <span class="number">5</span>, i + <span class="number">1</span>)</span><br><span class="line">            plt.plot(range(<span class="number">1</span>, n), results[i, <span class="number">1</span>:], marker=<span class="string">'.'</span>, label=f)</span><br><span class="line">            plt.title(s[i])</span><br><span class="line">            <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">                plt.legend()</span><br><span class="line">    plt.savefig(<span class="string">'./plot.png'</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    plot_results()</span><br></pre></td></tr></table></figure>
 <p><img src="https://user-images.githubusercontent.com/26833433/56207787-ec9e7000-604f-11e9-94dd-e1fcc374270f.png" alt></p>
-<h3 id="7-高级进阶-网络结构更改"><a href="#7-高级进阶-网络结构更改" class="headerlink" title="7. 高级进阶-网络结构更改"></a>7. 高级进阶-网络结构更改</h3><p>详细cfg文件讲解：<a href="https://pprp.github.io/2018/09/20/tricks.html" target="_blank" rel="noopener">https://pprp.github.io/2018/09/20/tricks.html</a></p>
+<h3 id="7-高级进阶-网络结构更改"><a class="markdownIt-Anchor" href="#7-高级进阶-网络结构更改"></a> 7. 高级进阶-网络结构更改</h3>
+<p>详细cfg文件讲解：<a href="https://pprp.github.io/2018/09/20/tricks.html" target="_blank" rel="noopener">https://pprp.github.io/2018/09/20/tricks.html</a></p>
 <p>参考资料以及网络更改经验：<a href="https://pprp.github.io/2018/06/20/yolo.html" target="_blank" rel="noopener">https://pprp.github.io/2018/06/20/yolo.html</a></p>
 
       
@@ -2094,10 +2221,58 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 
 
-    </div>
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>

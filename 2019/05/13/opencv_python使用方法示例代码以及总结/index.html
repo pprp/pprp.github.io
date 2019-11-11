@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.0.0">
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -51,13 +52,13 @@
   };
 </script>
 
-  <meta name="description" content="opencv python的使用 简单的图像处理 持续更新  1. 需要安装的库 opencv-python numpy  matplotlib  1pip install opencv-python numpy matplotlib 使用： 123import matplotlib.pyplot as pltimport numpy as npimport cv2 IDE选择： ​    建议">
+  <meta name="description" content="opencv python的使用 简单的图像处理 持续更新   1. 需要安装的库  opencv-python numpy matplotlib  1pip install opencv-python numpy matplotlib 使用： 123import matplotlib.pyplot as pltimport numpy as npimport cv2 IDE选择： ​	建议选择">
 <meta name="keywords" content="opencv">
 <meta property="og:type" content="article">
 <meta property="og:title" content="opencv python使用方法示例代码以及总结">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;05&#x2F;13&#x2F;opencv_python%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81%E4%BB%A5%E5%8F%8A%E6%80%BB%E7%BB%93&#x2F;index.html">
 <meta property="og:site_name" content="spicyCV">
-<meta property="og:description" content="opencv python的使用 简单的图像处理 持续更新  1. 需要安装的库 opencv-python numpy  matplotlib  1pip install opencv-python numpy matplotlib 使用： 123import matplotlib.pyplot as pltimport numpy as npimport cv2 IDE选择： ​    建议">
+<meta property="og:description" content="opencv python的使用 简单的图像处理 持续更新   1. 需要安装的库  opencv-python numpy matplotlib  1pip install opencv-python numpy matplotlib 使用： 123import matplotlib.pyplot as pltimport numpy as npimport cv2 IDE选择： ​	建议选择">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-11-11T08:03:45.817Z">
 <meta name="twitter:card" content="summary">
@@ -105,12 +106,12 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
     <div class="headband"></div>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -280,17 +281,19 @@
 <p>简单的图像处理</p>
 <p>持续更新</p>
 </blockquote>
-<h2 id="1-需要安装的库"><a href="#1-需要安装的库" class="headerlink" title="1. 需要安装的库"></a>1. 需要安装的库</h2><ul>
+<h2 id="1-需要安装的库"><a class="markdownIt-Anchor" href="#1-需要安装的库"></a> 1. 需要安装的库</h2>
+<ul>
 <li>opencv-python</li>
-<li>numpy </li>
+<li>numpy</li>
 <li>matplotlib</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install opencv-python numpy matplotlib</span><br></pre></td></tr></table></figure>
 <p>使用：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br></pre></td></tr></table></figure>
 <p>IDE选择：</p>
-<p>​    建议选择pycharm, 可以进行调试</p>
-<h2 id="2-opencv3图像处理"><a href="#2-opencv3图像处理" class="headerlink" title="2. opencv3图像处理"></a>2. opencv3图像处理</h2><p><strong>读取图片：</strong></p>
+<p>​	建议选择pycharm, 可以进行调试</p>
+<h2 id="2-opencv3图像处理"><a class="markdownIt-Anchor" href="#2-opencv3图像处理"></a> 2. opencv3图像处理</h2>
+<p><strong>读取图片：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv2.imread(filename,flags)</span><br></pre></td></tr></table></figure>
 <p>支持图像格式，常用的有：jpg,bmp,png,tiff等</p>
 <p>flags: color type</p>
@@ -377,7 +380,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-需要安装的库"><span class="nav-number">1.</span> <span class="nav-text">1. 需要安装的库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-opencv3图像处理"><span class="nav-number">2.</span> <span class="nav-text">2. opencv3图像处理</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-需要安装的库"><span class="nav-number">1.</span> <span class="nav-text"> 1. 需要安装的库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-opencv3图像处理"><span class="nav-number">2.</span> <span class="nav-text"> 2. opencv3图像处理</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -587,6 +590,54 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 
@@ -608,6 +659,6 @@ if (document.querySelectorAll('pre.mermaid').length) {
   }, window.Gitalk);
 </script>
 
-    </div>
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>

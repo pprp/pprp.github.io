@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.0.0">
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -105,12 +106,12 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
     <div class="headband"></div>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -279,16 +280,17 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">import torch.nn as nn</span><br><span class="line">import torchvision</span><br><span class="line">from torchvision import datasets, transforms</span><br><span class="line">from torch.autograd import Variable</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line"># part 1: 数据集的获取，torch中提供了数据集的相关API</span><br><span class="line">mnist_train_dataset = datasets.MNIST(root=&quot;./data/&quot;,</span><br><span class="line">                                      train=True,</span><br><span class="line">                                      download=True,</span><br><span class="line">                                      transform=</span><br><span class="line">                                        transforms.Compose([transforms.ToTensor(), transforms.Normalize(mean=[0.5],std=[0.5]),transforms.Resize((28,28))])</span><br><span class="line">                                    )</span><br><span class="line">                                        </span><br><span class="line">mnist_test_dataset = datasets.MNIST(root=&quot;./data/&quot;,</span><br><span class="line">                                      train=False,</span><br><span class="line">                                      download=True,</span><br><span class="line">                                      transform = transforms.Compose([transforms.ToTensor(), transforms.Resize((28,28)))</span><br><span class="line">                  )</span><br><span class="line"></span><br><span class="line"># part 2: 数据装载， dataloader</span><br><span class="line">data_loader_train = torch.utils.data.DataLoader(</span><br><span class="line">    dataset=mnist_train_dataset,</span><br><span class="line">    batch_size=128,</span><br><span class="line">    shuffle=True</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">data_loader_test = torch.utils.data.DataLoader(</span><br><span class="line">    dataset=mnist_test_dataset,</span><br><span class="line">    batch_size = 1,</span><br><span class="line">    shuffle=True</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># part 3: 数据可视化，检查数据</span><br><span class="line">images,labels = next(iter(data_loader_train))</span><br><span class="line"># TypeError: img should be PIL Image. Got &lt;class &apos;torch.Tensor&apos;&gt;</span><br><span class="line">img = torchvision.utils.make_grid(images)</span><br><span class="line">img = img.numpy().transpose(1,2,0)</span><br><span class="line">std=mean=[0.5,0.5,0.5]</span><br><span class="line">img = img * std + mean</span><br><span class="line"># 直接imshow会报错：Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).</span><br><span class="line"># 意思是需要归一化处理</span><br><span class="line">print([int(labels[i].numpy()) for i,label in enumerate(labels)])</span><br><span class="line">plt.imshow(img)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <p>运行会出现以下报错：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;d:/GitHub/studyNote/pytorch基础/mnist.torch.py&quot;, line 45, in &lt;module&gt;</span><br><span class="line">    images,labels = next(iter(data_loader_train))</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torch\utils\data\dataloader.py&quot;, line 560, in __next__</span><br><span class="line">    batch = self.collate_fn([self.dataset[i] for i in indices])</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torch\utils\data\dataloader.py&quot;, line 560, in &lt;listcomp&gt;</span><br><span class="line">    batch = self.collate_fn([self.dataset[i] for i in indices])</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torchvision\datasets\mnist.py&quot;, line 95, in __getitem__</span><br><span class="line">    img = self.transform(img)</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torchvision\transforms\transforms.py&quot;, line 61, in __call__</span><br><span class="line">    img = t(img)</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torchvision\transforms\transforms.py&quot;, line 196, in __call__</span><br><span class="line">    return F.resize(img, self.size, self.interpolation)</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torchvision\transforms\functional.py&quot;, line 229, in resize</span><br><span class="line">    raise TypeError(&apos;img should be PIL Image. Got &#123;&#125;&apos;.format(type(img)))</span><br><span class="line">TypeError: img should be PIL Image. Got &lt;class &apos;torch.Tensor&apos;&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="思考："><a href="#思考：" class="headerlink" title="思考："></a>思考：</h2><p>他需要PIL格式的图片，正好transforms中有一个方法为：<code>transforms.ToPILImage()</code>, 然后就变成了</p>
+<h2 id="思考"><a class="markdownIt-Anchor" href="#思考"></a> 思考：</h2>
+<p>他需要PIL格式的图片，正好transforms中有一个方法为：<code>transforms.ToPILImage()</code>, 然后就变成了</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">transform=transforms.Compose([</span><br><span class="line">    						transforms.ToTensor(),                               </span><br><span class="line">                              transforms.Normalize(mean=[<span class="number">0.5</span>],std=[<span class="number">0.5</span></span><br><span class="line">                              transforms.Resize([<span class="number">28</span>,<span class="number">28</span>]),</span><br><span class="line">                              transforms.ToPILImage()</span><br><span class="line">                             ])</span><br></pre></td></tr></table></figure>
 <p>但是还是报错：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;d:/GitHub/studyNote/pytorch基础/mnist.torch.py&quot;, line 45, in &lt;module&gt;</span><br><span class="line">    images,labels = next(iter(data_loader_train))</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torch\utils\data\dataloader.py&quot;, line 560, in __next__</span><br><span class="line">    batch = self.collate_fn([self.dataset[i] for i in indices])</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torch\utils\data\dataloader.py&quot;, line 560, in &lt;listcomp&gt;</span><br><span class="line">    batch = self.collate_fn([self.dataset[i] for i in indices])</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torchvision\datasets\mnist.py&quot;, line 95, in __getitem__</span><br><span class="line">    img = self.transform(img)</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torchvision\transforms\transforms.py&quot;, line 61, in __call__</span><br><span class="line">    img = t(img)</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torchvision\transforms\transforms.py&quot;, line 196, in __call__</span><br><span class="line">    return F.resize(img, self.size, self.interpolation)</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torchvision\transforms\functional.py&quot;, line 229, in resize</span><br><span class="line">    raise TypeError(&apos;img should be PIL Image. Got &#123;&#125;&apos;.format(type(img)))</span><br><span class="line">TypeError: img should be PIL Image. Got &lt;class &apos;torch.Tensor&apos;&gt;</span><br></pre></td></tr></table></figure>
 <p>去bing上查询到stackoverflow上发现一个类似的错误：</p>
 <blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">train_transforms = transforms.Compose(</span><br><span class="line">[transforms.Resize(<span class="number">255</span>), </span><br><span class="line">transforms.CenterCrop(<span class="number">224</span>), </span><br><span class="line">transforms.ToTensor(), </span><br><span class="line">transforms.RandomHorizontalFlip(), </span><br><span class="line">transforms.Normalize([<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>], [<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])])</span><br></pre></td></tr></table></figure>
-<p>TypeError: img should be PIL Image. Got <class 'torch.tensor'></class></p>
+<p>TypeError: img should be PIL Image. Got &lt;class ‘torch.Tensor’&gt;</p>
 </blockquote>
-<p>— from <a href="https://stackoverflow.com/questions/57079219/img-should-be-pil-image-got-class-torch-tensor" target="_blank" rel="noopener">https://stackoverflow.com/questions/57079219/img-should-be-pil-image-got-class-torch-tensor</a></p>
+<p>– from <a href="https://stackoverflow.com/questions/57079219/img-should-be-pil-image-got-class-torch-tensor" target="_blank" rel="noopener">https://stackoverflow.com/questions/57079219/img-should-be-pil-image-got-class-torch-tensor</a></p>
 <p>下边大神的解决方案是：</p>
 <blockquote>
 <p><code>transforms.RandomHorizontalFlip()</code> works on <code>PIL.Images</code>, not <code>torch.Tensor</code>. In your code above, you are applying <code>transforms.ToTensor()</code> prior to <code>transforms.RandomHorizontalFlip()</code>, which results in tensor.</p>
@@ -301,7 +303,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">train_transforms = transforms.Compose([transforms.Resize(255), </span><br><span class="line">                                       transforms.CenterCrop(224),  </span><br><span class="line">                                       transforms.RandomHorizontalFlip(),</span><br><span class="line">                                       transforms.ToTensor(), </span><br><span class="line">                                       transforms.Normalize([0.485, 0.456, 0.406], 										[0.229, 0.224, 0.225])])</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>发现是顺序问题，需要调换，将ToTensor放在RandomHorizontalFlip之后。</p>
-<h2 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h2><p>这个问题我们也采用相同方法尝试。</p>
+<h2 id="解决"><a class="markdownIt-Anchor" href="#解决"></a> 解决：</h2>
+<p>这个问题我们也采用相同方法尝试。</p>
 <p>从</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">transform=transforms.Compose([</span><br><span class="line">    						transforms.ToTensor(),                               </span><br><span class="line">                              transforms.Normalize(mean=[<span class="number">0.5</span>],std=[<span class="number">0.5</span></span><br><span class="line">                              transforms.Resize([<span class="number">28</span>,<span class="number">28</span>]),</span><br><span class="line">                              transforms.ToPILImage()</span><br><span class="line">                             ])</span><br></pre></td></tr></table></figure>
 <p>改为：</p>
@@ -311,7 +314,7 @@
 <p>发现报错：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  File &quot;d:/GitHub/studyNote/pytorch基础/mnist.torch.py&quot;, line 47, in &lt;module&gt;</span><br><span class="line">    images,labels = next(iter(data_loader_train))</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torch\utils\data\dataloader.py&quot;, line 560, in __next__</span><br><span class="line">    batch = self.collate_fn([self.dataset[i] for i in indices])</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torch\utils\data\dataloader.py&quot;, line 560, in &lt;listcomp&gt;</span><br><span class="line">    batch = self.collate_fn([self.dataset[i] for i in indices])</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torchvision\datasets\mnist.py&quot;, line 95, in __getitem__</span><br><span class="line">    img = self.transform(img)</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torchvision\transforms\transforms.py&quot;, line 61, in __call__</span><br><span class="line">    img = t(img)</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torchvision\transforms\transforms.py&quot;, line 164, in __call__</span><br><span class="line">    return F.normalize(tensor, self.mean, self.std, self.inplace)</span><br><span class="line">  File &quot;E:\ProgramData\Miniconda3\envs\pytorch\lib\site-packages\torchvision\transforms\functional.py&quot;, line 201, in normalize</span><br><span class="line">    raise TypeError(&apos;tensor is not a torch image.&apos;)</span><br><span class="line">TypeError: tensor is not a torch image.</span><br></pre></td></tr></table></figure>
 <p>看来ToTensor需要在Normalize之前才行。</p>
-<p>大家如果有新的发现可以在评论补充 </p>
+<p>大家如果有新的发现可以在评论补充</p>
 
     </div>
 
@@ -379,7 +382,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#思考："><span class="nav-number">1.</span> <span class="nav-text">思考：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决："><span class="nav-number">2.</span> <span class="nav-text">解决：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#思考"><span class="nav-number">1.</span> <span class="nav-text"> 思考：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">2.</span> <span class="nav-text"> 解决：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -589,6 +592,54 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 
@@ -610,6 +661,6 @@ if (document.querySelectorAll('pre.mermaid').length) {
   }, window.Gitalk);
 </script>
 
-    </div>
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
