@@ -219,372 +219,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%80%83%E7%A0%94%E6%9C%BA%E8%AF%95%E6%8C%87%E5%8D%97%E4%B8%8A%E6%9C%BA%E7%BC%96%E7%A8%8B%E7%BB%83%E4%B9%A0%E5%A4%8D%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/log.png">
-      <meta itemprop="name" content="pprp">
-      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spicyCV">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%80%83%E7%A0%94%E6%9C%BA%E8%AF%95%E6%8C%87%E5%8D%97%E4%B8%8A%E6%9C%BA%E7%BC%96%E7%A8%8B%E7%BB%83%E4%B9%A0%E5%A4%8D%E4%B9%A0/" class="post-title-link" itemprop="url">计算机考研机试指南上机编程练习复习</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-27 14:54:46" itemprop="dateCreated datePublished" datetime="2019-05-27T14:54:46+08:00">2019-05-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-11 15:18:54" itemprop="dateModified" datetime="2019-11-11T15:18:54+08:00">2019-11-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index">
-                    <span itemprop="name">编程</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年夏令营机试编程复习常识及入门</p>
-<h2 id="1-常识"><a href="#1-常识" class="headerlink" title="1. 常识"></a>1. 常识</h2><h3 id="1-1-评判结构"><a href="#1-1-评判结构" class="headerlink" title="1.1 评判结构"></a>1.1 评判结构</h3><ol>
-<li><p>Accepted: 正确</p>
-</li>
-<li><p>WA: wrong answer</p>
-</li>
-</ol>
-<ul>
-<li>考虑代码健壮性比如边界条件，溢出等</li>
-<li>重新设计算法</li>
-</ul>
-<ol>
-<li><p>Presentation Error: 格式错误</p>
-</li>
-<li><p>TLE: Time Limit Exceeded</p>
-</li>
-</ol>
-<ul>
-<li>出现死循环，查看边界条件</li>
-<li>设计的算法的复杂度比较高，优化算法</li>
-</ul>
-<ol>
-<li>Runtime Error: 运行时错误</li>
-</ol>
-<ul>
-<li>访存是否错误，如数组下标越界</li>
-<li>除以0</li>
-<li>递归过深导致了栈溢出</li>
-</ul>
-<ol>
-<li><p>compile Error: 编译错误</p>
-</li>
-<li><p>Memory Limit Exceeded: 内存超限，空间复杂度过高，或出现死循环</p>
-</li>
-<li><p>Output Limit Exceeded: 输出超出限制</p>
-</li>
-</ol>
-<ul>
-<li>可能是忘记了关闭调试信息</li>
-</ul>
-<h3 id="1-2-复杂度估计"><a href="#1-2-复杂度估计" class="headerlink" title="1.2 复杂度估计"></a>1.2 复杂度估计</h3><p>1s的时间限制：复杂度不能超过百万级别：100,0000.</p>
-<p>比如$O(n^2)$, n&lt;3000.</p>
-<p>空间限制：32MB,不能超过使用32M的内存。</p>
-<h2 id="2-经典入门"><a href="#2-经典入门" class="headerlink" title="2. 经典入门"></a>2. 经典入门</h2><h3 id="2-1-排序"><a href="#2-1-排序" class="headerlink" title="2.1 排序"></a>2.1 排序</h3><p>冒泡排序：    </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">100</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> arr[maxN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;N);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; N ; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = N<span class="number">-1</span> ; i &gt; <span class="number">1</span> ; i--)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span> ; j &lt;= i ; j++)&#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(arr[j]&lt;arr[j<span class="number">-1</span>])&#123;</span><br><span class="line">                tmp = arr[j<span class="number">-1</span>];</span><br><span class="line">                arr[j<span class="number">-1</span>] = arr[j];</span><br><span class="line">                arr[j] = tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; N ; i++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d,"</span>,arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>官方给的代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">100</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> arr[maxN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;N)!=EOF)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; N ; i++)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; N ; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; N<span class="number">-1</span>-i; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>])&#123;</span><br><span class="line">                    <span class="keyword">int</span> tp = arr[j+<span class="number">1</span>];</span><br><span class="line">                    arr[j+<span class="number">1</span>] = arr[j];</span><br><span class="line">                    arr[j] = tp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; N ; i++)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d "</span>,arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>简便的方式进行排序：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">100</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> arr[maxN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">com</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x &lt; y;<span class="comment">//从小到大,相反则是从大到小</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;N)!=EOF) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;arr[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(arr, arr + N, com);<span class="comment">//greater&lt;type&gt;() 从大到小，less&lt;type&gt;()从小到大</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d "</span>, arr[j]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>学生成绩排序：结构体排序典型例题</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stu</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">int</span> grade;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">1000</span>+<span class="number">10</span>;</span><br><span class="line">stu STU[maxN];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(stu s1, stu s2)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s1.grade != s2.grade)&#123;</span><br><span class="line">        <span class="keyword">return</span> s1.grade &lt; s2.grade;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">strcmp</span>(s1.name,s2.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n)!=EOF)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%s %d %d"</span>,&amp;STU[i].name,&amp;STU[i].age,&amp;STU[i].grade);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(STU,STU+n,cmp);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%s-%d-%d\n"</span>,STU[i].name,STU[i].age,STU[i].grade);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="2-2-日期计算"><a href="#2-2-日期计算" class="headerlink" title="2.2 日期计算"></a>2.2 日期计算</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ISYEAR(x) x%100!=0 &amp;&amp; x%4 == 0 || x%400 == 0 ? 1: 0</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> dayofMonth[<span class="number">13</span>][<span class="number">2</span>] = &#123;</span><br><span class="line">        <span class="number">0</span>,<span class="number">0</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">28</span>,<span class="number">29</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">30</span>,<span class="number">30</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">30</span>,<span class="number">30</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">30</span>,<span class="number">30</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span>,</span><br><span class="line">        <span class="number">30</span>,<span class="number">30</span>,</span><br><span class="line">        <span class="number">31</span>,<span class="number">31</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Date</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> day;</span><br><span class="line">    <span class="keyword">int</span> month;</span><br><span class="line">    <span class="keyword">int</span> year;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">nextDay</span><span class="params">()</span></span>&#123;</span><br><span class="line">        day++;</span><br><span class="line">        <span class="keyword">if</span>(day &gt; dayofMonth[month][ISYEAR(year)])&#123;</span><br><span class="line">            day = <span class="number">1</span>;</span><br><span class="line">            month++;</span><br><span class="line">            <span class="keyword">if</span>(month&gt;<span class="number">12</span>)&#123;</span><br><span class="line">                month=<span class="number">1</span>;</span><br><span class="line">                year++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> buff[<span class="number">5002</span>][<span class="number">13</span>][<span class="number">32</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ABS</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> -x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Date tmp;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    tmp.day=<span class="number">1</span>;</span><br><span class="line">    tmp.month=<span class="number">1</span>;</span><br><span class="line">    tmp.year=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(tmp.year!=<span class="number">5001</span>)&#123;</span><br><span class="line">        buff[tmp.year][tmp.month][tmp.day] = cnt;</span><br><span class="line">        tmp.nextDay();</span><br><span class="line">        cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> d1,m1,y1,d2,m2,y2;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%4d%2d%2d"</span>,&amp;y1,&amp;m1,&amp;d1)!=EOF)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%4d%2d%2d"</span>,&amp;y2,&amp;m2,&amp;d2);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ABS(buff[y2][m2][d2]-buff[y1][m1][d1]+<span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/19/%E5%A4%A9%E6%B4%A5%E5%A4%A7%E5%AD%A6%E8%A5%BF%E5%AE%89%E6%8B%9B%E7%94%9F%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/log.png">
-      <meta itemprop="name" content="pprp">
-      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spicyCV">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/19/%E5%A4%A9%E6%B4%A5%E5%A4%A7%E5%AD%A6%E8%A5%BF%E5%AE%89%E6%8B%9B%E7%94%9F%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">天津大学西安宣讲会招生总结</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-19 22:12:34" itemprop="dateCreated datePublished" datetime="2019-05-19T22:12:34+08:00">2019-05-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-11 16:06:36" itemprop="dateModified" datetime="2019-11-11T16:06:36+08:00">2019-11-11</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过这次的面试，感觉到自己还是有很多地方没有准备充分。</p>
-<ul>
-<li>来的时候没有打听好，没有进行准备<ul>
-<li>自我介绍</li>
-<li>没有提前准备纸质版材料</li>
-<li>可能问题的回答</li>
-<li>没有论文</li>
-</ul>
-</li>
-<li>时间安排不够合理<ul>
-<li>火车票购买问题</li>
-</ul>
-</li>
-<li>没有论文加持比较吃亏</li>
-<li>突出自己优势</li>
-<li>衣服穿得稍微正式一点点</li>
-<li>带好身份证，车票</li>
-<li>学会如何礼貌地对待老师</li>
-<li>需要赶快提高编程和英语面试能力</li>
-</ul>
-<h2 id="询问的问题"><a href="#询问的问题" class="headerlink" title="询问的问题"></a>询问的问题</h2><p>reference：<a href="https://mp.weixin.qq.com/s?__biz=MzIxNjA4NTUwMQ==&amp;mid=2247485813&amp;idx=1&amp;sn=5c701592c82e7156e15867e86be4428d&amp;chksm=978f2fe7a0f8a6f1c0953fc81ccf5f93976ca6e9fbe03655443ab816164eb3759bf23aca953d&amp;mpshare=1&amp;scene=1&amp;srcid=#rd" target="_blank" rel="noopener">未来研究生</a></p>
-<ol>
-<li>请进行自我介绍</li>
-<li>你是如何学习计算机视觉的？</li>
-<li>计算机视觉讲的是什么？</li>
-<li>这个比赛具体是什么方案？</li>
-<li>你除了python还熟悉哪种编程语言？</li>
-<li><p>你用改语言做过什么项目？是课设还是感兴趣？</p>
-</li>
-<li><p>你为什么要报考我们学校？我们专业？</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">解析：这个问题是很多学校在夏令营面试过程中都会问到的问题，针对这个问题一定要提前做好功课，准备充分，对本专业要有比较深入的理解。老师问这个问题的目的主要是看你是否真的对本院系感兴趣，而不是随便海投前来面试，其次则是看你是否真的对这个专业感兴趣（尤其是针对跨专业的考生）。</span><br></pre></td></tr></table></figure>
-<ol>
-<li>你读过哪些专业方面的文献？请举例说明作者的观点以及你的想法。 </li>
-<li>谈谈你已经发表的论文，或者本科毕业论文的选题与思路</li>
-<li>你是否打算读博士?</li>
-<li>如果你被录取，你打算做哪一方向的研究？</li>
-<li>专业课理论知识</li>
-<li>你们学校保研规则是？你有把握保研么？</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/14/pytorch%E7%89%88yolov3%E8%AE%AD%E7%BB%83%E8%87%AA%E5%B7%B1%E6%95%B0%E6%8D%AE%E9%9B%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/log.png">
-      <meta itemprop="name" content="pprp">
-      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spicyCV">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/14/pytorch%E7%89%88yolov3%E8%AE%AD%E7%BB%83%E8%87%AA%E5%B7%B1%E6%95%B0%E6%8D%AE%E9%9B%86/" class="post-title-link" itemprop="url">pytorch版本yolov3训练自己的数据集</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-14 13:31:59" itemprop="dateCreated datePublished" datetime="2019-05-14T13:31:59+08:00">2019-05-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-11 21:41:25" itemprop="dateModified" datetime="2019-11-11T21:41:25+08:00">2019-11-11</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1. 环境搭建"></a>1. 环境搭建</h3><ol>
-<li>将github库download下来。</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ultralytics/yolov3-fcos.git</span><br></pre></td></tr></table></figure>
-<ol>
-<li>建议在linux环境下使用anaconda进行搭建</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n yolov3 python=3.7</span><br></pre></td></tr></table></figure>
-<ol>
-<li>安装需要的软件</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
-<p>环境要求：</p>
-<ul>
-<li>python &gt;= 3.7</li>
-<li>pytorch &gt;= 1.1</li>
-<li>numpy</li>
-<li>tqdm</li>
-<li>opencv-python</li>
-</ul>
-<p>其中只需要注意pytorch的安装：</p>
-<p>到<a href="https://pytorch.org/" target="_blank" rel="noopener">https://pytorch.org/</a>中根据操作系统，python版本，cuda版本等选择命令即可。</p>
-<p>关于深度学习环境搭建请参看：<a href="https://www.cnblogs.com/pprp/p/9463974.html" target="_blank" rel="noopener">https://www.cnblogs.com/pprp/p/9463974.html</a></p>
-<p>anaconda常用用法：<a href="https://www.cnblogs.com/pprp/p/9463124.html" target="_blank" rel="noopener">https://www.cnblogs.com/pprp/p/9463124.html</a></p>
-<h3 id="2-数据集构建"><a href="#2-数据集构建" class="headerlink" title="2. 数据集构建"></a>2. 数据集构建</h3><h4 id="1-xml文件生成需要Labelimg软件"><a href="#1-xml文件生成需要Labelimg软件" class="headerlink" title="1. xml文件生成需要Labelimg软件"></a>1. xml文件生成需要Labelimg软件</h4><pre><code>在Windows下使用：
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/pprp/DeepLearning/blob/master/windows_v1.5.1/labelImg.exe</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用快捷键：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + u  加载目录中的所有图像，鼠标点击Open dir同功能</span><br><span class="line">Ctrl + r  更改默认注释目标目录(xml文件保存的地址) </span><br><span class="line">Ctrl + s  保存</span><br><span class="line">Ctrl + d  复制当前标签和矩形框</span><br><span class="line">space     将当前图像标记为已验证</span><br><span class="line">w         创建一个矩形框</span><br><span class="line">d         下一张图片</span><br><span class="line">a         上一张图片</span><br><span class="line">del       删除选定的矩形框</span><br><span class="line">Ctrl++    放大</span><br><span class="line">Ctrl--    缩小</span><br><span class="line">↑→↓←        键盘箭头移动选定的矩形框</span><br></pre></td></tr></table></figure>
-<h4 id="2-VOC2007-数据集格式"><a href="#2-VOC2007-数据集格式" class="headerlink" title="2. VOC2007 数据集格式"></a>2. VOC2007 数据集格式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-data</span><br><span class="line">    - VOCdevkit2007</span><br><span class="line">        - VOC2007</span><br><span class="line">            - Annotations (标签XML文件，用对应的图片处理工具人工生成的)</span><br><span class="line">            - ImageSets (生成的方法是用sh或者MATLAB语言生成)</span><br><span class="line">                - Main</span><br><span class="line">                    - test.txt</span><br><span class="line">                    - train.txt</span><br><span class="line">                    - trainval.txt</span><br><span class="line">                    - val.txt</span><br><span class="line">            - JPEGImages(原始文件)</span><br><span class="line">            - labels (xml文件对应的txt文件)</span><br></pre></td></tr></table></figure>
-<p>通过以上软件主要构造好JPEGImages和Annotations文件夹中内容,Main文件夹中的txt文件可以通过python脚本生成：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">import os  </span><br><span class="line">import random  </span><br><span class="line">  </span><br><span class="line">trainval_percent = 0.8</span><br><span class="line">train_percent = 0.8  </span><br><span class="line">xmlfilepath = &apos;Annotations&apos;  </span><br><span class="line">txtsavepath = &apos;ImageSets\Main&apos;  </span><br><span class="line">total_xml = os.listdir(xmlfilepath)  </span><br><span class="line">  </span><br><span class="line">num=len(total_xml)  </span><br><span class="line">list=range(num)  </span><br><span class="line">tv=int(num*trainval_percent)  </span><br><span class="line">tr=int(tv*train_percent)  </span><br><span class="line">trainval= random.sample(list,tv)  </span><br><span class="line">train=random.sample(trainval,tr)  </span><br><span class="line">  </span><br><span class="line">ftrainval = open(&apos;ImageSets/Main/trainval.txt&apos;, &apos;w&apos;)  </span><br><span class="line">ftest = open(&apos;ImageSets/Main/test.txt&apos;, &apos;w&apos;)  </span><br><span class="line">ftrain = open(&apos;ImageSets/Main/train.txt&apos;, &apos;w&apos;)  </span><br><span class="line">fval = open(&apos;ImageSets/Main/val.txt&apos;, &apos;w&apos;)  </span><br><span class="line">  </span><br><span class="line">for i  in list:  </span><br><span class="line">    name=total_xml[i][:-4]+&apos;\n&apos;  </span><br><span class="line">    if i in trainval:  </span><br><span class="line">        ftrainval.write(name)  </span><br><span class="line">        if i in train:  </span><br><span class="line">            ftrain.write(name)  </span><br><span class="line">        else:  </span><br><span class="line">            fval.write(name)  </span><br><span class="line">    else:  </span><br><span class="line">        ftest.write(name)  </span><br><span class="line">  </span><br><span class="line">ftrainval.close()  </span><br><span class="line">ftrain.close()  </span><br><span class="line">fval.close()  </span><br><span class="line">ftest.close()</span><br></pre></td></tr></table></figure>
-<p>生成labels文件，voc_label.py文件具体内容如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Tue Oct  2 11:42:13 2018</span></span><br><span class="line"><span class="string">将本文件放到VOC2007目录下，然后就可以直接运行</span></span><br><span class="line"><span class="string">需要修改的地方：</span></span><br><span class="line"><span class="string">1. sets中替换为自己的数据集</span></span><br><span class="line"><span class="string">2. classes中替换为自己的类别</span></span><br><span class="line"><span class="string">3. 将本文件放到VOC2007目录下</span></span><br><span class="line"><span class="string">4. 直接开始运行</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> listdir, getcwd</span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> join</span><br><span class="line">sets=[(<span class="string">'2007'</span>, <span class="string">'train'</span>), (<span class="string">'2007'</span>, <span class="string">'val'</span>), (<span class="string">'2007'</span>, <span class="string">'test'</span>)]  <span class="comment">#替换为自己的数据集</span></span><br><span class="line">classes = [<span class="string">"head"</span>, <span class="string">"eye"</span>, <span class="string">"nose"</span>]     <span class="comment">#修改为自己的类别</span></span><br><span class="line"><span class="comment">#classes = ["eye", "nose"]</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convert</span><span class="params">(size, box)</span>:</span></span><br><span class="line">    dw = <span class="number">1.</span>/(size[<span class="number">0</span>])</span><br><span class="line">    dh = <span class="number">1.</span>/(size[<span class="number">1</span>])</span><br><span class="line">    x = (box[<span class="number">0</span>] + box[<span class="number">1</span>])/<span class="number">2.0</span> - <span class="number">1</span></span><br><span class="line">    y = (box[<span class="number">2</span>] + box[<span class="number">3</span>])/<span class="number">2.0</span> - <span class="number">1</span></span><br><span class="line">    w = box[<span class="number">1</span>] - box[<span class="number">0</span>]</span><br><span class="line">    h = box[<span class="number">3</span>] - box[<span class="number">2</span>]</span><br><span class="line">    x = x*dw</span><br><span class="line">    w = w*dw</span><br><span class="line">    y = y*dh</span><br><span class="line">    h = h*dh</span><br><span class="line">    <span class="keyword">return</span> (x,y,w,h)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convert_annotation</span><span class="params">(year, image_id)</span>:</span></span><br><span class="line">    in_file = open(<span class="string">'VOC%s/Annotations/%s.xml'</span>%(year, image_id))  <span class="comment">#将数据集放于当前目录下</span></span><br><span class="line">    out_file = open(<span class="string">'VOC%s/labels/%s.txt'</span>%(year, image_id), <span class="string">'w'</span>)</span><br><span class="line">    tree=ET.parse(in_file)</span><br><span class="line">    root = tree.getroot()</span><br><span class="line">    size = root.find(<span class="string">'size'</span>)</span><br><span class="line">    w = int(size.find(<span class="string">'width'</span>).text)</span><br><span class="line">    h = int(size.find(<span class="string">'height'</span>).text)</span><br><span class="line">    <span class="keyword">for</span> obj <span class="keyword">in</span> root.iter(<span class="string">'object'</span>):</span><br><span class="line">        difficult = obj.find(<span class="string">'difficult'</span>).text</span><br><span class="line">        cls = obj.find(<span class="string">'name'</span>).text</span><br><span class="line">        <span class="keyword">if</span> cls <span class="keyword">not</span> <span class="keyword">in</span> classes <span class="keyword">or</span> int(difficult)==<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        cls_id = classes.index(cls)</span><br><span class="line">        xmlbox = obj.find(<span class="string">'bndbox'</span>)</span><br><span class="line">        b = (float(xmlbox.find(<span class="string">'xmin'</span>).text), float(xmlbox.find(<span class="string">'xmax'</span>).text), float(xmlbox.find(<span class="string">'ymin'</span>).text), float(xmlbox.find(<span class="string">'ymax'</span>).text))</span><br><span class="line">        bb = convert((w,h), b)</span><br><span class="line">        out_file.write(str(cls_id) + <span class="string">" "</span> + <span class="string">" "</span>.join([str(a) <span class="keyword">for</span> a <span class="keyword">in</span> bb]) + <span class="string">'\n'</span>)</span><br><span class="line">wd = getcwd()</span><br><span class="line"><span class="keyword">for</span> year, image_set <span class="keyword">in</span> sets:</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="string">'VOC%s/labels/'</span>%(year)):</span><br><span class="line">        os.makedirs(<span class="string">'VOC%s/labels/'</span>%(year))</span><br><span class="line">    image_ids = open(<span class="string">'VOC%s/ImageSets/Main/%s.txt'</span>%(year, image_set)).read().strip().split()</span><br><span class="line">    list_file = open(<span class="string">'%s_%s.txt'</span>%(year, image_set), <span class="string">'w'</span>)</span><br><span class="line">    <span class="keyword">for</span> image_id <span class="keyword">in</span> image_ids:</span><br><span class="line">        list_file.write(<span class="string">'VOC%s/JPEGImages/%s.jpg\n'</span>%(year, image_id))</span><br><span class="line">        convert_annotation(year, image_id)</span><br><span class="line">    list_file.close()   </span><br><span class="line"><span class="comment">#os.system("cat 2007_train.txt 2007_val.txt &gt; train.txt")     #修改为自己的数据集用作训练</span></span><br></pre></td></tr></table></figure>
-<p>到底为止，VOC格式数据集构造完毕，但是还需要继续构造符合darknet格式的数据集。</p>
-<p>（运行<code>bash yolov3/data/get_coco_dataset.sh</code>,仿照格式将数据放到其中）</p>
-<p>但是这个库还需要其他模型：</p>
-<h4 id="3-创建-names-file"><a href="#3-创建-names-file" class="headerlink" title="3. 创建*.names file,"></a>3. 创建*.names file,</h4><p>其中保存的是你的所有的类别，每行一个类别，如data/coco.names：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">head</span><br><span class="line">eye</span><br><span class="line">nose</span><br></pre></td></tr></table></figure>
-<h4 id="4-更新data-coco-data-其中保存的是很多配置信息"><a href="#4-更新data-coco-data-其中保存的是很多配置信息" class="headerlink" title="4. 更新data/coco.data,其中保存的是很多配置信息"></a>4. 更新data/coco.data,其中保存的是很多配置信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">classes = 3 # 改成你的数据集的类别个数</span><br><span class="line">train = ./data/2007_train.txt # 通过voc_label.py文件生成的txt文件</span><br><span class="line">valid = ./data/2007_test.txt # 通过voc_label.py文件生成的txt文件</span><br><span class="line">names = data/coco.names # 记录类别</span><br><span class="line">backup = backup/ # 记录checkpoint存放位置</span><br><span class="line">eval = coco # 选择map计算方式</span><br></pre></td></tr></table></figure>
-<h4 id="5-更新cfg文件，修改类别相关信息"><a href="#5-更新cfg文件，修改类别相关信息" class="headerlink" title="5. 更新cfg文件，修改类别相关信息"></a>5. 更新cfg文件，修改类别相关信息</h4><p>打开cfg文件夹下的yolov3.cfg文件，大体而言，cfg文件记录的是整个网络的结构，是核心部分，具体内容讲解请见：<a href="https://pprp.github.io/2018/09/20/tricks.html" target="_blank" rel="noopener">https://pprp.github.io/2018/09/20/tricks.html</a></p>
-<p>只需要更改每个[yolo]层前边卷积层的filter个数即可：</p>
-<blockquote>
-<p>每一个[region/yolo]层前的最后一个卷积层中的 filters=num(yolo层个数)*(classes+5) ,5的意义是5个坐标，论文中的tx,ty,tw,th,po</p>
-</blockquote>
-<p>举个例子：我有三个类，n = 3, 那么filter  = 3 * (3+5) = 21</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[convolutional]</span><br><span class="line">size=1</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">filters=255 # 改为 21</span><br><span class="line">activation=linear</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[yolo]</span><br><span class="line">mask = 6,7,8</span><br><span class="line">anchors = 10,13,  16,30,  33,23,  30,61,  62,45,  59,119,  116,90,  156,198,  373,326</span><br><span class="line">classes=80 # 改为 3</span><br><span class="line">num=9</span><br><span class="line">jitter=.3</span><br><span class="line">ignore_thresh = .7</span><br><span class="line">truth_thresh = 1</span><br><span class="line">random=1</span><br></pre></td></tr></table></figure>
-<h3 id="3-训练模型"><a href="#3-训练模型" class="headerlink" title="3. 训练模型"></a>3. 训练模型</h3><p>预训练模型：</p>
-<ul>
-<li>Darknet <code>*.weights</code> format: <a href="https://pjreddie.com/media/files/yolov3.weights" target="_blank" rel="noopener">https://pjreddie.com/media/files/yolov3.weights</a></li>
-<li>PyTorch <code>*.pt</code> format: <a href="https://drive.google.com/drive/folders/1uxgUBemJVw9wZsdpboYbzUN4bcRhsuAI" target="_blank" rel="noopener">https://drive.google.com/drive/folders/1uxgUBemJVw9wZsdpboYbzUN4bcRhsuAI</a></li>
-</ul>
-<p>开始训练：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py --data data/coco.data --cfg cfg/yolov3.cfg</span><br></pre></td></tr></table></figure>
-<p>如果日志正常输出那证明可以运行了</p>
-<p><img src="/2019/05/14/pytorch%E7%89%88yolov3%E8%AE%AD%E7%BB%83%E8%87%AA%E5%B7%B1%E6%95%B0%E6%8D%AE%E9%9B%86/1557826254445.png" alt="1557826254445"></p>
-<p>如果中断了，可以恢复训练</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py --data data/coco.data --cfg cfg/yolov3.cfg --resume</span><br></pre></td></tr></table></figure>
-<h3 id="4-测试模型"><a href="#4-测试模型" class="headerlink" title="4. 测试模型"></a>4. 测试模型</h3><p>将待测试图片放到data/samples中，然后运行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python detect.py --weights weights/best.pt</span><br></pre></td></tr></table></figure>
-<h3 id="5-评估模型"><a href="#5-评估模型" class="headerlink" title="5. 评估模型"></a>5. 评估模型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python test.py --weights weights/latest.pt</span><br></pre></td></tr></table></figure>
-<p>如果使用cocoAPI使用以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/cocodataset/cocoapi &amp;&amp; cd cocoapi/PythonAPI &amp;&amp; make &amp;&amp; cd ../.. &amp;&amp; cp -r cocoapi/PythonAPI/pycocotools yolov3</span><br><span class="line">cd yolov3</span><br><span class="line"> </span><br><span class="line">python3 test.py --save-json --img-size 416</span><br><span class="line">Namespace(batch_size=32, cfg=&apos;cfg/yolov3-spp.cfg&apos;, conf_thres=0.001, data_cfg=&apos;data/coco.data&apos;, img_size=416, iou_thres=0.5, nms_thres=0.5, save_json=True, weights=&apos;weights/yolov3-spp.weights&apos;)</span><br><span class="line">Using CUDA device0 _CudaDeviceProperties(name=&apos;Tesla V100-SXM2-16GB&apos;, total_memory=16130MB)</span><br><span class="line">               Class    Images   Targets         P         R       mAP        F1</span><br><span class="line">Calculating mAP: 100%|█████████████████████████████████████████| 157/157 [05:59&lt;00:00,  1.71s/it]</span><br><span class="line">                 all     5e+03  3.58e+04     0.109     0.773      0.57     0.186</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.335</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.565</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.349</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.151</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.360</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.493</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.280</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.432</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.458</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.255</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.494</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.620</span><br><span class="line"></span><br><span class="line">python3 test.py --save-json --img-size 608 --batch-size 16</span><br><span class="line">Namespace(batch_size=16, cfg=&apos;cfg/yolov3-spp.cfg&apos;, conf_thres=0.001, data_cfg=&apos;data/coco.data&apos;, img_size=608, iou_thres=0.5, nms_thres=0.5, save_json=True, weights=&apos;weights/yolov3-spp.weights&apos;)</span><br><span class="line">Using CUDA device0 _CudaDeviceProperties(name=&apos;Tesla V100-SXM2-16GB&apos;, total_memory=16130MB)</span><br><span class="line">               Class    Images   Targets         P         R       mAP        F1</span><br><span class="line">Computing mAP: 100%|█████████████████████████████████████████| 313/313 [06:11&lt;00:00,  1.01it/s]</span><br><span class="line">                 all     5e+03  3.58e+04      0.12      0.81     0.611     0.203</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.366</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.607</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.386</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.207</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.391</span><br><span class="line"> Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.485</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.296</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.464</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.494</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.331</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.517</span><br><span class="line"> Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.618</span><br></pre></td></tr></table></figure>
-<h3 id="6-可视化"><a href="#6-可视化" class="headerlink" title="6. 可视化"></a>6. 可视化</h3><p>可以使用<code>python -c from utils import utils;utils.plot_results()</code></p>
-<p>创建drawLog.py</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_results</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># Plot YOLO training results file 'results.txt'</span></span><br><span class="line">    <span class="keyword">import</span> glob</span><br><span class="line">    <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">    <span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">    <span class="comment">#import os; os.system('rm -rf results.txt &amp;&amp; wget https://storage.googleapis.com/ultralytics/results_v1_0.txt')</span></span><br><span class="line"></span><br><span class="line">    plt.figure(figsize=(<span class="number">16</span>, <span class="number">8</span>))</span><br><span class="line">    s = [<span class="string">'X'</span>, <span class="string">'Y'</span>, <span class="string">'Width'</span>, <span class="string">'Height'</span>, <span class="string">'Objectness'</span>, <span class="string">'Classification'</span>, <span class="string">'Total Loss'</span>, <span class="string">'Precision'</span>, <span class="string">'Recall'</span>, <span class="string">'mAP'</span>]</span><br><span class="line">    files = sorted(glob.glob(<span class="string">'results.txt'</span>))</span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> files:</span><br><span class="line">        results = np.loadtxt(f, usecols=[<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">16</span>]).T  <span class="comment"># column 16 is mAP</span></span><br><span class="line">        n = results.shape[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">            plt.subplot(<span class="number">2</span>, <span class="number">5</span>, i + <span class="number">1</span>)</span><br><span class="line">            plt.plot(range(<span class="number">1</span>, n), results[i, <span class="number">1</span>:], marker=<span class="string">'.'</span>, label=f)</span><br><span class="line">            plt.title(s[i])</span><br><span class="line">            <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">                plt.legend()</span><br><span class="line">    plt.savefig(<span class="string">'./plot.png'</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    plot_results()</span><br></pre></td></tr></table></figure>
-<p><img src="https://user-images.githubusercontent.com/26833433/56207787-ec9e7000-604f-11e9-94dd-e1fcc374270f.png" alt></p>
-<h3 id="7-高级进阶-网络结构更改"><a href="#7-高级进阶-网络结构更改" class="headerlink" title="7. 高级进阶-网络结构更改"></a>7. 高级进阶-网络结构更改</h3><p>详细cfg文件讲解：<a href="https://pprp.github.io/2018/09/20/tricks.html" target="_blank" rel="noopener">https://pprp.github.io/2018/09/20/tricks.html</a></p>
-<p>参考资料以及网络更改经验：<a href="https://pprp.github.io/2018/06/20/yolo.html" target="_blank" rel="noopener">https://pprp.github.io/2018/06/20/yolo.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/opencv_python%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81%E4%BB%A5%E5%8F%8A%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1001,6 +635,96 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/11/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%AA%E4%BA%BA%E9%94%BB%E7%82%BC%E8%AE%A1%E5%88%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/11/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%AA%E4%BA%BA%E9%94%BB%E7%82%BC%E8%AE%A1%E5%88%92/" class="post-title-link" itemprop="url">个人锻炼计划</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-11 15:58:11" itemprop="dateCreated datePublished" datetime="2019-05-11T15:58:11+08:00">2019-05-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 22:05:36" itemprop="dateModified" datetime="2019-11-11T22:05:36+08:00">2019-11-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="锻炼"><a href="#锻炼" class="headerlink" title="锻炼"></a>锻炼</h3><p>五分钟燃脂：</p>
+<p><strong>中等难度：</strong></p>
+<ul>
+<li>高抬腿</li>
+<li>深蹲</li>
+<li>开合跳</li>
+<li>俯卧撑</li>
+<li>卷腹</li>
+</ul>
+<p>高难度：</p>
+<ul>
+<li>波比上肢跳</li>
+<li>俯卧撑</li>
+<li>蹬自行车</li>
+<li>转换弓步</li>
+<li>V坐收腹</li>
+</ul>
+<p>改善XO型：</p>
+<ul>
+<li>大腿内侧肌肉拉伸(如同青蛙一样趴在地上)</li>
+<li>坐姿臀部肌肉拉伸(坐着跷二郎腿)</li>
+<li>坐姿臀部肌肉拉伸(大风车)</li>
+<li>婴儿式趴下</li>
+<li>猫式伸展</li>
+<li>拉伸小腿肌肉</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/20/YOLO%20cfg%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1130,18 +854,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1283,8 +1007,40 @@ window.addEventListener('pjax:success', () => {
 
 
 
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
 
 
+<script pjax>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
 
 
     <div id="pjax">

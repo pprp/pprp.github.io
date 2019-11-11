@@ -362,16 +362,16 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/06/25/%E5%A4%8F%E4%BB%A4%E8%90%A5%E6%97%B6%E9%97%B4%E5%AE%89%E6%8E%92gantt%E5%9B%BE/" rel="next" title="2019年夏令营甘特图">
-                  <i class="fa fa-chevron-left"></i> 2019年夏令营甘特图
+                <a href="/2019/06/23/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%B2%97%E4%BD%8D%E9%9C%80%E6%B1%82%E9%9C%80%E8%A6%81%E5%9F%B9%E5%85%BB%E7%9A%84%E8%83%BD%E5%8A%9B/" rel="next" title="人工智能岗位需求需要培养的能力">
+                  <i class="fa fa-chevron-left"></i> 人工智能岗位需求需要培养的能力
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/07/26/%E3%80%90%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%91%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%B3%95/" rel="prev" title="朴素贝叶斯法">
-                  朴素贝叶斯法 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/07/16/Ubuntu16.04,%20CUDA8%20CUDNN6%20%E4%B8%8B%E5%AE%89%E8%A3%85%20Tensorflow-gpu,%20Keras/" rel="prev" title="Ubuntu16.04, CUDA8 CUDNN6 下安装 Tensorflow-gpu, Keras, Pytorch, fastai">
+                  Ubuntu16.04, CUDA8 CUDNN6 下安装 Tensorflow-gpu, Keras, Pytorch, fastai <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -428,18 +428,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -581,8 +581,40 @@ window.addEventListener('pjax:success', () => {
 
 
 
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
 
 
+<script pjax>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
 
 
     <div id="pjax">

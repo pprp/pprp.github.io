@@ -55,13 +55,13 @@
 <meta name="keywords" content="python, pytorch, 深度学习, CV">
 <meta property="og:type" content="website">
 <meta property="og:title" content="spicyCV">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;categories&#x2F;%E5%81%A5%E5%BA%B7&#x2F;index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;archives&#x2F;2019&#x2F;09&#x2F;index.html">
 <meta property="og:site_name" content="spicyCV">
 <meta property="og:description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/categories/%E5%81%A5%E5%BA%B7/">
+<link rel="canonical" href="http://yoursite.com/archives/2019/09/">
 
 
 <script id="page-configurations">
@@ -71,11 +71,11 @@
     isHome: false,
     isPost: false,
     isPage: false,
-    isArchive: false
+    isArchive: true
   };
 </script>
 
-  <title>分类: 健康 | spicyCV</title>
+  <title>归档 | spicyCV</title>
   
 
 
@@ -220,9 +220,7 @@
   <div class="post-block">
     <div class="posts-collapse">
       <div class="collection-title">
-        <h1 class="collection-header">健康
-          <small>分类</small>
-        </h1>
+        <span class="collection-header">嗯..! 目前共计 24 篇日志。 继续努力。</span>
       </div>
 
       
@@ -235,20 +233,21 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2019-11-08T14:54:46+08:00"
-              content="2019-11-08">
-          11-08
+              datetime="2019-09-09T14:54:46+08:00"
+              content="2019-09-09">
+          09-09
         </time>
       </div>
 
       <h2 class="post-title">
-          <a class="post-title-link" href="/2019/11/08/%E3%80%8A%E7%A8%8B%E5%BA%8F%E5%91%98%E5%81%A5%E5%BA%B7%E6%8C%87%E5%8D%97%E3%80%8B-%20%E9%A2%84%E9%98%B2%E8%83%8C%E9%83%A8%E7%96%BC%E7%97%9B/" itemprop="url">
-            <span itemprop="name">程序员健康指南-预防背痛</span>
+          <a class="post-title-link" href="/2019/09/09/TypeError%20img%20should%20be%20PIL%20Image.%20Got%20class%20'torch.Tensor'/" itemprop="url">
+            <span itemprop="name">TypeError img should be PIL Image. Got <class 'torch.Tensor'></span>
           </a>
       </h2>
 
     </header>
   </article>
+
 
     </div>
   </div>
@@ -301,18 +300,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -454,8 +453,40 @@ window.addEventListener('pjax:success', () => {
 
 
 
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
 
 
+<script pjax>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
 
 
     <div id="pjax">

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="spicyCV" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="1. 四种情况Precision精确率， Recall召回率，是二分类问题常用的评价指标。混淆矩阵如下：      预测结果为阳性 Positive 预测结果为假阳性 Negative     预测结果是真实的 True TP TN   预测结果是虚假的 False FP FN     通常关注的类为正类，其他类为负类。（以猫狗二分类为例，现在关注狗的precision和recall）     T">
+<meta name="keywords" content="object detection,评价指标">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【深度学习】Precision 和 Recall 评价指标理解">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;07&#x2F;25&#x2F;%E3%80%90%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E3%80%91Precision%20%E5%92%8C%20Recall%20%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87%E7%90%86%E8%A7%A3&#x2F;index.html">
+<meta property="og:site_name" content="spicyCV">
+<meta property="og:description" content="1. 四种情况Precision精确率， Recall召回率，是二分类问题常用的评价指标。混淆矩阵如下：      预测结果为阳性 Positive 预测结果为假阳性 Negative     预测结果是真实的 True TP TN   预测结果是虚假的 False FP FN     通常关注的类为正类，其他类为负类。（以猫狗二分类为例，现在关注狗的precision和recall）     T">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-11T14:07:57.392Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/07/25/%E3%80%90%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E3%80%91Precision%20%E5%92%8C%20Recall%20%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87%E7%90%86%E8%A7%A3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【深度学习】Precision 和 Recall 评价指标理解 | spicyCV</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spicyCV</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">一个专注CV的starter</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/pprp" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/%E3%80%90%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E3%80%91Precision%20%E5%92%8C%20Recall%20%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87%E7%90%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【深度学习】Precision 和 Recall 评价指标理解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-25 14:54:46" itemprop="dateCreated datePublished" datetime="2019-07-25T14:54:46+08:00">2019-07-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 22:07:57" itemprop="dateModified" datetime="2019-11-11T22:07:57+08:00">2019-11-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-四种情况"><a href="#1-四种情况" class="headerlink" title="1. 四种情况"></a>1. 四种情况</h2><p>Precision精确率， Recall召回率，是二分类问题常用的评价指标。混淆矩阵如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">预测结果为阳性 Positive</th>
+<th style="text-align:center">预测结果为假阳性 Negative</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>预测结果是真实的 True</td>
+<td style="text-align:center">TP</td>
+<td style="text-align:center">TN</td>
+</tr>
+<tr>
+<td>预测结果是虚假的 False</td>
+<td style="text-align:center">FP</td>
+<td style="text-align:center">FN</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>通常关注的类为正类，其他类为负类。（以猫狗二分类为例，现在关注狗的precision和recall）</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>TP</th>
+<th style="text-align:center">正类预测为正类（预测出狗的图片实际标注也是狗）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FN</td>
+<td style="text-align:center">正类预测为负类（预测出猫的图片实际标注是狗）</td>
+</tr>
+<tr>
+<td>FP</td>
+<td style="text-align:center">负类预测为正类（预测出狗的图片实际标注是猫）</td>
+</tr>
+<tr>
+<td>TN</td>
+<td style="text-align:center">负类预测为负类（预测出猫的图片实际标注是猫）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>T, F 代表的是图片对应的标签</p>
+<p>P, N 代表的是图片预测出来的结果</p>
+<h2 id="2-Precision"><a href="#2-Precision" class="headerlink" title="2. Precision"></a>2. Precision</h2><p>精确率计算公式：</p>
+<script type="math/tex; mode=display">
+P=\frac{TP}{TP+FP}</script><p>理解：</p>
+<p>TP+FP: 也就是全体Positive， 也就是预测的图片中是正类的图片的数目</p>
+<p>TP: 也就是正类也被预测为正类的图片的个数</p>
+<p>总之：预测正确的图片个数占总的正类预测个数的比例（从预测结果角度看，有多少预测是准确的）</p>
+<h2 id="3-Recall"><a href="#3-Recall" class="headerlink" title="3. Recall"></a>3. Recall</h2><p>召回率计算公式：</p>
+<script type="math/tex; mode=display">
+R=\frac{TP}{TP+FN}</script><p>理解：</p>
+<p>TP+FN: 也就是全体完全满足图片标注的图片的个数</p>
+<p>TP：正类被预测为正类的图片个数</p>
+<p>总之：确定了正类被预测为正类图片占所有标注图片的个数（从标注角度看，有多少被召回）</p>
+<h2 id="4-二分类举例"><a href="#4-二分类举例" class="headerlink" title="4. 二分类举例"></a>4. 二分类举例</h2><p>还是以猫狗二分类为例，测试集一共有20张狗， 20张猫的图片的标注图片（狗为正例），模型预测出其中有16张图片是狗，其中14张图片标注确实为狗，剩下两张图片标注为猫。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Positive</th>
+<th>Negative</th>
+<th>All</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>True</td>
+<td>TP: 14</td>
+<td>TN: 6</td>
+<td>20</td>
+</tr>
+<tr>
+<td>False</td>
+<td>FP: 2</td>
+<td>FN:</td>
+<td></td>
+</tr>
+<tr>
+<td>All</td>
+<td>16</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>所以可以进行计算了</p>
+<script type="math/tex; mode=display">
+precision = \frac{TP}{TP+FP} = \frac{14}{14+2}</script><script type="math/tex; mode=display">
+recall = \frac{TP}{TP+FN} = \frac{14}{40}</script><h2 id="5-多分类举例"><a href="#5-多分类举例" class="headerlink" title="5. 多分类举例"></a>5. 多分类举例</h2><p>该例引用自：<a href="https://www.itcodemonkey.com/article/9521.html" target="_blank" rel="noopener">https://www.itcodemonkey.com/article/9521.html</a></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Class1</th>
+<th>Actual_Class1</th>
+<th>Actual_Class2</th>
+<th>Actual_Class3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Predicted_Class1</td>
+<td>30</td>
+<td>20</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Predicted_Class2</td>
+<td>50</td>
+<td>60</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Predicted_Class3</td>
+<td>20</td>
+<td>20</td>
+<td>80</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>比如我们对class2进行计算：</p>
+<p>class2-TP：标签为class2, 预测为class2  = 60</p>
+<p>class2-TN:  标签为class2, 预测不是class2 = 20+20 = 40</p>
+<p>class2-FP: 标签不为class2, 预测为class2 = 50 + 10 = 60</p>
+<p>class2-FN: 标签不为class2, 预测也不是class2 = 30+10+20+80 = 140</p>
+<h2 id="6-其他指标"><a href="#6-其他指标" class="headerlink" title="6. 其他指标"></a>6. 其他指标</h2><p>F1 值是precision和recall调和平均值：</p>
+<script type="math/tex; mode=display">
+\frac{2}{F_1} = \frac{1}{P} + \frac{1}{R}</script><script type="math/tex; mode=display">
+F_1 = \frac{2TP}{2TP+FP+FN}</script>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/object-detection/" rel="tag"># object detection</a>
+              <a href="/tags/%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/" rel="tag"># 评价指标</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/07/16/Ubuntu16.04,%20CUDA8%20CUDNN6%20%E4%B8%8B%E5%AE%89%E8%A3%85%20Tensorflow-gpu,%20Keras/" rel="next" title="Ubuntu16.04, CUDA8 CUDNN6 下安装 Tensorflow-gpu, Keras, Pytorch, fastai">
+                  <i class="fa fa-chevron-left"></i> Ubuntu16.04, CUDA8 CUDNN6 下安装 Tensorflow-gpu, Keras, Pytorch, fastai
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/07/26/%E3%80%90%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E3%80%91%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%B3%95/" rel="prev" title="朴素贝叶斯法">
+                  朴素贝叶斯法 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-四种情况"><span class="nav-number">1.</span> <span class="nav-text">1. 四种情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Precision"><span class="nav-number">2.</span> <span class="nav-text">2. Precision</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Recall"><span class="nav-number">3.</span> <span class="nav-text">3. Recall</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-二分类举例"><span class="nav-number">4.</span> <span class="nav-text">4. 二分类举例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-多分类举例"><span class="nav-number">5.</span> <span class="nav-text">5. 多分类举例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-其他指标"><span class="nav-number">6.</span> <span class="nav-text">6. 其他指标</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="pprp"
+      src="/images/log.png">
+  <p class="site-author-name" itemprop="name">pprp</p>
+  <div class="site-description" itemprop="description">涉猎编程语言主要为python, 深度学习框架以pytorch为主</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pprp</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+<script pjax>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+    <div id="pjax">
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '510ce8b06c45bdef1d58',
+      clientSecret: 'df992456e87a7ff04b9f002b27de9caf70cd0d6f',
+      repo: 'pprp.github.io',
+      owner: 'pprp',
+      admin: ['pprp'],
+      id: 'aa9fb09e04603ab406855bf068e6be89',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
