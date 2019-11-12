@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-11T14:04:22.865Z</updated>
+  <updated>2019-11-12T01:11:48.834Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2019/11/11/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/"/>
     <id>http://yoursite.com/2019/11/11/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/</id>
     <published>2019-11-11T13:26:56.000Z</published>
-    <updated>2019-11-11T14:04:22.865Z</updated>
+    <updated>2019-11-12T01:11:48.834Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="/.com//1573478916612.png" alt="1573478916612"></p><img src="/.com//11/11/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/1573478916612.png" class title="这是一个新的博客的图片的说明">]]></content>
+    <content type="html"><![CDATA[<p><img src="/.com//1573478916612.png" alt="1573478916612"></p><img src="/.com//11/11/%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/1573478916612.png" class title="这是一个新的博客的图片的说明"><p>hexo中插入数学公式：</p><p><a href="http://stevenshi.me/2017/06/26/hexo-insert-formula/" target="_blank" rel="noopener">http://stevenshi.me/2017/06/26/hexo-insert-formula/</a></p>]]></content>
     
     <summary type="html">
     
