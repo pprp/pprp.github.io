@@ -1,6 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>mmdetection使用指南</title>
+    <url>/2019/11/13/mmdetection%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</url>
+    <content><![CDATA[<blockquote>
+<p>主要是目标检测方面的使用记录，mmdetection还有分类网络，分割等功能，但这篇博客主要关注目标检测，之后如果涉及到分割会再开一篇博客进行记录。</p>
+</blockquote>
+<h2 id="1-安装"><a class="markdownIt-Anchor" href="#1-安装"></a> 1. 安装</h2>
+<p>mmdetection需要的环境是cuda10.0为基础的环境，对驱动版本也有一定的要求，cuda8.0的我始终没有配通，主要的错误都是跟cuda相关的。</p>
+<p>具体安装过程参见：<a href="https://blog.csdn.net/DD_PP_JJ/article/details/103055629" target="_blank" rel="noopener">https://blog.csdn.net/DD_PP_JJ/article/details/103055629</a></p>
+<p>安装完大体环境以后，开始配置mmdetection</p>
+<blockquote>
+<ul>
+<li>操作系统：Linux</li>
+<li>Python 3.5+</li>
+<li>PyTorch 1.0+ 或 PyTorch-nightly</li>
+<li>CUDA 9.0+</li>
+<li>NCCL 2+</li>
+<li>GCC 4.9+</li>
+</ul>
+</blockquote>
+<p>然后cd进入mmdetection， 运行：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">python setup.py develop</span><br></pre></td></tr></table></figure>
+<p>进行编译，如果你的mmdetection是从另外一台机器复制过来，只要他存在build文件夹，都有可能造成报错。直接<code>rm -rf build</code>, 删除build文件夹后重新运行，就可能能够顺利通过。</p>
+<h2 id="2-准备voc格式数据集"><a class="markdownIt-Anchor" href="#2-准备voc格式数据集"></a> 2. 准备VOC格式数据集</h2>
+<p>具体数据集构建可以看：</p>
+<ol>
+<li><a href="https://www.cnblogs.com/pprp/p/10863496.html#%E6%95%B0%E6%8D%AE%E9%9B%86%E6%9E%84%E5%BB%BA" target="_blank" rel="noopener">https://www.cnblogs.com/pprp/p/10863496.html#数据集构建</a></li>
+<li><a href="https://blog.csdn.net/weicao1990/article/details/93484603" target="_blank" rel="noopener">https://blog.csdn.net/weicao1990/article/details/93484603</a></li>
+</ol>
+<p>有一个库有一些脚本进行检查和生成：</p>
+<p><a href="https://github.com/pprp/voc2007_for_yolo_torch" target="_blank" rel="noopener">https://github.com/pprp/voc2007_for_yolo_torch</a></p>
+<h2 id="3-个性化配置"><a class="markdownIt-Anchor" href="#3-个性化配置"></a> 3. 个性化配置</h2>
+<p>训练之前首先要根据自己的数据集对配置文件进行修改：</p>
+<ul>
+<li>
+<p>修改类别数量， num_classes = 类别数+1</p>
+  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dict(</span><br><span class="line">    type=<span class="string">'SharedFCBBoxHead'</span>,</span><br><span class="line">    num_fcs=<span class="number">2</span>,</span><br><span class="line">    in_channels=<span class="number">256</span>,</span><br><span class="line">    fc_out_channels=<span class="number">1024</span>,</span><br><span class="line">    roi_feat_size=<span class="number">7</span>,</span><br><span class="line">    num_classes=<span class="number">2</span>, <span class="comment">#  修改 81 -&gt; 2</span></span><br><span class="line">    target_means=[<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">    target_stds=[<span class="number">0.05</span>, <span class="number">0.05</span>, <span class="number">0.1</span>, <span class="number">0.1</span>],</span><br><span class="line">    reg_class_agnostic=<span class="literal">True</span>,</span><br><span class="line">    loss_cls=dict(</span><br><span class="line">        type=<span class="string">'CrossEntropyLoss'</span>, use_sigmoid=<span class="literal">False</span>, loss_weight=<span class="number">1.0</span>),</span><br><span class="line">    loss_bbox=dict(type=<span class="string">'SmoothL1Loss'</span>, beta=<span class="number">1.0</span>, loss_weight=<span class="number">1.0</span>)),</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>修改数据集地址：</p>
+  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># dataset settings</span></span><br><span class="line">dataset_type = <span class="string">'VOCDataset'</span> <span class="comment">#  修改，'CocoDataset' -&gt; 'VOCDataset'</span></span><br><span class="line">data_root = <span class="string">'data/VOCdevkit/'</span> <span class="comment">#  修改，'data/coco/'  -&gt; 'data/VOCdevkit'</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">train=dict(</span><br><span class="line">    type=dataset_type,</span><br><span class="line">    ann_file=data_root + <span class="string">'VOC2007/ImageSets/Main/train.txt'</span>, <span class="comment">#  data_root + 'annotations/instances_train2017.json' -&gt; data_root + 'VOC2007/ImageSets/Main/train.txt'</span></span><br><span class="line">    img_prefix=data_root + <span class="string">'VOC2007/'</span>, <span class="comment"># 11/11, TC修改 data_root + 'train2017/' -&gt; data_root + 'VOC2007/'</span></span><br><span class="line">    pipeline=train_pipeline),</span><br><span class="line">val=dict(</span><br><span class="line">    type=dataset_type,</span><br><span class="line">    ann_file=data_root + <span class="string">'VOC2007/ImageSets/Main/val.txt'</span>, <span class="comment">#  data_root + 'annotations/instances_train2017.json' -&gt; data_root + 'VOC2007/ImageSets/Main/val.txt'</span></span><br><span class="line">    img_prefix=data_root + <span class="string">'VOC2007/'</span>,  <span class="comment"># 11/11, TC修改 data_root + 'val2017/' -&gt; data_root + 'VOC2007/'</span></span><br><span class="line">    pipeline=test_pipeline),</span><br><span class="line">test=dict(</span><br><span class="line">    type=dataset_type,</span><br><span class="line">    ann_file=data_root + <span class="string">'VOC2007/ImageSets/Main/test.txt'</span>, <span class="comment"># data_root + 'annotations/instances_train2017.json' -&gt; data_root + 'VOC2007/ImageSets/Main/test.txt'</span></span><br><span class="line">    img_prefix=data_root + <span class="string">'VOC2007/'</span>,  <span class="comment">#  data_root + 'test2017/' -&gt; data_root + 'VOC2007/'</span></span><br><span class="line">    pipeline=test_pipeline))</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>修改数据集voc.py文件：</p>
+  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">@DATASETS.register_module</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VOCDataset</span><span class="params">(XMLDataset)</span>:</span></span><br><span class="line"></span><br><span class="line">    CLASSES = (<span class="string">'pos'</span>,) <span class="comment"># 注意即便只有一个了类也要加逗号</span></span><br><span class="line">    <span class="comment"># ('aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus', 'car',</span></span><br><span class="line">    <span class="comment">#            'cat', 'chair', 'cow', 'diningtable', 'dog', 'horse',</span></span><br><span class="line">    <span class="comment">#            'motorbike', 'person', 'pottedplant', 'sheep', 'sofa', 'train',</span></span><br><span class="line">    <span class="comment">#            'tvmonitor')</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, **kwargs)</span>:</span></span><br><span class="line">        super(VOCDataset, self).__init__(**kwargs)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'VOC2007'</span> <span class="keyword">in</span> self.img_prefix:</span><br><span class="line">            self.year = <span class="number">2007</span></span><br><span class="line">        <span class="keyword">elif</span> <span class="string">'VOC2012'</span> <span class="keyword">in</span> self.img_prefix:</span><br><span class="line">            self.year = <span class="number">2012</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'Cannot infer dataset year from img_prefix'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>运行参数处理：</p>
+  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">total_epochs = <span class="number">20</span> <span class="comment"># 训练最大的epoch数</span></span><br><span class="line">dist_params = dict(backend=<span class="string">'nccl'</span>) <span class="comment"># 分布式参数</span></span><br><span class="line">log_level = <span class="string">'INFO'</span> <span class="comment"># 输出信息的完整度级别</span></span><br><span class="line">work_dir = <span class="string">'./work_dirs/libra_faster_rcnn_x101_64x4d_fpn_1x'</span> <span class="comment"># log文件和模型文件存储路径</span></span><br><span class="line">load_from = <span class="literal">None</span> <span class="comment"># 加载模型的路径，None表示从预训练模型加载</span></span><br><span class="line">resume_from = <span class="literal">None</span> <span class="comment"># 恢复训练模型的路径，None表示不进行训练模型的恢复</span></span><br><span class="line">workflow = [(<span class="string">'train'</span>, <span class="number">1</span>)] </span><br><span class="line"><span class="comment"># ======================================================</span></span><br><span class="line"><span class="comment"># 训练与验证策略，[('train', 1)]表示只训练，不验证；</span></span><br><span class="line"><span class="comment"># [('train', 2), ('val', 1)] 表示2个epoch训练，1个epoch验证</span></span><br><span class="line"><span class="comment"># ======================================================</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4-训练命令"><a class="markdownIt-Anchor" href="#4-训练命令"></a> 4. 训练命令</h2>
+<p>训练格式：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">python tools/train.py $&#123;config_files&#125;</span><br></pre></td></tr></table></figure>
+<p>可选参数：</p>
+<blockquote>
+<p>–validate : 每隔1个epoch就进行一次evaluation， 测一下map之类的指标。</p>
+<p>–work_dir: 指定训练的结果保存的位置，一般默认就行</p>
+<p>–resume_from: 需要指定到对应的权重文件</p>
+<p>–gpus： 指定使用哪个gpu</p>
+<p>–autoscale-lr: 根据GPU个数进行自动处理learning rate</p>
+</blockquote>
+<p>举例，训练cascade R-CNN进行目标检测：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">python tools/train.py configs/cascade_rcnn_r101_fpn_1x.py --validate</span><br></pre></td></tr></table></figure>
+<h2 id="5-测试命令"><a class="markdownIt-Anchor" href="#5-测试命令"></a> 5. 测试命令</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">python tools/test.py $&#123;CONFIG_FILE&#125; $&#123;CHECKPOINT_FILE&#125; [--out $&#123;RESULT_FILE&#125;] [--eval $&#123;EVAL_METRICS&#125;] [--show]</span><br></pre></td></tr></table></figure>
+<p>可选参数：</p>
+<blockquote>
+<p>–out : 输出结果文件，results.pkl</p>
+<p>–json_out: 输出结果文件，不需要后缀</p>
+<p>–eval: [‘proposal’, ‘proposal_fast’, ‘bbox’, ‘segm’, ‘keypoints’], 选择其中一个模式</p>
+<p>–show: 会跳出来一张图片给你展示</p>
+<p>–tmpdir : 将一些结果写入tmpdir</p>
+</blockquote>
+<p>在VOC数据集下，应该采用以下方式进行测试：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">python tools/test.py configs/retinanet_r101_fpn_1x.py work_dirs/retinanet_r101_fpn_1x/latest.pth --out ./result_retinanet.pkl</span><br></pre></td></tr></table></figure>
+<p>将结果输出到pkl文件夹中，然后在进行计算：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python tools/voc_eval.py result_retinanet.pkl configs/retinanet_r101_fpn_1x.py</span><br></pre></td></tr></table></figure>
+<p>得到以下结果：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+-------+-----+------+--------+-----------+-------+</span><br><span class="line">| class | gts | dets | recall | precision | ap    |</span><br><span class="line">+-------+-----+------+--------+-----------+-------+</span><br><span class="line">| pos   | 186 | 2356 | 0.801  | 0.063     | 0.398 |</span><br><span class="line">+-------+-----+------+--------+-----------+-------+</span><br><span class="line">| mAP   |     |      |        |           | 0.398 |</span><br><span class="line">+-------+-----+------+--------+-----------+-------+</span><br></pre></td></tr></table></figure>
+<h2 id="6-工具"><a class="markdownIt-Anchor" href="#6-工具"></a> 6. 工具</h2>
+<p>首先安装：<code>pip install seaborn</code></p>
+<p>可视化格式：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">python tools/analyze_logs.py plot_curve [--keys $&#123;KEYS&#125;] [--title $&#123;TITLE&#125;] [--legend $&#123;LEGEND&#125;] [--backend $&#123;BACKEND&#125;] [--style $&#123;STYLE&#125;] [--out $&#123;OUT_FILE&#125;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>具体的keys要看你的json文件中是否存在这个键值</li>
+<li>画出分类误差</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python tools/analyze_logs.py plot_curve log.json --keys loss_cls --legend loss_cls</span><br></pre></td></tr></table></figure>
+<ul>
+<li>画出分类和回归结果，并输出到pdf</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python tools/analyze_logs.py plot_curve log.json --keys loss_cls loss_reg --out losses.pdf</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在同一个图中比较两个模型map</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python tools/analyze_logs.py plot_curve log1.json log2.json --keys bbox_mAP --legend run1 run2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>计算平均训练速度</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python tools/analyze_logs.py cal_train_time $&#123;CONFIG_FILE&#125; [--include-outliers]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获得模型训练所需参数：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python tools/get_flops.py $&#123;CONFIG_FILE&#125; [--shape $&#123;INPUT_SHAPE&#125;]</span><br></pre></td></tr></table></figure>
+<h2 id="7-遇到的问题"><a class="markdownIt-Anchor" href="#7-遇到的问题"></a> 7. 遇到的问题</h2>
+<p>在测试的时候出现报错：</p>
+<blockquote>
+<p>File “tools/test.py”, line 224, in <module><br>
+main()<br>
+File “tools/test.py”, line 215, in main<br>
+results2json(dataset, outputs, args.json_out)<br>
+File “/home/cie320/mmdetection/mmdet/core/evaluation/coco_utils.py”, line 203, in results2json<br>
+json_results = det2json(dataset, results)<br>
+File “/home/cie320/mmdetection/mmdet/core/evaluation/coco_utils.py”, line 149, in det2json<br>
+img_id = dataset.img_ids[idx]<br>
+AttributeError: ‘VOCDataset’ object has no attribute ‘img_ids’</module></p>
+</blockquote>
+<p>可以看到调用的是coco，这是你的命令的问题，你应该采用上述方法，分两步进行计算。</p>
+<ul>
+<li>先生成results.pkl文件</li>
+<li>然后运行voc_eval进行解析，得到最终结果。</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>目标检测</tag>
+        <tag>mmdetection</tag>
+        <tag>使用指南</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Ubuntu16.04,2080Ti 下配置CUDA10,cuDNN7.5</title>
     <url>/2019/11/13/Ubuntu16-04-2080Ti-%E4%B8%8B%E9%85%8D%E7%BD%AECUDA10-cuDNN7-5/</url>
     <content><![CDATA[<blockquote>
