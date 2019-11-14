@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>使用python多线程加载模型并测试</title>
+    <url>/2019/11/14/%E4%BD%BF%E7%94%A8python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9E%8B%E5%B9%B6%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<blockquote>
+<p>前言：之前只用过单线程处理，加载模型进行测试，运行时间上也可以接受。但是现在需要处理比较大量的数据，如果进行线性处理，可能测试一次就花10个小时，而且还不知道结果怎么样，所以多线程就必须使用上了。有关线程部分主要参考：<a href="https://junyiseo.com/python/211.html" target="_blank" rel="noopener">https://junyiseo.com/python/211.html</a></p>
+</blockquote>
+<h2 id="1-多线程"><a class="markdownIt-Anchor" href="#1-多线程"></a> 1 多线程</h2>
+<p>多线程类似于同时执行多个不同程序，线程在执行过程中与进程还是有区别的。每个独立的进程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。</p>
+<p>特点：</p>
+<ul>
+<li>线程可以被抢占（中断）。</li>
+<li>在其他线程正在运行时，线程可以暂时搁置（也称为睡眠） – 这就是线程的退让。</li>
+</ul>
+<p>应用场景：</p>
+<ul>
+<li>使用线程可以把占据长时间的程序中的任务放到后台去处理。</li>
+<li>用户界面可以更加吸引人，这样比如用户点击了一个按钮去触发某些事件的处理，可以弹出一个进度条来显示处理的进度</li>
+<li>程序的运行速度可能加快</li>
+<li>在一些等待的任务实现上如用户输入、文件读写和网络收发数据等，线程就比较有用了。在这种情况下我们可以释放一些珍贵的资源如内存占用等等。</li>
+</ul>
+<blockquote>
+<p>以上内容来自：<a href="https://www.runoob.com/python/python-multithreading.html" target="_blank" rel="noopener">https://www.runoob.com/python/python-multithreading.html</a></p>
+<p>更多多线程python知识可以访问以上网站</p>
+</blockquote>
+<h2 id="2-使用多线程进行多模型加载和测试"><a class="markdownIt-Anchor" href="#2-使用多线程进行多模型加载和测试"></a> 2 使用多线程进行多模型加载和测试</h2>
+<ul>
+<li>
+<p>先说一下如何分配多线程执行的思路：</p>
+<ul>
+<li>
+<p>由于单线程进行测试的时候是一张图像进一次网络，然后得到结果。其占用的显存很小，只有900MB左右，而这里使用的是11G显存,所以在这种条件下支持每一个线程分配一个模型，然后进行预测。</p>
+</li>
+<li>
+<p>然后就是数据分配问题，多线程常常会遇到访问数据冲突的问题，但是这里我们可以避开这个问题，是用一个List存储所有图片，然后根据长度分配每个线程所要处理的图片多少。</p>
+</li>
+<li>
+<p>剩下就可以看模板了。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>这里提供一个模板，可以替换其中关键的测试图片的函数，然后就可以运行了。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep, ctime</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">totalThread = <span class="number">16</span>  <span class="comment"># 需要创建的线程数，可以控制线程的数量</span></span><br><span class="line"></span><br><span class="line">config_file = <span class="string">'模型配置文件'</span></span><br><span class="line">checkpoint_file = <span class="string">'模型权重文件'</span></span><br><span class="line">test_data_dir = <span class="string">'测试集所在文件夹（里边是待测试图片）'</span></span><br><span class="line"></span><br><span class="line">listImg = [file <span class="keyword">for</span> file <span class="keyword">in</span> os.listdir(test_data_dir)]  <span class="comment">#创建需要读取的列表，可以自行创建自己的列表</span></span><br><span class="line">lenList = len(listImg)  <span class="comment">#列表的总长度</span></span><br><span class="line">gap = int(lenList / totalThread)  <span class="comment">#列表分配到每个线程的执行数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照分配的区间，读取列表内容，需要其他功能在这个方法里设置</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">processSection</span><span class="params">(name, s, e)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(s, e):</span><br><span class="line">        processImg(name, listImg[i])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">processImg</span><span class="params">(name, file)</span>:</span></span><br><span class="line">    <span class="comment"># 这个部分内容包括：</span></span><br><span class="line">    <span class="comment"># 1. 加载模型</span></span><br><span class="line">    <span class="comment"># 2. 根据file读取图片</span></span><br><span class="line">    <span class="comment"># 3. 将结果进行处理并进行保存</span></span><br><span class="line">    print(<span class="string">"Thread %s: have processed %s"</span> % (name, filename))</span><br><span class="line">    print(os.path.join(<span class="string">'\t resultData'</span>, filename + <span class="string">'.json'</span>), end=<span class="string">""</span>)</span><br><span class="line">    print(<span class="string">" Length of json: %d"</span> % len(final_list))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myThread</span><span class="params">(threading.Thread)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, threadID, name, s, e)</span>:</span></span><br><span class="line">        threading.Thread.__init__(self)</span><br><span class="line">        self.threadID = threadID</span><br><span class="line">        self.name = name</span><br><span class="line">        self.s = s</span><br><span class="line">        self.e = e</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Starting "</span> + self.name + ctime(), end=<span class="string">""</span>)</span><br><span class="line">        print(<span class="string">" From %d to %d"</span> % (self.s, self.e))</span><br><span class="line">        <span class="comment"># 获得锁，成功获得锁定后返回True</span></span><br><span class="line">        <span class="comment"># 可选的timeout参数不填时将一直阻塞直到获得锁定</span></span><br><span class="line">        <span class="comment"># 否则超时后将返回False</span></span><br><span class="line">        <span class="comment"># 这里由于数据不存在冲突情况，所以可以注释掉锁的代码</span></span><br><span class="line">        <span class="comment"># threadLock.acquire()</span></span><br><span class="line">        <span class="comment">#线程需要执行的方法</span></span><br><span class="line">        processSection(self.name, self.s, self.e)</span><br><span class="line">        <span class="comment"># 释放锁</span></span><br><span class="line">        <span class="comment"># threadLock.release()</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">threadLock = threading.Lock()  <span class="comment">#锁</span></span><br><span class="line">threads = []  <span class="comment">#创建线程列表</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建新线程和添加线程到列表</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(totalThread):</span><br><span class="line">    thread = <span class="string">'thread%s'</span> % i</span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        thread = myThread(<span class="number">0</span>, <span class="string">"Thread-%s"</span> % i, <span class="number">0</span>, gap)</span><br><span class="line">    <span class="keyword">elif</span> totalThread == i + <span class="number">1</span>:</span><br><span class="line">        thread = myThread(i, <span class="string">"Thread-%s"</span> % i, i * gap, lenList)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        thread = myThread(i, <span class="string">"Thread-%s"</span> % i, i * gap, (i + <span class="number">1</span>) * gap)</span><br><span class="line">    threads.append(thread)  <span class="comment"># 添加线程到列表</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环开启线程</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(totalThread):</span><br><span class="line">    threads[i].start()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 等待所有线程完成</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> threads:</span><br><span class="line">    t.join()</span><br><span class="line">print(<span class="string">"Exiting Main Thread"</span>)</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| NVIDIA-SMI 440.31       Driver Version: 440.31       CUDA Version: 10.2     |</span><br><span class="line">|-------------------------------+----------------------+----------------------+</span><br><span class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</span><br><span class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</span><br><span class="line">|===============================+======================+======================|</span><br><span class="line">|   0  GeForce RTX 208...  Off  | 00000000:01:00.0 Off |                  N/A |</span><br><span class="line">| 46%   61C    P2   206W / 250W |  10238MiB / 11016MiB |     68%      Default |</span><br><span class="line">+-------------------------------+----------------------+----------------------+</span><br><span class="line"></span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| Processes:                                                       GPU Memory |</span><br><span class="line">|  GPU       PID   Type   Process name                             Usage      |</span><br><span class="line">|=============================================================================|</span><br><span class="line">|    0      4616      C   python                                      9935MiB |</span><br><span class="line">|    0     11667      G   /usr/lib/xorg/Xorg                           195MiB |</span><br><span class="line">|    0     30334      G   compiz                                        94MiB |</span><br><span class="line">+-----------------------------------------------------------------------------+</span><br></pre></td></tr></table></figure>
+<p>加载了16个模型，同时进行处理：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">Starting Thread-0Thu Nov 14 15:09:53 2019 From 0 to 3</span><br><span class="line">Starting Thread-1Thu Nov 14 15:09:53 2019 From 3 to 6</span><br><span class="line">Starting Thread-2Thu Nov 14 15:09:53 2019 From 6 to 9</span><br><span class="line">Starting Thread-3Thu Nov 14 15:09:53 2019 From 9 to 12</span><br><span class="line">Starting Thread-5Thu Nov 14 15:09:53 2019 From 15 to 18</span><br><span class="line">Starting Thread-4Thu Nov 14 15:09:53 2019 From 12 to 15</span><br><span class="line">Starting Thread-6Thu Nov 14 15:09:53 2019 From 18 to 21</span><br><span class="line">Starting Thread-7Thu Nov 14 15:09:53 2019 From 21 to 24</span><br><span class="line">Starting Thread-9Thu Nov 14 15:09:53 2019 From 27 to 30</span><br><span class="line">Starting Thread-10Thu Nov 14 15:09:53 2019 From 30 to 33</span><br><span class="line">Starting Thread-12Thu Nov 14 15:09:53 2019 From 36 to 39</span><br><span class="line">Starting Thread-13Thu Nov 14 15:09:53 2019 From 39 to 42</span><br><span class="line">Starting Thread-11Thu Nov 14 15:09:53 2019 From 33 to 36</span><br><span class="line">Starting Thread-14Thu Nov 14 15:09:53 2019 From 42 to 45</span><br><span class="line">Starting Thread-8Thu Nov 14 15:09:53 2019 From 24 to 27</span><br><span class="line">Starting Thread-15Thu Nov 14 15:09:53 2019 From 45 to 50</span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p>后记：主要提供了一个模板进行多模型加载，但是如果一个模型就很大的情况下，这种就明显不合适了。可以想到的是一次从多个batch进行测试，然后记录结果。其他方法大佬可以分享留言。</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>python</tag>
+        <tag>threading</tag>
+        <tag>测试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>mmdetection使用指南</title>
     <url>/2019/11/13/mmdetection%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</url>
     <content><![CDATA[<blockquote>
@@ -287,7 +347,6 @@ AttributeError: ‘VOCDataset’ object has no attribute ‘img_ids’</module><
 <blockquote>
 <p>ps: cuda下载的时候尽量选择run的形式，不要选deb形式，这样可以稍微提高一下成功率。</p>
 </blockquote>
-<p><img src="/.com//1573642300089.png" alt="1573642300089"></p>
 <p>如果是RTX 2080Ti的显卡，可以试一下目前的搭配，亲测是可行的：</p>
 <ul>
 <li>cuda_10.0.130_410.48_linux.run</li>
