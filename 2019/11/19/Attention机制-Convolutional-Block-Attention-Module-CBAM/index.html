@@ -52,17 +52,21 @@
   };
 </script>
 
-  <meta name="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
-<meta name="keywords" content="python, pytorch, 深度学习, CV">
-<meta property="og:type" content="website">
-<meta property="og:title" content="spicyCV">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;archives&#x2F;2019&#x2F;page&#x2F;3&#x2F;index.html">
+  <meta name="description" content="前言：Attention机制最开始是从NLP开始火起来的，后来才遍地开花，很多地方都用到了attention机制。 第一次接触Attention机制还是在一个比赛中，一个目标检测的比赛，一个哈工大的本科生使用attention机制中的CBAM对YOLOv3进行改进，竟然能让一个一阶段的方法获得第一名的好成绩。 这篇论文发表在ECCV2018, 感觉是一个值得一读的好文章，链接：http:&#x2F;&#x2F;op">
+<meta name="keywords" content="论文阅读,Attention机制,CV">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Attention机制- Convolutional Block Attention Module(CBAM)">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;19&#x2F;Attention%E6%9C%BA%E5%88%B6-Convolutional-Block-Attention-Module-CBAM&#x2F;index.html">
 <meta property="og:site_name" content="spicyCV">
-<meta property="og:description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+<meta property="og:description" content="前言：Attention机制最开始是从NLP开始火起来的，后来才遍地开花，很多地方都用到了attention机制。 第一次接触Attention机制还是在一个比赛中，一个目标检测的比赛，一个哈工大的本科生使用attention机制中的CBAM对YOLOv3进行改进，竟然能让一个一阶段的方法获得第一名的好成绩。 这篇论文发表在ECCV2018, 感觉是一个值得一读的好文章，链接：http:&#x2F;&#x2F;op">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019111922173278.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191119221811390.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-11-19T14:37:20.152Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;2019111922173278.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70">
 
-<link rel="canonical" href="http://yoursite.com/archives/2019/page/3/">
+<link rel="canonical" href="http://yoursite.com/2019/11/19/Attention%E6%9C%BA%E5%88%B6-Convolutional-Block-Attention-Module-CBAM/">
 
 
 <script id="page-configurations">
@@ -70,13 +74,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
-    isArchive: true
+    isArchive: false
   };
 </script>
 
-  <title>归档 | spicyCV</title>
+  <title>Attention机制- Convolutional Block Attention Module(CBAM) | spicyCV</title>
   
 
 
@@ -215,196 +219,135 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 29 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/19/Attention%E6%9C%BA%E5%88%B6-Convolutional-Block-Attention-Module-CBAM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Attention机制- Convolutional Block Attention Module(CBAM)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-11-19 21:09:56 / 修改时间：22:37:20" itemprop="dateCreated datePublished" datetime="2019-11-19T21:09:56+08:00">2019-11-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-06-20T14:54:46+08:00"
-              content="2019-06-20">
-          06-20
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/06/20/python%20%E5%8C%85%E5%8F%8A%E6%A8%A1%E5%9D%97%E5%BC%95%E7%94%A8%E6%A2%B3%E7%90%86/" itemprop="url">
-            <span itemprop="name">python包以及模块引用梳理</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-06-20T07:04:02+08:00"
-              content="2019-06-20">
-          06-20
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/06/20/%E5%B8%B8%E7%94%A8%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5%E5%88%86%E4%BA%AB/" itemprop="url">
-            <span itemprop="name">常用学习教程链接分享</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-05-27T14:54:46+08:00"
-              content="2019-05-27">
-          05-27
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/05/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%80%83%E7%A0%94%E6%9C%BA%E8%AF%95%E6%8C%87%E5%8D%97%E4%B8%8A%E6%9C%BA%E7%BC%96%E7%A8%8B%E7%BB%83%E4%B9%A0%E5%A4%8D%E4%B9%A0/" itemprop="url">
-            <span itemprop="name">计算机考研机试指南上机编程练习复习</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-05-19T22:12:34+08:00"
-              content="2019-05-19">
-          05-19
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/05/19/%E5%A4%A9%E6%B4%A5%E5%A4%A7%E5%AD%A6%E8%A5%BF%E5%AE%89%E6%8B%9B%E7%94%9F%E6%80%BB%E7%BB%93/" itemprop="url">
-            <span itemprop="name">天津大学西安宣讲会招生总结</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-05-14T13:31:59+08:00"
-              content="2019-05-14">
-          05-14
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/05/14/pytorch%E7%89%88yolov3%E8%AE%AD%E7%BB%83%E8%87%AA%E5%B7%B1%E6%95%B0%E6%8D%AE%E9%9B%86/" itemprop="url">
-            <span itemprop="name">pytorch版本yolov3训练自己的数据集</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-05-13T00:00:00+08:00"
-              content="2019-05-13">
-          05-13
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/05/13/opencv_python%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81%E4%BB%A5%E5%8F%8A%E6%80%BB%E7%BB%93/" itemprop="url">
-            <span itemprop="name">opencv python使用方法示例代码以及总结</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-05-11T17:30:03+08:00"
-              content="2019-05-11">
-          05-11
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/05/11/%E3%80%8A%E4%B8%BA%E4%BB%80%E4%B9%88%E7%B2%BE%E8%8B%B1%E9%83%BD%E6%98%AF%E6%97%B6%E9%97%B4%E6%8E%A7%E3%80%8B%E8%AF%BB%E4%B9%A6%E6%80%BB%E7%BB%93/" itemprop="url">
-            <span itemprop="name">为什么精英都是时间控</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-05-11T15:58:11+08:00"
-              content="2019-05-11">
-          05-11
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/05/11/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%AA%E4%BA%BA%E9%94%BB%E7%82%BC%E8%AE%A1%E5%88%92/" itemprop="url">
-            <span itemprop="name">个人锻炼计划</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
+        <blockquote>
+<p>前言：Attention机制最开始是从NLP开始火起来的，后来才遍地开花，很多地方都用到了attention机制。</p>
+<p>第一次接触Attention机制还是在一个比赛中，一个目标检测的比赛，一个哈工大的本科生使用attention机制中的CBAM对YOLOv3进行改进，竟然能让一个一阶段的方法获得第一名的好成绩。</p>
+<p>这篇论文发表在ECCV2018, 感觉是一个值得一读的好文章，链接：<a href="http://openaccess.thecvf.com/content_ECCV_2018/papers/Sanghyun_Woo_Convolutional_Block_Attention_ECCV_2018_paper.pdf" target="_blank" rel="noopener">http://openaccess.thecvf.com/content_ECCV_2018/papers/Sanghyun_Woo_Convolutional_Block_Attention_ECCV_2018_paper.pdf</a></p>
+</blockquote>
+<h2 id="1-摘要"><a class="markdownIt-Anchor" href="#1-摘要"></a> 1. 摘要</h2>
+<p>本研究提出一个Convolutional Block Attention Module(CBAM)模块，简单并且有效的注意力模型。处理对象是中间的feature map（意思是各种基础网络提取最后一层得到的除了全连接层以外的feature）。这个模块主要从空间和通道两个维度进行推理得到注意力权重，然后与原特征图进行相乘对特征进行自适应调整。</p>
+<p>CBAM是一个轻量级通用模块，可以被任何结构的CNN所集成，额外开销可以忽略不计，并且可以进行端到端的训练。</p>
+<p>在分类和检测任务重，使用了CBAM可以一直提升分类和检测的表现，这体现了模块广泛的应用性。</p>
+<h2 id="2-介绍"><a class="markdownIt-Anchor" href="#2-介绍"></a> 2. 介绍</h2>
+<ul>
+<li>目前的研究集中于网络的三要素：深度，宽度，基数。
+<ul>
+<li>深度：resnet, inceptionv4, inception-resnet</li>
+<li>宽度:  GoogLeNet</li>
+<li>基数：Xception, ResNeXt</li>
+</ul>
+</li>
+<li>本文集中于神经网络的另外一个要素：注意力。注意力不仅告诉我们应该集中到哪个位置，而且还提升了感兴趣区域的表示能力。</li>
+<li>本文目标是通过使用关注重要特征和压制五官特征的注意力机制来提高模型的表示能力。</li>
+<li>普通卷积功能是通过混合跨通道和空间的信息来提取更富信息量的特征。所以CBAM选择关注通道和空间两个方面，进行提取更有意义的特征。</li>
+<li>具体实现是顺序经过通道注意力模块和空间注意力模块：
+<ul>
+<li>通道注意力模块：学习注意什么“what”</li>
+<li>空间注意力模块：学习注意哪里“where”</li>
+</ul>
+</li>
+<li>主要贡献：
+<ol>
+<li>提出了CBAM模块，简单，有效，易于集成</li>
+<li>使用CBAM进行广泛的验证。</li>
+<li>使用多个模型在不同数据集上使用CBAM模块，并验证了模型的表现。</li>
+</ol>
+</li>
+</ul>
+<h2 id="3-cbam模块"><a class="markdownIt-Anchor" href="#3-cbam模块"></a> 3. CBAM模块</h2>
+<p>CBAM模块有两个模块组成。</p>
+<ol>
+<li>通道注意力模块（Channel Attention Module）</li>
+<li>空间注意力模块（Spatial Attention Module）</li>
+</ol>
+<h3 id="31-通道注意力机制"><a class="markdownIt-Anchor" href="#31-通道注意力机制"></a> 3.1 通道注意力机制</h3>
+<p><img src="https://img-blog.csdnimg.cn/2019111922173278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<h3 id><a class="markdownIt-Anchor" href="#"></a> </h3>
+<p><img src="https://img-blog.csdnimg.cn/20191119221811390.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
 
     </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" rel="tag"># 论文阅读</a>
+              <a href="/tags/Attention%E6%9C%BA%E5%88%B6/" rel="tag"># Attention机制</a>
+              <a href="/tags/CV/" rel="tag"># CV</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/15/RTX-2080Ti-Ubuntu16-04-cuda10-0%E4%B8%8B%E5%AE%89%E8%A3%85tensorflow1-14-0-keras-2-2-5/" rel="next" title="RTX 2080Ti, Ubuntu16.04, cuda10.0下安装tensorflow1.14.0, keras 2.2.5">
+                  <i class="fa fa-chevron-left"></i> RTX 2080Ti, Ubuntu16.04, cuda10.0下安装tensorflow1.14.0, keras 2.2.5
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2019/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/2019/">1</a><a class="page-number" href="/archives/2019/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
-
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
         </div>
           
@@ -429,6 +372,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-摘要"><span class="nav-number">1.</span> <span class="nav-text"> 1. 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-介绍"><span class="nav-number">2.</span> <span class="nav-text"> 2. 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-cbam模块"><span class="nav-number">3.</span> <span class="nav-text"> 3. CBAM模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#31-通道注意力机制"><span class="nav-number">3.1.</span> <span class="nav-text"> 3.1 通道注意力机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.2.</span> <span class="nav-text"> </span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -689,6 +633,23 @@ if (document.querySelectorAll('pre.mermaid').length) {
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '510ce8b06c45bdef1d58',
+      clientSecret: 'df992456e87a7ff04b9f002b27de9caf70cd0d6f',
+      repo: 'pprp.github.io',
+      owner: 'pprp',
+      admin: ['pprp'],
+      id: '5d9e65ccc93bbf76adb502ccdb01ed4a',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
 
     </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
