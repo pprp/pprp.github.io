@@ -220,6 +220,388 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/08/python%20%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/08/python%20%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" class="post-title-link" itemprop="url">python编码规范</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-08 14:54:46" itemprop="dateCreated datePublished" datetime="2019-11-08T14:54:46+08:00">2019-11-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 21:38:30" itemprop="dateModified" datetime="2019-11-11T21:38:30+08:00">2019-11-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="python-代码规范"><a class="markdownIt-Anchor" href="#python-代码规范"></a> python 代码规范</h1>
+<blockquote>
+<p>前言：之前写python代码感觉注释不规范，冗余性比较大，而且格式不规范，之后再重新理解的时候会很难理解，所以搜索了一些代码规范进行总结，今后写的代码尽量按照规范进行编码。</p>
+</blockquote>
+<h2 id="1-通用规范"><a class="markdownIt-Anchor" href="#1-通用规范"></a> 1 通用规范</h2>
+<ul>
+<li>
+<p>编码</p>
+<ul>
+<li>
+<p>头部需要加入<code>#-*-coding:utf-8-*-#</code></p>
+</li>
+<li>
+<p>尽可能使用‘is’‘is not’取代‘==’，比如if x is not None 要优于if x</p>
+</li>
+<li>
+<p>使用startswith() and endswith()代替切片进行序列前缀或后缀的检查。</p>
+<p><code>if foo.startswith('bar')</code>优于<code>if foo[:3] == ‘bar'</code></p>
+</li>
+<li>
+<p>判断序列空或不空，有如下规则</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Yes: <span class="keyword">if</span> <span class="keyword">not</span> seq:</span><br><span class="line"><span class="keyword">if</span> seq:</span><br><span class="line">优于</span><br><span class="line">No: <span class="keyword">if</span> len(seq)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> len(seq)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p>缩进</p>
+<ul>
+<li>统一使用4个空格，不能使用tab</li>
+</ul>
+</li>
+<li>
+<p>引号： 自然语言使用双引号，机器标识使用单引号，代码里多数使用单引号</p>
+<ul>
+<li>
+<p>自然语言使用双引号<code>“...”</code>例如raise得到的错误信息，使用unicode, u“代码有误”</p>
+</li>
+<li>
+<p>机器标识使用单引号：<code>‘key’</code></p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dict=&#123;&#125;</span><br><span class="line">dict[<span class="string">'key'</span>] = <span class="string">'value'</span><span class="comment"># key 使用单引号</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>正则表达式使用原生双引号<code>r&quot;...&quot;</code></p>
+</li>
+<li>
+<p>文档字符串 docstring, 使用三个双引号 <code>“&quot;&quot;...&quot;”&quot;</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-空行"><a class="markdownIt-Anchor" href="#2-空行"></a> 2 空行</h2>
+<ul>
+<li>
+<p>空行</p>
+<ul>
+<li>
+<p>模块级函数和类定义之间空两行</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test1</span><span class="params">(txt)</span>:</span></span><br><span class="line">    print(txt)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test2</span><span class="params">(txt)</span>:</span></span><br><span class="line">    print(txt)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">	    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>类成员函数之间空一行：</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>可以使用多个空行分割多组相关函数</p>
+</li>
+<li>
+<p>函数中使用空行分割逻辑相关的代码</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-import-规范"><a class="markdownIt-Anchor" href="#3-import-规范"></a> 3 import 规范</h2>
+<ul>
+<li>
+<p>import 语句</p>
+<ul>
+<li>
+<p>尽量分行书写</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"><span class="keyword">import</span> sys</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>import 语句尽量使用绝对引用，而不要使用相对引用</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pkg <span class="keyword">import</span> func1<span class="comment"># 推荐</span></span><br><span class="line"><span class="keyword">from</span> ..pkg <span class="keyword">import</span> func2<span class="comment"># 不推荐</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>import 语句应该在文件头部， 至于模块说明之后，在全局变量之前</p>
+</li>
+<li>
+<p>import语句按照顺序排列，按照功能逻辑使用空行分隔。</p>
+</li>
+<li>
+<p>如果发生命令冲突，可以使用命名空间</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> bar</span><br><span class="line"><span class="keyword">import</span> foo.bar</span><br><span class="line"></span><br><span class="line">bar.Bar()</span><br><span class="line">foo.bar.Bar()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-空行空格"><a class="markdownIt-Anchor" href="#4-空行空格"></a> 4 空行空格</h2>
+<ul>
+<li>
+<p>空格</p>
+<ul>
+<li>
+<p>两元运算符两边各一个空格</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">i = i + <span class="number">1</span></span><br><span class="line">sumbited += <span class="number">1</span></span><br><span class="line">x = x * <span class="number">2</span> + <span class="number">1</span></span><br><span class="line">c = (a - b) * (a + b)</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>参数列表中的逗号后要有空格</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">complex</span><span class="params">(real, img)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>参数列表默认值等号两边不要加空格</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">complex</span><span class="params">(real, img=<span class="number">0.1</span>)</span></span></span><br><span class="line"><span class="function">    <span class="title">pass</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p>换行</p>
+<ul>
+<li>
+<p>python支持括号内的换行</p>
+<ul>
+<li>
+<p>第二行缩进到括号的起始处</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">foo = func(var1, var2,</span><br><span class="line">           var3, var4)</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>第二行缩进四个空格，括号其实就换行</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    var1, var11,</span></span></span><br><span class="line"><span class="function"><span class="params">    var2, var12, </span></span></span><br><span class="line"><span class="function"><span class="params">    var3, var13,</span></span></span><br><span class="line"><span class="function"><span class="params">    var4)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-docstring与注释"><a class="markdownIt-Anchor" href="#5-docstring与注释"></a> 5 docstring与注释</h2>
+<ul>
+<li>
+<p>docstring</p>
+<ul>
+<li>
+<p>所有公共模块，函数，方法，类，都要写docstring, 私有方法不需要，但是应该在def后提供一个块注释来说明</p>
+</li>
+<li>
+<p>docstring 的结束<code>“”“</code>应该独占一行, 除非只有一行</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">multi-line</span></span><br><span class="line"><span class="string">docstring</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""one line docstring"""</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p>注释</p>
+<ul>
+<li>
+<p>块注释，空行同样也需要#</p>
+</li>
+<li>
+<p>行注释,  使用两个空格与语句分开，并且不要使用无意义注释</p>
+</li>
+<li>
+<p>在比较复杂的代码部分尽量写注释</p>
+</li>
+<li>
+<p>比较重要的注释端，使用多个等号隔开，更加醒目</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =====================================</span></span><br><span class="line"><span class="comment"># annotations!</span></span><br><span class="line"><span class="comment"># =====================================</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>可以使用vscode中使用autodocstring插件，然后快捷键<code>ctrl+shift+2</code>进行扩充</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">testb</span><span class="params">(es)</span>:</span></span><br><span class="line">    <span class="string">"""[summary]</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">        es &#123;[type]&#125; -- [description]</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    print(es)</span><br><span class="line">    </span><br><span class="line"><span class="string">"""[summary]</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span><span class="params">(Object)</span>:</span></span><br><span class="line">    <span class="string">"""[summary]</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, b)</span>:</span></span><br><span class="line">        <span class="string">"""[summary]</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">        Arguments:</span></span><br><span class="line"><span class="string">            Object &#123;[type]&#125; -- [description]</span></span><br><span class="line"><span class="string">            b &#123;[type]&#125; -- [description]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>TODO注释：</p>
+<p>TODO注释应该在所有开头处包含&quot;TODO&quot;字符串, 紧跟着是用括号括起来的你的名字, email地址或其它标识符. 然后是一个可选的冒号. 接着必须有一行注释, 解释要做什么. 主要目的是为了有一个统一的TODO格式, 这样添加注释的人就可以搜索到(并可以按需提供更多细节). 写了TODO注释并不保证写的人会亲自解决问题. 当你写了一个TODO, 请注上你的名字.</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># TODO(kl@gmail.com): Use a "*" here for string repetition.</span></span><br><span class="line"><span class="comment"># TODO(Zeke) Change this to use relations.</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-命令规范"><a class="markdownIt-Anchor" href="#6-命令规范"></a> 6 命令规范</h2>
+<ul>
+<li>
+<p>模块</p>
+<ul>
+<li>模块尽量使用小写开头，不要用下划线<code>import core</code></li>
+</ul>
+</li>
+<li>
+<p>类名</p>
+<ul>
+<li>
+<p>尽量使用驼峰命令风格，首字母大写，私有类使用下划线开头</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DogCat</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_Action</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>将相关的类和顶级函数放在同一个模块中，不必要限制一个类一个模块</p>
+</li>
+<li>
+<p>模块内部类采用<code>_CapWard</code>方法</p>
+</li>
+<li>
+<p>类的方法第一个参数必须是self，而静态方法第一个参数必须是cls</p>
+</li>
+</ul>
+</li>
+<li>
+<p>函数</p>
+<ul>
+<li>
+<p>函数名一律小写，多个单词用下划线隔开。</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_with_configs</span><span class="params">(config)</span>:</span></span><br><span class="line">    print(config)</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>私有函数名称前加下划线</p>
+</li>
+</ul>
+</li>
+<li>
+<p>变量名</p>
+<ul>
+<li>全局变量尽量只在模块内有效，具体是前缀使用一个下划线。</li>
+<li>尽量小写，多个单词用下划线隔开</li>
+<li>常量采用全大写，多个字母用下划线隔开</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Public</th>
+<th style="text-align:left">Internal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Modules</td>
+<td style="text-align:left">lower_with_under</td>
+<td style="text-align:left">_lower_with_under</td>
+</tr>
+<tr>
+<td style="text-align:left">Packages</td>
+<td style="text-align:left">lower_with_under</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Classes</td>
+<td style="text-align:left">CapWords</td>
+<td style="text-align:left">_CapWords</td>
+</tr>
+<tr>
+<td style="text-align:left">Exceptions</td>
+<td style="text-align:left">CapWords</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Functions</td>
+<td style="text-align:left">lower_with_under()</td>
+<td style="text-align:left">_lower_with_under()</td>
+</tr>
+<tr>
+<td style="text-align:left">Global/Class Constants</td>
+<td style="text-align:left">CAPS_WITH_UNDER</td>
+<td style="text-align:left">_CAPS_WITH_UNDER</td>
+</tr>
+<tr>
+<td style="text-align:left">Global/Class Variables</td>
+<td style="text-align:left">lower_with_under</td>
+<td style="text-align:left">_lower_with_under</td>
+</tr>
+<tr>
+<td style="text-align:left">Instance Variables</td>
+<td style="text-align:left">lower_with_under</td>
+<td style="text-align:left">_lower_with_under (protected) or __lower_with_under (private)</td>
+</tr>
+<tr>
+<td style="text-align:left">Method Names</td>
+<td style="text-align:left">lower_with_under()</td>
+<td style="text-align:left">_lower_with_under() (protected) or __lower_with_under() (private)</td>
+</tr>
+<tr>
+<td style="text-align:left">Function/Method Parameters</td>
+<td style="text-align:left">lower_with_under</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Local Variables</td>
+<td style="text-align:left">lower_with_under</td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-reference"><a class="markdownIt-Anchor" href="#7-reference"></a> 7 reference</h2>
+<ul>
+<li>
+<p><a href="https://www.zhihu.com/search?q=vscode%20python%20%E8%A7%84%E8%8C%83&amp;utm_content=search_history&amp;type=content" target="_blank" rel="noopener">https://www.zhihu.com/search?q=vscode python 规范&amp;utm_content=search_history&amp;type=content</a></p>
+</li>
+<li>
+<p><a href="https://www.runoob.com/w3cnote/google-python-styleguide.html" target="_blank" rel="noopener">https://www.runoob.com/w3cnote/google-python-styleguide.html</a></p>
+</li>
+<li>
+<p><a href="https://www.cnblogs.com/liangmingshen/p/9273413.html" target="_blank" rel="noopener">https://www.cnblogs.com/liangmingshen/p/9273413.html</a></p>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p>后记： 虽然比较多，需要花费时间去记忆，但是一旦形成习惯，养成良好的严谨的编码习惯，之后带来的益处也是无穷的。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/04/MOT%E9%A2%86%E5%9F%9F%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87%E3%80%8ASimple%20Online%20and%20Realtime%20Tracking%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1528,116 +1910,11 @@ An-->B</pre>
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/23/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%B2%97%E4%BD%8D%E9%9C%80%E6%B1%82%E9%9C%80%E8%A6%81%E5%9F%B9%E5%85%BB%E7%9A%84%E8%83%BD%E5%8A%9B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/log.png">
-      <meta itemprop="name" content="pprp">
-      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spicyCV">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/06/23/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%B2%97%E4%BD%8D%E9%9C%80%E6%B1%82%E9%9C%80%E8%A6%81%E5%9F%B9%E5%85%BB%E7%9A%84%E8%83%BD%E5%8A%9B/" class="post-title-link" itemprop="url">人工智能岗位需求需要培养的能力</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-06-23 17:11:13" itemprop="dateCreated datePublished" datetime="2019-06-23T17:11:13+08:00">2019-06-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-27 15:24:37" itemprop="dateModified" datetime="2019-10-27T15:24:37+08:00">2019-10-27</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <hr>
-<h2 id="date2019-06-23title人工智能图像相关岗位需求"><a class="markdownIt-Anchor" href="#date2019-06-23title人工智能图像相关岗位需求"></a> date:2019-06-23<br>
-title:“人工智能图像相关岗位需求”</h2>
-<blockquote>
-<p>人工智能图像岗位需要具备的技能</p>
-</blockquote>
-<h3 id="任职资格"><a class="markdownIt-Anchor" href="#任职资格"></a> 任职资格</h3>
-<ul>
-<li>图像处理和模式识别相关知识</li>
-<li>C/C++，OpenCV编程和项目经验，熟悉脚本语言python</li>
-<li>熟悉tensorflow, caffe , pytorch等开源框架</li>
-<li>跟踪国内外最新的图像处理算法发展方向和相应技术</li>
-<li>会视频识别相关图像算法的设计与研究</li>
-<li>图像处理，机器学习，深度学习等算法的研究和实现</li>
-<li>实现目标检测，识别，跟踪，语义分割等相关项目开发</li>
-<li>优化产品功能，解决实际问题</li>
-<li>熟悉机器学习常用算法：adaboost, svm，决策树，神经网络等</li>
-<li>会底层代码优化加速经验优先</li>
-<li>会使用intel神经计算棒或华为麒麟神经计算硬件加速</li>
-<li>能够写出所研发的软件的设计文档，具备严谨的文档撰写能力</li>
-<li>能够独立实现模型代码开发</li>
-<li>熟悉使用git , svn, redmine, project 等系统，了解ISO9001,CMMI等质量体系</li>
-</ul>
-<h3 id="现阶段需要培养的能力"><a class="markdownIt-Anchor" href="#现阶段需要培养的能力"></a> 现阶段需要培养的能力</h3>
-<ul>
-<li>C/C++开发能力</li>
-<li>opencv使用能力</li>
-<li>python开发能力</li>
-<li>学习图像处理和模式识别相关知识</li>
-<li>熟悉tensorflow,caffe,pytorch等，并且使用tensorflow框架开发产品</li>
-<li>学习机器学习常用算法，并且会手动推导</li>
-<li>提升文档撰写能力</li>
-</ul>
-<h3 id="近期目标"><a class="markdownIt-Anchor" href="#近期目标"></a> 近期目标</h3>
-<ul>
-<li>提升C/C++开发能力，算法编程水平</li>
-<li>继续锻炼python</li>
-<li>学习tensorflow，keras等框架</li>
-<li>在七月在线平台上进行知识学习</li>
-<li>面试准备</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1683,7 +1960,7 @@ title:“人工智能图像相关岗位需求”</h2>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
