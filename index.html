@@ -220,6 +220,211 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/03/%E8%A7%86%E9%A2%91%E6%A0%87%E6%B3%A8%E8%BD%AF%E4%BB%B6Darklabel%E7%94%A8%E6%B3%95%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/03/%E8%A7%86%E9%A2%91%E6%A0%87%E6%B3%A8%E8%BD%AF%E4%BB%B6Darklabel%E7%94%A8%E6%B3%95%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">视频标注软件Darklabel用法指南</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-03 16:24:25 / 修改时间：19:15:06" itemprop="dateCreated datePublished" datetime="2019-12-03T16:24:25+08:00">2019-12-03</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>前言：这是一个轻量的视频标注软件，相比于ViTBAT等软件而言，不需要安装就可以使用。但是由于是一个韩国人开发的，所以相关的说明不太够，所以这里进行一个darklabel软件的使用指南。之后会在这个视频标注的基础上进行一些脚本的编制，有利于ReID数据集、目标检测数据集和MOT数据集的快速构建</p>
+</blockquote>
+<h2 id="1-官方相关说明"><a class="markdownIt-Anchor" href="#1-官方相关说明"></a> 1. 官方相关说明</h2>
+<p>它是一个实用程序，可以沿着视频（avi，mpg）或图像列表中对象的矩形边界框以各种格式标记和保存。 该程序可用于创建用于对象识别或图像跟踪目的的数据库。最大的功能是快速响应，便捷的界面以及减少工作量的便捷 功能（自动跟踪，使用插值进行标记，自动ID标记）。 任何人都可以将其用于非商业目的，如果您有任何问题或建议，请在评论中让我知道。最初是为我自己创建的，最近我 花了些时间来改进该程序（ver1.3）。我们已经改进了难以看清的细微之处，但是改善了程序的质量，执行的稳定性 和未知性。</p>
+<p>软件示意：</p>
+<p><img src="https://img-blog.csdnimg.cn/20191203162851924.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>工具栏在左侧：</p>
+<p><img src="https://img-blog.csdnimg.cn/20191203163053987.png" alt></p>
+<h2 id="2-主要功能和特点"><a class="markdownIt-Anchor" href="#2-主要功能和特点"></a> 2. 主要功能和特点</h2>
+<ul>
+<li>
+<p>支持各种格式的视频（avi，mpg等）和图像列表（jpg，bmp，png等）</p>
+</li>
+<li>
+<p>多框设置和标签设置支持</p>
+</li>
+<li>
+<p>支持对象识别和图像跟踪中使用的各种数据格式</p>
+</li>
+<li>
+<p>使用图像跟踪器自动标记（通过跟踪标记）</p>
+</li>
+<li>
+<p>支持使用插值功能的间隔标签</p>
+</li>
+<li>
+<p>自动标记功能，可按类别自动为每个对象分配唯一的ID</p>
+</li>
+</ul>
+<h2 id="3-主要用法"><a class="markdownIt-Anchor" href="#3-主要用法"></a> 3. 主要用法</h2>
+<h3 id="31-鼠标键盘界面shift-ctrl-shift或ctrl"><a class="markdownIt-Anchor" href="#31-鼠标键盘界面shift-ctrl-shift或ctrl"></a> 3.1 鼠标/键盘界面（Shift / Ctrl = Shift或Ctrl）</h3>
+<ul>
+<li>鼠标拖动：创建一个框</li>
+<li>Shift / Ctrl +拖动：编辑框</li>
+<li>双击：选择/取消相同ID对象的轨迹</li>
+<li>右键单击：删除所有选定的对象轨迹（删除部分）</li>
+<li>右键单击：删除最近创建的框（如果未选择任何轨迹）</li>
+<li>Shift / Ctrl +右键单击（特定框）：仅删除所选框</li>
+<li>Shift / Ctrl +右键单击（空）：删除当前屏幕上的所有框</li>
+<li>Shift / Ctrl +双击（特定框）：修改所选框的标签</li>
+<li>Shift / Ctrl +双击（轨迹）：在所选轨迹上批量更改标签</li>
+<li>箭头键/ PgUp / PgDn / Home / End：移动视频帧（图像）</li>
+<li>Enter键：使用图像跟踪功能自动生成框（通过跟踪进行标记）</li>
+</ul>
+<h3 id="32-指定标签和id"><a class="markdownIt-Anchor" href="#32-指定标签和id"></a> 3.2 <strong>指定标签和</strong>ID</h3>
+<ul>
+<li>无标签：创建未标签的框</li>
+<li>框标签：用户指定的标签（例如，人类）</li>
+<li>box标签+自动编号：自动编号自定义标签（例如human0，human1等）</li>
+<li>如果指定了id，则可以选择/编辑轨迹单位对象</li>
+<li>popuplabeleditor：注册标签列表窗口的弹出窗口（已在labels.txt文件中注册）</li>
+<li>如果在弹出窗口中按快捷键（1〜9），则会自动输入标签。</li>
+<li>Label + id显示在屏幕上，但在内部，标签和ID分开。</li>
+<li>当另存为gt数据时，选择仅标签格式以保存可见标签（标签+ id）</li>
+<li>另存为gt数据时，如果选择了标签和ID分类格式，则标签和ID将分开保存。</li>
+</ul>
+<h3 id="33-追踪功能"><a class="markdownIt-Anchor" href="#33-追踪功能"></a> 3.3 追踪功能</h3>
+<ul>
+<li>通过使用图像跟踪功能设置下一帧的框（分配相同的ID /标签）</li>
+<li>多达100个同时跟踪</li>
+<li>tracker1（稳健）算法：长时间跟踪目标</li>
+<li>tracker2（准确）算法：准确跟踪目标（例如汽车）</li>
+<li>输入键/下一步和预测按钮</li>
+<li>注意！使用跟踪时，下一帧上的原始框消失</li>
+</ul>
+<blockquote>
+<p>建议使用tracker2，效果很好，几乎不用人工调整</p>
+</blockquote>
+<h3 id="34-插值功能"><a class="markdownIt-Anchor" href="#34-插值功能"></a> 3.4 插值功能</h3>
+<ul>
+<li>跟踪功能方便，但问题不准确</li>
+<li>在视频部分按对象标记时使用
+<ul>
+<li>开始插补按钮：开始插补功能</li>
+<li>在目标对象的轨迹的一半处绘制一个方框（航路点的种类）</li>
+<li>航路点框为紫色，插值框为黑色。</li>
+<li>更正插值错误的部分（Shift / Ctrl +拖动），添加任意数量的航路点（不考虑顺序）/删除</li>
+<li>结束插补按钮：将工作结束和工作轨迹注册为数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="35-导入视频视频并在帧之间移动"><a class="markdownIt-Anchor" href="#35-导入视频视频并在帧之间移动"></a> 3.5 导入视频/视频并在帧之间移动</h3>
+<ul>
+<li>打开视频文件：打开视频文件（avi，mpg，mp4，wmv，mov，…）</li>
+<li>打开图像目录：打开文件夹中的所有图像（jpg，bmp，png等）</li>
+<li>在视频帧之间移动：键盘→，←，PgUp，PgDn，Home，End，滑块控制</li>
+</ul>
+<h3 id="36-保存并调出作业数据"><a class="markdownIt-Anchor" href="#36-保存并调出作业数据"></a> 3.6 保存并调出作业数据</h3>
+<ul>
+<li>加载GT：以所选格式加载地面真相文件。</li>
+<li>保存GT：以所选数据格式保存到目前为止已获得的结果。</li>
+<li>导入数据时，需要选择与实际数据文件匹配的格式，但是在保存数据时，可以将其保存为所需的任何格式。</li>
+<li>在图像列表中工作时，使用帧号（frame＃）格式，按文件名排序时的图像顺序将变为帧号（对于诸如00000.jpg，00002.jpg等的列表很有用）</li>
+<li>保存设置：保存当前选择的数据格式和选项（运行程序时自动还原）</li>
+</ul>
+<h3 id="37-数据格式语法"><a class="markdownIt-Anchor" href="#37-数据格式语法"></a> 3.7 数据格式（语法）</h3>
+<ul>
+<li>|：换行</li>
+<li>[]：重复短语</li>
+<li>frame＃：帧号（视频的帧号，图像列表中的图像顺序）</li>
+<li>iname：图像文件名（仅在使用图像列表时有效）</li>
+<li>标签：标签</li>
+<li>id：对象的唯一ID</li>
+<li>n：在图像上设置的边界矩形的数量</li>
+<li>x，y：边界矩形的左侧和顶部位置</li>
+<li>w，h：边界矩形的宽度和高度</li>
+<li>cx，cy：边界矩形的中心坐标</li>
+<li>x1，y1，x2，y2：边界矩形的左上，右下位置</li>
+</ul>
+<h2 id="4-举栗子"><a class="markdownIt-Anchor" href="#4-举栗子"></a> 4. 举栗子</h2>
+<blockquote>
+<p>视频演示：<a href="https://www.youtube.com/watch?v=vbydG78Al8s&amp;t=11s" target="_blank" rel="noopener">https://www.youtube.com/watch?v=vbydG78Al8s&amp;t=11s</a></p>
+</blockquote>
+<ol>
+<li>
+<p>选择open video file，选择一个视频打开，最好不要太长</p>
+</li>
+<li>
+<p>左右拖动一下滑块，看一下准备标注的对象</p>
+</li>
+<li>
+<p>如果标注视频选择左侧工具栏中第三行，下拉找到frame开头的内容比如：frame#, n, [id, x1,y1,x2,y2,label],意思是左上角坐标和右下角坐标。</p>
+<p><img src="/.com//1575370704158.png" alt="1575370704158"></p>
+</li>
+<li>
+<p>然后右侧框中进行画框，然后可以采用以下几种方法继续标注</p>
+<ul>
+<li>画框以后，长按Enter键，就会采用Tracker2中的模式进行预测，效果不多</li>
+<li>先点击begin interpolation按钮，然后画框，然后按左右键对视频帧进行移动，然后再画一个关键框，完成后点击End interpolation按钮结束（这种模式可以进行通过插值进行预测中间帧）</li>
+</ul>
+</li>
+<li>
+<p>最后选择合适的标注模型，点击Save GT，保存为txt文件</p>
+</li>
+</ol>
+<h2 id="5-ffmpeg切割视频"><a class="markdownIt-Anchor" href="#5-ffmpeg切割视频"></a> 5. ffmpeg切割视频</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg  -i C:/plutopr.mp4 -acodec copy </span><br><span class="line">		-vf scale=1280:720</span><br><span class="line">		-ss 00:00:10 -to 00:00:15 C:/cutout1.mp4 -y</span><br></pre></td></tr></table></figure>
+<ol>
+<li>-ss time_off        set the start time offset 设置从视频的哪个时间点开始截取，上文从视频的第10s开始截取</li>
+<li>-to 截到视频的哪个时间点结束。上文到视频的第15s结束。截出的视频共5s.如果用-t 表示截取多长的时间如 上文-to 换位-t则是截取从视频的第10s开始，截取15s时长的视频。即截出来的视频共15s.</li>
+<li>-vcodec copy表示使用跟原视频一样的视频编解码器。</li>
+<li>-acodec copy表示使用跟原视频一样的音频编解码器。</li>
+<li>-i 表示源视频文件</li>
+<li>-y 表示如果输出文件已存在则覆盖。</li>
+<li>-vf 设置视频分辨率</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/29/Attention%E6%9C%BA%E5%88%B6%E4%B8%ADCBAM%E4%BB%A5%E5%8F%8ADual-pooling%E7%9A%84pytorch%E5%AE%9E%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -245,7 +450,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2019-11-29 20:27:17 / 修改时间：22:31:02" itemprop="dateCreated datePublished" datetime="2019-11-29T20:27:17+08:00">2019-11-29</time>
+              <time title="创建时间：2019-11-29 20:27:17 / 修改时间：22:46:23" itemprop="dateCreated datePublished" datetime="2019-11-29T20:27:17+08:00">2019-11-29</time>
             </span>
 
           
@@ -1376,86 +1581,6 @@ AttributeError: ‘VOCDataset’ object has no attribute ‘img_ids’</module><
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/11/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/log.png">
-      <meta itemprop="name" content="pprp">
-      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spicyCV">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/11/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-11 08:42:33" itemprop="dateCreated datePublished" datetime="2019-11-11T08:42:33+08:00">2019-11-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-13 16:51:18" itemprop="dateModified" datetime="2019-11-13T16:51:18+08:00">2019-11-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="quick-start"><a class="markdownIt-Anchor" href="#quick-start"></a> Quick Start</h2>
-<h3 id="create-a-new-post"><a class="markdownIt-Anchor" href="#create-a-new-post"></a> Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="run-server"><a class="markdownIt-Anchor" href="#run-server"></a> Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="generate-static-files"><a class="markdownIt-Anchor" href="#generate-static-files"></a> Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="deploy-to-remote-sites"><a class="markdownIt-Anchor" href="#deploy-to-remote-sites"></a> Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-<h3 id="enable-mathjax"><a class="markdownIt-Anchor" href="#enable-mathjax"></a> Enable mathjax</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mathjax: true</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1506,7 +1631,7 @@ AttributeError: ‘VOCDataset’ object has no attribute ‘img_ids’</module><
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1517,7 +1642,7 @@ AttributeError: ‘VOCDataset’ object has no attribute ‘img_ids’</module><
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-count">52</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
