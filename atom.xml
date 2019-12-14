@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-03T13:14:02.571Z</updated>
+  <updated>2019-12-14T14:37:53.504Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>无root权限情况ffmpeg的安装和使用教程</title>
+    <link href="http://yoursite.com/2019/12/14/%E6%97%A0root%E6%9D%83%E9%99%90%E6%83%85%E5%86%B5ffmpeg%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"/>
+    <id>http://yoursite.com/2019/12/14/%E6%97%A0root%E6%9D%83%E9%99%90%E6%83%85%E5%86%B5ffmpeg%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</id>
+    <published>2019-12-14T12:19:10.000Z</published>
+    <updated>2019-12-14T14:37:53.504Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-无管理员权限下的安装方法"><a class="markdownIt-Anchor" href="#1-无管理员权限下的安装方法"></a> 1. 无管理员权限下的安装方法</h2><p>首先下载安装包并解压：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/installed</span><br><span class="line">wget http://ffmpeg.org/releases/ffmpeg-1.2.6.tar.bz2</span><br><span class="line">tar -jxvf ffmpeg-1.2.6.tar.bz2</span><br></pre></td></tr></table></figure><p>得到文件夹<code>ffmpeg-1.2.6</code></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ffmpeg-1.2.6</span><br><span class="line">./configure --enable-libmp3lame --enable-libx264 --enable-gpl --prefix=./software/make-3.8.2</span><br><span class="line"># 比较关键的在于--prefix，由于我们没有管理员权限，所以设置的安装位置在本地</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><p>安装完成后会在prefix所指示目录下生成bin, include, lib, share几个文件夹，然后开始编辑<code>.bashrc</code>文件，让其可以访问到bin中的内容，添加以下内容：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=&quot;/home/*****/makeforffmpeg/bin:$PATH&quot;</span><br></pre></td></tr></table></figure><p>将<code>/home/*****/makeforffmpeg/bin</code>替换成安装的路径,然后运行命令<code>bash</code>进行刷新，然后可以尝试<code>ffmpeg -version</code>命令，得到以下显示内容：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg version 1.2.6</span><br><span class="line">built on Dec 14 2019 19:33:01 with gcc 5.4.0 (Ubuntu 5.4.0-6ubuntu1~16.04.10) 20160609</span><br><span class="line">configuration: --disable-yasm --prefix=&apos;/install/makeforffmpeg&apos;</span><br><span class="line">libavutil      52. 18.100 / 52. 18.100</span><br><span class="line">libavcodec     54. 92.100 / 54. 92.100</span><br><span class="line">libavformat    54. 63.104 / 54. 63.104</span><br><span class="line">libavdevice    54.  3.103 / 54.  3.103</span><br><span class="line">libavfilter     3. 42.103 /  3. 42.103</span><br><span class="line">libswscale      2.  2.100 /  2.  2.100</span><br><span class="line">libswresample   0. 17.102 /  0. 17.102</span><br></pre></td></tr></table></figure><p>就说明安装成功了，并且可以正常使用。</p><h2 id="2-常用的命令"><a class="markdownIt-Anchor" href="#2-常用的命令"></a> 2. 常用的命令</h2><ol><li>安装ffmpeg首要的需求就是压缩视频，在服务器上处理了视频以后，通常原来的视频有22M左右，最后竟然处理为600M,这是由于直接使用opencv进行视频的生成，没有进行压缩导致的占用空间过大。这时候就需要ffmpeg进行视频压缩，原先600M左右的视频通过使用以下命令可以压缩到10M左右。</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -y -i demo.avi -r 10 -b:a 32k output.mp4</span><br></pre></td></tr></table></figure><ul><li>-y 覆盖重名文件</li><li>-i 输入文件</li><li>-r 1秒10帧</li><li>-b:a 32k 表示音频1秒保存32kb，即1秒4kB</li><li>output.mp4 输出文件名称</li></ul><p>在python中使用以下命令比较合适</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.system(&quot;ffmpeg -y -i demo.avi -r 10 -b:a 32k %s.mp4&quot; % (your_file_name))</span><br></pre></td></tr></table></figure><ol start="2"><li>剪切视频</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg  -y -i C:/plutopr.mp4 -acodec copy </span><br><span class="line">-vf scale=1280:720</span><br><span class="line">-ss 00:00:10 -t 15 C:/cutout1.mp4</span><br></pre></td></tr></table></figure><ul><li>-ss time_off set the start time offset 设置从视频的哪个时间点开始截取，上文从视频的第10s开始截取</li><li>-to 截到视频的哪个时间点结束。上文到视频的第15s结束。截出的视频共5s.如果用-t 表示截取多长的时间如 上文-to 换位-t则是截取从视频的第10s开始，截取15s时长的视频。即截出来的视频共15s.</li><li>-vcodec copy表示使用跟原视频一样的视频编解码器。</li><li>-acodec copy表示使用跟原视频一样的音频编解码器。</li><li>-i 表示源视频文件</li><li>-y 表示如果输出文件已存在则覆盖。</li><li>-vf 设置视频分辨率</li></ul><ol start="3"><li><p>提取视频关键帧并组合为新的视频（方便标注）</p><p>切割视频为关键帧：</p></li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i .\part1_0015.mp4 -vf select=&apos;eq(pict_type\,I)&apos; -vsync 2 -s 1280*720 -f image2 .\0015\%04d.jpg</span><br></pre></td></tr></table></figure><p>将关键帧所在文件夹内容保存为新的视频</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -threads 2 -y -r 10 -i .\0015\%04d.jpg  output.mp4</span><br></pre></td></tr></table></figure><h2 id="references"><a class="markdownIt-Anchor" href="#references"></a> References</h2><p>解压：<a href="https://www.cnblogs.com/0616--ataozhijia/p/3670893.html" target="_blank" rel="noopener">https://www.cnblogs.com/0616--ataozhijia/p/3670893.html</a></p><p>安装：<a href="https://blog.csdn.net/tenebaul/article/details/31439377" target="_blank" rel="noopener">https://blog.csdn.net/tenebaul/article/details/31439377</a></p><p>压缩：<a href="https://cloud.tencent.com/developer/article/1331837" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1331837</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;1-无管理员权限下的安装方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#1-无管理员权限下的安装方法&quot;&gt;&lt;/a&gt; 1. 无管理员权限下的安装方法&lt;/h2&gt;
+&lt;p&gt;首先下载安装包并解压：&lt;/p&gt;
+&lt;figure class=&quot;high
+      
+    
+    </summary>
+    
+    
+    
+      <category term="ubuntu" scheme="http://yoursite.com/tags/ubuntu/"/>
+    
+      <category term="无管理员权限" scheme="http://yoursite.com/tags/%E6%97%A0%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90/"/>
+    
+      <category term="ffmpeg" scheme="http://yoursite.com/tags/ffmpeg/"/>
+    
+      <category term="使用教程" scheme="http://yoursite.com/tags/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>视频标注软件Darklabel用法指南</title>
@@ -565,41 +597,6 @@
       <category term="object detection" scheme="http://yoursite.com/tags/object-detection/"/>
     
       <category term="评价指标" scheme="http://yoursite.com/tags/%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Ubuntu16.04, CUDA8 CUDNN6 下安装 Tensorflow-gpu, Keras, Pytorch, fastai</title>
-    <link href="http://yoursite.com/2019/07/16/Ubuntu16.04,%20CUDA8%20CUDNN6%20%E4%B8%8B%E5%AE%89%E8%A3%85%20Tensorflow-gpu,%20Keras/"/>
-    <id>http://yoursite.com/2019/07/16/Ubuntu16.04,%20CUDA8%20CUDNN6%20%E4%B8%8B%E5%AE%89%E8%A3%85%20Tensorflow-gpu,%20Keras/</id>
-    <published>2019-07-16T06:54:46.000Z</published>
-    <updated>2019-11-11T14:07:21.674Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="如何访问tensorflow官方网站"><a class="markdownIt-Anchor" href="#如何访问tensorflow官方网站"></a> 如何访问tensorflow官方网站</h2><p>tensorflow官方网站变为：<a href="https://tensorflow.google.cn/" target="_blank" rel="noopener">https://tensorflow.google.cn/</a></p><h2 id="安装深度学习框架"><a class="markdownIt-Anchor" href="#安装深度学习框架"></a> 安装深度学习框架</h2><h3 id="0-ubuntu查看cuda和cudnn版本"><a class="markdownIt-Anchor" href="#0-ubuntu查看cuda和cudnn版本"></a> 0. ubuntu查看CUDA和cuDNN版本</h3><p>CUDA:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/local/cuda/version.txt</span><br></pre></td></tr></table></figure><p>cuDNN:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2</span><br></pre></td></tr></table></figure><h3 id="1-keras"><a class="markdownIt-Anchor" href="#1-keras"></a> 1. keras</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tensorflow 1.5 和 keras 2.1.4搭配</span><br><span class="line">tensorflow 1.4 和 keras2.1.3搭配</span><br><span class="line">tensorflow 1.3 和keras 2.1.2 搭配</span><br><span class="line">tensorflow 1.2 和keras 2.1.1搭配</span><br></pre></td></tr></table></figure><table><thead><tr><th>版本</th><th>Python 版本</th><th>编译器</th><th>编译工具</th><th>cuDNN</th><th>CUDA</th></tr></thead><tbody><tr><td>tensorflow_gpu-2.0.0-alpha0</td><td>2.7、3.3-3.6</td><td>GCC 4.8</td><td>Bazel 0.19.2</td><td>7.4.1以及更高版本</td><td>CUDA 10.0 (需要 410.x 或更高版本)</td></tr><tr><td>tensorflow_gpu-1.13.0</td><td>2.7、3.3-3.6</td><td>GCC 4.8</td><td>Bazel 0.19.2</td><td>7.4</td><td>10</td></tr><tr><td>tensorflow_gpu-1.12.0</td><td>2.7、3.3-3.6</td><td>GCC 4.8</td><td>Bazel 0.15.0</td><td>7</td><td>9</td></tr><tr><td>tensorflow_gpu-1.11.0</td><td>2.7、3.3-3.6</td><td>GCC 4.8</td><td>Bazel 0.15.0</td><td>7</td><td>9</td></tr><tr><td>tensorflow_gpu-1.10.0</td><td>2.7、3.3-3.6</td><td>GCC 4.8</td><td>Bazel 0.15.0</td><td>7</td><td>9</td></tr><tr><td>tensorflow_gpu-1.9.0</td><td>2.7、3.3-3.6</td><td>GCC 4.8</td><td>Bazel 0.11.0</td><td>7</td><td>9</td></tr><tr><td>tensorflow_gpu-1.8.0</td><td>2.7、3.3-3.6</td><td>GCC 4.8</td><td>Bazel 0.10.0</td><td>7</td><td>9</td></tr><tr><td>tensorflow_gpu-1.7.0</td><td>2.7、3.3-3.6</td><td>GCC 4.8</td><td>Bazel 0.9.0</td><td>7</td><td>9</td></tr><tr><td>tensorflow_gpu-1.6.0</td><td>2.7、3.3-3.6</td><td>GCC 4.8</td><td>Bazel 0.9.0</td><td>7</td><td>9</td></tr><tr><td>tensorflow_gpu-1.5.0</td><td>2.7、3.3-3.6</td><td>GCC 4.8</td><td>Bazel 0.8.0</td><td>7</td><td>9</td></tr><tr><td>tensorflow_gpu-1.4.0</td><td>2.7、3.3-3.6</td><td>GCC 4.8</td><td>Bazel 0.5.4</td><td>6</td><td>8</td></tr><tr><td>tensorflow_gpu-1.3.0</td><td>2.7、3.3-3.6</td><td>GCC 4.8</td><td>Bazel 0.4.5</td><td>6</td><td>8</td></tr><tr><td>tensorflow_gpu-1.2.0</td><td>2.7、3.3-3.6</td><td>GCC 4.8</td><td>Bazel 0.4.5</td><td>5.1</td><td>8</td></tr><tr><td>tensorflow_gpu-1.1.0</td><td>2.7、3.3-3.6</td><td>GCC 4.8</td><td>Bazel 0.4.2</td><td>5.1</td><td>8</td></tr><tr><td>tensorflow_gpu-1.0.0</td><td>2.7、3.3-3.6</td><td>GCC 4.8</td><td>Bazel 0.4.2</td><td>5.1</td><td>8</td></tr></tbody></table><p>本地环境安装的是CUDA8和CUDNN5，所以采用以下命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorflow-gpu==1.2.0 -i https://mirrors.aliyun.com/pypi/simple</span><br><span class="line">pip install keras==2.1.1</span><br></pre></td></tr></table></figure><h3 id="2-fastai"><a class="markdownIt-Anchor" href="#2-fastai"></a> 2. fastai</h3><p>安装比较人性化：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install fastai</span><br></pre></td></tr></table></figure><p>测试：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> fastai</span><br><span class="line"><span class="keyword">import</span> torch</span><br></pre></td></tr></table></figure><p>如果没有报错就说明正常，一般配合jupyter notebook进行使用，比较方便。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install jupter</span><br></pre></td></tr></table></figure><h2 id="报错解决"><a class="markdownIt-Anchor" href="#报错解决"></a> 报错解决</h2><ol><li>TypeError: softmax</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: softmax() got an unexpected keyword argument &apos;axis&apos;</span><br></pre></td></tr></table></figure><p>当前keras版本是2.2 退回到2.1</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install keras==2.1</span><br></pre></td></tr></table></figure><ol start="2"><li>TypeError: validation_split</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: __init__() got an unexpected keyword argument &apos;validation_split&apos;</span><br></pre></td></tr></table></figure><p>将validation_split删除</p><ol start="3"><li>TypeError: fit_generator() missing 1 required positional argument: ‘steps_per_epoch’</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: fit_generator() missing 1 required positional argument: &apos;steps_per_epoch&apos;</span><br></pre></td></tr></table></figure><p>添加上steps_pers_epoch参数，这是一个必要参数，但是不同版本keras要求不太一样。</p><ol start="4"><li>RemoveError: ‘setuptools’ is a dependency of conda and cannot be removed from</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda update conda</span><br></pre></td></tr></table></figure><ol start="5"><li>jupyter notebook no module named xxx</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">which jupyter # 查看使用的是哪个jupyter，通常情况下这种情况出现一般用的是系统的jupyter而不是anaconda中的jupyter</span><br></pre></td></tr></table></figure><p>通过以上分析可以得到解决方案是使用以下命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install jupyter</span><br></pre></td></tr></table></figure><p>再次查看使用的是哪个jupyter</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">which jupter</span><br></pre></td></tr></table></figure><p>如果发现使用的是anaconda中的路径那就说明成功了，问题解决。</p><ol start="6"><li>ValueError: <code>validation_steps=None</code> is only valid for a generator based on the <code>keras.utils.Sequence</code> class. Please specify <code>validation_steps</code> or use the <code>keras.utils.Sequence</code> class.</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;如何访问tensorflow官方网站&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#如何访问tensorflow官方网站&quot;&gt;&lt;/a&gt; 如何访问tensorflow官方网站&lt;/h2&gt;
-&lt;p&gt;tensorflow官方网站变为：&lt;a href
-      
-    
-    </summary>
-    
-    
-      <category term="环境配置" scheme="http://yoursite.com/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
-    
-    
-      <category term="cuda" scheme="http://yoursite.com/tags/cuda/"/>
-    
-      <category term="tensorflow" scheme="http://yoursite.com/tags/tensorflow/"/>
-    
-      <category term="ubuntu16.04," scheme="http://yoursite.com/tags/ubuntu16-04/"/>
-    
-      <category term="cudnn" scheme="http://yoursite.com/tags/cudnn/"/>
-    
-      <category term="kears" scheme="http://yoursite.com/tags/kears/"/>
     
   </entry>
   
