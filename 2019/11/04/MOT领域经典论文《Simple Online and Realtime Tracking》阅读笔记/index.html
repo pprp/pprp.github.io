@@ -60,8 +60,11 @@
 <meta property="og:site_name" content="spicyCV">
 <meta property="og:description" content="MOT领域经典论文《Simple Online and Realtime Tracking》阅读笔记  前言：目前打算将多目标检测MOT作为自己的毕设题目，相当于重新进入一个领域，在这个领域中听到最多的就是SORT论文，也就是今天要阅读的论文。 自己阅读论文的能力有点差，所以趁还没有进入研究生阶段，尽早提高自己的论文阅读理解能力，让自己在未来的路上走的更远一些。光有鸡汤还不够，需要有理论进行支撑">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-11T08:31:22.784Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217192211383.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217200703527.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-12-17T12:11:23.412Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20191217192211383.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70">
 
 <link rel="canonical" href="http://yoursite.com/2019/11/04/MOT%E9%A2%86%E5%9F%9F%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87%E3%80%8ASimple%20Online%20and%20Realtime%20Tracking%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">
 
@@ -251,7 +254,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-11 16:31:22" itemprop="dateModified" datetime="2019-11-11T16:31:22+08:00">2019-11-11</time>
+                <time title="修改时间：2019-12-17 20:11:23" itemprop="dateModified" datetime="2019-12-17T20:11:23+08:00">2019-12-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -335,22 +338,101 @@
 <p>MOT领域解决的关键问题还是数据关联(data association)</p>
 <p>SORT使用的方法是：</p>
 <ul>
-<li>Tracking-by-Detection（TBD）类别的方法：基于检测进行目标跟踪, 只根据<strong>当前和上一帧</strong>得到的内容进行跟踪。</li>
-<li>强调加强<strong>实时跟踪</strong>，并且引入自动驾驶领域的<strong>行人跟踪</strong>进行提升</li>
-<li>之前的跟踪方法只是基于BBox的位置和大小进行数据关联和移动估计(motion estimation),忽略了appearance feature,</li>
-<li></li>
+<li>
+<p>Tracking-by-Detection（TBD）类别的方法：基于检测进行目标跟踪, 只根据<strong>当前和上一帧</strong>得到的内容进行跟踪。</p>
+</li>
+<li>
+<p>强调加强<strong>实时跟踪</strong>，并且引入自动驾驶领域的<strong>行人跟踪</strong>进行提升</p>
+</li>
+<li>
+<p>之前的跟踪方法只是基于Bounding Box的<strong>位置和大小</strong>进行数据关联和移动估计(motion estimation),忽略了appearance feature</p>
+</li>
+<li>
+<p>忽视短期/长期的遮挡</p>
+</li>
+<li>
+<p>不考虑使用物体重识别方法（object reid），因为会影响到检测速度（sort目的在于尽可能的快）</p>
+</li>
+<li>
+<p>使用了faster rcnn作为目标检测器，使用了基于VOC数据集训练得到的权重，只关心person这个类，置信度阈值为0.5来判断是否是一个人</p>
+</li>
+<li>
+<p>运动预测模型：使用了卡尔曼滤波算法进行预测，使用了线性恒速运动模型进行位置预测。如果没有检测框对应目标，那就使用线性恒速运行模型对其进行简单的位置预测而不需要修正。</p>
+</li>
+<li>
+<p>数据关联模型：使用了匈牙利算法进行数据关联，其中匈牙利算法中框与框之间的距离由IOU来决定的，但是必须大于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi><mi>O</mi><msub><mi>U</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">IOU_{min}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> ，如果小于该阈值。</p>
+</li>
+<li>
+<p>ID的创建与销毁：目标进入或者离开图片会导致ID的创建和销毁，如果有检测框与现存在的检测框之间的IOU小于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi><mi>O</mi><msub><mi>U</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">IOU_{min}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>的时候，就认为他是一个新的目标框（而sort只关心前一帧与当前帧，如果检测器得到的偏差较大，那在SORT中可能就会被认为是新的目标，从而分配新的ID）</p>
+<blockquote>
+<p>如果连续 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>T</mi><mrow><mi>l</mi><mi>o</mi><mi>s</mi><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">T_{lost}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">s</span><span class="mord mathdefault mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 帧没有实现已追踪目标预测位置和检测框的IOU匹配，则认为目标消失。实验中设置 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>T</mi><mrow><mi>l</mi><mi>o</mi><mi>s</mi><mi>t</mi></mrow></msub><mo>=</mo><mn>1</mn><mi mathvariant="normal">​</mi></mrow><annotation encoding="application/x-tex">T_{lost}=1​</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">s</span><span class="mord mathdefault mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">​</span></span></span></span> ，原因有二，一是匀速运动假设不合理，二是作者主要关注短时目标追踪。另外，尽早删除已丢失的目标有助于提升追踪效率。但是，问题就出现了，这样的话目标的ID一定会频繁的切换，这样就会造成跟踪计数的不准确！</p>
+<p>知乎作者：TeddyZhang</p>
+</blockquote>
+</li>
 </ul>
 <h2 id="4-结果以及分析"><a class="markdownIt-Anchor" href="#4-结果以及分析"></a> 4. 结果以及分析</h2>
+<p><img src="https://img-blog.csdnimg.cn/20191217192211383.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>从结果可以看出，SORT的MOTA在Online算法中比较高，缺点在于ID sw太高，实际测试的时候也会发现，其ID频繁的翻转。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191217200703527.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>通过比较Accuracy和MOTA这两项，SORT遥遥领先。</p>
 <h2 id="5-结论"><a class="markdownIt-Anchor" href="#5-结论"></a> 5. 结论</h2>
+<p>使用了Faster RCNN来进行模型的检测，并使用Kalman滤波预测状态，基于检测框位置和IOU的匈牙利算法，使得算法有很高的效率。</p>
+<p>跟踪质量严重依赖于检测结果，ID sw比较严重，难以支持实际应用。</p>
 <h2 id="6-总结"><a class="markdownIt-Anchor" href="#6-总结"></a> 6. 总结</h2>
-<p>最重要想要记住的观点，或者将来会引用的</p>
+<ul>
+<li>
+<p><strong>最重要想要记住的观点，或者将来会引用的</strong></p>
+<ul>
+<li>SORT 主要由检测器，卡尔曼滤波算法，匈牙利算法匹配三个重要部分组成：</li>
+<li>检测器：必须精度足够高，能够维持框，因为SORT只用到了当前帧与前一帧的检测结果，检测器不灵敏很容易出问题。</li>
+<li>卡尔曼滤波：使用了基于坐标框的卡尔曼滤波算法，做了一个比较好的应用。</li>
+<li>匈牙利算法匹配：这个部分比较关键，采用何种方法对检测框与目标框的匹配？这里采用的是IOU单纯为了速度能更快，但是确实忽略了一些信息，比如表观信息appearance。</li>
+</ul>
+</li>
+<li>
 <p>可能用到的结论</p>
+<ul>
+<li>创新性的使用目标检测、卡尔曼滤波、匈牙利算法组合而成了SORT算法，速度确实非常快</li>
+<li>其效果严重依赖于目标检测效果，能影响到18.9%</li>
+<li>ID switch严重，严重影响效果。</li>
+</ul>
+</li>
+<li>
 <p>可能用到的方法</p>
+<ul>
+<li>理解SORT的贡献，为之后理解DEEP SORT算法做准备</li>
+</ul>
+</li>
+<li>
 <p>文章在研究设计上有哪些不足？有没有更好的改进方法？</p>
+<ul>
+<li>感觉可能使用了Faster R-CNN进行检测，可能由于他是一个二阶段的检测器，效果相对一阶段要好一点，但是奇怪为何速度如此之快，比一阶段的YOLOv3还要快。</li>
+<li>SORT是一个Online的方法，但是仅仅依靠前一帧和当前帧严重依赖了目标检测方法，如果目标检测器稍微差一点的情况下，如何更好的提升模型效果？能不能尝试使用near online方法，结合前3-5帧的框进行预测（如果目标运行不是特别迅速的情况下）。</li>
+</ul>
+</li>
+<li>
 <p>文章让你想到了哪些观点类似或者是完全不同的其他文章？</p>
+<ul>
+<li>DEEP SORT算法，之后会进行解读。</li>
+</ul>
+</li>
+<li>
 <p>对文章中观点、论述、方法、讨论部分有什么想法和评价？</p>
+<ul>
+<li>论文中方法部分：如果能进行多个检测器的比较，更详细的说明检测器的作用就好了，这篇直接使用了Faster R-CNN，并且说了检测器对模型影响最多18.9%, 检测器这块不够充实。</li>
+<li>实验部分：评价标准有点偏激，图表上展示的结果只关心MOTA和Speed， 没有说明ID switch， ID switch明显要比其他模型要高，这一点严重的影响了效果。</li>
+</ul>
+</li>
+</ul>
 <h2 id="7-其他知识"><a class="markdownIt-Anchor" href="#7-其他知识"></a> 7. 其他知识</h2>
-<p>奥卡姆剃刀原理：如无必要，勿增实体；切勿浪费较多东西去做用较少的东西同样可以做好的事情。</p>
+<p><strong>奥卡姆剃刀原理</strong>：如无必要，勿增实体；切勿浪费较多东西去做用较少的东西同样可以做好的事情。</p>
+<p>代码：<a href="https://github.com/abewley/sort" target="_blank" rel="noopener">https://github.com/abewley/sort</a></p>
+<p>在自己的项目中如何使用？（上述库中sort.py复制过来，作为自己的第三方模块）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">from sort import *</span><br><span class="line"></span><br><span class="line">#create instance of SORT</span><br><span class="line">mot_tracker = Sort() </span><br><span class="line"></span><br><span class="line"># get detections</span><br><span class="line">...</span><br><span class="line"># 注意这里的detections是类似[[x1,y1,x2,y2,score],[x1,y1,x2,y2,score],...]这种格式</span><br><span class="line"></span><br><span class="line"># update SORT</span><br><span class="line">track_bbs_ids = mot_tracker.update(detections)</span><br><span class="line"></span><br><span class="line"># track_bbs_ids is a np array where each row contains a valid bounding box and track_id (last column)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>我这里已经实现了sort和deep sort,分别运行sort.py和deep_sort.py即可。</p>
+<p>repo:<a href="https://github.com/pprp/simple_deep_sort" target="_blank" rel="noopener">https://github.com/pprp/simple_deep_sort</a></p>
+<p>其中检测器使用的是<a href="https://github.com/ultralytics/yolov3" target="_blank" rel="noopener">https://github.com/ultralytics/yolov3</a>,这个比较受欢迎，支持训练，在一直不断更新，在原版使用的检测器是解析darknet得到的yolov3.weights权重进行检测的，灵活性较差。</p>
+<p>如果有帮助，请不吝点个star 😙</p>
 
     </div>
 
