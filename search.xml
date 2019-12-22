@@ -1,6 +1,318 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>验证码识别竞赛解决方案(97%)</title>
+    <url>/2019/12/22/%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB%E7%AB%9E%E8%B5%9B%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-97/</url>
+    <content><![CDATA[<blockquote>
+<p>前言：这个库是为验证码识别竞赛而开发的一个基于pytorch实现的端到端的验证码识别系统。前后开发大概有2个月，其中大部分时间都在调参，后期参考kaggle大神经验，加入了一些trick，但是由于第一个榜截止了，所以没有得到测试集结果，只有验证集的参考结果。该库比较简单，适合入门竞赛，不过调参难度比较大，需要尝试合适的超参数，如果超参数不合适，可能会导致无法收敛，具体问题具体分析。</p>
+</blockquote>
+<h3 id="1-竞赛背景"><a class="markdownIt-Anchor" href="#1-竞赛背景"></a> 1. 竞赛背景</h3>
+<p>基于<a href="https://github.com/dee1024/pytorch-captcha-recognition" target="_blank" rel="noopener">https://github.com/dee1024/pytorch-captcha-recognition</a>进行改进，原版中数据集采用的captcha库自动生成的图片，可以随意制定生成数量，并且相对而言生成的图片比较简单。</p>
+<p>本次项目是全国高校计算机能力挑战赛中的人工智能赛道里的验证码识别，该比赛需要识别26（大写）+26（小写）+数字（10）= 62个字符，随机组成的四位验证码图片。训练集仅有5000张，并且识别的难度系数较大，人眼有时候也很容易识别出错。</p>
+<p>最终库地址：<a href="https://github.com/pprp/captcha.Pytorch" target="_blank" rel="noopener">https://github.com/pprp/captcha.Pytorch</a></p>
+<h3 id="2-环境要求"><a class="markdownIt-Anchor" href="#2-环境要求"></a> 2. 环境要求</h3>
+<ul>
+<li>显存：2G以上</li>
+<li>Ubuntu16.04</li>
+<li>numpy</li>
+<li>torch==1.1.0</li>
+<li>torchnet==0.0.4</li>
+<li>torchvision==0.2.0</li>
+<li>tqdm</li>
+<li>visdom</li>
+<li>adabound</li>
+<li>Augmentor</li>
+</ul>
+<blockquote>
+<p>可通过pip install -r requirements.txt进行环境的安装或者使用以下命令进行安装</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip install numpy torchnet==0.0.4 torchvision==0.2.0 tqdm visdom adabound Augmentor -i https://mirrors.aliyun.com/pypi/simple</span><br></pre></td></tr></table></figure>
+<h3 id="3-数据集"><a class="markdownIt-Anchor" href="#3-数据集"></a> 3. 数据集</h3>
+<p><img src="https://img-blog.csdnimg.cn/20191222093400349.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt="1575527368225"></p>
+<p>比赛提供的数据集如上图所示，120$\times$40的像素的图片，然后标签是由图片名称提供的。训练集测试集划分：80%的数据用于训练集，20%的数据用于测试集。</p>
+<ul>
+<li>
+<p>训练图片个数为：3988</p>
+</li>
+<li>
+<p>测试图片个数为：1000</p>
+</li>
+</ul>
+<p>训练的数据还是明显不够的，考虑使用数据增强，最终选择了Augmentor库作为图像增强的库。</p>
+<p>安装方式：<code>pip install Augmentor</code></p>
+<p>API: <a href="https://augmentor.readthedocs.io/en/master/index.html" target="_blank" rel="noopener">https://augmentor.readthedocs.io/en/master/index.html</a></p>
+<p>由于验证码与普通的分类图片有一定区别，所以选择的增强方式有一定局限，经过几轮实验，最终选取了distortion类的方法作为具体增强方法，输入为训练所用的图片，输出设置为原来图片个数的2倍，<a href="http://xn--dataAug-0b5kp6at0n222k7ryb.py" target="_blank" rel="noopener">具体代码见dataAug.py</a>, 核心代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_distortion_pipline</span><span class="params">(path, num)</span>:</span></span><br><span class="line">    p = Augmentor.Pipeline(path)</span><br><span class="line">    p.zoom(probability=<span class="number">0.5</span>, min_factor=<span class="number">1.05</span>, max_factor=<span class="number">1.05</span>)</span><br><span class="line">    p.random_distortion(probability=<span class="number">1</span>, grid_width=<span class="number">6</span>, grid_height=<span class="number">2</span>, magnitude=<span class="number">3</span>)</span><br><span class="line">    p.sample(num)</span><br><span class="line">    <span class="keyword">return</span> p</span><br></pre></td></tr></table></figure>
+<p>将得到的图片重命名为auged_train文件夹，最终数据集组成如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">root </span><br><span class="line">	- data</span><br><span class="line">		- train:3988张</span><br><span class="line">		- test:1000张</span><br><span class="line">		- auged_train:7976张</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>增强后的数据集，建议使用dataset2</p>
+<p>链接：<a href="https://pan.baidu.com/s/13BmN7Na4ESTPAgyfBAHMxA" target="_blank" rel="noopener">https://pan.baidu.com/s/13BmN7Na4ESTPAgyfBAHMxA</a></p>
+<p>链接：<a href="https://pan.baidu.com/s/13BmN7Na4ESTPAgyfBAHMxA" target="_blank" rel="noopener">https://pan.baidu.com/s/13BmN7Na4ESTPAgyfBAHMxA</a><br>
+提取码：v4nk</p>
+</blockquote>
+<p>数据集结构的组织,从网盘下载数据以后，按照以下文件夹格式进行组织：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- data</span><br><span class="line">	- train</span><br><span class="line">	- test</span><br><span class="line">	- auged_train</span><br></pre></td></tr></table></figure>
+<p>然后就可以训练了。</p>
+<h3 id="4-库的组织架构"><a class="markdownIt-Anchor" href="#4-库的组织架构"></a> 4. 库的组织架构</h3>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">root </span><br><span class="line">	- config</span><br><span class="line">		- parameters.py 主要包括超参数，最重要的是learning rate</span><br><span class="line">	- lib</span><br><span class="line">		- center_loss.py 将center loss引入，用于训练</span><br><span class="line">		- dataset.py 包装Dataset，针对train文件夹和auged_train文件夹内容各自写了一个处理类</span><br><span class="line">		- generate_captcha.py 生成简单的数据集，在没有官方数据集的情况下</span><br><span class="line">		- optimizer.py RAdam, AdamW, label smooth等新的optimizer</span><br><span class="line">		- scheduler.py 新增了warmup机制</span><br><span class="line">	- model</span><br><span class="line">		- BNNeck.py 基于resnet18使用了bnnect结构，来自罗浩大佬行人检测中的trick</span><br><span class="line">		- CaptchaNet.py 手工构建的一个简单网络，原有库提供的</span><br><span class="line">		- dense.py 更改backbone，使用dense121作为backbone，其他也可以更改</span><br><span class="line">		- dualpooling.py 在resnet18基础上添加了dual pooling，增加了信息</span><br><span class="line">		- IBN.py 使用ibn模块，以resnet18为基础</span><br><span class="line">		- model.py resnet18，添加dropout</span><br><span class="line">		- res18.py 引入了attention机制和dual pooling</span><br><span class="line">		- senet.py 将senet作为backbone</span><br><span class="line">	- result</span><br><span class="line">		- submission.csv 结果保存</span><br><span class="line">	- utils</span><br><span class="line">		- cutoff.py 数据增强方法，不适合验证码，可以用在普通图片</span><br><span class="line">		- dataAug.py 使用Agumentor进行数据增强</span><br><span class="line">		- Visdom.py 使用visdom记录log，进行可视化</span><br><span class="line">- predict.py 引入了多模型预测，然后分析结果</span><br><span class="line">- run.py 与predict类似，不过是单模型的预测</span><br><span class="line">- test.py 规定测试模型权重，待测试图片路径，对测试集进行测试</span><br><span class="line">- train.py 模型的训练，每个epoch先训练所有的train,然后训练所有的auged_train图片</span><br></pre></td></tr></table></figure>
+<h3 id="5-训练结果"><a class="markdownIt-Anchor" href="#5-训练结果"></a> 5. 训练结果</h3>
+<p>最好结果：</p>
+<p>ResNet18+Dropout(0.5)+RAdam+DataAugmentation+lr(3e-4) = 98.4%测试集准确率，线上A榜：97%</p>
+<p><img src="https://img-blog.csdnimg.cn/20191222093406186.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>模型分析：分析四个模型，python <a href="http://predict.py" target="_blank" rel="noopener">predict.py</a> 观察预测出错的结果，评判模型好坏，最终选择了0号模型。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191222093412830.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt="1575530264099"></p>
+<h3 id="6-调参过程记录"><a class="markdownIt-Anchor" href="#6-调参过程记录"></a> 6. 调参过程记录</h3>
+<p>调参过程记录：null代表未记录</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>item1</th>
+<th>item2</th>
+<th>item3</th>
+<th>item4</th>
+<th>item5</th>
+<th>测试:线上</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>baseline0</td>
+<td>ResNet18</td>
+<td>lr=1e-3</td>
+<td>4:1划分</td>
+<td>Adam</td>
+<td></td>
+<td>88%:84%</td>
+</tr>
+<tr>
+<td>baseline1</td>
+<td>ResNet34</td>
+<td>lr=1e-3</td>
+<td>4:1划分</td>
+<td>Adam</td>
+<td></td>
+<td>90%:84%</td>
+</tr>
+<tr>
+<td>baseline2</td>
+<td>ResNet18</td>
+<td>lr=1e-3</td>
+<td>4:1划分</td>
+<td>RAdam</td>
+<td></td>
+<td>null:<strong>90%</strong></td>
+</tr>
+<tr>
+<td>baseline3</td>
+<td>ResNet18</td>
+<td>lr=3e-4</td>
+<td>4:1划分</td>
+<td>RAdam</td>
+<td></td>
+<td>未收敛</td>
+</tr>
+<tr>
+<td>baseline4</td>
+<td>ResNet18</td>
+<td>lr=1e-1</td>
+<td>4:1划分</td>
+<td>RAdam</td>
+<td></td>
+<td>96.4%:87%</td>
+</tr>
+<tr>
+<td>baseline5</td>
+<td>ResNet18</td>
+<td>lr=1e-1</td>
+<td>4:1划分</td>
+<td>RAdam</td>
+<td>aug0</td>
+<td>98%:<strong>93%</strong></td>
+</tr>
+<tr>
+<td>baseline6</td>
+<td>ResNet18</td>
+<td>lr=1e-1</td>
+<td>9:1划分</td>
+<td>RAdam</td>
+<td>aug1</td>
+<td>60%:null</td>
+</tr>
+<tr>
+<td>baseline7</td>
+<td>ResNet18</td>
+<td>lr=1e-3</td>
+<td>4:1划分</td>
+<td>RAdam</td>
+<td>aug2</td>
+<td>null:94%</td>
+</tr>
+<tr>
+<td>baseline8</td>
+<td>ResNet18</td>
+<td>lr=1e-3</td>
+<td>4:1划分</td>
+<td>AdamW</td>
+<td>aug2</td>
+<td>98.4%:92.56%</td>
+</tr>
+<tr>
+<td>baseline9</td>
+<td>ResNet18</td>
+<td>lr=1e-3</td>
+<td>4:1划分</td>
+<td>RAdam</td>
+<td>aug3</td>
+<td>null:93.52%</td>
+</tr>
+<tr>
+<td>baseline10</td>
+<td>ResNet18</td>
+<td>lr=1e-3</td>
+<td>4:1划分</td>
+<td>RAdam</td>
+<td>aug4</td>
+<td>null:94.16%</td>
+</tr>
+<tr>
+<td>baseline11</td>
+<td>ResNet18</td>
+<td>lr=1e-3</td>
+<td>9:1划分</td>
+<td>RAdam</td>
+<td>aug5</td>
+<td>60%:null</td>
+</tr>
+<tr>
+<td>baseline12</td>
+<td>ResNet18</td>
+<td>lr=3.5e-4</td>
+<td>4:1划分</td>
+<td>RAdam</td>
+<td>aug2</td>
+<td>null:<strong>94.72%</strong></td>
+</tr>
+<tr>
+<td>baseline13</td>
+<td>ResNet18</td>
+<td>lr=3.5e-4 decay:6e-4</td>
+<td>4:1划分</td>
+<td>RAdam</td>
+<td>aug2</td>
+<td>null:<strong>95.16%</strong></td>
+</tr>
+<tr>
+<td>baseline14</td>
+<td>ResNet18</td>
+<td>lr=3.5e-4 decay:7e-4</td>
+<td>4:1划分</td>
+<td>RAdam</td>
+<td>aug2</td>
+<td>bad</td>
+</tr>
+<tr>
+<td>baseline15</td>
+<td>ResNet18</td>
+<td>lr=3.5e-5 decay:6.5e-4</td>
+<td>4:1划分</td>
+<td>RAdam</td>
+<td>aug2</td>
+<td>null:95%</td>
+</tr>
+<tr>
+<td>baseline16</td>
+<td>ResNet18</td>
+<td>lr=3.5e-5 decay:6.5e-4</td>
+<td>4:1划分</td>
+<td>RAdam</td>
+<td>drop(0.5)</td>
+<td>null:97%</td>
+</tr>
+</tbody>
+</table>
+<p>以上的aug代表数据增强：</p>
+<ul>
+<li>
+<p><strong>aug0:</strong> +distrotion</p>
+</li>
+<li>
+<p><strong>aug1</strong>: 9:1划分+扩增3倍</p>
+</li>
+<li>
+<p><strong>aug2</strong>: +distortion+zoom</p>
+</li>
+<li>
+<p><strong>aug3:</strong> +tilt+扩增两倍</p>
+</li>
+<li>
+<p><strong>aug4:</strong> aug2+aug3混合</p>
+</li>
+<li>
+<p><strong>aug5:</strong> 9:1划分 +tilt倾斜</p>
+</li>
+</ul>
+<p>数据增强示意图：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">example1</th>
+<th style="text-align:center">example2</th>
+<th style="text-align:center">example3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="https://img-blog.csdnimg.cn/20191222093349734.gif" alt="在这里插入图片描述"></td>
+<td style="text-align:center"><img src="https://img-blog.csdnimg.cn/20191222093344933.gif" alt="2"></td>
+<td style="text-align:center"><img src="https://img-blog.csdnimg.cn/2019122209335545.gif" alt="3"></td>
+</tr>
+</tbody>
+</table>
+<p>后期由于错过了提交时间，只能进行测试集上的测试，主要方案有以下：</p>
+<ul>
+<li>learning rate scheduler尝试：CosineAnnealingLR, ReduceLROnPlateau,StepLR,MultiStepLR</li>
+<li>更改backbone: senet, densenet</li>
+<li>在res18基础上添加：attention机制，dual pooling, ibn模块，bnneck等</li>
+<li>尝试center loss，收敛很慢，但是效果应该不错</li>
+</ul>
+<p>还未尝试的方案：</p>
+<ul>
+<li>label smooth</li>
+<li>多模型ensemble</li>
+</ul>
+<hr>
+<p>联系方式：</p>
+<ul>
+<li>QQ: 1115957667</li>
+<li>CSDN:<a href="https://blog.csdn.net/DD_PP_JJ" target="_blank" rel="noopener">https://blog.csdn.net/DD_PP_JJ</a></li>
+<li>博客园:<a href="https://www.cnblogs.com/pprp" target="_blank" rel="noopener">https://www.cnblogs.com/pprp</a></li>
+</ul>
+<hr>
+<blockquote>
+<p>后记：整个比赛下来得到了一等奖，整个过程可谓过山车一般，比赛还没有放榜的时候，觉得问题不会很难，因为提前查看了网上的验证码库，研究了一下发现，大部分验证码都很简单，比较清晰，但是这次验证码下来以后就发现难度比较大</p>
+<ul>
+<li>数字+大小写字母，容易混淆</li>
+<li>图片验证码难以识别，人眼都难以分辨</li>
+<li>选择架构，直接选取端到端还是先切割然后 做单字符识别</li>
+<li>数据量很小, 其他库可以用captcha进行验证码的生成，所以数据量不会受限制，这次训练一共给了5000，划分完训练集验证机以后就只剩下4000图片用于训练，数据规模比较小，所以可能对超参数比较敏感，如果选取不合适就会导致模型不收敛。</li>
+</ul>
+<p>之后就选择了一个能达到80%准确率的baseline开始调整，然后在自己的验证集通过调参能够达到90%的准确率，然后就开始感觉差不多了，因为里边确实有很多人眼都识别不清楚。但是还是低估了神经网络的能力，榜单不断刷新，直逼100%, 后边把我从前10挤到了100多，然后这个时候开始正视这个比赛，开始认真调参，更换模型，添加最新的trick等等，其中比较有感触的是比赛结束前一段时间，突发奇想想加入dropout, dropout可以视作多模型集成，效果可能会好一点，所以加了dropout以后，榜一排名到了30左右，最终也选择提交这个带有dropout的模型，最终才得到不错的结果。</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>pytorch</tag>
+        <tag>验证码识别</tag>
+        <tag>竞赛经验</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>REID系列: In Defense of the Triplet Loss for Person Re-Identification</title>
+    <url>/2019/12/20/REID%E7%B3%BB%E5%88%97-In-Defense-of-the-Triplet-Loss-for-Person-Re-Identification/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>无root权限情况ffmpeg的安装和使用教程</title>
     <url>/2019/12/14/%E6%97%A0root%E6%9D%83%E9%99%90%E6%83%85%E5%86%B5ffmpeg%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</url>
     <content><![CDATA[<h2 id="1-无管理员权限下的安装方法"><a class="markdownIt-Anchor" href="#1-无管理员权限下的安装方法"></a> 1. 无管理员权限下的安装方法</h2>
@@ -890,8 +1202,8 @@ AttributeError: ‘VOCDataset’ object has no attribute ‘img_ids’</module><
 </blockquote>
 ]]></content>
       <tags>
-        <tag>深度学习环境</tag>
         <tag>Ubuntu</tag>
+        <tag>深度学习环境</tag>
         <tag>2080Ti</tag>
         <tag>CUDA10, cuDNN7.5</tag>
       </tags>
@@ -2023,11 +2335,11 @@ An-->B</pre>
         <category>环境配置</category>
       </categories>
       <tags>
-        <tag>cuda</tag>
-        <tag>tensorflow</tag>
         <tag>ubuntu16.04,</tag>
+        <tag>cuda</tag>
         <tag>cudnn</tag>
         <tag>kears</tag>
+        <tag>tensorflow</tag>
       </tags>
   </entry>
   <entry>
