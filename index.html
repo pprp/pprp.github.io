@@ -220,6 +220,228 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/28/%E8%AE%BA%E6%96%87%E3%80%8ALearning-Efficient-Convolutional-Networks-through-Network-Slimming%E3%80%8B%E7%BF%BB%E8%AF%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/28/%E8%AE%BA%E6%96%87%E3%80%8ALearning-Efficient-Convolutional-Networks-through-Network-Slimming%E3%80%8B%E7%BF%BB%E8%AF%91/" class="post-title-link" itemprop="url"># 论文《Learning Efficient Convolutional Networks through Network Slimming》翻译</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-28 16:45:08 / 修改时间：20:55:20" itemprop="dateCreated datePublished" datetime="2019-12-28T16:45:08+08:00">2019-12-28</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[TOC]</p>
+<h2 id="1-摘要"><a class="markdownIt-Anchor" href="#1-摘要"></a> 1. 摘要</h2>
+<p>在许多实际应用中部署深度卷积神经网络在很大程度上受到其高计算成本的阻碍。本文提出了一种新的CNN学习方案，以同时达到</p>
+<ol>
+<li>
+<p>减小模型大小;</p>
+</li>
+<li>
+<p>减少运行时内存占用;</p>
+</li>
+<li>
+<p>降低计算操作次数，同时不影响准确性。</p>
+</li>
+</ol>
+<p>这是通过以简单但有效的方式在网络中实施信道级稀疏性来实现的。与许多现有方法不同，所提出的方法直接应用于现代CNN架构，为训练过程引入最小开销，并且不需要用于所得模型的特殊软件/硬件加速器。我们将我们的方法称为<strong>网络瘦身</strong>，它将广泛和大型网络作为输入模型，但在训练过程中，自动识别和修剪了无关紧要的通道，从而产生具有相当精度的薄而紧凑的模型。我们通过各种图像分类数据集，在几个最先进的CNN模型（包括VGGNet，ResNet和DenseNet）上凭经验证明了我们方法的有效性。对于VGGNet，网络瘦身的多次通过版本可使模型尺寸减少20倍，计算操作减少5倍。</p>
+<h2 id="2-简介"><a class="markdownIt-Anchor" href="#2-简介"></a> 2. 简介</h2>
+<p>近年来，卷积神经网络（CNN）已成为各种计算机视觉任务的主要方法，例如图像分类，物体检测，语义分割大规模数据集，高端现代GPU和新的网络架构允许开发前所未有的大型CNN模型。例如，从AlexNet ，VGGNet 和GoogleNet 到ResNets ，ImageNet Classification Challenge获胜者模型已经从8层发展到超过100层。然而，更大的CNN虽然具有更强的代表能力，但更需要资源。例如，152层ResNet 有超过6000万个参数，并且在推断分辨率为224×224的图像时需要超过20个GFLOP。在资源有限的平台上，例如移动设备，可穿戴设备或物联网（IoT）设备，这种情况不太可能实现。</p>
+<p>CNN在实际应用中的部署主要受到以下因素的限制：</p>
+<ol>
+<li>
+<p>模型大小：CNN的强大表现力来自其数百万可训练参数。这些参数以及网络结构信息需要存储在磁盘上并在推理期间加载到内存中。例如，存储在ImageNet上训练的典型CNN会占用超过300MB的空间，这对嵌入式设备来说是一个很大的资源负担。</p>
+</li>
+<li>
+<p>运行时内存：在推理期间，即使批量大小为1，CNN的中间激活/响应甚至可能比存储模型参数占用更多的内存空间。这对于高端GPU来说不是问题，但对于许多具有低计算能力的应用来说是难以承受的。</p>
+</li>
+<li>
+<p>计算操作的数量：卷积操作在高分辨率图像上是计算密集的。大型CNN可能需要几分钟来处理移动设备上的单个图像，这使得在实际应用中采用它是不现实的。</p>
+</li>
+</ol>
+<p>现在已经提出许多工作来压缩大型CNN或直接学习更有效的CNN模型以进行快速推理。这些包括低秩近似，网络量化和二值化，权重修剪，动态推理等。但是，大多数这些方法只能解决上面提到的一个或两个挑战。此外，一些技术需要专门设计的软件/硬件加速器来执行加速。另一个降低大型CNNs资源消耗的方向是网络的稀疏化。稀疏性可以施加于不同层次的结构，这产生了相当大的模型大小的压缩和推理速度。然而，这些方法通常需要特殊的软件/硬件加速器来获得内存或节省时间的收益。</p>
+<p>在本文中，我们提出了一种简单而有效的网络训练方案——网络瘦身，它解决了在有限资源下部署大型CNNs所面临的所有上述挑战。我们的方法将L1正则化应用于批量标准化(BN)层的缩放因子上，因此无需对现有CNN体系结构进行任何更改就可以轻松实现。将BN尺度因子值通过L1正则化趋近于零，可以识别出不重要的通道(或神经元. 因为每个尺度因子对应一个特定的卷积通道(或全连接层中的神经元)。这便于在接下来的步骤中进行通道级修剪。额外的正则化项很少会影响性能。事实上，在某些情况下，它会导致更高的泛化精度。修剪不重要的通道有时会暂时降低性能，但是这种效果可以通过对修剪后的网络进行微调来补偿。经过修剪后，与初始的宽网络相比，最终的窄网络在模型大小、运行时内存和计算操作方面更加紧凑。上述过程可以重复多次，得到一个多通网络瘦身方案，从而使网络更加紧凑。在多个基准数据集和不同网络架构上的实验表明，我们可以获得与原始模型相同甚至更高精度的CNN模型，其模量压缩高达20倍，计算操作减少了5倍。此外，我们的方法通过传统的硬件和深度学习软件包实现了模型压缩和推理的加速，因为得到的更窄的模型不需要任何稀疏存储格式或计算操作。</p>
+<h2 id="3-相关工作"><a class="markdownIt-Anchor" href="#3-相关工作"></a> 3. 相关工作</h2>
+<p>这一部分将从五个方面来讨论相关工作。</p>
+<p>（1）利用奇异值分解(SVD)等技术，用低秩矩阵逼近神经网络中的权矩阵。这种方法在完全连接的层上尤其有效，生成∼3x模型大小的压缩，但是没有显著的速度加速，因为CNN中的计算操作主要来自卷积层。</p>
+<p>（2）权值量化。HashNet 建议对网络权重进行量化。在训练之前，将网络权重散列到不同的组中，并在每个组权重中共享该值。这样，只需要存储共享的权值和散列索引，就可以节省大量的存储空间。在深压缩管道中采用了改进的量化技术，在AlexNet和VGGNet上实现了35x到49x的压缩速率。但是，这些技术既不能节省运行时内存，也不能节省推理时间，因为在推理期间需要将共享权重恢复到它们的原始位置。实值权值量化为二元/三元权值(权值限制为{- 1,1}或{- 1,0,1})。这产生了大量的模型大小节省，并可以获得显著的加速，给定位操作库。然而，这种侵略性的低比特近似方法通常伴随着适度的精度损失。</p>
+<p>（3）权重修剪/稀疏化。在训练好的神经网络中，用小权值剔除不重要的连接。结果网络的权值大多为零，因此可以通过以稀疏格式存储模型来减少存储空间。然而，这些方法只能通过专用的稀疏矩阵运算库和/或硬件来实现加速。运行时内存节省也非常有限，因为大多数内存空间是由激活映射(仍然很密集)而不是权重消耗的。没有训练稀疏性的指导。通过显式地对每个权重施加带有附加门变量的稀疏约束来克服这一限制，并通过修剪具有零门值的连接来实现高压缩率。</p>
+<p>（4）结构化修剪/稀疏化。最近，提出在经过训练的CNNs中对输入权值较小的信道进行修剪，然后对网络进行微调以恢复精度。在训练前通过在卷积层中随机失活输入-输出通道级连接，引入稀疏性，从而产生较小的网络，精度损失适中。与这些工作相比，我们在训练过程中明确地在优化目标中加入信道稀疏性，使得信道修剪过程更加平滑，精度损失较小。</p>
+<p>在训练过程中增加了神经元水平的稀疏性，因此可以对一些神经元进行剪枝以获得紧凑的网络。提出了一种结构化稀疏学习(SSL)方法来稀疏化CNNs中不同层次的结构(如过滤器、通道或层)。两种方法都利用训练过程中的群体稀疏化来获得结构化稀疏性。该方法不依赖于卷积权值的组稀疏性，而是对信道尺度因子施加简单的L1稀疏性，优化目标简单得多。</p>
+<p>由于这些方法对网络结构的一部分(如神经元、通道)进行了修剪或稀疏化，而不是单独的权值，因此它们通常需要较少的专用库(如用于稀疏计算操作)来实现推理加速和运行时内存节省。我们的网络瘦身也属于这一类，完全不需要特殊的库来获得这些好处。</p>
+<p>（5）神经结构的学习。虽然最先进的CNNs通常由专家设计，但也有一些关于自动学习网络架构的探索。子模块/超模块优化用于给定资源预算下的网络架构搜索。最近的一些工作提出利用强化学习自动学习神经结构。这些方法的搜索空间非常大，需要训练数百个模型来区分优劣。网络瘦身也可以作为一种架构学习方法，尽管选择仅限于每一层的宽度。然而，与上述方法相比，网络瘦身只通过一个单一的训练过程来学习网络架构，这符合我们的效率目标。</p>
+<h2 id="4-网络瘦身"><a class="markdownIt-Anchor" href="#4-网络瘦身"></a> 4. 网络瘦身</h2>
+<p>目标是提供一个简单的方案，以实现通道级稀疏在深CNNs。在本节中，我们首先讨论通道级稀疏性的优点和挑战，并介绍如何在批处理规范化中利用缩放层来有效地识别和删除网络中不重要的通道。</p>
+<p>通道级稀疏性的优点。如前所述，稀疏性可以在不同的层次上实现，如重量级、核级、沟道级或层级。细粒度级别(例如，权重级别)的稀疏性提供了最高的灵活性，通用性导致更高的压缩率，但通常需要特殊的软件或硬件加速器来对稀疏模型进行快速推理。相反，最粗的层级稀疏性不需要特殊的包来获得推理加速，而它的灵活性较差，因为需要修剪一些完整的层。事实上，只有当深度足够大，如超过50层时，去除层才有效。相比之下，通道级别的稀疏性在灵活性和易于实现之间提供了一个很好的折衷。它可以应用于任何典型的CNNs或全连通网络(将每个神经元视为一个通道. 得到的网络本质上是未剪枝网络的“精简”版本，可以在传统CNN平台上有效地进行推理。</p>
+<p>挑战。实现通道级稀疏性需要修剪与通道关联的所有传入和传出连接。这使得直接剪枝预先训练模型上的权值的方法无效，因为通道的输入或输出端上的所有权值不太可能碰巧接近于零。正如所报道的，在预先训练的ResNets上修剪通道只能导致参数数减少约10%，而不会造成精度损失。通过在训练目标中强制稀疏正则化来解决这个问题。具体来说，他们在训练过程中采用群LASSO将同一通道对应的所有滤波权重同时推向零。但是，这种方法需要计算附加正则化项相对于所有过滤器权重的梯度，而这并不是微不足道的。我们介绍了一个简单的想法来解决上述挑战，具体细节如下。</p>
+<p>尺度因子和稀疏性惩罚。我们的想法是为每个通道引入比例因子γ,即增加的输出通道。然后我们联合训练网络权值和这些尺度因子，并对后者进行稀疏正则化。最后，我们用小因子对这些信道进行了修剪，并对修剪后的网络进行了微调。具体来说，我们方法的训练目标是由以下公式决定的。</p>
+<p><img src="/.com//1577536582053.png" alt="1577536582053"></p>
+<p>其中，（x，y）表示训练的输入和目标输出；W表示训练权重，第一项求和是CNN正常训练后的loss，g(·)是一个sparsity-induced处罚比例因素,和λ平衡系数。在我们的实验中，我们选择g(s) = |s|，这被称为L1-norm，被广泛用于实现稀疏性。采用亚梯度下降法对non-smooth-L1惩罚项进行优化。另一种选择是用smooth-L1惩罚替换L1惩罚，以避免在非光滑点使用子梯度。</p>
+<p><img src="/.com//1577536658537.png" alt="1577536658537"></p>
+<p>由于修剪通道本质上对应于删除该通道的所有传入和传出连接，因此我们可以直接获得一个狭窄的网络(参见上图. 而无需使用任何特殊的稀疏计算包。尺度因子作为通道选择的代理。由于它们与网络权值共同优化，网络可以自动识别不重要的信道，可以在不影响泛化性能的前提下安全删除。</p>
+<p><strong>利用BN层中的缩放因子</strong>。批量归一化[19]已被大多数现代CNNs采用作为标准方法，以实现快速收敛和更好的泛化性能。BN规范激活的方式促使我们设计一种简单而有效的方法来整合通道尺度因子。特别是，BN层使用小批统计数据对内部激活进行规范化。设Z.in和Z.out为一个BN层的输入和输出，B为当前的minibatch, BN层进行如下转换:</p>
+<p><img src="/.com//1577536700523.png" alt="1577536700523"></p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="normal">µ</mi><mi>B</mi></msub></mrow><annotation encoding="application/x-tex">µ_B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.47833099999999995em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord">µ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>σ</mi><mi>B</mi></msub></mrow><annotation encoding="application/x-tex">σ_B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>是输入激活/ B的平均值和标准偏差值；γ和β是可训练的仿射变换参数，它为线性转换规范化激活任何尺度提供了可能性。</p>
+<p>在卷积层之后插入BN层是一种常见的做法，具有通道级缩放/移位参数。因此,我们可以直接利用BN层γ参数作为网络的扩展因素我们需要减肥。它的最大优点是不给网络带来开销。事实上，这可能也是我们学习有意义的通道修剪缩放因子的最有效方法。</p>
+<ol>
+<li>
+<p>如果我们在没有BN层的CNN上添加尺度层，尺度因子的值对于评估信道的重要性没有意义，因为卷积层和尺度层都是线性变换。通过减小尺度因子值，同时增大卷积层的权值，可以得到相同的结果。</p>
+</li>
+<li>
+<p>如果在BN层之前插入一个缩放层，则BN的归一化过程将完全抵消缩放层的缩放效果。</p>
+</li>
+<li>
+<p>如果我们在BN层之后插入缩放层，每个通道都有两个连续的缩放因子。</p>
+</li>
+</ol>
+<p>通道修剪和微调。经过信道级稀疏诱导正则化下的训练，我们得到了一个许多尺度因子接近于零的模型(如图1所示. 然后我们可以用接近于零的尺度因子对信道进行修剪，去除它们所有的传入和传出连接以及相应的权重。我们在所有层中使用全局阈值对通道进行修剪，该阈值定义为所有比例因子值的某个百分位数。例如，我们通过选择百分位数阈值为70%来修剪具有较低比例因子的70%通道。通过这样做，我们获得了一个更紧凑的网络，具有更少的参数和运行时内存，以及更少的计算操作。当剪枝率较高时，剪枝可能会暂时导致一定的精度损失。但是，这在很大程度上可以通过修剪后的网络上的后续微调过程得到补偿。在我们的实验中，在许多情况下，微调窄网络甚至可以达到比原始未剪枝网络更高的精度。</p>
+<p>多路计划。我们还可以将该方法从单遍学习方案(稀疏正则化训练、剪枝和微调)扩展到多遍学习方案。具体来说，一个网络瘦身的过程导致了一个狭窄的网络，在这个网络上我们可以再次应用整个训练过程来学习一个更加紧凑的模型。图2中的虚线说明了这一点。实验结果表明，该多通道方案在压缩率方面有较好的效果。</p>
+<p>处理跨层连接和预激活结构。上面介绍的网络瘦身过程可以直接应用于大多数普通CNN架构，如AlexNet和VGGNet。当它应用于具有跨层连接的现代网络和预激活设计(如ResNet和DenseNet)时，需要进行一些调整。对于这些网络，一层的输出可以看作是多个后续层的输入，其中BN层放在卷积层之前。在这种情况下，稀疏性是在层的传入端实现的，即，该层选择性地使用它接收到的通道的子集。为了在测试时获得参数和计算节省，我们需要放置一个通道选择层来屏蔽我们已经识别的不重要的通道。</p>
+<h2 id="5-实验"><a class="markdownIt-Anchor" href="#5-实验"></a> 5. 实验</h2>
+<p>这里展示了一些数据集上的效果。</p>
+<p><img src="/.com//1577536914788.png" alt="1577536914788"></p>
+<p>数据集有以下几个：</p>
+<p><strong>CIFAR</strong>。两个CIFAR数据集由分辨率为32×32的自然图像组成。CIFAR-10来自10,CIFAR-100来自100个类。火车和测试集分别包含50,000和10,000张图像。CIFAR10,验证组5000个图像分割的训练集的搜索λ(方程1)在每个模型。我们报告最后的测试错误后，培训或微调所有培训图像。采用标准的数据增强方案(移位/镜像)。采用通道均值和标准差对输入数据进行归一化。我们还将我们的方法与CIFAR数据集上的进行了比较。</p>
+<p><strong>SVHN</strong>。街景房号(SVHN)数据集由32x32个彩色数字图像组成。按照惯例，我们使用所有604,388张训练图像，从中分离出6000张验证集，用于训练期间的模型选择。测试集包含26,032张图像。在训练过程中，我们选择验证误差最小的模型作为要修剪的模型(或基线模型)。我们还报告了在微调过程中验证误差最小的模型的测试误差。</p>
+<p><strong>ImageNet</strong>。ImageNet数据集包含120万张训练图像和5000张1000个类的验证图像。我们采用了与相同的数据增强方案。我们报告了最终模型的单中心作物验证误差。</p>
+<p><strong>MNIST</strong>。MNIST是一个手写数字数据集，包含60000张训练图像和10000张测试图像。为了测试我们的方法在全连接网络上的有效性(将每个神经元作为一个1×1空间大小的通道)，我们将我们的方法与这个数据集上的[35]进行了比较。</p>
+<p><strong>网络模型</strong></p>
+<p>在CIFAR和SVHN数据集上，我们分别对VGGNet、ResNet和DenseNet三种流行的网络架构进行了评估。VGGNet最初是为ImageNet分类而设计的。在我们的实验中，我们从中提取了CIFAR数据集的原始VGGNet的一个变体。对于ResNet，使用了具有瓶颈结构(ResNet-164)的164层预激活ResNet。对于DenseNet，我们使用生长速率为12 (DenseNet-40)的40层DenseNet。</p>
+<p>在ImageNet数据集上，我们采用了11层(8-conv + 3fc)的“VGG-A”网络模型，并对其进行了批量归一化。我们删除了dropout层，因为我们使用了相对较重的数据增强。为了对全连接层神经元进行剪枝，我们将其作为1×1空间大小的卷积通道。</p>
+<p>在MNIST数据集上，我们在与相同的三层全连接网络上评估了我们的方法。</p>
+<p><strong>训练、剪枝和微调</strong></p>
+<p><img src="/.com//1577537077036.png" alt="1577537077036"></p>
+<p><strong>正常的训练</strong>。我们通常从零开始训练所有的网络作为基线。所有的网络都使用SGD进行训练。在CIFAR和SVHN数据集上，我们分别使用小批量64和20个epoch进行培训。初始学习率设置为0.1，除以10，分别为训练周期总数的50%和75%。在ImageNet和MNIST数据集上，我们分别训练了60个epoch和30个epoch的模型，批量大小为256，初始学习率为0.1，经过1/3和2/3个训练epoch的分数后除以10。我们使用重量衰减为10 - 4和涅斯特罗夫动量[33]为0.9而没有衰减。采用引入的权值初始化。我们的优化设置严格遵循的原始实现。在我们所有的实验中，我们将所有通道缩放因子初始化为0.5，因为与默认设置(所有初始化为1)相比，这为基线模型提供了更高的精度。</p>
+<p><strong>训练与稀疏</strong>。CIFAR和SVHN数据集,当与信道稀疏正规化培训,在hyperparameteerλ,控制经验损失之间的权衡和稀疏,是由一个网格搜索10−3,10−4、10−5 CIFAR-10验证集。我们选择VGGNetλ= 10−4和ResNet DenseNetλ= 10−5。对于ImageNet VGG-A,我们设置λ= 10−5。所有其他设置与正常训练相同。</p>
+<p><strong>剪枝</strong>。当我们对稀疏训练模型的信道进行剪枝时，需要确定尺度因子的剪枝阈值。与中不同的是，不同的层被不同的比例剪枝，为了简单起见，我们使用全局剪枝阈值。剪枝阈值由所有尺度因子中的百分位数决定，例如剪枝40%或60%的通道。剪枝过程是通过建立一个新的较窄模型，并从稀疏训练的模型中复制相应的权值来实现的。</p>
+<p>**微调。**剪枝后得到一个更窄、更紧凑的模型，然后对模型进行微调。在CIFAR、SVHN和MNIST数据集中，微调使用与培训中相同的优化设置。对于ImageNet数据集，由于时间的限制，我们只对修剪后的VGG-A进行了5个epochs的微调，学习速率为0.001。</p>
+<h2 id="6-结果"><a class="markdownIt-Anchor" href="#6-结果"></a> 6. 结果</h2>
+<p>CIFAR和SVHN的结果如上表所示。我们用黑体字标出模型的所有最低测试误差。</p>
+<p><strong>参数和触发器减少</strong>。网络瘦身的目的是减少所需的计算资源。每个模型的最后一行都进行了≥60%的通道修剪，同时仍然保持与基线相似的精度。参数节省可达10×。失败的减少通常在50%左右。为了突出网络瘦身的效率，我们在图3中绘制了资源节约情况。可以看出，VGGNet有大量的冗余参数可以进行修剪。在ResNet-164上，参数和触发器的节省相对较小，我们推测这是由于它的“瓶颈”结构已经起到了选择通道的作用。此外，在CIFAR-100上，减少率通常略低于CIFAR-10和SVHN，这可能是由于CIFAR-100包含更多的类。</p>
+<p><strong>正则化的效果</strong>。从表1中我们可以看出，在ResNet和DenseNet上，通常当40%的通道被修剪时，微调后的网络可以达到比原始模型更低的测试误差。例如，在CIFAR-10上，DenseNet-40剔除40%通道后的测试误差为5.19%，比原模型低了近1%。我们假设这是由于L1稀疏性对信道的正则化效应造成的，它自然地在网络的中间层提供了特征选择。我们将在下一节中分析这种影响。</p>
+<p><strong>ImageNet</strong>。ImageNet数据集的结果如表2所示。当50%通道被剪枝时，参数保存量大于5×，而触发器保存量仅为30.4%。这是因为在所有计算密集型卷积层的2752个通道中，只有378个通道被剪枝，而在参数密集型全连接层的8192个通道中，只有5094个通道被剪枝。值得注意的是，我们的方法可以在不损失精度的情况下实现对1000级ImageNet数据集的节省，而其他高效CNNs方法[2,23,35,28]大多报告精度损失。</p>
+<p><strong>MNIST</strong>。在MNIST数据集上，我们将我们的方法与表3中的结构化稀疏学习(SSL)方法[35]进行了比较。尽管我们的方法主要是针对卷积层中的通道进行剪枝，但它也可以很好地剪枝全连接层中的神经元。在这个实验中，我们观察到使用全局阈值剪枝有时会完全去除一个层，因此我们剪枝了两个中间层中80%的神经元。我们的方法略优于[35]，因为在删除更多参数的同时，可以获得稍低的测试误差。</p>
+<p>我们在补充材料方面提供了一些额外的实验结果，包括(1)CIFAR-10上一个紧凑的VGGNet的详细结构;(2)在实际应用中节省了挂钟时间和运行时内存。(3)与之前的通道剪枝方法[23]比较;</p>
+<p><strong>多通道方案的结果</strong></p>
+<p>我们使用VGGNet在CIFAR数据集上采用多通道方案。由于没有跳转连接，删除整个层将完全破坏模型。因此，除了将百分位数阈值设置为50%外，我们还设置了一个约束，即在每一层中，最多可以修剪50%的通道。</p>
+<p>各迭代模型的测试误差如表4所示。随着剪枝过程的进行，我们得到了越来越紧凑的模型。在CIFAR-10上，经过训练的模型在迭代5中达到了最小的测试误差。该模型在降低测试误差的同时，实现了20×参数约简和5×触发器约简。在CIFAR-100上，迭代3之后，测试错误开始增加。这可能是因为它包含比CIFAR-10更多的类，所以过于激烈地修剪通道将不可避免地损害性能。然而，我们仍然可以修剪近90%的参数和近70%的失败，而没有显著的精度损失。</p>
+<p><img src="/.com//1577537212187.png" alt="1577537212187"></p>
+<h2 id="7-分析"><a class="markdownIt-Anchor" href="#7-分析"></a> 7. 分析</h2>
+<p>有两个关键hyper-parameters网络瘦身,修剪百分比t和稀疏正则化项的系数λ(见方程(1)。在这一节中,我们详细分析其影响。</p>
+<p>剪枝率的影响。一旦我们得到了一个经过稀疏正则化训练的模型，我们就需要决定从该模型中删除通道的百分比。如果我们削减的频道太少，节省的资源就会非常有限。然而，如果我们修剪太多的通道，可能会对模型造成破坏，并且可能无法通过微调来恢复精度。我们训练DenseNet40模型与λ= 10−5 CIFAR-10给修剪不同比例的渠道的影响。结果总结在图5中。</p>
+<p>从图5可以看出，只有当剪枝比例超过阈值时，被剪枝或微调模型的分类性能才会下降。微调过程通常可以补偿修剪可能造成的精度损失。只有当阈值超过80%时，微调模型的测试误差才会低于基线模型。值得注意的是，当训练稀疏性时，即使不进行微调，模型的性能也比原始模型好。这可能是由于L1稀疏性对信道尺度因子的正则化效应。</p>
+<p><img src="/.com//1577537367558.png" alt="1577537367558"></p>
+<p>信道稀疏正则化。L1稀疏项的目的是迫使许多尺度因子趋近于零。方程1中的参数λ控制它的重要性与正常训练的损失。在图4中我们把缩放因子的分布在整个网络与不同的λ值。在本实验中，我们使用了一个在CIFAR-10数据集上训练的VGGNet。</p>
+<p>它可以观察到,与λ的增加,比例因素越来越集中在接近零的水平。当λ= 0,即。，不存在稀疏正则化，分布相对平坦。当λ= 10−4,几乎所有扩展因素分为零附近的一个小区域。这一过程可以看作是深度网络中发生的一种特征选择，在深度网络中，只有具有不可忽略的尺度因子的信道被选择。我们通过热图进一步形象化了这个过程。图6显示了VGGNet中一个层的缩放因子的大小，以及训练过程。每个通道都以相等的权重开始;随着训练的进行，一些通道的缩放因子变大(变亮)，而另一些通道的缩放因子变小(变暗)。</p>
+<p><img src="/.com//1577537499906.png" alt="1577537499906"></p>
+<h2 id="8-结论"><a class="markdownIt-Anchor" href="#8-结论"></a> 8. 结论</h2>
+<p>为了学习更紧凑的CNNs，我们提出了网络瘦身技术。它直接对批量归一化层的尺度因子进行稀疏诱导正则化，从而在训练过程中自动识别出不重要的通道并进行修剪。在多个数据集上，我们证明了该方法能够显著降低最先进网络的计算成本(高达20×)，且没有精度损失。更重要的是，该方法在为训练过程引入最小开销的同时，同时减少了模型大小、运行时内存和计算操作，并且生成的模型不需要特殊的库/硬件来进行有效的推理。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/22/%E5%90%B4%E6%81%A9%E8%BE%BE%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/22/%E5%90%B4%E6%81%A9%E8%BE%BE%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">吴恩达卷积神经网络课程学习笔记</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-22 10:32:18 / 修改时间：10:32:51" itemprop="dateCreated datePublished" datetime="2019-12-22T10:32:18+08:00">2019-12-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/22/%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB%E7%AB%9E%E8%B5%9B%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1393,293 +1615,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/14/%E4%BD%BF%E7%94%A8python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9E%8B%E5%B9%B6%E6%B5%8B%E8%AF%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/log.png">
-      <meta itemprop="name" content="pprp">
-      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spicyCV">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/14/%E4%BD%BF%E7%94%A8python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9E%8B%E5%B9%B6%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">使用python多线程加载模型并测试</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-11-14 15:16:17 / 修改时间：15:43:50" itemprop="dateCreated datePublished" datetime="2019-11-14T15:16:17+08:00">2019-11-14</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>前言：之前只用过单线程处理，加载模型进行测试，运行时间上也可以接受。但是现在需要处理比较大量的数据，如果进行线性处理，可能测试一次就花10个小时，而且还不知道结果怎么样，所以多线程就必须使用上了。有关线程部分主要参考：<a href="https://junyiseo.com/python/211.html" target="_blank" rel="noopener">https://junyiseo.com/python/211.html</a></p>
-</blockquote>
-<h2 id="1-多线程"><a class="markdownIt-Anchor" href="#1-多线程"></a> 1 多线程</h2>
-<p>多线程类似于同时执行多个不同程序，线程在执行过程中与进程还是有区别的。每个独立的进程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。</p>
-<p>特点：</p>
-<ul>
-<li>线程可以被抢占（中断）。</li>
-<li>在其他线程正在运行时，线程可以暂时搁置（也称为睡眠） – 这就是线程的退让。</li>
-</ul>
-<p>应用场景：</p>
-<ul>
-<li>使用线程可以把占据长时间的程序中的任务放到后台去处理。</li>
-<li>用户界面可以更加吸引人，这样比如用户点击了一个按钮去触发某些事件的处理，可以弹出一个进度条来显示处理的进度</li>
-<li>程序的运行速度可能加快</li>
-<li>在一些等待的任务实现上如用户输入、文件读写和网络收发数据等，线程就比较有用了。在这种情况下我们可以释放一些珍贵的资源如内存占用等等。</li>
-</ul>
-<blockquote>
-<p>以上内容来自：<a href="https://www.runoob.com/python/python-multithreading.html" target="_blank" rel="noopener">https://www.runoob.com/python/python-multithreading.html</a></p>
-<p>更多多线程python知识可以访问以上网站</p>
-</blockquote>
-<h2 id="2-使用多线程进行多模型加载和测试"><a class="markdownIt-Anchor" href="#2-使用多线程进行多模型加载和测试"></a> 2 使用多线程进行多模型加载和测试</h2>
-<ul>
-<li>
-<p>先说一下如何分配多线程执行的思路：</p>
-<ul>
-<li>
-<p>由于单线程进行测试的时候是一张图像进一次网络，然后得到结果。其占用的显存很小，只有900MB左右，而这里使用的是11G显存,所以在这种条件下支持每一个线程分配一个模型，然后进行预测。</p>
-</li>
-<li>
-<p>然后就是数据分配问题，多线程常常会遇到访问数据冲突的问题，但是这里我们可以避开这个问题，是用一个List存储所有图片，然后根据长度分配每个线程所要处理的图片多少。</p>
-</li>
-<li>
-<p>剩下就可以看模板了。</p>
-</li>
-</ul>
-</li>
-<li>
-<p>这里提供一个模板，可以替换其中关键的测试图片的函数，然后就可以运行了。</p>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep, ctime</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">totalThread = <span class="number">16</span>  <span class="comment"># 需要创建的线程数，可以控制线程的数量</span></span><br><span class="line"></span><br><span class="line">config_file = <span class="string">'模型配置文件'</span></span><br><span class="line">checkpoint_file = <span class="string">'模型权重文件'</span></span><br><span class="line">test_data_dir = <span class="string">'测试集所在文件夹（里边是待测试图片）'</span></span><br><span class="line"></span><br><span class="line">listImg = [file <span class="keyword">for</span> file <span class="keyword">in</span> os.listdir(test_data_dir)]  <span class="comment">#创建需要读取的列表，可以自行创建自己的列表</span></span><br><span class="line">lenList = len(listImg)  <span class="comment">#列表的总长度</span></span><br><span class="line">gap = int(lenList / totalThread)  <span class="comment">#列表分配到每个线程的执行数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照分配的区间，读取列表内容，需要其他功能在这个方法里设置</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">processSection</span><span class="params">(name, s, e)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(s, e):</span><br><span class="line">        processImg(name, listImg[i])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">processImg</span><span class="params">(name, file)</span>:</span></span><br><span class="line">    <span class="comment"># 这个部分内容包括：</span></span><br><span class="line">    <span class="comment"># 1. 加载模型</span></span><br><span class="line">    <span class="comment"># 2. 根据file读取图片</span></span><br><span class="line">    <span class="comment"># 3. 将结果进行处理并进行保存</span></span><br><span class="line">    print(<span class="string">"Thread %s: have processed %s"</span> % (name, filename))</span><br><span class="line">    print(os.path.join(<span class="string">'\t resultData'</span>, filename + <span class="string">'.json'</span>), end=<span class="string">""</span>)</span><br><span class="line">    print(<span class="string">" Length of json: %d"</span> % len(final_list))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myThread</span><span class="params">(threading.Thread)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, threadID, name, s, e)</span>:</span></span><br><span class="line">        threading.Thread.__init__(self)</span><br><span class="line">        self.threadID = threadID</span><br><span class="line">        self.name = name</span><br><span class="line">        self.s = s</span><br><span class="line">        self.e = e</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Starting "</span> + self.name + ctime(), end=<span class="string">""</span>)</span><br><span class="line">        print(<span class="string">" From %d to %d"</span> % (self.s, self.e))</span><br><span class="line">        <span class="comment"># 获得锁，成功获得锁定后返回True</span></span><br><span class="line">        <span class="comment"># 可选的timeout参数不填时将一直阻塞直到获得锁定</span></span><br><span class="line">        <span class="comment"># 否则超时后将返回False</span></span><br><span class="line">        <span class="comment"># 这里由于数据不存在冲突情况，所以可以注释掉锁的代码</span></span><br><span class="line">        <span class="comment"># threadLock.acquire()</span></span><br><span class="line">        <span class="comment">#线程需要执行的方法</span></span><br><span class="line">        processSection(self.name, self.s, self.e)</span><br><span class="line">        <span class="comment"># 释放锁</span></span><br><span class="line">        <span class="comment"># threadLock.release()</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">threadLock = threading.Lock()  <span class="comment">#锁</span></span><br><span class="line">threads = []  <span class="comment">#创建线程列表</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建新线程和添加线程到列表</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(totalThread):</span><br><span class="line">    thread = <span class="string">'thread%s'</span> % i</span><br><span class="line">    <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">        thread = myThread(<span class="number">0</span>, <span class="string">"Thread-%s"</span> % i, <span class="number">0</span>, gap)</span><br><span class="line">    <span class="keyword">elif</span> totalThread == i + <span class="number">1</span>:</span><br><span class="line">        thread = myThread(i, <span class="string">"Thread-%s"</span> % i, i * gap, lenList)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        thread = myThread(i, <span class="string">"Thread-%s"</span> % i, i * gap, (i + <span class="number">1</span>) * gap)</span><br><span class="line">    threads.append(thread)  <span class="comment"># 添加线程到列表</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环开启线程</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(totalThread):</span><br><span class="line">    threads[i].start()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 等待所有线程完成</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> threads:</span><br><span class="line">    t.join()</span><br><span class="line">print(<span class="string">"Exiting Main Thread"</span>)</span><br></pre></td></tr></table></figure>
-<p>结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| NVIDIA-SMI 440.31       Driver Version: 440.31       CUDA Version: 10.2     |</span><br><span class="line">|-------------------------------+----------------------+----------------------+</span><br><span class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</span><br><span class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</span><br><span class="line">|===============================+======================+======================|</span><br><span class="line">|   0  GeForce RTX 208...  Off  | 00000000:01:00.0 Off |                  N/A |</span><br><span class="line">| 46%   61C    P2   206W / 250W |  10238MiB / 11016MiB |     68%      Default |</span><br><span class="line">+-------------------------------+----------------------+----------------------+</span><br><span class="line"></span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| Processes:                                                       GPU Memory |</span><br><span class="line">|  GPU       PID   Type   Process name                             Usage      |</span><br><span class="line">|=============================================================================|</span><br><span class="line">|    0      4616      C   python                                      9935MiB |</span><br><span class="line">|    0     11667      G   /usr/lib/xorg/Xorg                           195MiB |</span><br><span class="line">|    0     30334      G   compiz                                        94MiB |</span><br><span class="line">+-----------------------------------------------------------------------------+</span><br></pre></td></tr></table></figure>
-<p>加载了16个模型，同时进行处理：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Starting Thread-0Thu Nov 14 15:09:53 2019 From 0 to 3</span><br><span class="line">Starting Thread-1Thu Nov 14 15:09:53 2019 From 3 to 6</span><br><span class="line">Starting Thread-2Thu Nov 14 15:09:53 2019 From 6 to 9</span><br><span class="line">Starting Thread-3Thu Nov 14 15:09:53 2019 From 9 to 12</span><br><span class="line">Starting Thread-5Thu Nov 14 15:09:53 2019 From 15 to 18</span><br><span class="line">Starting Thread-4Thu Nov 14 15:09:53 2019 From 12 to 15</span><br><span class="line">Starting Thread-6Thu Nov 14 15:09:53 2019 From 18 to 21</span><br><span class="line">Starting Thread-7Thu Nov 14 15:09:53 2019 From 21 to 24</span><br><span class="line">Starting Thread-9Thu Nov 14 15:09:53 2019 From 27 to 30</span><br><span class="line">Starting Thread-10Thu Nov 14 15:09:53 2019 From 30 to 33</span><br><span class="line">Starting Thread-12Thu Nov 14 15:09:53 2019 From 36 to 39</span><br><span class="line">Starting Thread-13Thu Nov 14 15:09:53 2019 From 39 to 42</span><br><span class="line">Starting Thread-11Thu Nov 14 15:09:53 2019 From 33 to 36</span><br><span class="line">Starting Thread-14Thu Nov 14 15:09:53 2019 From 42 to 45</span><br><span class="line">Starting Thread-8Thu Nov 14 15:09:53 2019 From 24 to 27</span><br><span class="line">Starting Thread-15Thu Nov 14 15:09:53 2019 From 45 to 50</span><br></pre></td></tr></table></figure>
-<hr>
-<blockquote>
-<p>后记：主要提供了一个模板进行多模型加载，但是如果一个模型就很大的情况下，这种就明显不合适了。可以想到的是一次从多个batch进行测试，然后记录结果。其他方法大佬可以分享留言。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/13/mmdetection%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/log.png">
-      <meta itemprop="name" content="pprp">
-      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spicyCV">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/13/mmdetection%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">mmdetection使用指南</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-11-13 20:44:29 / 修改时间：21:55:58" itemprop="dateCreated datePublished" datetime="2019-11-13T20:44:29+08:00">2019-11-13</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>主要是目标检测方面的使用记录，mmdetection还有分类网络，分割等功能，但这篇博客主要关注目标检测，之后如果涉及到分割会再开一篇博客进行记录。</p>
-</blockquote>
-<h2 id="1-安装"><a class="markdownIt-Anchor" href="#1-安装"></a> 1. 安装</h2>
-<p>mmdetection需要的环境是cuda10.0为基础的环境，对驱动版本也有一定的要求，cuda8.0的我始终没有配通，主要的错误都是跟cuda相关的。</p>
-<p>具体安装过程参见：<a href="https://blog.csdn.net/DD_PP_JJ/article/details/103055629" target="_blank" rel="noopener">https://blog.csdn.net/DD_PP_JJ/article/details/103055629</a></p>
-<p>安装完大体环境以后，开始配置mmdetection</p>
-<blockquote>
-<ul>
-<li>操作系统：Linux</li>
-<li>Python 3.5+</li>
-<li>PyTorch 1.0+ 或 PyTorch-nightly</li>
-<li>CUDA 9.0+</li>
-<li>NCCL 2+</li>
-<li>GCC 4.9+</li>
-</ul>
-</blockquote>
-<p>然后cd进入mmdetection， 运行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py develop</span><br></pre></td></tr></table></figure>
-<p>进行编译，如果你的mmdetection是从另外一台机器复制过来，只要他存在build文件夹，都有可能造成报错。直接<code>rm -rf build</code>, 删除build文件夹后重新运行，就可能能够顺利通过。</p>
-<h2 id="2-准备voc格式数据集"><a class="markdownIt-Anchor" href="#2-准备voc格式数据集"></a> 2. 准备VOC格式数据集</h2>
-<p>具体数据集构建可以看：</p>
-<ol>
-<li><a href="https://www.cnblogs.com/pprp/p/10863496.html#%E6%95%B0%E6%8D%AE%E9%9B%86%E6%9E%84%E5%BB%BA" target="_blank" rel="noopener">https://www.cnblogs.com/pprp/p/10863496.html#数据集构建</a></li>
-<li><a href="https://blog.csdn.net/weicao1990/article/details/93484603" target="_blank" rel="noopener">https://blog.csdn.net/weicao1990/article/details/93484603</a></li>
-</ol>
-<p>有一个库有一些脚本进行检查和生成：</p>
-<p><a href="https://github.com/pprp/voc2007_for_yolo_torch" target="_blank" rel="noopener">https://github.com/pprp/voc2007_for_yolo_torch</a></p>
-<h2 id="3-个性化配置"><a class="markdownIt-Anchor" href="#3-个性化配置"></a> 3. 个性化配置</h2>
-<p>训练之前首先要根据自己的数据集对配置文件进行修改：</p>
-<ul>
-<li>
-<p>修改类别数量， num_classes = 类别数+1</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">dict(</span><br><span class="line">    type=<span class="string">'SharedFCBBoxHead'</span>,</span><br><span class="line">    num_fcs=<span class="number">2</span>,</span><br><span class="line">    in_channels=<span class="number">256</span>,</span><br><span class="line">    fc_out_channels=<span class="number">1024</span>,</span><br><span class="line">    roi_feat_size=<span class="number">7</span>,</span><br><span class="line">    num_classes=<span class="number">2</span>, <span class="comment">#  修改 81 -&gt; 2</span></span><br><span class="line">    target_means=[<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">    target_stds=[<span class="number">0.05</span>, <span class="number">0.05</span>, <span class="number">0.1</span>, <span class="number">0.1</span>],</span><br><span class="line">    reg_class_agnostic=<span class="literal">True</span>,</span><br><span class="line">    loss_cls=dict(</span><br><span class="line">        type=<span class="string">'CrossEntropyLoss'</span>, use_sigmoid=<span class="literal">False</span>, loss_weight=<span class="number">1.0</span>),</span><br><span class="line">    loss_bbox=dict(type=<span class="string">'SmoothL1Loss'</span>, beta=<span class="number">1.0</span>, loss_weight=<span class="number">1.0</span>)),</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>修改数据集地址：</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># dataset settings</span></span><br><span class="line">dataset_type = <span class="string">'VOCDataset'</span> <span class="comment">#  修改，'CocoDataset' -&gt; 'VOCDataset'</span></span><br><span class="line">data_root = <span class="string">'data/VOCdevkit/'</span> <span class="comment">#  修改，'data/coco/'  -&gt; 'data/VOCdevkit'</span></span><br></pre></td></tr></table></figure>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">train=dict(</span><br><span class="line">    type=dataset_type,</span><br><span class="line">    ann_file=data_root + <span class="string">'VOC2007/ImageSets/Main/train.txt'</span>, <span class="comment">#  data_root + 'annotations/instances_train2017.json' -&gt; data_root + 'VOC2007/ImageSets/Main/train.txt'</span></span><br><span class="line">    img_prefix=data_root + <span class="string">'VOC2007/'</span>, <span class="comment"># 11/11, TC修改 data_root + 'train2017/' -&gt; data_root + 'VOC2007/'</span></span><br><span class="line">    pipeline=train_pipeline),</span><br><span class="line">val=dict(</span><br><span class="line">    type=dataset_type,</span><br><span class="line">    ann_file=data_root + <span class="string">'VOC2007/ImageSets/Main/val.txt'</span>, <span class="comment">#  data_root + 'annotations/instances_train2017.json' -&gt; data_root + 'VOC2007/ImageSets/Main/val.txt'</span></span><br><span class="line">    img_prefix=data_root + <span class="string">'VOC2007/'</span>,  <span class="comment"># 11/11, TC修改 data_root + 'val2017/' -&gt; data_root + 'VOC2007/'</span></span><br><span class="line">    pipeline=test_pipeline),</span><br><span class="line">test=dict(</span><br><span class="line">    type=dataset_type,</span><br><span class="line">    ann_file=data_root + <span class="string">'VOC2007/ImageSets/Main/test.txt'</span>, <span class="comment"># data_root + 'annotations/instances_train2017.json' -&gt; data_root + 'VOC2007/ImageSets/Main/test.txt'</span></span><br><span class="line">    img_prefix=data_root + <span class="string">'VOC2007/'</span>,  <span class="comment">#  data_root + 'test2017/' -&gt; data_root + 'VOC2007/'</span></span><br><span class="line">    pipeline=test_pipeline))</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>修改数据集voc.py文件：</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@DATASETS.register_module</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VOCDataset</span><span class="params">(XMLDataset)</span>:</span></span><br><span class="line"></span><br><span class="line">    CLASSES = (<span class="string">'pos'</span>,) <span class="comment"># 注意即便只有一个了类也要加逗号</span></span><br><span class="line">    <span class="comment"># ('aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus', 'car',</span></span><br><span class="line">    <span class="comment">#            'cat', 'chair', 'cow', 'diningtable', 'dog', 'horse',</span></span><br><span class="line">    <span class="comment">#            'motorbike', 'person', 'pottedplant', 'sheep', 'sofa', 'train',</span></span><br><span class="line">    <span class="comment">#            'tvmonitor')</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, **kwargs)</span>:</span></span><br><span class="line">        super(VOCDataset, self).__init__(**kwargs)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'VOC2007'</span> <span class="keyword">in</span> self.img_prefix:</span><br><span class="line">            self.year = <span class="number">2007</span></span><br><span class="line">        <span class="keyword">elif</span> <span class="string">'VOC2012'</span> <span class="keyword">in</span> self.img_prefix:</span><br><span class="line">            self.year = <span class="number">2012</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'Cannot infer dataset year from img_prefix'</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>运行参数处理：</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">total_epochs = <span class="number">20</span> <span class="comment"># 训练最大的epoch数</span></span><br><span class="line">dist_params = dict(backend=<span class="string">'nccl'</span>) <span class="comment"># 分布式参数</span></span><br><span class="line">log_level = <span class="string">'INFO'</span> <span class="comment"># 输出信息的完整度级别</span></span><br><span class="line">work_dir = <span class="string">'./work_dirs/libra_faster_rcnn_x101_64x4d_fpn_1x'</span> <span class="comment"># log文件和模型文件存储路径</span></span><br><span class="line">load_from = <span class="literal">None</span> <span class="comment"># 加载模型的路径，None表示从预训练模型加载</span></span><br><span class="line">resume_from = <span class="literal">None</span> <span class="comment"># 恢复训练模型的路径，None表示不进行训练模型的恢复</span></span><br><span class="line">workflow = [(<span class="string">'train'</span>, <span class="number">1</span>)] </span><br><span class="line"><span class="comment"># ======================================================</span></span><br><span class="line"><span class="comment"># 训练与验证策略，[('train', 1)]表示只训练，不验证；</span></span><br><span class="line"><span class="comment"># [('train', 2), ('val', 1)] 表示2个epoch训练，1个epoch验证</span></span><br><span class="line"><span class="comment"># ======================================================</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="4-训练命令"><a class="markdownIt-Anchor" href="#4-训练命令"></a> 4. 训练命令</h2>
-<p>训练格式：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/train.py $&#123;config_files&#125;</span><br></pre></td></tr></table></figure>
-<p>可选参数：</p>
-<blockquote>
-<p>–validate : 每隔1个epoch就进行一次evaluation， 测一下map之类的指标。</p>
-<p>–work_dir: 指定训练的结果保存的位置，一般默认就行</p>
-<p>–resume_from: 需要指定到对应的权重文件</p>
-<p>–gpus： 指定使用哪个gpu</p>
-<p>–autoscale-lr: 根据GPU个数进行自动处理learning rate</p>
-</blockquote>
-<p>举例，训练cascade R-CNN进行目标检测：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/train.py configs/cascade_rcnn_r101_fpn_1x.py --validate</span><br></pre></td></tr></table></figure>
-<h2 id="5-测试命令"><a class="markdownIt-Anchor" href="#5-测试命令"></a> 5. 测试命令</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/test.py $&#123;CONFIG_FILE&#125; $&#123;CHECKPOINT_FILE&#125; [--out $&#123;RESULT_FILE&#125;] [--eval $&#123;EVAL_METRICS&#125;] [--show]</span><br></pre></td></tr></table></figure>
-<p>可选参数：</p>
-<blockquote>
-<p>–out : 输出结果文件，results.pkl</p>
-<p>–json_out: 输出结果文件，不需要后缀</p>
-<p>–eval: [‘proposal’, ‘proposal_fast’, ‘bbox’, ‘segm’, ‘keypoints’], 选择其中一个模式</p>
-<p>–show: 会跳出来一张图片给你展示</p>
-<p>–tmpdir : 将一些结果写入tmpdir</p>
-</blockquote>
-<p>在VOC数据集下，应该采用以下方式进行测试：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/test.py configs/retinanet_r101_fpn_1x.py work_dirs/retinanet_r101_fpn_1x/latest.pth --out ./result_retinanet.pkl</span><br></pre></td></tr></table></figure>
-<p>将结果输出到pkl文件夹中，然后在进行计算：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/voc_eval.py result_retinanet.pkl configs/retinanet_r101_fpn_1x.py</span><br></pre></td></tr></table></figure>
-<p>得到以下结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+-------+-----+------+--------+-----------+-------+</span><br><span class="line">| class | gts | dets | recall | precision | ap    |</span><br><span class="line">+-------+-----+------+--------+-----------+-------+</span><br><span class="line">| pos   | 186 | 2356 | 0.801  | 0.063     | 0.398 |</span><br><span class="line">+-------+-----+------+--------+-----------+-------+</span><br><span class="line">| mAP   |     |      |        |           | 0.398 |</span><br><span class="line">+-------+-----+------+--------+-----------+-------+</span><br></pre></td></tr></table></figure>
-<h2 id="6-工具"><a class="markdownIt-Anchor" href="#6-工具"></a> 6. 工具</h2>
-<p>首先安装：<code>pip install seaborn</code></p>
-<p>可视化格式：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/analyze_logs.py plot_curve [--keys $&#123;KEYS&#125;] [--title $&#123;TITLE&#125;] [--legend $&#123;LEGEND&#125;] [--backend $&#123;BACKEND&#125;] [--style $&#123;STYLE&#125;] [--out $&#123;OUT_FILE&#125;]</span><br></pre></td></tr></table></figure>
-<ul>
-<li>具体的keys要看你的json文件中是否存在这个键值</li>
-<li>画出分类误差</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/analyze_logs.py plot_curve log.json --keys loss_cls --legend loss_cls</span><br></pre></td></tr></table></figure>
-<ul>
-<li>画出分类和回归结果，并输出到pdf</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/analyze_logs.py plot_curve log.json --keys loss_cls loss_reg --out losses.pdf</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在同一个图中比较两个模型map</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/analyze_logs.py plot_curve log1.json log2.json --keys bbox_mAP --legend run1 run2</span><br></pre></td></tr></table></figure>
-<ul>
-<li>计算平均训练速度</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/analyze_logs.py cal_train_time $&#123;CONFIG_FILE&#125; [--include-outliers]</span><br></pre></td></tr></table></figure>
-<ul>
-<li>获得模型训练所需参数：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/get_flops.py $&#123;CONFIG_FILE&#125; [--shape $&#123;INPUT_SHAPE&#125;]</span><br></pre></td></tr></table></figure>
-<h2 id="7-遇到的问题"><a class="markdownIt-Anchor" href="#7-遇到的问题"></a> 7. 遇到的问题</h2>
-<p>在测试的时候出现报错：</p>
-<blockquote>
-<p>File “tools/test.py”, line 224, in <module><br>
-main()<br>
-File “tools/test.py”, line 215, in main<br>
-results2json(dataset, outputs, args.json_out)<br>
-File “/home/cie320/mmdetection/mmdet/core/evaluation/coco_utils.py”, line 203, in results2json<br>
-json_results = det2json(dataset, results)<br>
-File “/home/cie320/mmdetection/mmdet/core/evaluation/coco_utils.py”, line 149, in det2json<br>
-img_id = dataset.img_ids[idx]<br>
-AttributeError: ‘VOCDataset’ object has no attribute ‘img_ids’</module></p>
-</blockquote>
-<p>可以看到调用的是coco，这是你的命令的问题，你应该采用上述方法，分两步进行计算。</p>
-<ul>
-<li>先生成results.pkl文件</li>
-<li>然后运行voc_eval进行解析，得到最终结果。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1730,7 +1665,7 @@ AttributeError: ‘VOCDataset’ object has no attribute ‘img_ids’</module><
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1741,7 +1676,7 @@ AttributeError: ‘VOCDataset’ object has no attribute ‘img_ids’</module><
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
