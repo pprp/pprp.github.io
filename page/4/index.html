@@ -220,6 +220,386 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/python%20%E5%8C%85%E5%8F%8A%E6%A8%A1%E5%9D%97%E5%BC%95%E7%94%A8%E6%A2%B3%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/20/python%20%E5%8C%85%E5%8F%8A%E6%A8%A1%E5%9D%97%E5%BC%95%E7%94%A8%E6%A2%B3%E7%90%86/" class="post-title-link" itemprop="url">python包以及模块引用梳理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-20 14:54:46" itemprop="dateCreated datePublished" datetime="2019-06-20T14:54:46+08:00">2019-06-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 21:38:44" itemprop="dateModified" datetime="2019-11-11T21:38:44+08:00">2019-11-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>前言：在查看一些工程性代码的时候，总是会发现类似：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> .util <span class="keyword">import</span> utils</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> datasets</span><br></pre></td></tr></table></figure>
+<p>这样的引用语句, 这让我比较困惑，所以趁这次机会，花点时间，好好整理一下相关的知识</p>
+</blockquote>
+<h2 id="1-python包机制"><a class="markdownIt-Anchor" href="#1-python包机制"></a> 1. python包机制</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 包</span><br><span class="line">- 模块</span><br><span class="line">- 框架： 如何组织包和模块</span><br></pre></td></tr></table></figure>
+<p>python提供了包的概念，是一个有层次的文件目录结构，用于管理多个模块源文件。</p>
+<ul>
+<li>
+<p>包就是文件夹，这个文件夹下有__init__.py文件，并且该文件夹可以包括其他模块</p>
+</li>
+<li>
+<p>多个相关联的模块组成一个包，以便于维护和使用，同时能有限的避免命名空间的冲突。</p>
+</li>
+<li>
+<p>在导入一个包的时候，会先调用这个包的__init__.py文件</p>
+</li>
+</ul>
+<p>层次问题：从小到大</p>
+<ul>
+<li>语句</li>
+<li>函数 def</li>
+<li>类 class</li>
+<li>模块 module， 物理上是一个python文件</li>
+<li>包 package， 物理上是一个文件夹， 包中可以含有模块和包</li>
+</ul>
+<p>包和模块的作用：</p>
+<blockquote>
+<ul>
+<li>
+<p>编写好轮子，工具类，供其他模块进行使用</p>
+</li>
+<li>
+<p>有效地对程序进行分解，方便代码的管理和维护</p>
+</li>
+<li>
+<p>防止同一模块内命名重复的问题(<a href="http://module1.name" target="_blank" rel="noopener">module1.name</a>, <a href="http://module2.name" target="_blank" rel="noopener">module2.name</a>)</p>
+</li>
+</ul>
+</blockquote>
+<p>– from bilibili <a href="https://www.bilibili.com/video/av65157512?p=2" target="_blank" rel="noopener">https://www.bilibili.com/video/av65157512?p=2</a></p>
+<p>包和模块基本信息</p>
+<ul>
+<li>包和模块名称
+<ul>
+<li><code>__name__</code></li>
+<li><code>__package__</code></li>
+</ul>
+</li>
+<li>存放位置
+<ul>
+<li><code>__file__</code></li>
+</ul>
+</li>
+<li>查看包和模块的内容
+<ul>
+<li>dir(os)</li>
+<li><code>__dict__</code></li>
+</ul>
+</li>
+</ul>
+<p>导入包/模块的方式：</p>
+<ul>
+<li>
+<p>常规导入：</p>
+<ul>
+<li>import M
+<ul>
+<li>同级目录直接导入import M</li>
+<li>不同级目录使用点语法import pkg1.pkg2.M</li>
+</ul>
+</li>
+<li>import M1, M2</li>
+<li>import M as m</li>
+<li>from A import B as b, C as c
+<ul>
+<li>A 的范围要大于B,C
+<ul>
+<li>范围：包&gt;模块&gt;资源</li>
+</ul>
+</li>
+<li>B，C这部分要尽可能简单
+<ul>
+<li>正确：from A.A1 import aa</li>
+<li>错误：from A import A1.aa</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>from 模块 import *
+<ul>
+<li>那么会去该模块对应的python文件中找<code>__all__</code>变量对应的内容</li>
+</ul>
+</li>
+<li>from 包 import *
+<ul>
+<li>那么就会去该包对应的<code>__init__.py</code>文件中找<code>__all__</code>变量对应内容</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>注意：</p>
+<ul>
+<li>
+<p>使用时，导入的对象应该是模块，而不是包</p>
+</li>
+<li>
+<p>如果导入的是一个包，默认不会导入任何模块</p>
+</li>
+<li>
+<p>解决方案：</p>
+<ul>
+<li>
+<p>在该包中的<code>__init__.py</code>中导入所有需要的模块</p>
+</li>
+<li>
+<p>以from 包/文件夹 import 模块/子包 的形式导入</p>
+<ul>
+<li>from p1 import Tool1 as t1, Tool2 as t2</li>
+<li>from p1.sub_p import sub_xx</li>
+</ul>
+</li>
+<li>
+<p>from模块 import 资源名 的形式导入</p>
+<ul>
+<li>from other import num</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>遇到no module named xxx</p>
+<ul>
+<li>
+<pre class="highlight"><code class="python">  <span class="keyword">import</span> sys
+  sys.path.append(<span class="string">'rc:\Desktop\xxx_dir'</span>)
+  <span class="keyword">import</span> xxx
+  <span class="comment"># 比较强硬的解决方法</span>
+  &lt;!--￼<span class="number">2</span>--&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>ValueError: attempted relative import beyond top-level package</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这通常是由于相对引用的使用而出现的问题。</span><br><span class="line"></span><br><span class="line">需要明确：</span><br><span class="line"></span><br><span class="line">1. 相对引用不是相对于文件结构！！</span><br><span class="line">2. 相对引用是相对于`__name__`</span><br><span class="line"></span><br><span class="line">举个例子：</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">- rootdir</span><br><span class="line">  - subdir1</span><br><span class="line">    - __init__.py</span><br><span class="line">  	- subfile1.py</span><br><span class="line">  - subdir2 </span><br><span class="line">    - __init__.py</span><br><span class="line">    - subfile2.py</span><br><span class="line">- test.py</span><br></pre></td></tr></table></figure>
+<p>test.py中调用subfile1.py的内容：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_mod1</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'__name__: &#123;&#125;'</span>.format(__name__))</span><br><span class="line">    print(<span class="string">'__package__: &#123;&#125;'</span>.format(__package__))</span><br><span class="line">    print(<span class="string">'Import Successfully!'</span>)</span><br></pre></td></tr></table></figure>
+<p>输出为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__name__: subdir1.subfile1</span><br><span class="line">__package__: subfile1</span><br><span class="line">Import Successfully!</span><br></pre></td></tr></table></figure>
+<p>所以这个相对位置就是相对于<code>__name__</code>变量，比如：</p>
+<p>一个点：<code>.</code> 就代表当前是subdir1</p>
+<p>两个点：<code>..</code>就不存在，就会报错<code>beyond top-level package</code>, 这里的top-level package 也很容易理解，那就是当前的subdir1。</p>
+<p>更多内容可以查看：<a href="https://www.cnblogs.com/jay54520/p/8438228.html" target="_blank" rel="noopener">https://www.cnblogs.com/jay54520/p/8438228.html</a></p>
+<h2 id="3-举例"><a class="markdownIt-Anchor" href="#3-举例"></a> 3. 举例</h2>
+<p>目录结构如下：</p>
+<p><img src="/.com//1572056109473.png" alt="1572056109473"></p>
+<ol>
+<li>model文件夹下：</li>
+</ol>
+<p><code>__init__.py</code> ·文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'-'</span>*<span class="number">5</span>,<span class="string">"init for model folder"</span>,<span class="string">'-'</span>*<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p><code>models.py</code>文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mm</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"this is rootpkg/model/models/model"</span>)</span><br><span class="line">    print(<span class="string">'__name__: &#123;&#125;'</span>.format(__name__))</span><br><span class="line">    print(<span class="string">'__package__: &#123;&#125;'</span>.format(__package__))</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>src文件夹下：</li>
+</ol>
+<p><code>__init__.py</code> ·文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'-'</span>*<span class="number">5</span>,<span class="string">"init for src folder"</span>,<span class="string">'-'</span>*<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p><code>source.py</code>文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ss</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"this is rootpkg/src/source/src"</span>)</span><br><span class="line">    print(<span class="string">'__name__: &#123;&#125;'</span>.format(__name__))</span><br><span class="line">    print(<span class="string">'__package__: &#123;&#125;'</span>.format(__package__))</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>RootPkg文件夹下：</li>
+</ol>
+<p><code>__init__.py</code> ·文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'-'</span>*<span class="number">5</span>,<span class="string">"init for rootpkg folder"</span>,<span class="string">'-'</span>*<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p><code>main.py</code>文件内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> model <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> src <span class="keyword">import</span> source</span><br><span class="line"><span class="keyword">from</span> 模块/文件夹 <span class="keyword">import</span> 具体某个python文件名</span><br><span class="line"></span><br><span class="line">source.ss()</span><br><span class="line">models.mm()</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>
+<p>运行结果如下：</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">----- init <span class="keyword">for</span> model folder -----  </span><br><span class="line">----- init <span class="keyword">for</span> src folder ----- </span><br><span class="line"><span class="comment"># 这两个是在import模块的时候执行的__init__.py文件</span></span><br><span class="line">this <span class="keyword">is</span> rootpkg/src/source/src</span><br><span class="line">__name__: src.source</span><br><span class="line">__package__: src</span><br><span class="line">this <span class="keyword">is</span> rootpkg/model/models/model</span><br><span class="line">__name__: model.models</span><br><span class="line">__package__: model</span><br></pre></td></tr></table></figure>
+<p>运行完以后会出现<code>__pycache__</code>文件夹</p>
+<p><img src="/.com//1572056618738.png" alt="1572056618738"></p>
+</li>
+</ol>
+<p>运行成功，但是Tommy-Yu的最佳实践那部分没有直行通过，大家可以查看一下第一个reference的博客，如果有谁能跑通，欢迎联系我。（ps: 个人感觉这个博客没有讲的很清楚，实际运行确实会出错）</p>
+<hr>
+<h2 id="reference"><a class="markdownIt-Anchor" href="#reference"></a> reference</h2>
+<ul>
+<li>
+<p><a href="https://www.cnblogs.com/Tommy-Yu/p/5794829.html?spm=a2c4e.10696291.0.0.289619a41CBdwB" target="_blank" rel="noopener">https://www.cnblogs.com/Tommy-Yu/p/5794829.html?spm=a2c4e.10696291.0.0.289619a41CBdwB</a></p>
+</li>
+<li>
+<p><a href="https://www.cnblogs.com/jay54520/p/8438228.html" target="_blank" rel="noopener">https://www.cnblogs.com/jay54520/p/8438228.html</a></p>
+</li>
+<li>
+<p><a href="https://www.bilibili.com/video/av65157512?from=search&amp;seid=6677976813026578695" target="_blank" rel="noopener">https://www.bilibili.com/video/av65157512?from=search&amp;seid=6677976813026578695</a></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/%E5%B8%B8%E7%94%A8%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5%E5%88%86%E4%BA%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/20/%E5%B8%B8%E7%94%A8%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5%E5%88%86%E4%BA%AB/" class="post-title-link" itemprop="url">常用学习教程链接分享</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-20 07:04:02" itemprop="dateCreated datePublished" datetime="2019-06-20T07:04:02+08:00">2019-06-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 16:09:48" itemprop="dateModified" datetime="2019-11-11T16:09:48+08:00">2019-11-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/59507137" target="_blank" rel="noopener">Tensorflow 2.0 教程</a></p>
+</li>
+<li>
+<p><a href="https://pytorch.apachecn.org/docs/1.0/blitz_neural_networks_tutorial.html" target="_blank" rel="noopener">Pytorch 教程</a></p>
+</li>
+<li>
+<p><a href="https://keras.io/zh/" target="_blank" rel="noopener">Keras中文文档</a></p>
+</li>
+<li>
+<p><a href="https://docs.fast.ai/" target="_blank" rel="noopener">fastai 官方文档</a></p>
+</li>
+</ul>
+<hr>
+<h3 id="keras流程"><a class="markdownIt-Anchor" href="#keras流程"></a> keras流程</h3>
+<ol>
+<li>数据准备</li>
+<li>模型构建</li>
+<li>模型编译(loss，optimizer，评价指标)</li>
+<li>模型训练(fit，数据，步数，batch, lr, valid数据集)</li>
+</ol>
+<h3 id="pytorch流程"><a class="markdownIt-Anchor" href="#pytorch流程"></a> pytorch流程</h3>
+<ol>
+<li>数据集需要构造dataloader类</li>
+<li>训练模型构造Module类</li>
+<li>创建优化器(optimizer)</li>
+<li>循环中
+<ol>
+<li>优化器清零</li>
+<li>正向走一遍模型，得到输出</li>
+<li>计算loss</li>
+<li>loss进行反向传播</li>
+<li>优化器step()更新参数</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%80%83%E7%A0%94%E6%9C%BA%E8%AF%95%E6%8C%87%E5%8D%97%E4%B8%8A%E6%9C%BA%E7%BC%96%E7%A8%8B%E7%BB%83%E4%B9%A0%E5%A4%8D%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1345,7 +1725,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1356,7 +1736,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-count">64</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1386,7 +1766,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

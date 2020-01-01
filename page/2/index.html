@@ -220,6 +220,195 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/19/Attention%E6%9C%BA%E5%88%B6-Convolutional-Block-Attention-Module-CBAM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/19/Attention%E6%9C%BA%E5%88%B6-Convolutional-Block-Attention-Module-CBAM/" class="post-title-link" itemprop="url">Attention机制- Convolutional Block Attention Module(CBAM)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-19 21:09:56" itemprop="dateCreated datePublished" datetime="2019-11-19T21:09:56+08:00">2019-11-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-17 10:47:52" itemprop="dateModified" datetime="2019-12-17T10:47:52+08:00">2019-12-17</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>前言：Attention机制最开始是从NLP开始火起来的，后来才遍地开花，很多地方都用到了attention机制。</p>
+<p>第一次接触Attention机制还是在一个比赛中，一个目标检测的比赛，一个哈工大的本科生使用attention机制中的CBAM对YOLOv3进行改进，竟然能让一个一阶段的方法获得第一名的好成绩。</p>
+<p>这篇论文发表在ECCV2018, 感觉是一个值得一读的好文章，链接：<a href="http://openaccess.thecvf.com/content_ECCV_2018/papers/Sanghyun_Woo_Convolutional_Block_Attention_ECCV_2018_paper.pdf" target="_blank" rel="noopener">http://openaccess.thecvf.com/content_ECCV_2018/papers/Sanghyun_Woo_Convolutional_Block_Attention_ECCV_2018_paper.pdf</a></p>
+</blockquote>
+<h2 id="1-摘要"><a class="markdownIt-Anchor" href="#1-摘要"></a> 1. 摘要</h2>
+<p>本研究提出一个Convolutional Block Attention Module(CBAM)模块，简单并且有效的注意力模型。处理对象是中间的feature map（意思是各种基础网络提取最后一层得到的除了全连接层以外的feature）。这个模块主要从空间和通道两个维度进行推理得到注意力权重，然后与原特征图进行相乘对特征进行自适应调整。</p>
+<p>CBAM是一个轻量级通用模块，可以被任何结构的CNN所集成，额外开销可以忽略不计，并且可以进行端到端的训练。</p>
+<p>在分类和检测任务重，使用了CBAM可以一直提升分类和检测的表现，这体现了模块广泛的应用性。</p>
+<h2 id="2-介绍"><a class="markdownIt-Anchor" href="#2-介绍"></a> 2. 介绍</h2>
+<ul>
+<li>目前的研究集中于网络的三要素：深度，宽度，基数。
+<ul>
+<li>深度：resnet, inceptionv4, inception-resnet</li>
+<li>宽度:  GoogLeNet</li>
+<li>基数：Xception, ResNeXt</li>
+</ul>
+</li>
+<li>本文集中于神经网络的另外一个要素：注意力。注意力不仅告诉我们应该集中到哪个位置，而且还提升了感兴趣区域的表示能力。</li>
+<li>本文目标是通过使用关注重要特征和压制五官特征的注意力机制来提高模型的表示能力。</li>
+<li>普通卷积功能是通过混合跨通道和空间的信息来提取更富信息量的特征。所以CBAM选择关注通道和空间两个方面，进行提取更有意义的特征。</li>
+<li>具体实现是顺序经过通道注意力模块和空间注意力模块：
+<ul>
+<li>通道注意力模块：学习注意什么“what”</li>
+<li>空间注意力模块：学习注意哪里“where”</li>
+</ul>
+</li>
+<li>主要贡献：
+<ol>
+<li>提出了CBAM模块，简单，有效，易于集成</li>
+<li>使用CBAM进行广泛的验证。</li>
+<li>使用多个模型在不同数据集上使用CBAM模块，并验证了模型的表现。</li>
+</ol>
+</li>
+</ul>
+<h2 id="3-cbam模块"><a class="markdownIt-Anchor" href="#3-cbam模块"></a> 3. CBAM模块</h2>
+<p>CBAM模块有两个模块组成。</p>
+<ol>
+<li>通道注意力模块（Channel Attention Module）</li>
+<li>空间注意力模块（Spatial Attention Module）</li>
+</ol>
+<h3 id="31-通道注意力机制"><a class="markdownIt-Anchor" href="#31-通道注意力机制"></a> 3.1 通道注意力机制</h3>
+<p><img src="https://img-blog.csdnimg.cn/2019111922173278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p><img src="https://img-blog.csdnimg.cn/20191119221811390.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/15/RTX-2080Ti-Ubuntu16-04-cuda10-0%E4%B8%8B%E5%AE%89%E8%A3%85tensorflow1-14-0-keras-2-2-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/15/RTX-2080Ti-Ubuntu16-04-cuda10-0%E4%B8%8B%E5%AE%89%E8%A3%85tensorflow1-14-0-keras-2-2-5/" class="post-title-link" itemprop="url">RTX 2080Ti, Ubuntu16.04, cuda10.0下安装tensorflow1.14.0, keras 2.2.5</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-11-15 20:20:09 / 修改时间：20:21:44" itemprop="dateCreated datePublished" datetime="2019-11-15T20:20:09+08:00">2019-11-15</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>前言：朋友让我帮他装一下tensorflow,keras的gpu环境，之前明明一句话就能搞定的，所以我就直接pip install了，但很明显这样不行。默认安装的tensorflow是2版本的，之前的代码都是基于1的所以还得再找找教程。现在去网上找一下，还有很多教程都是基于cuda8的，pip源里边已经找不到1.2，1.6这种版本的tensorflow了。所以找了半天，终于找到靠谱的，在这里进行分享。</p>
+</blockquote>
+<p>本教程是安装<strong>RTX 2080Ti, tensorflow1.14.0, keras 2.2.5，Ubuntu16.04, cuda10.0</strong><br>
+<strong>1. 安装成功的关键在哪？</strong><br>
+关键在于版本匹配问题，必须找到匹配的版本才能正常运行，否则会出各种问题，不过前提是你要安装号cuda和cudnn，具体安装可以看我之前写的一篇：<a href="https://blog.csdn.net/DD_PP_JJ/article/details/103055629" target="_blank" rel="noopener">https://blog.csdn.net/DD_PP_JJ/article/details/103055629</a>, 写的很详细。<br>
+<strong>2. 去哪里找版本的匹配？</strong><br>
+<a href="https://docs.floydhub.com/guides/environments/" target="_blank" rel="noopener">https://docs.floydhub.com/guides/environments/</a><br>
+<strong>3. 在cuda10.0下进行安装</strong>：<br>
+经过查询版本匹配问题，选择tensorflow1.14进行安装，安装命令为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tensorflow-gpu==1.14</span><br></pre></td></tr></table></figure>
+<p>然后查询keras版本，发现2.2.5是比较合适的keras版本，继续安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install keras==2.2.5</span><br></pre></td></tr></table></figure>
+<p><strong>4. 测试是否安装成功GPU版本?</strong><br>
+输入python命令，然后输入以下代码进行测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">from keras import backend as K</span><br><span class="line">K.tensorflow_backend._get_available_gpus()</span><br></pre></td></tr></table></figure>
+<p>如果可以得到一堆输出，就说明已经配置好GPU版本的tensorflow和keras了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from keras import backend as K</span><br><span class="line">Using TensorFlow backend.</span><br><span class="line">&gt;&gt;&gt; K.tensorflow_backend._get_available_gpus()</span><br><span class="line">WARNING:tensorflow:From /home/user-hlw/anaconda3/lib/python3.7/site-packages/keras/backend/tensorflow_backend.py:190: The name tf.get_default_session is deprecated. Please use tf.compat.v1.get_default_session instead.</span><br><span class="line">WARNING:tensorflow:From /home/user-hlw/anaconda3/lib/python3.7/site-packages/keras/backend/tensorflow_backend.py:197: The name tf.ConfigProto is deprecated. Please use tf.compat.v1.ConfigProto instead.</span><br><span class="line">WARNING:tensorflow:From /home/user-hlw/anaconda3/lib/python3.7/site-packages/keras/backend/tensorflow_backend.py:203: The name tf.Session is deprecated. Please use tf.compat.v1.Session instead.</span><br><span class="line">2019-11-15 15:50:41.358531: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA</span><br><span class="line">2019-11-15 15:50:41.374301: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2399995000 Hz</span><br><span class="line">2019-11-15 15:50:41.379576: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x564dbea39c60 executing computations on platform Host. Devices:</span><br><span class="line">2019-11-15 15:50:41.379607: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): &lt;undefined&gt;, &lt;undefined&gt;</span><br><span class="line">2019-11-15 15:50:41.383516: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcuda.so.1</span><br><span class="line">2019-11-15 15:50:42.396020: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x564dbeaf38a0 executing computations on platform CUDA. Devices:</span><br><span class="line">2019-11-15 15:50:42.396092: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): GeForce RTX 2080 Ti, Compute Capability 7.5</span><br><span class="line">2019-11-15 15:50:42.396108: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (1): GeForce RTX 2080 Ti, Compute Capability 7.5</span><br><span class="line">2019-11-15 15:50:42.396120: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (2): GeForce RTX 2080 Ti, Compute Capability 7.5</span><br><span class="line">2019-11-15 15:50:42.396130: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (3): GeForce RTX 2080 Ti, Compute Capability 7.5</span><br><span class="line">2019-11-15 15:50:42.398726: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1640] Found device 0 with properties:</span><br><span class="line">name: GeForce RTX 2080 Ti major: 7 minor: 5 memoryClockRate(GHz): 1.545</span><br><span class="line">pciBusID: 0000:02:00.0</span><br><span class="line">2019-11-15 15:50:42.400394: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1640] Found device 1 with properties:</span><br><span class="line">name: GeForce RTX 2080 Ti major: 7 minor: 5 memoryClockRate(GHz): 1.545</span><br><span class="line">pciBusID: 0000:03:00.0</span><br><span class="line">2019-11-15 15:50:42.401969: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1640] Found device 2 with properties:</span><br><span class="line">name: GeForce RTX 2080 Ti major: 7 minor: 5 memoryClockRate(GHz): 1.545</span><br><span class="line">pciBusID: 0000:82:00.0</span><br><span class="line">2019-11-15 15:50:42.403479: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1640] Found device 3 with properties:</span><br><span class="line">name: GeForce RTX 2080 Ti major: 7 minor: 5 memoryClockRate(GHz): 1.545</span><br><span class="line">pciBusID: 0000:83:00.0</span><br><span class="line">2019-11-15 15:50:42.403989: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudart.so.10.0</span><br><span class="line">2019-11-15 15:50:42.406544: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcublas.so.10.0</span><br><span class="line">2019-11-15 15:50:42.408770: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcufft.so.10.0</span><br><span class="line">2019-11-15 15:50:42.409258: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcurand.so.10.0</span><br><span class="line">2019-11-15 15:50:42.411924: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcusolver.so.10.0</span><br><span class="line">2019-11-15 15:50:42.413938: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcusparse.so.10.0</span><br><span class="line">2019-11-15 15:50:42.419643: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudnn.so.7</span><br><span class="line">2019-11-15 15:50:42.430706: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1763] Adding visible gpu devices: 0, 1, 2, 3</span><br><span class="line">2019-11-15 15:50:42.430769: I tensorflow/stream_executor/platform/default/dso_loader.cc:42] Successfully opened dynamic library libcudart.so.10.0</span><br><span class="line">2019-11-15 15:50:42.437215: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1181] Device interconnect StreamExecutor with strength 1 edge matrix:</span><br><span class="line">2019-11-15 15:50:42.437241: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1187]      0 1 2 3</span><br><span class="line">2019-11-15 15:50:42.437250: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1200] 0:   N N N N</span><br><span class="line">2019-11-15 15:50:42.437256: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1200] 1:   N N N N</span><br><span class="line">2019-11-15 15:50:42.437262: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1200] 2:   N N N N</span><br><span class="line">2019-11-15 15:50:42.437270: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1200] 3:   N N N N</span><br><span class="line">2019-11-15 15:50:42.443910: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1326] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10165 MB memory) -&gt; physical GPU (device: 0, name: GeForce RTX 2080 Ti, pci bus id: 0000:02:00.0, compute capability: 7.5)</span><br><span class="line">2019-11-15 15:50:42.450433: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1326] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:1 with 10165 MB memory) -&gt; physical GPU (device: 1, name: GeForce RTX 2080 Ti, pci bus id: 0000:03:00.0, compute capability: 7.5)</span><br><span class="line">2019-11-15 15:50:42.453357: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1326] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:2 with 10165 MB memory) -&gt; physical GPU (device: 2, name: GeForce RTX 2080 Ti, pci bus id: 0000:82:00.0, compute capability: 7.5)</span><br><span class="line">2019-11-15 15:50:42.455533: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1326] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:3 with 10165 MB memory) -&gt; physical GPU (device: 3, name: GeForce RTX 2080 Ti, pci bus id: 0000:83:00.0, compute capability: 7.5)</span><br><span class="line">WARNING:tensorflow:From /home/user-hlw/anaconda3/lib/python3.7/site-packages/keras/backend/tensorflow_backend.py:207: The name tf.global_variables is deprecated. Please use tf.compat.v1.global_variables instead.</span><br><span class="line"></span><br><span class="line">[&apos;/job:localhost/replica:0/task:0/device:GPU:0&apos;, &apos;/job:localhost/replica:0/task:0/device:GPU:1&apos;, &apos;/job:localhost/replica:0/task:0/device:GPU:2&apos;, &apos;/job:localhost/replica:0/task:0/device:GPU:3&apos;]</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>5. 如果想要安装tensorflow2呢？</strong><br>
+参考tensorflow官方的文档进行安装：<a href="https://tensorflow.google.cn/install/pip" target="_blank" rel="noopener">https://tensorflow.google.cn/install/pip</a></p>
+<blockquote>
+<p>后记：安装这些深度学习库的时候要注意版本对应关系，否则会浪费很长时间，浪费很多流量。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/14/%E4%BD%BF%E7%94%A8python%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9E%8B%E5%B9%B6%E6%B5%8B%E8%AF%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1620,196 +1809,6 @@ AttributeError: ‘VOCDataset’ object has no attribute ‘img_ids’</module><
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/18/MOT%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/log.png">
-      <meta itemprop="name" content="pprp">
-      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spicyCV">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/18/MOT%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF/" class="post-title-link" itemprop="url">MOT技术路线</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-10-18 14:54:46" itemprop="dateCreated datePublished" datetime="2019-10-18T14:54:46+08:00">2019-10-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-11 17:03:43" itemprop="dateModified" datetime="2019-11-11T17:03:43+08:00">2019-11-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">深度学习</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>数据集收集，数据集主要来源是宁夏项目中来自肉牛养殖场的视频，视频质量参差不齐，存在夜间光线过弱，光照过于强烈，遮挡过于严重，视频模糊等情况，需要进行初步筛选，并从中提取关键帧作为数据集。
-<ol>
-<li>挑选满足要求的视频，光照适宜，没有明显视频模糊</li>
-<li>处理视频，提取关键帧，要求清晰，帧与帧之间重复较小，具有代表性</li>
-<li>处理关键帧，将关键帧图像分辨率统一到1240*720, 剔除不合要求关键帧并且每隔几张取一张关键帧作为最终数据集中的图片</li>
-</ol>
-</li>
-<li>数据集构造，我们采用detection-based-tracking方法进行多目标检测，所以目标检测是基础，拟采用的deep sort方法是基于yolov3进行检测的，所以需要训练高效检测器，才能为多目标检测服务。
-<ol>
-<li>处理挑选的关键帧，进行模糊检测，对清晰度不合要求的图片删除</li>
-<li>使用labelimg软件进行标注，制定了标注的标准：
-<ol>
-<li>不止标注完整牛，牛身体的一部分也进行标注，不能只标注图像中完整的目标，被遮挡的目标，只要人眼能看清是啥的都应该被标注，并且矩形框只需要包含看得见的部分即可</li>
-<li>遮挡不超过50%，远处目标如果人眼无法识别，那就先不要标注</li>
-<li>标注方框大小合适，矩形方框应该刚好将目标包围住，之间的间隙不能太大，也不能太小，防止出现抖动</li>
-<li>一张图片素材中，近处的大目标需要标注，远处人眼看得清的小目标同样需要标注</li>
-</ol>
-</li>
-<li>完成标注后进行审核，确保标注质量</li>
-<li>着手构建标准数据集如 VOC2007, MS COCO等， 按照官方要求进行构造，完成后进行复查，确保数据集完整性和正确性。</li>
-</ol>
-</li>
-<li>训练YOLOv3，设计新型网络模型进行目标检测训练，尽可能提升检测器的表现。
-<ol>
-<li>配置深度学习服务器，如CUDA, cuDnn加速环境，以及深度学习环境，如pytorch, keras , tensorflow等。</li>
-<li>进行服务器环境配置，配置好环境变量，保证命令行下正常运行。</li>
-<li>使用官方提供的darknet模型进行训练，对原始模型（即yolov3）进行训练，查看模型提升效果，测试其他网络模型，比如轻量级网络Tiny YOLOv3等。</li>
-<li>借鉴轻量级模型设计原则，比如YOLO Nano, MobileNet, DenseNet等模型进行模型的设计，尽可能在减少模型参数的情况下提高模型检测的准确率。</li>
-<li>训练模型，综合比对，得到最优模型，作为下一步目标跟踪的基础。</li>
-</ol>
-</li>
-<li>多目标跟踪不仅是用到了YOLOv3进行目标检测，还有一部分负责重识别，deep association metric在原始论文中是一个行人重识别网络，可以作为牛的多目标跟踪进行重识别，但是效果相对会差一点，所以下一步目标是构建牛的重识别矩阵，结合外观模型进行进一步对较长时间遮挡情况下进行优化。</li>
-<li>目前采用的方法是基于online的方法，实时检测效果比较好，但是没有结合上下文信息（前后几帧），可能会出现ID switch的情况，所以之后会继续追随最新的研究方向，结合更多信息，让多目标追踪效果更佳突出。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/15/%E5%B0%86xml%E6%96%87%E4%BB%B6%E4%B8%AD%E6%9F%90%E4%B8%AA%E5%AD%97%E6%AE%B5%E6%89%B9%E9%87%8F%E6%9B%B4%E6%94%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/log.png">
-      <meta itemprop="name" content="pprp">
-      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spicyCV">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/15/%E5%B0%86xml%E6%96%87%E4%BB%B6%E4%B8%AD%E6%9F%90%E4%B8%AA%E5%AD%97%E6%AE%B5%E6%89%B9%E9%87%8F%E6%9B%B4%E6%94%B9/" class="post-title-link" itemprop="url">将xml文件中某个字段批量更改</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-10-15 14:54:46" itemprop="dateCreated datePublished" datetime="2019-10-15T14:54:46+08:00">2019-10-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-11 16:31:38" itemprop="dateModified" datetime="2019-11-11T16:31:38+08:00">2019-11-11</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="将xml文件中某个字段批量更改"><a class="markdownIt-Anchor" href="#将xml文件中某个字段批量更改"></a> 将xml文件中某个字段批量更改</h1>
-<blockquote>
-<p>前言：使用labelimg进行标注的时候，由于都是用的是默认的名称，有时候类的名字会出现拼写错误，比如我想要写的是“cow” 结果打上去的是“cwo”, 一出错就错一片，这很常见，所以参考了：<a href="https://www.jianshu.com/p/cf12bef0872c" target="_blank" rel="noopener">https://www.jianshu.com/p/cf12bef0872c</a> 的代码，修改了冗余的代码，并添加了新的模块以后，将代码分享给大家。</p>
-</blockquote>
-<h2 id="1-xml文件展示"><a class="markdownIt-Anchor" href="#1-xml文件展示"></a> 1. xml文件展示</h2>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">annotation</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">folder</span>&gt;</span>part3<span class="tag">&lt;/<span class="name">folder</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">filename</span>&gt;</span>0015-1150.jpg<span class="tag">&lt;/<span class="name">filename</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">path</span>&gt;</span>I:\part3\0015-1150.jpg<span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">source</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">database</span>&gt;</span>Unknown<span class="tag">&lt;/<span class="name">database</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">size</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">width</span>&gt;</span>1280<span class="tag">&lt;/<span class="name">width</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">height</span>&gt;</span>720<span class="tag">&lt;/<span class="name">height</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">depth</span>&gt;</span>3<span class="tag">&lt;/<span class="name">depth</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">size</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">segmented</span>&gt;</span>0<span class="tag">&lt;/<span class="name">segmented</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>459<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>88<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>567<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>163<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>543<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>92<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>630<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>163<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>659<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>156<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>773<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>263<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>497<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>171<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>677<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>315<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>584<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>303<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>715<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>395<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>537<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>389<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>814<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>497<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>750<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>303<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>918<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>434<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>770<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>223<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>958<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>285<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>974<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>477<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>1152<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>636<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>66<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>454<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>308<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>696<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>1<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>347<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>548<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>550<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>720<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>996<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>154<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>1128<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>245<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">annotation</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="2-将文件夹中所有name进行批量更改"><a class="markdownIt-Anchor" href="#2-将文件夹中所有name进行批量更改"></a> 2. 将文件夹中所有name进行批量更改</h2>
-<h3 id="21-将某类别名称更改"><a class="markdownIt-Anchor" href="#21-将某类别名称更改"></a> 2.1 将某类别名称更改</h3>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">changeName</span><span class="params">(xml_fold, origin_name, new_name)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    xml_fold: xml存放文件夹</span></span><br><span class="line"><span class="string">    origin_name: 原始名字，比如弄错的名字，原先要cow,不小心打成cwo</span></span><br><span class="line"><span class="string">    new_name: 需要改成的正确的名字，在上个例子中就是cow</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    files = os.listdir(xml_fold)</span><br><span class="line">    cnt = <span class="number">0</span> </span><br><span class="line">    <span class="keyword">for</span> xmlFile <span class="keyword">in</span> files:</span><br><span class="line">        file_path = os.path.join(xml_fold, xmlFile)</span><br><span class="line">        dom = parse(file_path)</span><br><span class="line">        root = dom.getroot()</span><br><span class="line">        <span class="keyword">for</span> obj <span class="keyword">in</span> root.iter(<span class="string">'object'</span>):<span class="comment">#获取object节点中的name子节点</span></span><br><span class="line">            tmp_name = obj.find(<span class="string">'name'</span>).text</span><br><span class="line">            <span class="keyword">if</span> tmp_name == origin_name: <span class="comment"># 修改</span></span><br><span class="line">                obj.find(<span class="string">'name'</span>).text = new_name</span><br><span class="line">                print(<span class="string">"change %s to %s."</span> % (origin_name, new_name))</span><br><span class="line">                cnt += <span class="number">1</span></span><br><span class="line">        dom.write(file_path, xml_declaration=<span class="literal">True</span>)<span class="comment">#保存到指定文件</span></span><br><span class="line">    print(<span class="string">"有%d个文件被成功修改。"</span> % cnt)</span><br></pre></td></tr></table></figure>
-<h3 id="22-将某文件夹所有类别都统一成某个类别"><a class="markdownIt-Anchor" href="#22-将某文件夹所有类别都统一成某个类别"></a> 2.2 将某文件夹所有类别都统一成某个类别</h3>
-<p>适用于只有一个类，并且进行改名的时候。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">changeAll</span><span class="params">(xml_fold,new_name)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    xml_fold: xml存放文件夹</span></span><br><span class="line"><span class="string">    new_name: 需要改成的正确的名字，在上个例子中就是cow</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    files = os.listdir(xml_fold)</span><br><span class="line">    cnt = <span class="number">0</span> </span><br><span class="line">    <span class="keyword">for</span> xmlFile <span class="keyword">in</span> files:</span><br><span class="line">        file_path = os.path.join(xml_fold, xmlFile)</span><br><span class="line">        dom = parse(file_path)</span><br><span class="line">        root = dom.getroot()</span><br><span class="line">        <span class="keyword">for</span> obj <span class="keyword">in</span> root.iter(<span class="string">'object'</span>):<span class="comment">#获取object节点中的name子节点</span></span><br><span class="line">            tmp_name = obj.find(<span class="string">'name'</span>).text</span><br><span class="line">            obj.find(<span class="string">'name'</span>).text = new_name</span><br><span class="line">            print(<span class="string">"change %s to %s."</span> % (tmp_name, new_name))</span><br><span class="line">            cnt += <span class="number">1</span></span><br><span class="line">        dom.write(file_path, xml_declaration=<span class="literal">True</span>)<span class="comment">#保存到指定文件</span></span><br><span class="line">    print(<span class="string">"有%d个文件被成功修改。"</span> % cnt)</span><br></pre></td></tr></table></figure>
-<h3 id="23-统计每个类别实际目标的个数"><a class="markdownIt-Anchor" href="#23-统计每个类别实际目标的个数"></a> 2.3 统计每个类别实际目标的个数</h3>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">countAll</span><span class="params">(xml_fold)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    xml_fold: xml存放文件夹</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    files = os.listdir(xml_fold)</span><br><span class="line">    dict=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> xmlFile <span class="keyword">in</span> files:</span><br><span class="line">        file_path = os.path.join(xml_fold, xmlFile)</span><br><span class="line">        dom = parse(file_path)</span><br><span class="line">        root = dom.getroot()</span><br><span class="line">        <span class="keyword">for</span> obj <span class="keyword">in</span> root.iter(<span class="string">'object'</span>):<span class="comment">#获取object节点中的name子节点</span></span><br><span class="line">            tmp_name = obj.find(<span class="string">'name'</span>).text</span><br><span class="line">            <span class="keyword">if</span> tmp_name <span class="keyword">not</span> <span class="keyword">in</span> dict:</span><br><span class="line">                dict[tmp_name] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dict[tmp_name] += <span class="number">1</span></span><br><span class="line">        dom.write(file_path, xml_declaration=<span class="literal">True</span>)<span class="comment">#保存到指定文件</span></span><br><span class="line">    print(<span class="string">"统计结果如下："</span>)</span><br><span class="line">    print(<span class="string">"-"</span>*<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">for</span> key,value <span class="keyword">in</span> dict.items():</span><br><span class="line">        print(<span class="string">"类别为%s的目标个数为%d."</span> % (key, value))</span><br><span class="line">    print(<span class="string">"-"</span>*<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="3-全部代码"><a class="markdownIt-Anchor" href="#3-全部代码"></a> 3. 全部代码</h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"><span class="keyword">from</span> xml.etree.ElementTree <span class="keyword">import</span> parse, Element</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">changeName</span><span class="params">(xml_fold, origin_name, new_name)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    xml_fold: xml存放文件夹</span></span><br><span class="line"><span class="string">    origin_name: 原始名字，比如弄错的名字，原先要cow,不小心打成cwo</span></span><br><span class="line"><span class="string">    new_name: 需要改成的正确的名字，在上个例子中就是cow</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    files = os.listdir(xml_fold)</span><br><span class="line">    cnt = <span class="number">0</span> </span><br><span class="line">    <span class="keyword">for</span> xmlFile <span class="keyword">in</span> files:</span><br><span class="line">        file_path = os.path.join(xml_fold, xmlFile)</span><br><span class="line">        dom = parse(file_path)</span><br><span class="line">        root = dom.getroot()</span><br><span class="line">        <span class="keyword">for</span> obj <span class="keyword">in</span> root.iter(<span class="string">'object'</span>):<span class="comment">#获取object节点中的name子节点</span></span><br><span class="line">            tmp_name = obj.find(<span class="string">'name'</span>).text</span><br><span class="line">            <span class="keyword">if</span> tmp_name == origin_name: <span class="comment"># 修改</span></span><br><span class="line">                obj.find(<span class="string">'name'</span>).text = new_name</span><br><span class="line">                print(<span class="string">"change %s to %s."</span> % (origin_name, new_name))</span><br><span class="line">                cnt += <span class="number">1</span></span><br><span class="line">        dom.write(file_path, xml_declaration=<span class="literal">True</span>)<span class="comment">#保存到指定文件</span></span><br><span class="line">    print(<span class="string">"有%d个文件被成功修改。"</span> % cnt)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">changeAll</span><span class="params">(xml_fold,new_name)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    xml_fold: xml存放文件夹</span></span><br><span class="line"><span class="string">    new_name: 需要改成的正确的名字，在上个例子中就是cow</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    files = os.listdir(xml_fold)</span><br><span class="line">    cnt = <span class="number">0</span> </span><br><span class="line">    <span class="keyword">for</span> xmlFile <span class="keyword">in</span> files:</span><br><span class="line">        file_path = os.path.join(xml_fold, xmlFile)</span><br><span class="line">        dom = parse(file_path)</span><br><span class="line">        root = dom.getroot()</span><br><span class="line">        <span class="keyword">for</span> obj <span class="keyword">in</span> root.iter(<span class="string">'object'</span>):<span class="comment">#获取object节点中的name子节点</span></span><br><span class="line">            tmp_name = obj.find(<span class="string">'name'</span>).text</span><br><span class="line">            obj.find(<span class="string">'name'</span>).text = new_name</span><br><span class="line">            print(<span class="string">"change %s to %s."</span> % (tmp_name, new_name))</span><br><span class="line">            cnt += <span class="number">1</span></span><br><span class="line">        dom.write(file_path, xml_declaration=<span class="literal">True</span>)<span class="comment">#保存到指定文件</span></span><br><span class="line">    print(<span class="string">"有%d个文件被成功修改。"</span> % cnt)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">countAll</span><span class="params">(xml_fold)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    xml_fold: xml存放文件夹</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    files = os.listdir(xml_fold)</span><br><span class="line">    dict=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> xmlFile <span class="keyword">in</span> files:</span><br><span class="line">        file_path = os.path.join(xml_fold, xmlFile)</span><br><span class="line">        dom = parse(file_path)</span><br><span class="line">        root = dom.getroot()</span><br><span class="line">        <span class="keyword">for</span> obj <span class="keyword">in</span> root.iter(<span class="string">'object'</span>):<span class="comment">#获取object节点中的name子节点</span></span><br><span class="line">            tmp_name = obj.find(<span class="string">'name'</span>).text</span><br><span class="line">            <span class="keyword">if</span> tmp_name <span class="keyword">not</span> <span class="keyword">in</span> dict:</span><br><span class="line">                dict[tmp_name] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dict[tmp_name] += <span class="number">1</span></span><br><span class="line">        dom.write(file_path, xml_declaration=<span class="literal">True</span>)<span class="comment">#保存到指定文件</span></span><br><span class="line">    print(<span class="string">"统计结果如下："</span>)</span><br><span class="line">    print(<span class="string">"-"</span>*<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">for</span> key,value <span class="keyword">in</span> dict.items():</span><br><span class="line">        print(<span class="string">"类别为%s的目标个数为%d."</span> % (key, value))</span><br><span class="line">    print(<span class="string">"-"</span>*<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    path = <span class="string">r"I:\dongpeijiePickup\assignment\part2_xml"</span> <span class="comment">#xml文件所在的目录</span></span><br><span class="line">    <span class="comment"># changeName(path, "cattle", "cow")</span></span><br><span class="line">    <span class="comment"># changeAll(path, "cattle")</span></span><br><span class="line">    countAll(path)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1860,7 +1859,7 @@ AttributeError: ‘VOCDataset’ object has no attribute ‘img_ids’</module><
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1871,7 +1870,7 @@ AttributeError: ‘VOCDataset’ object has no attribute ‘img_ids’</module><
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-count">64</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1901,7 +1900,7 @@ AttributeError: ‘VOCDataset’ object has no attribute ‘img_ids’</module><
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

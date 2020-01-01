@@ -220,6 +220,196 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/18/MOT%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/18/MOT%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF/" class="post-title-link" itemprop="url">MOT技术路线</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-18 14:54:46" itemprop="dateCreated datePublished" datetime="2019-10-18T14:54:46+08:00">2019-10-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 17:03:43" itemprop="dateModified" datetime="2019-11-11T17:03:43+08:00">2019-11-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li>数据集收集，数据集主要来源是宁夏项目中来自肉牛养殖场的视频，视频质量参差不齐，存在夜间光线过弱，光照过于强烈，遮挡过于严重，视频模糊等情况，需要进行初步筛选，并从中提取关键帧作为数据集。
+<ol>
+<li>挑选满足要求的视频，光照适宜，没有明显视频模糊</li>
+<li>处理视频，提取关键帧，要求清晰，帧与帧之间重复较小，具有代表性</li>
+<li>处理关键帧，将关键帧图像分辨率统一到1240*720, 剔除不合要求关键帧并且每隔几张取一张关键帧作为最终数据集中的图片</li>
+</ol>
+</li>
+<li>数据集构造，我们采用detection-based-tracking方法进行多目标检测，所以目标检测是基础，拟采用的deep sort方法是基于yolov3进行检测的，所以需要训练高效检测器，才能为多目标检测服务。
+<ol>
+<li>处理挑选的关键帧，进行模糊检测，对清晰度不合要求的图片删除</li>
+<li>使用labelimg软件进行标注，制定了标注的标准：
+<ol>
+<li>不止标注完整牛，牛身体的一部分也进行标注，不能只标注图像中完整的目标，被遮挡的目标，只要人眼能看清是啥的都应该被标注，并且矩形框只需要包含看得见的部分即可</li>
+<li>遮挡不超过50%，远处目标如果人眼无法识别，那就先不要标注</li>
+<li>标注方框大小合适，矩形方框应该刚好将目标包围住，之间的间隙不能太大，也不能太小，防止出现抖动</li>
+<li>一张图片素材中，近处的大目标需要标注，远处人眼看得清的小目标同样需要标注</li>
+</ol>
+</li>
+<li>完成标注后进行审核，确保标注质量</li>
+<li>着手构建标准数据集如 VOC2007, MS COCO等， 按照官方要求进行构造，完成后进行复查，确保数据集完整性和正确性。</li>
+</ol>
+</li>
+<li>训练YOLOv3，设计新型网络模型进行目标检测训练，尽可能提升检测器的表现。
+<ol>
+<li>配置深度学习服务器，如CUDA, cuDnn加速环境，以及深度学习环境，如pytorch, keras , tensorflow等。</li>
+<li>进行服务器环境配置，配置好环境变量，保证命令行下正常运行。</li>
+<li>使用官方提供的darknet模型进行训练，对原始模型（即yolov3）进行训练，查看模型提升效果，测试其他网络模型，比如轻量级网络Tiny YOLOv3等。</li>
+<li>借鉴轻量级模型设计原则，比如YOLO Nano, MobileNet, DenseNet等模型进行模型的设计，尽可能在减少模型参数的情况下提高模型检测的准确率。</li>
+<li>训练模型，综合比对，得到最优模型，作为下一步目标跟踪的基础。</li>
+</ol>
+</li>
+<li>多目标跟踪不仅是用到了YOLOv3进行目标检测，还有一部分负责重识别，deep association metric在原始论文中是一个行人重识别网络，可以作为牛的多目标跟踪进行重识别，但是效果相对会差一点，所以下一步目标是构建牛的重识别矩阵，结合外观模型进行进一步对较长时间遮挡情况下进行优化。</li>
+<li>目前采用的方法是基于online的方法，实时检测效果比较好，但是没有结合上下文信息（前后几帧），可能会出现ID switch的情况，所以之后会继续追随最新的研究方向，结合更多信息，让多目标追踪效果更佳突出。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/15/%E5%B0%86xml%E6%96%87%E4%BB%B6%E4%B8%AD%E6%9F%90%E4%B8%AA%E5%AD%97%E6%AE%B5%E6%89%B9%E9%87%8F%E6%9B%B4%E6%94%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/15/%E5%B0%86xml%E6%96%87%E4%BB%B6%E4%B8%AD%E6%9F%90%E4%B8%AA%E5%AD%97%E6%AE%B5%E6%89%B9%E9%87%8F%E6%9B%B4%E6%94%B9/" class="post-title-link" itemprop="url">将xml文件中某个字段批量更改</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-15 14:54:46" itemprop="dateCreated datePublished" datetime="2019-10-15T14:54:46+08:00">2019-10-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 16:31:38" itemprop="dateModified" datetime="2019-11-11T16:31:38+08:00">2019-11-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="将xml文件中某个字段批量更改"><a class="markdownIt-Anchor" href="#将xml文件中某个字段批量更改"></a> 将xml文件中某个字段批量更改</h1>
+<blockquote>
+<p>前言：使用labelimg进行标注的时候，由于都是用的是默认的名称，有时候类的名字会出现拼写错误，比如我想要写的是“cow” 结果打上去的是“cwo”, 一出错就错一片，这很常见，所以参考了：<a href="https://www.jianshu.com/p/cf12bef0872c" target="_blank" rel="noopener">https://www.jianshu.com/p/cf12bef0872c</a> 的代码，修改了冗余的代码，并添加了新的模块以后，将代码分享给大家。</p>
+</blockquote>
+<h2 id="1-xml文件展示"><a class="markdownIt-Anchor" href="#1-xml文件展示"></a> 1. xml文件展示</h2>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">annotation</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">folder</span>&gt;</span>part3<span class="tag">&lt;/<span class="name">folder</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">filename</span>&gt;</span>0015-1150.jpg<span class="tag">&lt;/<span class="name">filename</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">path</span>&gt;</span>I:\part3\0015-1150.jpg<span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">source</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">database</span>&gt;</span>Unknown<span class="tag">&lt;/<span class="name">database</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">size</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">width</span>&gt;</span>1280<span class="tag">&lt;/<span class="name">width</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">height</span>&gt;</span>720<span class="tag">&lt;/<span class="name">height</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">depth</span>&gt;</span>3<span class="tag">&lt;/<span class="name">depth</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">size</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">segmented</span>&gt;</span>0<span class="tag">&lt;/<span class="name">segmented</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>459<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>88<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>567<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>163<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>543<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>92<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>630<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>163<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>659<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>156<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>773<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>263<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>497<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>171<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>677<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>315<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>584<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>303<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>715<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>395<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>537<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>389<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>814<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>497<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>750<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>303<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>918<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>434<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>770<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>223<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>958<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>285<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>974<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>477<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>1152<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>636<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>66<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>454<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>308<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>696<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>1<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>347<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>548<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>550<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>720<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>cow<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>996<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>154<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>1128<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>245<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">annotation</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-将文件夹中所有name进行批量更改"><a class="markdownIt-Anchor" href="#2-将文件夹中所有name进行批量更改"></a> 2. 将文件夹中所有name进行批量更改</h2>
+<h3 id="21-将某类别名称更改"><a class="markdownIt-Anchor" href="#21-将某类别名称更改"></a> 2.1 将某类别名称更改</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">changeName</span><span class="params">(xml_fold, origin_name, new_name)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    xml_fold: xml存放文件夹</span></span><br><span class="line"><span class="string">    origin_name: 原始名字，比如弄错的名字，原先要cow,不小心打成cwo</span></span><br><span class="line"><span class="string">    new_name: 需要改成的正确的名字，在上个例子中就是cow</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    files = os.listdir(xml_fold)</span><br><span class="line">    cnt = <span class="number">0</span> </span><br><span class="line">    <span class="keyword">for</span> xmlFile <span class="keyword">in</span> files:</span><br><span class="line">        file_path = os.path.join(xml_fold, xmlFile)</span><br><span class="line">        dom = parse(file_path)</span><br><span class="line">        root = dom.getroot()</span><br><span class="line">        <span class="keyword">for</span> obj <span class="keyword">in</span> root.iter(<span class="string">'object'</span>):<span class="comment">#获取object节点中的name子节点</span></span><br><span class="line">            tmp_name = obj.find(<span class="string">'name'</span>).text</span><br><span class="line">            <span class="keyword">if</span> tmp_name == origin_name: <span class="comment"># 修改</span></span><br><span class="line">                obj.find(<span class="string">'name'</span>).text = new_name</span><br><span class="line">                print(<span class="string">"change %s to %s."</span> % (origin_name, new_name))</span><br><span class="line">                cnt += <span class="number">1</span></span><br><span class="line">        dom.write(file_path, xml_declaration=<span class="literal">True</span>)<span class="comment">#保存到指定文件</span></span><br><span class="line">    print(<span class="string">"有%d个文件被成功修改。"</span> % cnt)</span><br></pre></td></tr></table></figure>
+<h3 id="22-将某文件夹所有类别都统一成某个类别"><a class="markdownIt-Anchor" href="#22-将某文件夹所有类别都统一成某个类别"></a> 2.2 将某文件夹所有类别都统一成某个类别</h3>
+<p>适用于只有一个类，并且进行改名的时候。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">changeAll</span><span class="params">(xml_fold,new_name)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    xml_fold: xml存放文件夹</span></span><br><span class="line"><span class="string">    new_name: 需要改成的正确的名字，在上个例子中就是cow</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    files = os.listdir(xml_fold)</span><br><span class="line">    cnt = <span class="number">0</span> </span><br><span class="line">    <span class="keyword">for</span> xmlFile <span class="keyword">in</span> files:</span><br><span class="line">        file_path = os.path.join(xml_fold, xmlFile)</span><br><span class="line">        dom = parse(file_path)</span><br><span class="line">        root = dom.getroot()</span><br><span class="line">        <span class="keyword">for</span> obj <span class="keyword">in</span> root.iter(<span class="string">'object'</span>):<span class="comment">#获取object节点中的name子节点</span></span><br><span class="line">            tmp_name = obj.find(<span class="string">'name'</span>).text</span><br><span class="line">            obj.find(<span class="string">'name'</span>).text = new_name</span><br><span class="line">            print(<span class="string">"change %s to %s."</span> % (tmp_name, new_name))</span><br><span class="line">            cnt += <span class="number">1</span></span><br><span class="line">        dom.write(file_path, xml_declaration=<span class="literal">True</span>)<span class="comment">#保存到指定文件</span></span><br><span class="line">    print(<span class="string">"有%d个文件被成功修改。"</span> % cnt)</span><br></pre></td></tr></table></figure>
+<h3 id="23-统计每个类别实际目标的个数"><a class="markdownIt-Anchor" href="#23-统计每个类别实际目标的个数"></a> 2.3 统计每个类别实际目标的个数</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">countAll</span><span class="params">(xml_fold)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    xml_fold: xml存放文件夹</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    files = os.listdir(xml_fold)</span><br><span class="line">    dict=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> xmlFile <span class="keyword">in</span> files:</span><br><span class="line">        file_path = os.path.join(xml_fold, xmlFile)</span><br><span class="line">        dom = parse(file_path)</span><br><span class="line">        root = dom.getroot()</span><br><span class="line">        <span class="keyword">for</span> obj <span class="keyword">in</span> root.iter(<span class="string">'object'</span>):<span class="comment">#获取object节点中的name子节点</span></span><br><span class="line">            tmp_name = obj.find(<span class="string">'name'</span>).text</span><br><span class="line">            <span class="keyword">if</span> tmp_name <span class="keyword">not</span> <span class="keyword">in</span> dict:</span><br><span class="line">                dict[tmp_name] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dict[tmp_name] += <span class="number">1</span></span><br><span class="line">        dom.write(file_path, xml_declaration=<span class="literal">True</span>)<span class="comment">#保存到指定文件</span></span><br><span class="line">    print(<span class="string">"统计结果如下："</span>)</span><br><span class="line">    print(<span class="string">"-"</span>*<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">for</span> key,value <span class="keyword">in</span> dict.items():</span><br><span class="line">        print(<span class="string">"类别为%s的目标个数为%d."</span> % (key, value))</span><br><span class="line">    print(<span class="string">"-"</span>*<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="3-全部代码"><a class="markdownIt-Anchor" href="#3-全部代码"></a> 3. 全部代码</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"><span class="keyword">from</span> xml.etree.ElementTree <span class="keyword">import</span> parse, Element</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">changeName</span><span class="params">(xml_fold, origin_name, new_name)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    xml_fold: xml存放文件夹</span></span><br><span class="line"><span class="string">    origin_name: 原始名字，比如弄错的名字，原先要cow,不小心打成cwo</span></span><br><span class="line"><span class="string">    new_name: 需要改成的正确的名字，在上个例子中就是cow</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    files = os.listdir(xml_fold)</span><br><span class="line">    cnt = <span class="number">0</span> </span><br><span class="line">    <span class="keyword">for</span> xmlFile <span class="keyword">in</span> files:</span><br><span class="line">        file_path = os.path.join(xml_fold, xmlFile)</span><br><span class="line">        dom = parse(file_path)</span><br><span class="line">        root = dom.getroot()</span><br><span class="line">        <span class="keyword">for</span> obj <span class="keyword">in</span> root.iter(<span class="string">'object'</span>):<span class="comment">#获取object节点中的name子节点</span></span><br><span class="line">            tmp_name = obj.find(<span class="string">'name'</span>).text</span><br><span class="line">            <span class="keyword">if</span> tmp_name == origin_name: <span class="comment"># 修改</span></span><br><span class="line">                obj.find(<span class="string">'name'</span>).text = new_name</span><br><span class="line">                print(<span class="string">"change %s to %s."</span> % (origin_name, new_name))</span><br><span class="line">                cnt += <span class="number">1</span></span><br><span class="line">        dom.write(file_path, xml_declaration=<span class="literal">True</span>)<span class="comment">#保存到指定文件</span></span><br><span class="line">    print(<span class="string">"有%d个文件被成功修改。"</span> % cnt)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">changeAll</span><span class="params">(xml_fold,new_name)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    xml_fold: xml存放文件夹</span></span><br><span class="line"><span class="string">    new_name: 需要改成的正确的名字，在上个例子中就是cow</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    files = os.listdir(xml_fold)</span><br><span class="line">    cnt = <span class="number">0</span> </span><br><span class="line">    <span class="keyword">for</span> xmlFile <span class="keyword">in</span> files:</span><br><span class="line">        file_path = os.path.join(xml_fold, xmlFile)</span><br><span class="line">        dom = parse(file_path)</span><br><span class="line">        root = dom.getroot()</span><br><span class="line">        <span class="keyword">for</span> obj <span class="keyword">in</span> root.iter(<span class="string">'object'</span>):<span class="comment">#获取object节点中的name子节点</span></span><br><span class="line">            tmp_name = obj.find(<span class="string">'name'</span>).text</span><br><span class="line">            obj.find(<span class="string">'name'</span>).text = new_name</span><br><span class="line">            print(<span class="string">"change %s to %s."</span> % (tmp_name, new_name))</span><br><span class="line">            cnt += <span class="number">1</span></span><br><span class="line">        dom.write(file_path, xml_declaration=<span class="literal">True</span>)<span class="comment">#保存到指定文件</span></span><br><span class="line">    print(<span class="string">"有%d个文件被成功修改。"</span> % cnt)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">countAll</span><span class="params">(xml_fold)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    xml_fold: xml存放文件夹</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    files = os.listdir(xml_fold)</span><br><span class="line">    dict=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> xmlFile <span class="keyword">in</span> files:</span><br><span class="line">        file_path = os.path.join(xml_fold, xmlFile)</span><br><span class="line">        dom = parse(file_path)</span><br><span class="line">        root = dom.getroot()</span><br><span class="line">        <span class="keyword">for</span> obj <span class="keyword">in</span> root.iter(<span class="string">'object'</span>):<span class="comment">#获取object节点中的name子节点</span></span><br><span class="line">            tmp_name = obj.find(<span class="string">'name'</span>).text</span><br><span class="line">            <span class="keyword">if</span> tmp_name <span class="keyword">not</span> <span class="keyword">in</span> dict:</span><br><span class="line">                dict[tmp_name] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dict[tmp_name] += <span class="number">1</span></span><br><span class="line">        dom.write(file_path, xml_declaration=<span class="literal">True</span>)<span class="comment">#保存到指定文件</span></span><br><span class="line">    print(<span class="string">"统计结果如下："</span>)</span><br><span class="line">    print(<span class="string">"-"</span>*<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">for</span> key,value <span class="keyword">in</span> dict.items():</span><br><span class="line">        print(<span class="string">"类别为%s的目标个数为%d."</span> % (key, value))</span><br><span class="line">    print(<span class="string">"-"</span>*<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    path = <span class="string">r"I:\dongpeijiePickup\assignment\part2_xml"</span> <span class="comment">#xml文件所在的目录</span></span><br><span class="line">    <span class="comment"># changeName(path, "cattle", "cow")</span></span><br><span class="line">    <span class="comment"># changeAll(path, "cattle")</span></span><br><span class="line">    countAll(path)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/11/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E6%8E%A8%E5%AF%BC-%E5%9F%BA%E4%BA%8E%E4%BB%A3%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1539,386 +1729,6 @@ title:“人工智能图像相关岗位需求”</h2>
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/python%20%E5%8C%85%E5%8F%8A%E6%A8%A1%E5%9D%97%E5%BC%95%E7%94%A8%E6%A2%B3%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/log.png">
-      <meta itemprop="name" content="pprp">
-      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spicyCV">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/06/20/python%20%E5%8C%85%E5%8F%8A%E6%A8%A1%E5%9D%97%E5%BC%95%E7%94%A8%E6%A2%B3%E7%90%86/" class="post-title-link" itemprop="url">python包以及模块引用梳理</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-06-20 14:54:46" itemprop="dateCreated datePublished" datetime="2019-06-20T14:54:46+08:00">2019-06-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-11 21:38:44" itemprop="dateModified" datetime="2019-11-11T21:38:44+08:00">2019-11-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">深度学习</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>前言：在查看一些工程性代码的时候，总是会发现类似：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> .util <span class="keyword">import</span> utils</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> datasets</span><br></pre></td></tr></table></figure>
-<p>这样的引用语句, 这让我比较困惑，所以趁这次机会，花点时间，好好整理一下相关的知识</p>
-</blockquote>
-<h2 id="1-python包机制"><a class="markdownIt-Anchor" href="#1-python包机制"></a> 1. python包机制</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 包</span><br><span class="line">- 模块</span><br><span class="line">- 框架： 如何组织包和模块</span><br></pre></td></tr></table></figure>
-<p>python提供了包的概念，是一个有层次的文件目录结构，用于管理多个模块源文件。</p>
-<ul>
-<li>
-<p>包就是文件夹，这个文件夹下有__init__.py文件，并且该文件夹可以包括其他模块</p>
-</li>
-<li>
-<p>多个相关联的模块组成一个包，以便于维护和使用，同时能有限的避免命名空间的冲突。</p>
-</li>
-<li>
-<p>在导入一个包的时候，会先调用这个包的__init__.py文件</p>
-</li>
-</ul>
-<p>层次问题：从小到大</p>
-<ul>
-<li>语句</li>
-<li>函数 def</li>
-<li>类 class</li>
-<li>模块 module， 物理上是一个python文件</li>
-<li>包 package， 物理上是一个文件夹， 包中可以含有模块和包</li>
-</ul>
-<p>包和模块的作用：</p>
-<blockquote>
-<ul>
-<li>
-<p>编写好轮子，工具类，供其他模块进行使用</p>
-</li>
-<li>
-<p>有效地对程序进行分解，方便代码的管理和维护</p>
-</li>
-<li>
-<p>防止同一模块内命名重复的问题(<a href="http://module1.name" target="_blank" rel="noopener">module1.name</a>, <a href="http://module2.name" target="_blank" rel="noopener">module2.name</a>)</p>
-</li>
-</ul>
-</blockquote>
-<p>– from bilibili <a href="https://www.bilibili.com/video/av65157512?p=2" target="_blank" rel="noopener">https://www.bilibili.com/video/av65157512?p=2</a></p>
-<p>包和模块基本信息</p>
-<ul>
-<li>包和模块名称
-<ul>
-<li><code>__name__</code></li>
-<li><code>__package__</code></li>
-</ul>
-</li>
-<li>存放位置
-<ul>
-<li><code>__file__</code></li>
-</ul>
-</li>
-<li>查看包和模块的内容
-<ul>
-<li>dir(os)</li>
-<li><code>__dict__</code></li>
-</ul>
-</li>
-</ul>
-<p>导入包/模块的方式：</p>
-<ul>
-<li>
-<p>常规导入：</p>
-<ul>
-<li>import M
-<ul>
-<li>同级目录直接导入import M</li>
-<li>不同级目录使用点语法import pkg1.pkg2.M</li>
-</ul>
-</li>
-<li>import M1, M2</li>
-<li>import M as m</li>
-<li>from A import B as b, C as c
-<ul>
-<li>A 的范围要大于B,C
-<ul>
-<li>范围：包&gt;模块&gt;资源</li>
-</ul>
-</li>
-<li>B，C这部分要尽可能简单
-<ul>
-<li>正确：from A.A1 import aa</li>
-<li>错误：from A import A1.aa</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>from 模块 import *
-<ul>
-<li>那么会去该模块对应的python文件中找<code>__all__</code>变量对应的内容</li>
-</ul>
-</li>
-<li>from 包 import *
-<ul>
-<li>那么就会去该包对应的<code>__init__.py</code>文件中找<code>__all__</code>变量对应内容</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>注意：</p>
-<ul>
-<li>
-<p>使用时，导入的对象应该是模块，而不是包</p>
-</li>
-<li>
-<p>如果导入的是一个包，默认不会导入任何模块</p>
-</li>
-<li>
-<p>解决方案：</p>
-<ul>
-<li>
-<p>在该包中的<code>__init__.py</code>中导入所有需要的模块</p>
-</li>
-<li>
-<p>以from 包/文件夹 import 模块/子包 的形式导入</p>
-<ul>
-<li>from p1 import Tool1 as t1, Tool2 as t2</li>
-<li>from p1.sub_p import sub_xx</li>
-</ul>
-</li>
-<li>
-<p>from模块 import 资源名 的形式导入</p>
-<ul>
-<li>from other import num</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>遇到no module named xxx</p>
-<ul>
-<li>
-<pre class="highlight"><code class="python">  <span class="keyword">import</span> sys
-  sys.path.append(<span class="string">'rc:\Desktop\xxx_dir'</span>)
-  <span class="keyword">import</span> xxx
-  <span class="comment"># 比较强硬的解决方法</span>
-  &lt;!--￼<span class="number">2</span>--&gt;
-</code></pre>
-</li>
-</ul>
-</li>
-</ul>
-<p>ValueError: attempted relative import beyond top-level package</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">这通常是由于相对引用的使用而出现的问题。</span><br><span class="line"></span><br><span class="line">需要明确：</span><br><span class="line"></span><br><span class="line">1. 相对引用不是相对于文件结构！！</span><br><span class="line">2. 相对引用是相对于`__name__`</span><br><span class="line"></span><br><span class="line">举个例子：</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">- rootdir</span><br><span class="line">  - subdir1</span><br><span class="line">    - __init__.py</span><br><span class="line">  	- subfile1.py</span><br><span class="line">  - subdir2 </span><br><span class="line">    - __init__.py</span><br><span class="line">    - subfile2.py</span><br><span class="line">- test.py</span><br></pre></td></tr></table></figure>
-<p>test.py中调用subfile1.py的内容：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_mod1</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'__name__: &#123;&#125;'</span>.format(__name__))</span><br><span class="line">    print(<span class="string">'__package__: &#123;&#125;'</span>.format(__package__))</span><br><span class="line">    print(<span class="string">'Import Successfully!'</span>)</span><br></pre></td></tr></table></figure>
-<p>输出为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__name__: subdir1.subfile1</span><br><span class="line">__package__: subfile1</span><br><span class="line">Import Successfully!</span><br></pre></td></tr></table></figure>
-<p>所以这个相对位置就是相对于<code>__name__</code>变量，比如：</p>
-<p>一个点：<code>.</code> 就代表当前是subdir1</p>
-<p>两个点：<code>..</code>就不存在，就会报错<code>beyond top-level package</code>, 这里的top-level package 也很容易理解，那就是当前的subdir1。</p>
-<p>更多内容可以查看：<a href="https://www.cnblogs.com/jay54520/p/8438228.html" target="_blank" rel="noopener">https://www.cnblogs.com/jay54520/p/8438228.html</a></p>
-<h2 id="3-举例"><a class="markdownIt-Anchor" href="#3-举例"></a> 3. 举例</h2>
-<p>目录结构如下：</p>
-<p><img src="/.com//1572056109473.png" alt="1572056109473"></p>
-<ol>
-<li>model文件夹下：</li>
-</ol>
-<p><code>__init__.py</code> ·文件内容如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'-'</span>*<span class="number">5</span>,<span class="string">"init for model folder"</span>,<span class="string">'-'</span>*<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
-<p><code>models.py</code>文件内容如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mm</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"this is rootpkg/model/models/model"</span>)</span><br><span class="line">    print(<span class="string">'__name__: &#123;&#125;'</span>.format(__name__))</span><br><span class="line">    print(<span class="string">'__package__: &#123;&#125;'</span>.format(__package__))</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>src文件夹下：</li>
-</ol>
-<p><code>__init__.py</code> ·文件内容如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'-'</span>*<span class="number">5</span>,<span class="string">"init for src folder"</span>,<span class="string">'-'</span>*<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
-<p><code>source.py</code>文件内容如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ss</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"this is rootpkg/src/source/src"</span>)</span><br><span class="line">    print(<span class="string">'__name__: &#123;&#125;'</span>.format(__name__))</span><br><span class="line">    print(<span class="string">'__package__: &#123;&#125;'</span>.format(__package__))</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>RootPkg文件夹下：</li>
-</ol>
-<p><code>__init__.py</code> ·文件内容如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'-'</span>*<span class="number">5</span>,<span class="string">"init for rootpkg folder"</span>,<span class="string">'-'</span>*<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
-<p><code>main.py</code>文件内容如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> model <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> src <span class="keyword">import</span> source</span><br><span class="line"><span class="keyword">from</span> 模块/文件夹 <span class="keyword">import</span> 具体某个python文件名</span><br><span class="line"></span><br><span class="line">source.ss()</span><br><span class="line">models.mm()</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>
-<p>运行结果如下：</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">----- init <span class="keyword">for</span> model folder -----  </span><br><span class="line">----- init <span class="keyword">for</span> src folder ----- </span><br><span class="line"><span class="comment"># 这两个是在import模块的时候执行的__init__.py文件</span></span><br><span class="line">this <span class="keyword">is</span> rootpkg/src/source/src</span><br><span class="line">__name__: src.source</span><br><span class="line">__package__: src</span><br><span class="line">this <span class="keyword">is</span> rootpkg/model/models/model</span><br><span class="line">__name__: model.models</span><br><span class="line">__package__: model</span><br></pre></td></tr></table></figure>
-<p>运行完以后会出现<code>__pycache__</code>文件夹</p>
-<p><img src="/.com//1572056618738.png" alt="1572056618738"></p>
-</li>
-</ol>
-<p>运行成功，但是Tommy-Yu的最佳实践那部分没有直行通过，大家可以查看一下第一个reference的博客，如果有谁能跑通，欢迎联系我。（ps: 个人感觉这个博客没有讲的很清楚，实际运行确实会出错）</p>
-<hr>
-<h2 id="reference"><a class="markdownIt-Anchor" href="#reference"></a> reference</h2>
-<ul>
-<li>
-<p><a href="https://www.cnblogs.com/Tommy-Yu/p/5794829.html?spm=a2c4e.10696291.0.0.289619a41CBdwB" target="_blank" rel="noopener">https://www.cnblogs.com/Tommy-Yu/p/5794829.html?spm=a2c4e.10696291.0.0.289619a41CBdwB</a></p>
-</li>
-<li>
-<p><a href="https://www.cnblogs.com/jay54520/p/8438228.html" target="_blank" rel="noopener">https://www.cnblogs.com/jay54520/p/8438228.html</a></p>
-</li>
-<li>
-<p><a href="https://www.bilibili.com/video/av65157512?from=search&amp;seid=6677976813026578695" target="_blank" rel="noopener">https://www.bilibili.com/video/av65157512?from=search&amp;seid=6677976813026578695</a></p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/%E5%B8%B8%E7%94%A8%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5%E5%88%86%E4%BA%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/log.png">
-      <meta itemprop="name" content="pprp">
-      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spicyCV">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/06/20/%E5%B8%B8%E7%94%A8%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5%E5%88%86%E4%BA%AB/" class="post-title-link" itemprop="url">常用学习教程链接分享</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-06-20 07:04:02" itemprop="dateCreated datePublished" datetime="2019-06-20T07:04:02+08:00">2019-06-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-11 16:09:48" itemprop="dateModified" datetime="2019-11-11T16:09:48+08:00">2019-11-11</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>
-<p><a href="https://zhuanlan.zhihu.com/p/59507137" target="_blank" rel="noopener">Tensorflow 2.0 教程</a></p>
-</li>
-<li>
-<p><a href="https://pytorch.apachecn.org/docs/1.0/blitz_neural_networks_tutorial.html" target="_blank" rel="noopener">Pytorch 教程</a></p>
-</li>
-<li>
-<p><a href="https://keras.io/zh/" target="_blank" rel="noopener">Keras中文文档</a></p>
-</li>
-<li>
-<p><a href="https://docs.fast.ai/" target="_blank" rel="noopener">fastai 官方文档</a></p>
-</li>
-</ul>
-<hr>
-<h3 id="keras流程"><a class="markdownIt-Anchor" href="#keras流程"></a> keras流程</h3>
-<ol>
-<li>数据准备</li>
-<li>模型构建</li>
-<li>模型编译(loss，optimizer，评价指标)</li>
-<li>模型训练(fit，数据，步数，batch, lr, valid数据集)</li>
-</ol>
-<h3 id="pytorch流程"><a class="markdownIt-Anchor" href="#pytorch流程"></a> pytorch流程</h3>
-<ol>
-<li>数据集需要构造dataloader类</li>
-<li>训练模型构造Module类</li>
-<li>创建优化器(optimizer)</li>
-<li>循环中
-<ol>
-<li>优化器清零</li>
-<li>正向走一遍模型，得到输出</li>
-<li>计算loss</li>
-<li>loss进行反向传播</li>
-<li>优化器step()更新参数</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1969,7 +1779,7 @@ title:“人工智能图像相关岗位需求”</h2>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1980,7 +1790,7 @@ title:“人工智能图像相关岗位需求”</h2>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-count">64</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -2010,7 +1820,7 @@ title:“人工智能图像相关岗位需求”</h2>
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
