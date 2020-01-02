@@ -52,18 +52,21 @@
   };
 </script>
 
-  <meta name="description" content="Tensorflow 2.0 教程   Pytorch 教程   Keras中文文档   fastai 官方文档     keras流程  数据准备 模型构建 模型编译(loss，optimizer，评价指标) 模型训练(fit，数据，步数，batch, lr, valid数据集)   pytorch流程  数据集需要构造dataloader类 训练模型构造Module类 创建优化器(opti">
-<meta name="keywords" content="python, pytorch, 深度学习, CV">
+  <meta name="description" content="1. SKNet SKNet是SENet的加强版，结合了SE opetator, Merge-and-Run Mappings以及attention on inception block的产物。其最终提出的也是与SE类似的一个模块，名为SK, 可以自适应调节自身的感受野。据作者说，该模块在超分辨率任务上有很大提升，并且论文中的实验也证实了在分类任务上有很好的表现。 这篇博客重画了SK模块示意图，">
+<meta name="keywords" content="attention,cv">
 <meta property="og:type" content="article">
-<meta property="og:title" content="常用学习教程链接分享">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;06&#x2F;20&#x2F;%E5%B8%B8%E7%94%A8%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5%E5%88%86%E4%BA%AB&#x2F;index.html">
+<meta property="og:title" content="【CV中的Attention机制】Selective Kernel Networks(SE进化版)">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;01&#x2F;%E3%80%90CV%E4%B8%AD%E7%9A%84Attention%E6%9C%BA%E5%88%B6%E3%80%91Selective-Kernel-Networks-SE%E8%BF%9B%E5%8C%96%E7%89%88&#x2F;index.html">
 <meta property="og:site_name" content="spicyCV">
-<meta property="og:description" content="Tensorflow 2.0 教程   Pytorch 教程   Keras中文文档   fastai 官方文档     keras流程  数据准备 模型构建 模型编译(loss，optimizer，评价指标) 模型训练(fit，数据，步数，batch, lr, valid数据集)   pytorch流程  数据集需要构造dataloader类 训练模型构造Module类 创建优化器(opti">
+<meta property="og:description" content="1. SKNet SKNet是SENet的加强版，结合了SE opetator, Merge-and-Run Mappings以及attention on inception block的产物。其最终提出的也是与SE类似的一个模块，名为SK, 可以自适应调节自身的感受野。据作者说，该模块在超分辨率任务上有很大提升，并且论文中的实验也证实了在分类任务上有很好的表现。 这篇博客重画了SK模块示意图，">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-11T08:09:48.733Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200102192550708.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200102194942760.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2020-01-02T12:00:04.566Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200102192550708.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70">
 
-<link rel="canonical" href="http://yoursite.com/2019/06/20/%E5%B8%B8%E7%94%A8%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5%E5%88%86%E4%BA%AB/">
+<link rel="canonical" href="http://yoursite.com/2020/01/01/%E3%80%90CV%E4%B8%AD%E7%9A%84Attention%E6%9C%BA%E5%88%B6%E3%80%91Selective-Kernel-Networks-SE%E8%BF%9B%E5%8C%96%E7%89%88/">
 
 
 <script id="page-configurations">
@@ -77,7 +80,7 @@
   };
 </script>
 
-  <title>常用学习教程链接分享 | spicyCV</title>
+  <title>【CV中的Attention机制】Selective Kernel Networks(SE进化版) | spicyCV</title>
   
 
 
@@ -221,7 +224,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/%E5%B8%B8%E7%94%A8%E6%95%99%E7%A8%8B%E9%93%BE%E6%8E%A5%E5%88%86%E4%BA%AB/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/01/%E3%80%90CV%E4%B8%AD%E7%9A%84Attention%E6%9C%BA%E5%88%B6%E3%80%91Selective-Kernel-Networks-SE%E8%BF%9B%E5%8C%96%E7%89%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/log.png">
@@ -234,7 +237,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          常用学习教程链接分享
+          【CV中的Attention机制】Selective Kernel Networks(SE进化版)
         </h1>
 
         <div class="post-meta">
@@ -244,14 +247,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-06-20 07:04:02" itemprop="dateCreated datePublished" datetime="2019-06-20T07:04:02+08:00">2019-06-20</time>
+              <time title="创建时间：2020-01-01 14:27:41" itemprop="dateCreated datePublished" datetime="2020-01-01T14:27:41+08:00">2020-01-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-11 16:09:48" itemprop="dateModified" datetime="2019-11-11T16:09:48+08:00">2019-11-11</time>
+                <time title="修改时间：2020-01-02 20:00:04" itemprop="dateModified" datetime="2020-01-02T20:00:04+08:00">2020-01-02</time>
               </span>
 
           
@@ -265,43 +268,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <ul>
-<li>
-<p><a href="https://zhuanlan.zhihu.com/p/59507137" target="_blank" rel="noopener">Tensorflow 2.0 教程</a></p>
-</li>
-<li>
-<p><a href="https://pytorch.apachecn.org/docs/1.0/blitz_neural_networks_tutorial.html" target="_blank" rel="noopener">Pytorch 教程</a></p>
-</li>
-<li>
-<p><a href="https://keras.io/zh/" target="_blank" rel="noopener">Keras中文文档</a></p>
-</li>
-<li>
-<p><a href="https://docs.fast.ai/" target="_blank" rel="noopener">fastai 官方文档</a></p>
-</li>
+        <h2 id="1-sknet"><a class="markdownIt-Anchor" href="#1-sknet"></a> <strong>1. SKNet</strong></h2>
+<p>SKNet是SENet的加强版，结合了SE opetator, Merge-and-Run Mappings以及attention on inception block的产物。其最终提出的也是与SE类似的一个模块，名为SK, 可以自适应调节自身的感受野。据作者说，该模块在超分辨率任务上有很大提升，并且论文中的实验也证实了在分类任务上有很好的表现。</p>
+<p>这篇博客重画了SK模块示意图，详见下图，下图中上边的部分是重画的，下边的是论文中的图，虽然比较简洁，但是比较难理解。上边重画的部分分为了三个部分，而原来的模块分成了两个模块。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200102192550708.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>接下来对照着图先理一遍思路，然后再直接上pytorch版本的代码。</p>
+<p>论文中说这个模块可以更好地实现多个分辨率，调节感受野，个人理解就是从不同的分支造成的。下边讲解对照上图进行：</p>
+<p>原始feature map X 经过kernel size分别为3×3，5×5…以此类推的卷积进行卷积后得到U1,U2,U3三个，然后相加得到了U，相当于融合了多个感受野的信息。然后得到的U是C×H×W的（C代表channel,H代表height, W代表width）feature map，然后将H和W维度求平均值，具体做法是使用torch.mean完成，最终得到了关于channel的信息是一个C×1×1的一维向量，代表的是各个通道的信息的重要程度。</p>
+<p>之后再用了一个线性变换，将原来的C维映射成z维度的信息，进行信息抽取，然后分别使用了三个线性变换，从z维度变为原来的c维度，这样完成了针对channel维度的信息提取，然后使用Softmax进行归一化，这时候每个channel对应一个分数，代表其channel的重要程度，这相当于一个打分mask。将这三个分别得到的mask分别乘以对应的U1,U2,U3，得到A1,A2,A3, 然后相加三个模块，进行信息融合，得到最终模块A， 模块A相比于最初的X经过了信息的提纯，具有了多尺度的信息。</p>
+<p>经过以上分析，就能理解了作者的SK模块的构成了：</p>
+<ul>
+<li>从C线性变换为Z维，再到C维度，这个部分与SE operator比较像</li>
+<li>多分支的操作借鉴自：inception</li>
+<li>整个流程类似merge-and-run mapping</li>
 </ul>
+<p><img src="https://img-blog.csdnimg.cn/20200102194942760.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>这就是merge-and-run mapping中提出的三个基础模块，与本文sk虽然没有直接联系，但是都是属于先进行分支，然后在合并，也类似于inception中的图。</p>
+<h2 id="2-pytorch代码"><a class="markdownIt-Anchor" href="#2-pytorch代码"></a> <strong>2. pytorch代码</strong></h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SKConv</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, features, WH, M, G, r, stride=<span class="number">1</span>, L=<span class="number">32</span>)</span>:</span></span><br><span class="line">        <span class="string">""" Constructor</span></span><br><span class="line"><span class="string">        Args:</span></span><br><span class="line"><span class="string">            features: input channel dimensionality.</span></span><br><span class="line"><span class="string">            WH: input spatial dimensionality, used for GAP kernel size.</span></span><br><span class="line"><span class="string">            M: the number of branchs.</span></span><br><span class="line"><span class="string">            G: num of convolution groups.</span></span><br><span class="line"><span class="string">            r: the radio for compute d, the length of z.</span></span><br><span class="line"><span class="string">            stride: stride, default 1.</span></span><br><span class="line"><span class="string">            L: the minimum dim of the vector z in paper, default 32.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        super(SKConv, self).__init__()</span><br><span class="line">        d = max(int(features / r), L)</span><br><span class="line">        self.M = M</span><br><span class="line">        self.features = features</span><br><span class="line">        self.convs = nn.ModuleList([])</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(M):</span><br><span class="line">            self.convs.append(</span><br><span class="line">                nn.Sequential(</span><br><span class="line">                    nn.Conv2d(features,</span><br><span class="line">                              features,</span><br><span class="line">                              kernel_size=<span class="number">3</span> + i * <span class="number">2</span>,</span><br><span class="line">                              stride=stride,</span><br><span class="line">                              padding=<span class="number">1</span> + i,</span><br><span class="line">                              groups=G), nn.BatchNorm2d(features),</span><br><span class="line">                    nn.ReLU(inplace=<span class="literal">False</span>)))</span><br><span class="line">        <span class="comment"># self.gap = nn.AvgPool2d(int(WH/stride))</span></span><br><span class="line">        print(<span class="string">"D:"</span>, d)</span><br><span class="line">        self.fc = nn.Linear(features, d)</span><br><span class="line">        self.fcs = nn.ModuleList([])</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(M):</span><br><span class="line">            self.fcs.append(nn.Linear(d, features))</span><br><span class="line">        self.softmax = nn.Softmax(dim=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> i, conv <span class="keyword">in</span> enumerate(self.convs):</span><br><span class="line">            fea = conv(x).unsqueeze_(dim=<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">                feas = fea</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                feas = torch.cat([feas, fea], dim=<span class="number">1</span>)</span><br><span class="line">        fea_U = torch.sum(feas, dim=<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># fea_s = self.gap(fea_U).squeeze_()</span></span><br><span class="line">        fea_s = fea_U.mean(<span class="number">-1</span>).mean(<span class="number">-1</span>)</span><br><span class="line">        fea_z = self.fc(fea_s)</span><br><span class="line">        <span class="keyword">for</span> i, fc <span class="keyword">in</span> enumerate(self.fcs):</span><br><span class="line">            print(i, fea_z.shape)</span><br><span class="line">            vector = fc(fea_z).unsqueeze_(dim=<span class="number">1</span>)</span><br><span class="line">            print(i, vector.shape)</span><br><span class="line">            <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">                attention_vectors = vector</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                attention_vectors = torch.cat([attention_vectors, vector],</span><br><span class="line">                                              dim=<span class="number">1</span>)</span><br><span class="line">        attention_vectors = self.softmax(attention_vectors)</span><br><span class="line">        attention_vectors = attention_vectors.unsqueeze(<span class="number">-1</span>).unsqueeze(<span class="number">-1</span>)</span><br><span class="line">        fea_v = (feas * attention_vectors).sum(dim=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> fea_v</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    t = torch.ones((<span class="number">32</span>, <span class="number">256</span>, <span class="number">24</span>,<span class="number">24</span>))</span><br><span class="line">    sk = SKConv(<span class="number">256</span>,WH=<span class="number">1</span>,M=<span class="number">2</span>,G=<span class="number">1</span>,r=<span class="number">2</span>)</span><br><span class="line">    out = sk(t)</span><br><span class="line">    print(out.shape)</span><br></pre></td></tr></table></figure>
+<h2 id="3-资源"><a class="markdownIt-Anchor" href="#3-资源"></a> 3. 资源</h2>
+<p>sknet论文地址：<a href="https://arxiv.org/pdf/1903.06586.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1903.06586.pdf</a></p>
+<p>作者知乎讲解：<a href="https://zhuanlan.zhihu.com/p/59690223" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/59690223</a></p>
+<p>代码源自：<a href="https://github.com/implus/SKNet" target="_blank" rel="noopener">https://github.com/implus/SKNet</a></p>
 <hr>
-<h3 id="keras流程"><a class="markdownIt-Anchor" href="#keras流程"></a> keras流程</h3>
-<ol>
-<li>数据准备</li>
-<li>模型构建</li>
-<li>模型编译(loss，optimizer，评价指标)</li>
-<li>模型训练(fit，数据，步数，batch, lr, valid数据集)</li>
-</ol>
-<h3 id="pytorch流程"><a class="markdownIt-Anchor" href="#pytorch流程"></a> pytorch流程</h3>
-<ol>
-<li>数据集需要构造dataloader类</li>
-<li>训练模型构造Module类</li>
-<li>创建优化器(optimizer)</li>
-<li>循环中
-<ol>
-<li>优化器清零</li>
-<li>正向走一遍模型，得到输出</li>
-<li>计算loss</li>
-<li>loss进行反向传播</li>
-<li>优化器step()更新参数</li>
-</ol>
-</li>
-</ol>
+<p>画图、码字不易，求个关注</p>
 
     </div>
 
@@ -310,22 +300,23 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/attention/" rel="tag"># attention</a>
+              <a href="/tags/cv/" rel="tag"># cv</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/05/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%80%83%E7%A0%94%E6%9C%BA%E8%AF%95%E6%8C%87%E5%8D%97%E4%B8%8A%E6%9C%BA%E7%BC%96%E7%A8%8B%E7%BB%83%E4%B9%A0%E5%A4%8D%E4%B9%A0/" rel="next" title="计算机考研机试指南上机编程练习复习">
-                  <i class="fa fa-chevron-left"></i> 计算机考研机试指南上机编程练习复习
+                <a href="/2020/01/01/%E3%80%90cv%E4%B8%AD%E7%9A%84Attention%E6%9C%BA%E5%88%B6%E3%80%91%E6%9C%80%E7%AE%80%E5%8D%95%E6%9C%80%E6%98%93%E5%AE%9E%E7%8E%B0%E7%9A%84SE%E6%A8%A1%E5%9D%97/" rel="next" title="【CV中的Attention机制】最简单最易实现的SE模块">
+                  <i class="fa fa-chevron-left"></i> 【CV中的Attention机制】最简单最易实现的SE模块
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/06/20/python%20%E5%8C%85%E5%8F%8A%E6%A8%A1%E5%9D%97%E5%BC%95%E7%94%A8%E6%A2%B3%E7%90%86/" rel="prev" title="python包以及模块引用梳理">
-                  python包以及模块引用梳理 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
       </footer>
@@ -365,7 +356,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#keras流程"><span class="nav-number">1.</span> <span class="nav-text"> keras流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pytorch流程"><span class="nav-number">2.</span> <span class="nav-text"> pytorch流程</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-sknet"><span class="nav-number">1.</span> <span class="nav-text"> 1. SKNet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-pytorch代码"><span class="nav-number">2.</span> <span class="nav-text"> 2. pytorch代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-资源"><span class="nav-number">3.</span> <span class="nav-text"> 3. 资源</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -636,7 +627,7 @@ if (document.querySelectorAll('pre.mermaid').length) {
       repo: 'pprp.github.io',
       owner: 'pprp',
       admin: ['pprp'],
-      id: '78b43f344b309ed078a33dc114e37afb',
+      id: '7c3bd94dc100a9ee83bc8d84a0c2eecd',
         language: 'zh-CN',
       distractionFreeMode: 'true'
     });

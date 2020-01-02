@@ -220,6 +220,235 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/04/MOT%E9%A2%86%E5%9F%9F%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87%E3%80%8ASimple%20Online%20and%20Realtime%20Tracking%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/04/MOT%E9%A2%86%E5%9F%9F%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87%E3%80%8ASimple%20Online%20and%20Realtime%20Tracking%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">《Simple Online and Realtime Tracking》阅读笔记</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-04 14:54:46" itemprop="dateCreated datePublished" datetime="2019-11-04T14:54:46+08:00">2019-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-17 20:11:23" itemprop="dateModified" datetime="2019-12-17T20:11:23+08:00">2019-12-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="mot领域经典论文simple-online-and-realtime-tracking阅读笔记"><a class="markdownIt-Anchor" href="#mot领域经典论文simple-online-and-realtime-tracking阅读笔记"></a> MOT领域经典论文《Simple Online and Realtime Tracking》阅读笔记</h1>
+<blockquote>
+<p>前言：目前打算将多目标检测MOT作为自己的毕设题目，相当于重新进入一个领域，在这个领域中听到最多的就是SORT论文，也就是今天要阅读的论文。</p>
+<p>自己阅读论文的能力有点差，所以趁还没有进入研究生阶段，尽早提高自己的论文阅读理解能力，让自己在未来的路上走的更远一些。光有鸡汤还不够，需要有理论进行支撑，我打算采用<a href="https://zhuanlan.zhihu.com/p/78328408" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/78328408</a>中提到的方法进行论文的阅读，文章中有一些论文总结框架可能跟计算机专业框架不太一样，所以我这里也尽量摸索，总结适合于深度学习领域的框架。</p>
+</blockquote>
+<h2 id="1-目的"><a class="markdownIt-Anchor" href="#1-目的"></a> 1. 目的</h2>
+<blockquote>
+<p>This paper explores a pragmatic approach to multiple object tracking where the main focus is to associate objects efficiently for online and realtime applications.</p>
+</blockquote>
+<p>文章的目的是：</p>
+<ul>
+<li>更有效地关联检测出的目标</li>
+<li>实现在线实时跟踪</li>
+</ul>
+<h2 id="2-竞品分析"><a class="markdownIt-Anchor" href="#2-竞品分析"></a> 2. 竞品分析</h2>
+<p>竞品分析：</p>
+<ul>
+<li>batch based tracking approaches:
+<ul>
+<li>The way they move: Tracking multiple targets with similar appearance</li>
+<li>Joint Probabilistic Data Association Revisited</li>
+<li>Multiple Hypothesis Tracking Revisited</li>
+</ul>
+</li>
+<li>使用模拟运动的方法： modelling the motion
+<ul>
+<li>The way they move: Tracking multiple targets with similar appearance</li>
+<li>Bayesian Multi-Object Tracking Using Motion Context from Multiple Objects</li>
+</ul>
+</li>
+<li>使用物体表征信息： apperance of objects
+<ul>
+<li>Multiple Hypothesis Tracking Revisited</li>
+<li>“ALEx-TRAC: Affinity Learning by Exploring Temporal Rein-forcement within Association Chains,”</li>
+</ul>
+</li>
+<li>常用的成熟的数据关联方法：
+<ul>
+<li>Multiple Hypothesis Tracking MHT:
+<ul>
+<li>Multiple Hypothesis Tracking Revisited</li>
+<li>An Algorithm for Tracking Multiple Targets,</li>
+</ul>
+</li>
+<li>Joint Probabilistic Data Association JPDA
+<ul>
+<li>Joint Probabilistic Data Association Revisited</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-方法"><a class="markdownIt-Anchor" href="#3-方法"></a> 3. 方法</h2>
+<blockquote>
+<p>Despite only using a rudimentary combination of familiar techniques such as the Kalman Filter and Hungarian algorithm for the tracking components, this approach achieves an accuracy comparable to state-of-the-art online trackers.</p>
+</blockquote>
+<p>MOT领域解决的关键问题还是数据关联(data association)</p>
+<p>SORT使用的方法是：</p>
+<ul>
+<li>
+<p>Tracking-by-Detection（TBD）类别的方法：基于检测进行目标跟踪, 只根据<strong>当前和上一帧</strong>得到的内容进行跟踪。</p>
+</li>
+<li>
+<p>强调加强<strong>实时跟踪</strong>，并且引入自动驾驶领域的<strong>行人跟踪</strong>进行提升</p>
+</li>
+<li>
+<p>之前的跟踪方法只是基于Bounding Box的<strong>位置和大小</strong>进行数据关联和移动估计(motion estimation),忽略了appearance feature</p>
+</li>
+<li>
+<p>忽视短期/长期的遮挡</p>
+</li>
+<li>
+<p>不考虑使用物体重识别方法（object reid），因为会影响到检测速度（sort目的在于尽可能的快）</p>
+</li>
+<li>
+<p>使用了faster rcnn作为目标检测器，使用了基于VOC数据集训练得到的权重，只关心person这个类，置信度阈值为0.5来判断是否是一个人</p>
+</li>
+<li>
+<p>运动预测模型：使用了卡尔曼滤波算法进行预测，使用了线性恒速运动模型进行位置预测。如果没有检测框对应目标，那就使用线性恒速运行模型对其进行简单的位置预测而不需要修正。</p>
+</li>
+<li>
+<p>数据关联模型：使用了匈牙利算法进行数据关联，其中匈牙利算法中框与框之间的距离由IOU来决定的，但是必须大于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi><mi>O</mi><msub><mi>U</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">IOU_{min}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> ，如果小于该阈值。</p>
+</li>
+<li>
+<p>ID的创建与销毁：目标进入或者离开图片会导致ID的创建和销毁，如果有检测框与现存在的检测框之间的IOU小于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi><mi>O</mi><msub><mi>U</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">IOU_{min}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>的时候，就认为他是一个新的目标框（而sort只关心前一帧与当前帧，如果检测器得到的偏差较大，那在SORT中可能就会被认为是新的目标，从而分配新的ID）</p>
+<blockquote>
+<p>如果连续 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>T</mi><mrow><mi>l</mi><mi>o</mi><mi>s</mi><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">T_{lost}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">s</span><span class="mord mathdefault mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 帧没有实现已追踪目标预测位置和检测框的IOU匹配，则认为目标消失。实验中设置 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>T</mi><mrow><mi>l</mi><mi>o</mi><mi>s</mi><mi>t</mi></mrow></msub><mo>=</mo><mn>1</mn><mi mathvariant="normal">​</mi></mrow><annotation encoding="application/x-tex">T_{lost}=1​</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">s</span><span class="mord mathdefault mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">​</span></span></span></span> ，原因有二，一是匀速运动假设不合理，二是作者主要关注短时目标追踪。另外，尽早删除已丢失的目标有助于提升追踪效率。但是，问题就出现了，这样的话目标的ID一定会频繁的切换，这样就会造成跟踪计数的不准确！</p>
+<p>知乎作者：TeddyZhang</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="4-结果以及分析"><a class="markdownIt-Anchor" href="#4-结果以及分析"></a> 4. 结果以及分析</h2>
+<p><img src="https://img-blog.csdnimg.cn/20191217192211383.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>从结果可以看出，SORT的MOTA在Online算法中比较高，缺点在于ID sw太高，实际测试的时候也会发现，其ID频繁的翻转。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191217200703527.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>通过比较Accuracy和MOTA这两项，SORT遥遥领先。</p>
+<h2 id="5-结论"><a class="markdownIt-Anchor" href="#5-结论"></a> 5. 结论</h2>
+<p>使用了Faster RCNN来进行模型的检测，并使用Kalman滤波预测状态，基于检测框位置和IOU的匈牙利算法，使得算法有很高的效率。</p>
+<p>跟踪质量严重依赖于检测结果，ID sw比较严重，难以支持实际应用。</p>
+<h2 id="6-总结"><a class="markdownIt-Anchor" href="#6-总结"></a> 6. 总结</h2>
+<ul>
+<li>
+<p><strong>最重要想要记住的观点，或者将来会引用的</strong></p>
+<ul>
+<li>SORT 主要由检测器，卡尔曼滤波算法，匈牙利算法匹配三个重要部分组成：</li>
+<li>检测器：必须精度足够高，能够维持框，因为SORT只用到了当前帧与前一帧的检测结果，检测器不灵敏很容易出问题。</li>
+<li>卡尔曼滤波：使用了基于坐标框的卡尔曼滤波算法，做了一个比较好的应用。</li>
+<li>匈牙利算法匹配：这个部分比较关键，采用何种方法对检测框与目标框的匹配？这里采用的是IOU单纯为了速度能更快，但是确实忽略了一些信息，比如表观信息appearance。</li>
+</ul>
+</li>
+<li>
+<p>可能用到的结论</p>
+<ul>
+<li>创新性的使用目标检测、卡尔曼滤波、匈牙利算法组合而成了SORT算法，速度确实非常快</li>
+<li>其效果严重依赖于目标检测效果，能影响到18.9%</li>
+<li>ID switch严重，严重影响效果。</li>
+</ul>
+</li>
+<li>
+<p>可能用到的方法</p>
+<ul>
+<li>理解SORT的贡献，为之后理解DEEP SORT算法做准备</li>
+</ul>
+</li>
+<li>
+<p>文章在研究设计上有哪些不足？有没有更好的改进方法？</p>
+<ul>
+<li>感觉可能使用了Faster R-CNN进行检测，可能由于他是一个二阶段的检测器，效果相对一阶段要好一点，但是奇怪为何速度如此之快，比一阶段的YOLOv3还要快。</li>
+<li>SORT是一个Online的方法，但是仅仅依靠前一帧和当前帧严重依赖了目标检测方法，如果目标检测器稍微差一点的情况下，如何更好的提升模型效果？能不能尝试使用near online方法，结合前3-5帧的框进行预测（如果目标运行不是特别迅速的情况下）。</li>
+</ul>
+</li>
+<li>
+<p>文章让你想到了哪些观点类似或者是完全不同的其他文章？</p>
+<ul>
+<li>DEEP SORT算法，之后会进行解读。</li>
+</ul>
+</li>
+<li>
+<p>对文章中观点、论述、方法、讨论部分有什么想法和评价？</p>
+<ul>
+<li>论文中方法部分：如果能进行多个检测器的比较，更详细的说明检测器的作用就好了，这篇直接使用了Faster R-CNN，并且说了检测器对模型影响最多18.9%, 检测器这块不够充实。</li>
+<li>实验部分：评价标准有点偏激，图表上展示的结果只关心MOTA和Speed， 没有说明ID switch， ID switch明显要比其他模型要高，这一点严重的影响了效果。</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-其他知识"><a class="markdownIt-Anchor" href="#7-其他知识"></a> 7. 其他知识</h2>
+<p><strong>奥卡姆剃刀原理</strong>：如无必要，勿增实体；切勿浪费较多东西去做用较少的东西同样可以做好的事情。</p>
+<p>代码：<a href="https://github.com/abewley/sort" target="_blank" rel="noopener">https://github.com/abewley/sort</a></p>
+<p>在自己的项目中如何使用？（上述库中sort.py复制过来，作为自己的第三方模块）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">from sort import *</span><br><span class="line"></span><br><span class="line">#create instance of SORT</span><br><span class="line">mot_tracker = Sort() </span><br><span class="line"></span><br><span class="line"># get detections</span><br><span class="line">...</span><br><span class="line"># 注意这里的detections是类似[[x1,y1,x2,y2,score],[x1,y1,x2,y2,score],...]这种格式</span><br><span class="line"></span><br><span class="line"># update SORT</span><br><span class="line">track_bbs_ids = mot_tracker.update(detections)</span><br><span class="line"></span><br><span class="line"># track_bbs_ids is a np array where each row contains a valid bounding box and track_id (last column)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>我这里已经实现了sort和deep sort,分别运行sort.py和deep_sort.py即可。</p>
+<p>repo:<a href="https://github.com/pprp/simple_deep_sort" target="_blank" rel="noopener">https://github.com/pprp/simple_deep_sort</a></p>
+<p>其中检测器使用的是<a href="https://github.com/ultralytics/yolov3" target="_blank" rel="noopener">https://github.com/ultralytics/yolov3</a>,这个比较受欢迎，支持训练，在一直不断更新，在原版使用的检测器是解析darknet得到的yolov3.weights权重进行检测的，灵活性较差。</p>
+<p>如果有帮助，请不吝点个star 😙</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/18/MOT%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1483,252 +1712,6 @@ title:“人工智能图像相关岗位需求”</h2>
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/YOLO%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/log.png">
-      <meta itemprop="name" content="pprp">
-      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spicyCV">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/06/20/YOLO%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">YOLO经验总结</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-06-20 14:54:46" itemprop="dateCreated datePublished" datetime="2019-06-20T14:54:46+08:00">2019-06-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-11 15:21:43" itemprop="dateModified" datetime="2019-11-11T15:21:43+08:00">2019-11-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/YOLOv3/" itemprop="url" rel="index">
-                    <span itemprop="name">YOLOv3</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>YOLO 网络架构方法</p>
-<p>YOLO参数计算</p>
-<p>YOLO调参经验</p>
-<p>学习博客总结</p>
-</blockquote>
-<h3 id="网络更改经验"><a class="markdownIt-Anchor" href="#网络更改经验"></a> 网络更改经验</h3>
-<p>输出图像的计算方法：</p>
-<center>output = （input-filter_size+2*padding）/（stride）+ 1</center>
-<p>yolo层的前一层filter计算方法：</p>
-<center>filters = (classes + 5) * 预测框的个数</center>
-<p>特征融合一般操作：</p>
-<ol>
-<li>Route from previous layer</li>
-<li>Conv it for 1~ times</li>
-<li>Do upsample</li>
-<li>Route from the corresponding layer with same size of feature map</li>
-<li>Continue</li>
-</ol>
-<ul>
-<li>res结构：</li>
-</ul>
-<p>filter: 128-&gt;256-&gt;128-&gt;256…</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[convolutional]</span><br><span class="line">batch_normalize=1</span><br><span class="line">filters=128</span><br><span class="line">size=1</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">activation=leaky</span><br><span class="line"></span><br><span class="line">[convolutional]</span><br><span class="line">batch_normalize=1</span><br><span class="line">filters=256</span><br><span class="line">size=3</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">activation=leaky</span><br><span class="line"></span><br><span class="line">[shortcut]</span><br><span class="line">from=-3</span><br><span class="line">activation=linear</span><br></pre></td></tr></table></figure>
-<ul>
-<li>只改filter不改feature大小：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[convolutional]</span><br><span class="line">batch_normalize=1</span><br><span class="line">filters=512</span><br><span class="line">size=1</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">activation=leaky</span><br></pre></td></tr></table></figure>
-<p>or</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[convolutional]</span><br><span class="line">batch_normalize=1</span><br><span class="line">filters=1024</span><br><span class="line">size=3</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">activation=leaky</span><br></pre></td></tr></table></figure>
-<ul>
-<li>feature减半：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[maxpool]</span><br><span class="line">size=2</span><br><span class="line">stride=2</span><br></pre></td></tr></table></figure>
-<p>or</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[convolutional]</span><br><span class="line">batch_normalize=1</span><br><span class="line">filters=128</span><br><span class="line">size=3</span><br><span class="line">stride=2</span><br><span class="line">pad=1</span><br><span class="line">activation=leaky</span><br></pre></td></tr></table></figure>
-<ul>
-<li>普通的filter变大变小：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[convolutional]</span><br><span class="line">batch_normalize=1</span><br><span class="line">filters=256</span><br><span class="line">size=3</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">activation=leaky</span><br><span class="line"></span><br><span class="line">[convolutional]</span><br><span class="line">batch_normalize=1</span><br><span class="line">filters=128</span><br><span class="line">size=1</span><br><span class="line">stride=1</span><br><span class="line">pad=1</span><br><span class="line">activation=leaky</span><br></pre></td></tr></table></figure>
-<ul>
-<li>feature扩大为原来二倍：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[upsample]</span><br><span class="line">stride=2</span><br></pre></td></tr></table></figure>
-<ul>
-<li>不改变任何参数：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[maxpool]</span><br><span class="line">size=2</span><br><span class="line">stride=1</span><br></pre></td></tr></table></figure>
-<h4 id="参数说明"><a class="markdownIt-Anchor" href="#参数说明"></a> 参数说明</h4>
-<ul>
-<li>
-<p>batch_normalize:<a href="https://blog.csdn.net/yujianmin1990/article/details/78764597" target="_blank" rel="noopener">了解链接</a></p>
-</li>
-<li>
-<p>filter: 卷积核个数，也是输出通道个数</p>
-</li>
-<li>
-<p>size: 卷积核尺寸</p>
-</li>
-<li>
-<p>stride: 卷积步长</p>
-</li>
-<li>
-<p>pad: 补0</p>
-</li>
-</ul>
-<h3 id="教程"><a class="markdownIt-Anchor" href="#教程"></a> 教程</h3>
-<ul>
-<li>yolo <a href="./tricks.md">配置文件总结</a></li>
-</ul>
-<h3 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h3>
-<ul>
-<li>测试mAP,画图</li>
-<li>看论文，准备论文相关的内容
-<ul>
-<li>画loss图</li>
-<li>跑实验</li>
-<li>跑一下</li>
-</ul>
-</li>
-<li>通过加大 w, h 的值提升小目标检测效果</li>
-<li>学习率的设置，先大后小效果比较好</li>
-<li>模型剪枝</li>
-<li>创造更改网络</li>
-<li>更改v3_improved网络，将maxpooling换成conv</li>
-<li>训练集中增加小目标可以提高小目标的检测效果</li>
-<li>目前抛弃模型压缩这种想法先将基础网络部分搞懂</li>
-</ul>
-<h3 id="改进的point"><a class="markdownIt-Anchor" href="#改进的point"></a> 改进的Point</h3>
-<ol>
-<li>基础网络的选择tiny, yolov2-tiny?</li>
-<li>input Size的增大： 增大最大到672</li>
-<li>anchor的选择，6,7,9个anchor，查看效果</li>
-<li>改进 激活函数 Leaky RELU 尝试一下，ELU, RELU</li>
-</ol>
-<h3 id="靠谱的思路"><a class="markdownIt-Anchor" href="#靠谱的思路"></a> 靠谱的思路</h3>
-<blockquote>
-<p>注意调参的时候将尺度关闭，batch改大，图片正常</p>
-<p>投论文尽量投CCF上有分类的</p>
-<p>写论文的时候如果设计一个自己的网络要进行数学上的证明</p>
-</blockquote>
-<p>大小目标只是一个卷积的感受野的问题，yolo这方面做得还不够好，yolo是一个三分类的目标等级做的，SSD的结构更适合小目标，里边是特征金字塔，将Yolo, SSD的优点融合然后再自己网络的构造。高级做法是细粒度（待看）。</p>
-<p>下一阶段工作：</p>
-<ol>
-<li>FPN论文阅读+网络结构梳理</li>
-<li>SSD论文阅读+网络结构梳理</li>
-<li>有时间再看一下细粒度方面的</li>
-<li>yolo源码-对具体使用以及内容理解有帮助</li>
-</ol>
-<p>几个小的点：</p>
-<ol>
-<li>batch 32 64</li>
-<li>max替换为conv</li>
-<li>使用有切割图片的训练集进行进一步的测试</li>
-<li>可视化研究</li>
-</ol>
-<h3 id="调参经验"><a class="markdownIt-Anchor" href="#调参经验"></a> 调参经验</h3>
-<ol>
-<li>
-<p>learning-rate 学习速率：学习速率越小，模型收敛花费的时间就越长，但是可以提高模型精确度。一般初始设置为0.1，然后每次除以0.2或者0.5来改进，得到最终值；</p>
-</li>
-<li>
-<p>batchsize 样本批次容量：影响模型的优化程度和收敛速度，需要参考你的数据集大小来设置，具体问题具体分析</p>
-</li>
-<li>
-<p>weightdecay 权重衰减：用来在反向传播中更新权重和偏置，一般设置为0.005；</p>
-</li>
-<li>
-<p>epoch-number 训练次数：包括所有训练样本的一个正向传递和一个反向传递，训练至模型收敛即可；（注：和迭代周期iteration不一样）</p>
-</li>
-<li>
-<p>经过交叉验证，dropout率等于0.5的时候效果最好，原因是0.5的时候dropout随机生成的网络结构最多。</p>
-</li>
-</ol>
-<p>ref:</p>
-<p><a href="https://blog.csdn.net/weixin_38437404/article/details/74927694" target="_blank" rel="noopener">https://blog.csdn.net/weixin_38437404/article/details/74927694</a></p>
-<p><a href="https://blog.csdn.net/weixin_38437404/article/details/78837176" target="_blank" rel="noopener">https://blog.csdn.net/weixin_38437404/article/details/78837176</a></p>
-<h3 id="学习博客总结"><a class="markdownIt-Anchor" href="#学习博客总结"></a> 学习博客总结</h3>
-<p><a href="https://blog.csdn.net/phinoo/article/details/83022101" target="_blank" rel="noopener">yolov3实战理解cfg文件</a></p>
-<p><a href="https://blog.csdn.net/qian99/article/details/79008053" target="_blank" rel="noopener">卷积网络参数计算方法</a></p>
-<p><a href="https://blog.csdn.net/phinoo/article/details/83025690" target="_blank" rel="noopener">YOLOV3实战5：利用三方工具绘制P-R曲线</a></p>
-<p><a href="https://blog.csdn.net/qq_34806812/article/details/81459982" target="_blank" rel="noopener">YOLOV3可视化</a></p>
-<p><a href="https://blog.csdn.net/oTengYue/article/details/81365185" target="_blank" rel="noopener">Yolov3可视化2</a></p>
-<p><a href="https://blog.csdn.net/qq_27158179/article/details/81915740?tdsourcetag=s_pctim_aiomsg" target="_blank" rel="noopener">Opencv yolov3</a></p>
-<p><a href="https://blog.csdn.net/haoqimao_hard/article/details/82081285" target="_blank" rel="noopener">OPENCV YOLOv3 实践</a></p>
-<p><a href="https://pjreddie.com/darknet/imagenet/#darknet19_448" target="_blank" rel="noopener">darknet 预训练模型与cfg文件</a></p>
-<p><a href="https://www.deeplearning.ai/" target="_blank" rel="noopener">deeplearning.ai</a></p>
-<p><a href="https://www.youtube.com/results?search_query=fast.ai" target="_blank" rel="noopener">Fast. ai</a></p>
-<p><a href="https://blog.csdn.net/cgt19910923/article/details/83176997?tdsourcetag=s_pctim_aiomsg" target="_blank" rel="noopener">Yolov3修改基础网络darknet19</a></p>
-<p><a href="https://blog.csdn.net/sum_nap/article/details/80781587" target="_blank" rel="noopener">Yolov3网络改进以及修改</a></p>
-<p><a href="https://www.cnblogs.com/Zhi-Z/p/8728168.html" target="_blank" rel="noopener">准确率召回率的理解</a></p>
-<p><a href="https://blog.csdn.net/sum_nap/article/details/80781587" target="_blank" rel="noopener">YOLOv3增加网络结构</a></p>
-<p><a href="https://www.youtube.com/watch?v=GBu2jofRJtk" target="_blank" rel="noopener">yotube yolo9000</a></p>
-<p><a href="https://www.kancloud.cn/aollo/aolloopencv/269602" target="_blank" rel="noopener">Opencv-python教程</a></p>
-<p><a href="https://blog.csdn.net/m_buddy/article/details/82926024" target="_blank" rel="noopener">darknet anchor设计</a></p>
-<p><a href="https://blog.csdn.net/cgt19910923/article/details/80784525" target="_blank" rel="noopener">Yolov2 可视化研究</a></p>
-<p><a href="https://jacobgil.github.io/deeplearning/pruning-deep-learning" target="_blank" rel="noopener">模型剪枝总结</a></p>
-<p><a href="https://medium.com/@monocasero/object-detection-with-yolo-implementations-and-how-to-use-them-5da928356035" target="_blank" rel="noopener">一个比较详细的yolo指南</a></p>
-<p><a href="https://www.coursera.org/learn/convolutional-neural-networks/lecture/4Trod/edge-detection-example" target="_blank" rel="noopener">coursera 课程</a></p>
-<p><a href="https://www.leiphone.com/news/201708/7pRPkwvzEG1jgimW.html" target="_blank" rel="noopener">yolov2 yolo9000</a></p>
-<p><a href="https://blog.csdn.net/ghw15221836342/article/details/84427923" target="_blank" rel="noopener">YOLO LITE轻量级</a></p>
-<p><a href="https://blog.csdn.net/qq_20657717/article/details/81669006" target="_blank" rel="noopener">YOLO实验总结</a></p>
-<p><a href="https://blog.csdn.net/u012554092/article/details/78594425" target="_blank" rel="noopener">YOLOv3 darknet源码细节上优化</a></p>
-<p><a href="https://github.com/GZHermit/darknet-visualization_script/tree/master" target="_blank" rel="noopener">github darknet 可视化1</a></p>
-<p><a href="https://github.com/xueeinstein/darknet-vis" target="_blank" rel="noopener">github darknet 可视化2</a></p>
-<p><a href="https://blog.csdn.net/u013228894/article/details/79544109" target="_blank" rel="noopener">调参模型方法</a></p>
-<p><a href="https://blog.csdn.net/weixin_33860450/article/details/84890877" target="_blank" rel="noopener">c++调用模型</a></p>
-<p><a href="https://blog.csdn.net/qq_34199326/article/details/84109828?tdsourcetag=s_pctim_aiomsg" target="_blank" rel="noopener">详细解释YOLOv3边框预测分析</a></p>
-<p><a href="https://www.kancloud.cn/aollo/aolloopencv/259610" target="_blank" rel="noopener">opencv-python教程</a></p>
-<p><a href="https://oldpan.me/archives/pytorch-conmon-problem-in-training" target="_blank" rel="noopener">pytorch使用遇到的问题以及技巧</a></p>
-<p><a href="https://nanfei.xyz/2018/01/23/YOLOv2%E8%B0%83%E5%8F%82%E6%80%BB%E7%BB%93/#more" target="_blank" rel="noopener">learning Rate 相关调参</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1779,7 +1762,7 @@ title:“人工智能图像相关岗位需求”</h2>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
