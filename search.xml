@@ -1,6 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>【CV中的Attention机制】CBAM的姊妹篇-BAM模块</title>
+    <url>/2020/01/03/%E3%80%90CV%E4%B8%AD%E7%9A%84Attention%E6%9C%BA%E5%88%B6%E3%80%91CBAM%E7%9A%84%E5%A7%8A%E5%A6%B9%E7%AF%87-BAM%E6%A8%A1%E5%9D%97/</url>
+    <content><![CDATA[<h2 id="1-bam"><a class="markdownIt-Anchor" href="#1-bam"></a> 1. BAM</h2>
+<p>BAM全程是bottlenect attention module，与CBAM很相似的起名，还是CBAM的团队完成的作品。</p>
+<p>CBAM被ECCV18接受，BAM被BMVC18接收。</p>
+<p>CBAM可以看做是通道注意力机制和空间注意力机制的串联（先通道后空间），BAM可以看做两者的并联。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200103194503616.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>这个模块之所以叫bottlenect是因为这个模块放在DownSample 也就是pooling layer之前，如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200103195320299.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>由于改论文与上一篇：<a href="https://blog.csdn.net/DD_PP_JJ/article/details/103789457" target="_blank" rel="noopener">CBAM</a>的理论部分极为相似，下边直接进行实现部分。</p>
+<h2 id="2-通道部分的实现"><a class="markdownIt-Anchor" href="#2-通道部分的实现"></a> 2. 通道部分的实现</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Flatten</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> x.view(x.size(<span class="number">0</span>), <span class="number">-1</span>)</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ChannelGate</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, gate_channel, reduction_ratio=<span class="number">16</span>, num_layers=<span class="number">1</span>)</span>:</span></span><br><span class="line">        super(ChannelGate, self).__init__()</span><br><span class="line">        self.gate_c = nn.Sequential()</span><br><span class="line">        self.gate_c.add_module(<span class="string">'flatten'</span>, Flatten())</span><br><span class="line"></span><br><span class="line">        gate_channels = [gate_channel]  <span class="comment"># eg 64</span></span><br><span class="line">        gate_channels += [gate_channel // reduction_ratio] * num_layers  <span class="comment"># eg 4</span></span><br><span class="line">        gate_channels += [gate_channel]  <span class="comment"># 64</span></span><br><span class="line">        <span class="comment"># gate_channels: [64, 4, 4]</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(gate_channels) - <span class="number">2</span>):</span><br><span class="line">            self.gate_c.add_module(</span><br><span class="line">                <span class="string">'gate_c_fc_%d'</span> % i,</span><br><span class="line">                nn.Linear(gate_channels[i], gate_channels[i + <span class="number">1</span>]))</span><br><span class="line">            self.gate_c.add_module(<span class="string">'gate_c_bn_%d'</span> % (i + <span class="number">1</span>),</span><br><span class="line">                                   nn.BatchNorm1d(gate_channels[i + <span class="number">1</span>]))</span><br><span class="line">            self.gate_c.add_module(<span class="string">'gate_c_relu_%d'</span> % (i + <span class="number">1</span>), nn.ReLU())</span><br><span class="line"></span><br><span class="line">        self.gate_c.add_module(<span class="string">'gate_c_fc_final'</span>,</span><br><span class="line">                               nn.Linear(gate_channels[<span class="number">-2</span>], gate_channels[<span class="number">-1</span>]))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        avg_pool = F.avg_pool2d(x, x.size(<span class="number">2</span>), stride=x.size(<span class="number">2</span>))</span><br><span class="line">        <span class="keyword">return</span> self.gate_c(avg_pool).unsqueeze(<span class="number">2</span>).unsqueeze(<span class="number">3</span>).expand_as(x)</span><br></pre></td></tr></table></figure>
+<p>看上去代码要比CBAM中的ChannelAttention模块要多很多，贴上ChannelAttention代码方便对比：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ChannelAttention</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_planes, rotio=<span class="number">16</span>)</span>:</span></span><br><span class="line">        super(ChannelAttention, self).__init__()</span><br><span class="line">        self.avg_pool = nn.AdaptiveAvgPool2d(<span class="number">1</span>)</span><br><span class="line">        self.max_pool = nn.AdaptiveMaxPool2d(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        self.sharedMLP = nn.Sequential(</span><br><span class="line">            nn.Conv2d(in_planes, in_planes // ratio, <span class="number">1</span>, bias=<span class="literal">False</span>), nn.ReLU(),</span><br><span class="line">            nn.Conv2d(in_planes // rotio, in_planes, <span class="number">1</span>, bias=<span class="literal">False</span>))</span><br><span class="line">        self.sigmoid = nn.Sigmoid()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        avgout = self.sharedMLP(self.avg_pool(x))</span><br><span class="line">        maxout = self.sharedMLP(self.max_pool(x))</span><br><span class="line">        <span class="keyword">return</span> self.sigmoid(avgout + maxout)</span><br></pre></td></tr></table></figure>
+<p>首先讲ChannelGate的处理流程：</p>
+<ul>
+<li>
+<p>使用avg_pool2d测试</p>
+  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> torch</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = torch.ones((<span class="number">12</span>, <span class="number">8</span>, <span class="number">64</span>, <span class="number">64</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.shape</span><br><span class="line">torch.Size([<span class="number">12</span>, <span class="number">8</span>, <span class="number">64</span>, <span class="number">64</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>F.avg_pool2d(x,x.size(<span class="number">2</span>), stride=x.size(<span class="number">2</span>)).shape</span><br><span class="line">torch.Size([<span class="number">12</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">1</span>])</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>其效果与AdaptiveAvgPool2d(1)是一样的。</p>
+</li>
+<li>
+<p>然后经过gate_c模块，里边先经过Flatten将其变为[batch size, channel]形状的tensor, 然后后边一大部分都是Linear模块，进行线性变换。（ps:虽然代码看上去多，但是功能也就那样）这个部分与SE模块有一点相似，但是要更丰富一点。</p>
+</li>
+<li>
+<p>最终按照输入tensor x的形状进行扩展，得到关于通道的注意力。</p>
+</li>
+</ul>
+<p>然后讲一下与CBAM中的区别：</p>
+<ul>
+<li>CBAM中使用的是卷积实现的通道处理，这里使用的是线性变换Linear，但是背后的数学原理应该是一致的，区别在于计算量上</li>
+<li>CBAM中激活函数使用sigmoid， BAM中的通道部分使用了ReLU，还添加了BN层</li>
+</ul>
+<h2 id="3-空间注意力机制"><a class="markdownIt-Anchor" href="#3-空间注意力机制"></a> 3. 空间注意力机制</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SpatialGate</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,</span></span></span><br><span class="line"><span class="function"><span class="params">                 gate_channel,</span></span></span><br><span class="line"><span class="function"><span class="params">                 reduction_ratio=<span class="number">16</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 dilation_conv_num=<span class="number">2</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                 dilation_val=<span class="number">4</span>)</span>:</span></span><br><span class="line">        super(SpatialGate, self).__init__()</span><br><span class="line">        self.gate_s = nn.Sequential()</span><br><span class="line"></span><br><span class="line">        self.gate_s.add_module(</span><br><span class="line">            <span class="string">'gate_s_conv_reduce0'</span>,</span><br><span class="line">            nn.Conv2d(gate_channel,</span><br><span class="line">                      gate_channel // reduction_ratio,</span><br><span class="line">                      kernel_size=<span class="number">1</span>))</span><br><span class="line">        self.gate_s.add_module(<span class="string">'gate_s_bn_reduce0'</span>,</span><br><span class="line">                               nn.BatchNorm2d(gate_channel // reduction_ratio))</span><br><span class="line">        self.gate_s.add_module(<span class="string">'gate_s_relu_reduce0'</span>, nn.ReLU())</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 进行多个空洞卷积，丰富感受野</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(dilation_conv_num):</span><br><span class="line">            self.gate_s.add_module(</span><br><span class="line">                <span class="string">'gate_s_conv_di_%d'</span> % i,</span><br><span class="line">                nn.Conv2d(gate_channel // reduction_ratio,</span><br><span class="line">                          gate_channel // reduction_ratio,</span><br><span class="line">                          kernel_size=<span class="number">3</span>,</span><br><span class="line">                          padding=dilation_val,</span><br><span class="line">                          dilation=dilation_val))</span><br><span class="line">            self.gate_s.add_module(</span><br><span class="line">                <span class="string">'gate_s_bn_di_%d'</span> % i,</span><br><span class="line">                nn.BatchNorm2d(gate_channel // reduction_ratio))</span><br><span class="line">            self.gate_s.add_module(<span class="string">'gate_s_relu_di_%d'</span> % i, nn.ReLU())</span><br><span class="line"></span><br><span class="line">        self.gate_s.add_module(</span><br><span class="line">            <span class="string">'gate_s_conv_final'</span>,</span><br><span class="line">            nn.Conv2d(gate_channel // reduction_ratio, <span class="number">1</span>, kernel_size=<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.gate_s(x).expand_as(x)</span><br></pre></td></tr></table></figure>
+<p>这里可以看出，代码量相比CBAM中的spatial attention要大很多，依然进行对比：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SpatialAttention</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, kernel_size=<span class="number">7</span>)</span>:</span></span><br><span class="line">        super(SpatialAttention, self).__init__()</span><br><span class="line">        <span class="keyword">assert</span> kernel_size <span class="keyword">in</span> (<span class="number">3</span>,<span class="number">7</span>), <span class="string">"kernel size must be 3 or 7"</span></span><br><span class="line">        padding = <span class="number">3</span> <span class="keyword">if</span> kernel_size == <span class="number">7</span> <span class="keyword">else</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        self.conv = nn.Conv2d(<span class="number">2</span>,<span class="number">1</span>,kernel_size, padding=padding, bias=<span class="literal">False</span>)</span><br><span class="line">        self.sigmoid = nn.Sigmoid()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        avgout = torch.mean(x, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">        maxout, _ = torch.max(x, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">        x = torch.cat([avgout, maxout], dim=<span class="number">1</span>)</span><br><span class="line">        x = self.conv(x)</span><br><span class="line">        <span class="keyword">return</span> self.sigmoid(x)</span><br></pre></td></tr></table></figure>
+<p>这个部分空间注意力处理就各有特色了，先说一下BAM中的流程：</p>
+<ul>
+<li>先经过一个conv+bn+relu模块，通道缩进，信息进行压缩</li>
+<li>然后经过了两个dilated conv+bn+relu模块，空洞率设置为4（默认）</li>
+<li>最后经过一个卷积，将通道压缩到1</li>
+<li>最终将其扩展为tensor x的形状</li>
+</ul>
+<p>区别在于：</p>
+<ul>
+<li>CBAM中通过通道间的max,avg处理成通道数为2的feature, 然后通过卷积+Sigmoid得到最终的map</li>
+<li>BAM中则全部通过卷积或者空洞卷积完成信息处理，计算量更大一点, 但是融合了多感受野，信息更加丰富。</li>
+</ul>
+<h2 id="4-bam融合"><a class="markdownIt-Anchor" href="#4-bam融合"></a> 4. BAM融合</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BAM</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, gate_channel)</span>:</span></span><br><span class="line">        super(BAM, self).__init__()</span><br><span class="line">        self.channel_att = ChannelGate(gate_channel)</span><br><span class="line">        self.spatial_att = SpatialGate(gate_channel)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        att = <span class="number">1</span> + F.sigmoid(self.channel_att(x) * self.spatial_att(x))</span><br><span class="line">        <span class="keyword">return</span> att * x</span><br></pre></td></tr></table></figure>
+<p>最终融合很简单，需要注意的就是两者是相乘的，并且使用了sigmoid进行归一化。</p>
+<hr>
+<blockquote>
+<p>后记：感觉BAM跟CBAM相比有一点点复杂，没有CBAM的那种简洁美。这两篇都是坐着在同一时期进行发表的，所以并没有互相的一个详细的对照，但是大概看了一下，感觉CBAM效果好于BAM。</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>attention</tag>
+        <tag>cv</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【CV论文阅读】centernet之Objects as Points</title>
+    <url>/2020/01/03/%E3%80%90CV%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E3%80%91centernet%E4%B9%8BObjects-as-Points/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>【CV中的Attention机制】Selective Kernel Networks(SE进化版)</title>
     <url>/2020/01/01/%E3%80%90CV%E4%B8%AD%E7%9A%84Attention%E6%9C%BA%E5%88%B6%E3%80%91Selective-Kernel-Networks-SE%E8%BF%9B%E5%8C%96%E7%89%88/</url>
     <content><![CDATA[<h2 id="1-sknet"><a class="markdownIt-Anchor" href="#1-sknet"></a> <strong>1. SKNet</strong></h2>
@@ -1476,8 +1544,8 @@ AttributeError: ‘VOCDataset’ object has no attribute ‘img_ids’</module><
 </blockquote>
 ]]></content>
       <tags>
-        <tag>深度学习环境</tag>
         <tag>Ubuntu</tag>
+        <tag>深度学习环境</tag>
         <tag>2080Ti</tag>
         <tag>CUDA10, cuDNN7.5</tag>
       </tags>
@@ -2609,11 +2677,11 @@ An-->B</pre>
         <category>环境配置</category>
       </categories>
       <tags>
-        <tag>cuda</tag>
-        <tag>tensorflow</tag>
         <tag>ubuntu16.04,</tag>
+        <tag>cuda</tag>
         <tag>cudnn</tag>
         <tag>kears</tag>
+        <tag>tensorflow</tag>
       </tags>
   </entry>
   <entry>
