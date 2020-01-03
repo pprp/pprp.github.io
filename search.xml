@@ -1544,8 +1544,8 @@ AttributeError: ‘VOCDataset’ object has no attribute ‘img_ids’</module><
 </blockquote>
 ]]></content>
       <tags>
-        <tag>Ubuntu</tag>
         <tag>深度学习环境</tag>
+        <tag>Ubuntu</tag>
         <tag>2080Ti</tag>
         <tag>CUDA10, cuDNN7.5</tag>
       </tags>
@@ -2677,11 +2677,11 @@ An-->B</pre>
         <category>环境配置</category>
       </categories>
       <tags>
-        <tag>ubuntu16.04,</tag>
         <tag>cuda</tag>
+        <tag>tensorflow</tag>
+        <tag>ubuntu16.04,</tag>
         <tag>cudnn</tag>
         <tag>kears</tag>
-        <tag>tensorflow</tag>
       </tags>
   </entry>
   <entry>
