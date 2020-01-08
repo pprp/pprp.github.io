@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+<link href="https://cdn.bootcss.com/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="spicyCV" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="作者:pprp 编辑:BBuf   摘要: 本文介绍了一个用于语义分割领域的attention模块scSE。scSE模块与之前介绍的BAM模块很类似，不过在这里scSE模块只在语义分割中进行应用和测试，对语义分割准确率带来的提升比较大。  提出scSE模块论文的全称是：《Concurrent Spatial and Channel ‘Squeeze &amp;amp; Excitation’ in Fu">
+<meta name="keywords" content="attention,cv,scSE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【CV中的attention机制】语义分割中的scSE模块">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;06&#x2F;%E3%80%90CV%E4%B8%AD%E7%9A%84attention%E6%9C%BA%E5%88%B6%E3%80%91%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E4%B8%AD%E7%9A%84csSE%E6%A8%A1%E5%9D%97&#x2F;index.html">
+<meta property="og:site_name" content="spicyCV">
+<meta property="og:description" content="作者:pprp 编辑:BBuf   摘要: 本文介绍了一个用于语义分割领域的attention模块scSE。scSE模块与之前介绍的BAM模块很类似，不过在这里scSE模块只在语义分割中进行应用和测试，对语义分割准确率带来的提升比较大。  提出scSE模块论文的全称是：《Concurrent Spatial and Channel ‘Squeeze &amp;amp; Excitation’ in Fu">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200106214302699.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200106214518416.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200106214506323.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200106221034514.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200106222528563.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200106223359538.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200106223724371.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2020-01-06T14:47:42.015Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20200106214302699.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70">
+
+<link rel="canonical" href="http://yoursite.com/2020/01/06/%E3%80%90CV%E4%B8%AD%E7%9A%84attention%E6%9C%BA%E5%88%B6%E3%80%91%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E4%B8%AD%E7%9A%84csSE%E6%A8%A1%E5%9D%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>【CV中的attention机制】语义分割中的scSE模块 | spicyCV</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spicyCV</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">一个专注CV的starter</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/pprp" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/06/%E3%80%90CV%E4%B8%AD%E7%9A%84attention%E6%9C%BA%E5%88%B6%E3%80%91%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E4%B8%AD%E7%9A%84csSE%E6%A8%A1%E5%9D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【CV中的attention机制】语义分割中的scSE模块
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-06 21:21:34 / 修改时间：22:47:42" itemprop="dateCreated datePublished" datetime="2020-01-06T21:21:34+08:00">2020-01-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li>作者:pprp</li>
+<li>编辑:BBuf</li>
+</ul>
+<blockquote>
+<p>摘要: 本文介绍了一个用于语义分割领域的attention模块scSE。scSE模块与之前介绍的BAM模块很类似，不过在这里scSE模块只在语义分割中进行应用和测试，对语义分割准确率带来的提升比较大。</p>
+</blockquote>
+<p>提出scSE模块论文的全称是：《<strong>Concurrent Spatial and Channel ‘Squeeze &amp; Excitation’ in Fully Convolutional Networks</strong> 》。这篇文章对SE模块进行了改进，提出了SE模块的三个变体cSE、sSE、scSE，并通过实验证明了了这样的模块可以增强有意义的特征，抑制无用特征。实验是基于两个医学上的数据集MALC Dataset和Visceral Dataset进行实验的。</p>
+<p>语义分割模型大部分都是类似于U-Net这样的encoder-decoder的形式，先进行下采样，然后进行上采样到与原图一样的尺寸。其添加SE模块可以添加在每个卷积层之后，用于对feature map信息的提炼。具体方案如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200106214302699.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>然后开始分别介绍由SE改进的三个模块，首先说明一下图例:</p>
+<p><img src="https://img-blog.csdnimg.cn/20200106214518416.png" alt></p>
+<ol>
+<li>cSE模块：</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20200106214506323.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>这个模块类似之前BAM模块里的Channel attention模块，通过观察这个图就很容易理解其实现方法，具体流程如下:</p>
+<ul>
+<li>
+<p>将feature map通过global average pooling方法从[C, H, W]变为[C, 1, 1]</p>
+</li>
+<li>
+<p>然后使用两个1$\times<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>\times$1卷积进行信息的处理，最终得到C维的向量</p>
+</li>
+<li>
+<p>然后使用sigmoid函数进行归一化，得到对应的mask</p>
+</li>
+<li>
+<p>最后通过channel-wise相乘，得到经过信息校准过的feature map</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cSE</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_channels)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.avgpool = nn.AdaptiveAvgPool2d(<span class="number">1</span>)</span><br><span class="line">        self.Conv_Squeeze = nn.Conv2d(in_channels,</span><br><span class="line">                                      in_channels // <span class="number">2</span>,</span><br><span class="line">                                      kernel_size=<span class="number">1</span>,</span><br><span class="line">                                      bias=<span class="literal">False</span>)</span><br><span class="line">        self.Conv_Excitation = nn.Conv2d(in_channels // <span class="number">2</span>,</span><br><span class="line">                                         in_channels,</span><br><span class="line">                                         kernel_size=<span class="number">1</span>,</span><br><span class="line">                                         bias=<span class="literal">False</span>)</span><br><span class="line">        self.norm = nn.Sigmoid()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, U)</span>:</span></span><br><span class="line">        z = self.avgpool(U)  <span class="comment"># shape: [bs, c, h, w] to [bs, c, 1, 1]</span></span><br><span class="line">        z = self.Conv_Squeeze(z)  <span class="comment"># shape: [bs, c/2, 1, 1]</span></span><br><span class="line">        z = self.Conv_Excitation(z)  <span class="comment"># shape: [bs, c, 1, 1]</span></span><br><span class="line">        z = self.norm(z)</span><br><span class="line">        <span class="keyword">return</span> U * z.expand_as(U)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    bs, c, h, w = <span class="number">10</span>, <span class="number">3</span>, <span class="number">64</span>, <span class="number">64</span></span><br><span class="line">    in_tensor = torch.ones(bs, c, h, w)</span><br><span class="line"></span><br><span class="line">    c_se = cSE(c)</span><br><span class="line">    print(<span class="string">"in shape:"</span>, in_tensor.shape)</span><br><span class="line">    out_tensor = c_se(in_tensor)</span><br><span class="line">    print(<span class="string">"out shape:"</span>, out_tensor.shape)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>sSE模块：</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20200106221034514.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>上图是空间注意力机制的实现，与BAM中的实现确实有很大不同，实现过程变得很简单，具体分析如下：</p>
+<ul>
+<li>直接对feature map使用1$\times<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>\times$1卷积, 从[C, H, W]变为[1, H, W]的features</li>
+<li>然后使用sigmoid进行激活得到spatial attention map</li>
+<li>然后直接施加到原始feature map中，完成空间的信息校准</li>
+</ul>
+<p>NOTE: 这里需要注意一点，先使用1$\times<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>\times$1卷积，后使用sigmoid函数，这个信息无法从图中直接获取，需要理解论文。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sSE</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_channels)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.Conv1x1 = nn.Conv2d(in_channels, <span class="number">1</span>, kernel_size=<span class="number">1</span>, bias=<span class="literal">False</span>)</span><br><span class="line">        self.norm = nn.Sigmoid()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, U)</span>:</span></span><br><span class="line">        q = self.Conv1x1(U) <span class="comment"># U:[bs,c,h,w] to q:[bs,1,h,w]</span></span><br><span class="line">        q = self.norm(q)</span><br><span class="line">        <span class="keyword">return</span> U * q <span class="comment"># 广播机制</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    bs, c, h, w = <span class="number">10</span>, <span class="number">3</span>, <span class="number">64</span>, <span class="number">64</span></span><br><span class="line">    in_tensor = torch.ones(bs, c, h, w)</span><br><span class="line"></span><br><span class="line">    s_se = sSE(c)</span><br><span class="line">    print(<span class="string">"in shape:"</span>, in_tensor.shape)</span><br><span class="line">    out_tensor = s_se(in_tensor)</span><br><span class="line">    print(<span class="string">"out shape:"</span>, out_tensor.shape)</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>scSE模块：</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20200106222528563.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>可以看出scSE是前两个模块的并联，与BAM的并联很相似，具体就是在分别通过sSE和cSE模块后，然后将两个模块相加，得到更为精准校准的feature map, 直接上代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sSE</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_channels)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.Conv1x1 = nn.Conv2d(in_channels, <span class="number">1</span>, kernel_size=<span class="number">1</span>, bias=<span class="literal">False</span>)</span><br><span class="line">        self.norm = nn.Sigmoid()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, U)</span>:</span></span><br><span class="line">        q = self.Conv1x1(U)  <span class="comment"># U:[bs,c,h,w] to q:[bs,1,h,w]</span></span><br><span class="line">        q = self.norm(q)</span><br><span class="line">        <span class="keyword">return</span> U * q  <span class="comment"># 广播机制</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cSE</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_channels)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.avgpool = nn.AdaptiveAvgPool2d(<span class="number">1</span>)</span><br><span class="line">        self.Conv_Squeeze = nn.Conv2d(in_channels, in_channels // <span class="number">2</span>, kernel_size=<span class="number">1</span>, bias=<span class="literal">False</span>)</span><br><span class="line">        self.Conv_Excitation = nn.Conv2d(in_channels//<span class="number">2</span>, in_channels, kernel_size=<span class="number">1</span>, bias=<span class="literal">False</span>)</span><br><span class="line">        self.norm = nn.Sigmoid()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, U)</span>:</span></span><br><span class="line">        z = self.avgpool(U)<span class="comment"># shape: [bs, c, h, w] to [bs, c, 1, 1]</span></span><br><span class="line">        z = self.Conv_Squeeze(z) <span class="comment"># shape: [bs, c/2]</span></span><br><span class="line">        z = self.Conv_Excitation(z) <span class="comment"># shape: [bs, c]</span></span><br><span class="line">        z = self.norm(z)</span><br><span class="line">        <span class="keyword">return</span> U * z.expand_as(U)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">scSE</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_channels)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.cSE = cSE(in_channels)</span><br><span class="line">        self.sSE = sSE(in_channels)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, U)</span>:</span></span><br><span class="line">        U_sse = self.sSE(U)</span><br><span class="line">        U_cse = self.cSE(U)</span><br><span class="line">        <span class="keyword">return</span> U_cse+U_sse</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    bs, c, h, w = <span class="number">10</span>, <span class="number">3</span>, <span class="number">64</span>, <span class="number">64</span></span><br><span class="line">    in_tensor = torch.ones(bs, c, h, w)</span><br><span class="line"></span><br><span class="line">    sc_se = scSE(c)</span><br><span class="line">    print(<span class="string">"in shape:"</span>,in_tensor.shape)</span><br><span class="line">    out_tensor = sc_se(in_tensor)</span><br><span class="line">    print(<span class="string">"out shape:"</span>, out_tensor.shape)</span><br></pre></td></tr></table></figure>
+<p>NOTE: 没有找到官方的实现，所以就根据论文中内容，进行基于pytorch的实现。</p>
+<hr>
+<p>这三个模块都很容易实现，可以说是仅仅比SE模块稍微复杂一点，接下来看一下实验部分：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200106223359538.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>作者分别在两个数据集上使用了三个语义分割网络，以上就是结果，可以看出scSE模块可以带来2-9%的提升，相比于BAM,CBAM,SE等对分类网络带来的1%左右的提升，要好很多。</p>
+<p>不仅如此，添加了scSE模块可以带来细粒度的语义分割提升，能够让分割边缘更加平滑，在医学图像分割领域效果很好。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200106223724371.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<blockquote>
+<p>后记：接触这篇文章是在知乎一个分享kaggle图像分割竞赛的文章中，拖了很长时间才开始仔细阅读这篇文章，其带来的效果确实很不错，但是实验仅限于图像分割，各位可以尝试将其添加到图像分类，目标检测等领域，对该模块进行测评。</p>
+</blockquote>
+<p>参考文献：</p>
+<p>论文链接：<a href="http://arxiv.org/pdf/1803.02579v2.pdf" target="_blank" rel="noopener">http://arxiv.org/pdf/1803.02579v2.pdf</a></p>
+<p>核心代码：<a href="https://github.com/pprp/SimpleCVReproduction/tree/master/attention/scSE" target="_blank" rel="noopener">https://github.com/pprp/SimpleCVReproduction/tree/master/attention/scSE</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/attention/" rel="tag"># attention</a>
+              <a href="/tags/cv/" rel="tag"># cv</a>
+              <a href="/tags/scSE/" rel="tag"># scSE</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/01/05/%E3%80%90CV%E4%B8%AD%E7%9A%84Attention%E6%9C%BA%E5%88%B6%E3%80%91Non-Local-neural-networks%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%AE%9E%E7%8E%B0/" rel="next" title="【CV中的Attention机制】Non-Local neural networks的理解与实现">
+                  <i class="fa fa-chevron-left"></i> 【CV中的Attention机制】Non-Local neural networks的理解与实现
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="pprp"
+      src="/images/log.png">
+  <p class="site-author-name" itemprop="name">pprp</p>
+  <div class="site-description" itemprop="description">涉猎编程语言主要为python, 深度学习框架以pytorch为主</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pprp</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script pjax>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+<script pjax>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+    <div id="pjax">
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '510ce8b06c45bdef1d58',
+      clientSecret: 'df992456e87a7ff04b9f002b27de9caf70cd0d6f',
+      repo: 'pprp.github.io',
+      owner: 'pprp',
+      admin: ['pprp'],
+      id: 'eff6cbace2d0f7b2186abec224430d6c',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>

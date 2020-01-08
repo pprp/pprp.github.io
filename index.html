@@ -220,6 +220,127 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/06/%E3%80%90CV%E4%B8%AD%E7%9A%84attention%E6%9C%BA%E5%88%B6%E3%80%91%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E4%B8%AD%E7%9A%84csSE%E6%A8%A1%E5%9D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/log.png">
+      <meta itemprop="name" content="pprp">
+      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spicyCV">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/06/%E3%80%90CV%E4%B8%AD%E7%9A%84attention%E6%9C%BA%E5%88%B6%E3%80%91%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E4%B8%AD%E7%9A%84csSE%E6%A8%A1%E5%9D%97/" class="post-title-link" itemprop="url">【CV中的attention机制】语义分割中的scSE模块</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-06 21:21:34 / 修改时间：22:47:42" itemprop="dateCreated datePublished" datetime="2020-01-06T21:21:34+08:00">2020-01-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>作者:pprp</li>
+<li>编辑:BBuf</li>
+</ul>
+<blockquote>
+<p>摘要: 本文介绍了一个用于语义分割领域的attention模块scSE。scSE模块与之前介绍的BAM模块很类似，不过在这里scSE模块只在语义分割中进行应用和测试，对语义分割准确率带来的提升比较大。</p>
+</blockquote>
+<p>提出scSE模块论文的全称是：《<strong>Concurrent Spatial and Channel ‘Squeeze &amp; Excitation’ in Fully Convolutional Networks</strong> 》。这篇文章对SE模块进行了改进，提出了SE模块的三个变体cSE、sSE、scSE，并通过实验证明了了这样的模块可以增强有意义的特征，抑制无用特征。实验是基于两个医学上的数据集MALC Dataset和Visceral Dataset进行实验的。</p>
+<p>语义分割模型大部分都是类似于U-Net这样的encoder-decoder的形式，先进行下采样，然后进行上采样到与原图一样的尺寸。其添加SE模块可以添加在每个卷积层之后，用于对feature map信息的提炼。具体方案如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200106214302699.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>然后开始分别介绍由SE改进的三个模块，首先说明一下图例:</p>
+<p><img src="https://img-blog.csdnimg.cn/20200106214518416.png" alt></p>
+<ol>
+<li>cSE模块：</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20200106214506323.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>这个模块类似之前BAM模块里的Channel attention模块，通过观察这个图就很容易理解其实现方法，具体流程如下:</p>
+<ul>
+<li>
+<p>将feature map通过global average pooling方法从[C, H, W]变为[C, 1, 1]</p>
+</li>
+<li>
+<p>然后使用两个1$\times<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>\times$1卷积进行信息的处理，最终得到C维的向量</p>
+</li>
+<li>
+<p>然后使用sigmoid函数进行归一化，得到对应的mask</p>
+</li>
+<li>
+<p>最后通过channel-wise相乘，得到经过信息校准过的feature map</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cSE</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_channels)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.avgpool = nn.AdaptiveAvgPool2d(<span class="number">1</span>)</span><br><span class="line">        self.Conv_Squeeze = nn.Conv2d(in_channels,</span><br><span class="line">                                      in_channels // <span class="number">2</span>,</span><br><span class="line">                                      kernel_size=<span class="number">1</span>,</span><br><span class="line">                                      bias=<span class="literal">False</span>)</span><br><span class="line">        self.Conv_Excitation = nn.Conv2d(in_channels // <span class="number">2</span>,</span><br><span class="line">                                         in_channels,</span><br><span class="line">                                         kernel_size=<span class="number">1</span>,</span><br><span class="line">                                         bias=<span class="literal">False</span>)</span><br><span class="line">        self.norm = nn.Sigmoid()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, U)</span>:</span></span><br><span class="line">        z = self.avgpool(U)  <span class="comment"># shape: [bs, c, h, w] to [bs, c, 1, 1]</span></span><br><span class="line">        z = self.Conv_Squeeze(z)  <span class="comment"># shape: [bs, c/2, 1, 1]</span></span><br><span class="line">        z = self.Conv_Excitation(z)  <span class="comment"># shape: [bs, c, 1, 1]</span></span><br><span class="line">        z = self.norm(z)</span><br><span class="line">        <span class="keyword">return</span> U * z.expand_as(U)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    bs, c, h, w = <span class="number">10</span>, <span class="number">3</span>, <span class="number">64</span>, <span class="number">64</span></span><br><span class="line">    in_tensor = torch.ones(bs, c, h, w)</span><br><span class="line"></span><br><span class="line">    c_se = cSE(c)</span><br><span class="line">    print(<span class="string">"in shape:"</span>, in_tensor.shape)</span><br><span class="line">    out_tensor = c_se(in_tensor)</span><br><span class="line">    print(<span class="string">"out shape:"</span>, out_tensor.shape)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>sSE模块：</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20200106221034514.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>上图是空间注意力机制的实现，与BAM中的实现确实有很大不同，实现过程变得很简单，具体分析如下：</p>
+<ul>
+<li>直接对feature map使用1$\times<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>\times$1卷积, 从[C, H, W]变为[1, H, W]的features</li>
+<li>然后使用sigmoid进行激活得到spatial attention map</li>
+<li>然后直接施加到原始feature map中，完成空间的信息校准</li>
+</ul>
+<p>NOTE: 这里需要注意一点，先使用1$\times<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>\times$1卷积，后使用sigmoid函数，这个信息无法从图中直接获取，需要理解论文。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sSE</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_channels)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.Conv1x1 = nn.Conv2d(in_channels, <span class="number">1</span>, kernel_size=<span class="number">1</span>, bias=<span class="literal">False</span>)</span><br><span class="line">        self.norm = nn.Sigmoid()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, U)</span>:</span></span><br><span class="line">        q = self.Conv1x1(U) <span class="comment"># U:[bs,c,h,w] to q:[bs,1,h,w]</span></span><br><span class="line">        q = self.norm(q)</span><br><span class="line">        <span class="keyword">return</span> U * q <span class="comment"># 广播机制</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    bs, c, h, w = <span class="number">10</span>, <span class="number">3</span>, <span class="number">64</span>, <span class="number">64</span></span><br><span class="line">    in_tensor = torch.ones(bs, c, h, w)</span><br><span class="line"></span><br><span class="line">    s_se = sSE(c)</span><br><span class="line">    print(<span class="string">"in shape:"</span>, in_tensor.shape)</span><br><span class="line">    out_tensor = s_se(in_tensor)</span><br><span class="line">    print(<span class="string">"out shape:"</span>, out_tensor.shape)</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>scSE模块：</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20200106222528563.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>可以看出scSE是前两个模块的并联，与BAM的并联很相似，具体就是在分别通过sSE和cSE模块后，然后将两个模块相加，得到更为精准校准的feature map, 直接上代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sSE</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_channels)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.Conv1x1 = nn.Conv2d(in_channels, <span class="number">1</span>, kernel_size=<span class="number">1</span>, bias=<span class="literal">False</span>)</span><br><span class="line">        self.norm = nn.Sigmoid()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, U)</span>:</span></span><br><span class="line">        q = self.Conv1x1(U)  <span class="comment"># U:[bs,c,h,w] to q:[bs,1,h,w]</span></span><br><span class="line">        q = self.norm(q)</span><br><span class="line">        <span class="keyword">return</span> U * q  <span class="comment"># 广播机制</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">cSE</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_channels)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.avgpool = nn.AdaptiveAvgPool2d(<span class="number">1</span>)</span><br><span class="line">        self.Conv_Squeeze = nn.Conv2d(in_channels, in_channels // <span class="number">2</span>, kernel_size=<span class="number">1</span>, bias=<span class="literal">False</span>)</span><br><span class="line">        self.Conv_Excitation = nn.Conv2d(in_channels//<span class="number">2</span>, in_channels, kernel_size=<span class="number">1</span>, bias=<span class="literal">False</span>)</span><br><span class="line">        self.norm = nn.Sigmoid()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, U)</span>:</span></span><br><span class="line">        z = self.avgpool(U)<span class="comment"># shape: [bs, c, h, w] to [bs, c, 1, 1]</span></span><br><span class="line">        z = self.Conv_Squeeze(z) <span class="comment"># shape: [bs, c/2]</span></span><br><span class="line">        z = self.Conv_Excitation(z) <span class="comment"># shape: [bs, c]</span></span><br><span class="line">        z = self.norm(z)</span><br><span class="line">        <span class="keyword">return</span> U * z.expand_as(U)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">scSE</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_channels)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.cSE = cSE(in_channels)</span><br><span class="line">        self.sSE = sSE(in_channels)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, U)</span>:</span></span><br><span class="line">        U_sse = self.sSE(U)</span><br><span class="line">        U_cse = self.cSE(U)</span><br><span class="line">        <span class="keyword">return</span> U_cse+U_sse</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    bs, c, h, w = <span class="number">10</span>, <span class="number">3</span>, <span class="number">64</span>, <span class="number">64</span></span><br><span class="line">    in_tensor = torch.ones(bs, c, h, w)</span><br><span class="line"></span><br><span class="line">    sc_se = scSE(c)</span><br><span class="line">    print(<span class="string">"in shape:"</span>,in_tensor.shape)</span><br><span class="line">    out_tensor = sc_se(in_tensor)</span><br><span class="line">    print(<span class="string">"out shape:"</span>, out_tensor.shape)</span><br></pre></td></tr></table></figure>
+<p>NOTE: 没有找到官方的实现，所以就根据论文中内容，进行基于pytorch的实现。</p>
+<hr>
+<p>这三个模块都很容易实现，可以说是仅仅比SE模块稍微复杂一点，接下来看一下实验部分：</p>
+<p><img src="https://img-blog.csdnimg.cn/20200106223359538.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<p>作者分别在两个数据集上使用了三个语义分割网络，以上就是结果，可以看出scSE模块可以带来2-9%的提升，相比于BAM,CBAM,SE等对分类网络带来的1%左右的提升，要好很多。</p>
+<p>不仅如此，添加了scSE模块可以带来细粒度的语义分割提升，能够让分割边缘更加平滑，在医学图像分割领域效果很好。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200106223724371.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0REX1BQX0pK,size_16,color_FFFFFF,t_70" alt></p>
+<blockquote>
+<p>后记：接触这篇文章是在知乎一个分享kaggle图像分割竞赛的文章中，拖了很长时间才开始仔细阅读这篇文章，其带来的效果确实很不错，但是实验仅限于图像分割，各位可以尝试将其添加到图像分类，目标检测等领域，对该模块进行测评。</p>
+</blockquote>
+<p>参考文献：</p>
+<p>论文链接：<a href="http://arxiv.org/pdf/1803.02579v2.pdf" target="_blank" rel="noopener">http://arxiv.org/pdf/1803.02579v2.pdf</a></p>
+<p>核心代码：<a href="https://github.com/pprp/SimpleCVReproduction/tree/master/attention/scSE" target="_blank" rel="noopener">https://github.com/pprp/SimpleCVReproduction/tree/master/attention/scSE</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/05/%E3%80%90CV%E4%B8%AD%E7%9A%84Attention%E6%9C%BA%E5%88%B6%E3%80%91Non-Local-neural-networks%E7%9A%84%E7%90%86%E8%A7%A3%E4%B8%8E%E5%AE%9E%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1515,63 +1636,6 @@ C(x)=|\{i|i is a valid index of x\}|
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/20/REID%E7%B3%BB%E5%88%97-In-Defense-of-the-Triplet-Loss-for-Person-Re-Identification/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/log.png">
-      <meta itemprop="name" content="pprp">
-      <meta itemprop="description" content="涉猎编程语言主要为python, 深度学习框架以pytorch为主">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="spicyCV">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/20/REID%E7%B3%BB%E5%88%97-In-Defense-of-the-Triplet-Loss-for-Person-Re-Identification/" class="post-title-link" itemprop="url">REID系列: In Defense of the Triplet Loss for Person Re-Identification</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-20 16:19:36" itemprop="dateCreated datePublished" datetime="2019-12-20T16:19:36+08:00">2019-12-20</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1622,7 +1686,7 @@ C(x)=|\{i|i is a valid index of x\}|
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1633,7 +1697,7 @@ C(x)=|\{i|i is a valid index of x\}|
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-count">67</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
