@@ -8,21 +8,18 @@ redirect_from:
   - /about.html
 ---
 
-My name is Peijie Dong, a Ph.D. student in the Data Science and Analysis at the Hong Kong University of Science and Technology (Guangzhou). I am supervised by Prof. [Xiaowen Chu](https://sites.google.com/view/chuxiaowen). My research interests include auto machine learning, deep learning, and model compression. I am also interested in large language model and diffusion models.
-
+My name is Peijie Dong, a Ph.D. student in Data Science and Analysis at the Hong Kong University of Science and Technology (Guangzhou). Under the supervision of [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen), my research focuses on auto machine learning, deep learning, and model compression. I obtained my B.S. in Software Engineering from Northwest Agriculture & Forestry University supervised by [Prof. Hongming Zhang](https://cie.nwsuaf.edu.cn/szdw/js/2008117820/index.htm) and A.P Yaojun Geng, where I ranked first in my class with a GPA of 3.78/4.0. Additionally, I completed my Master of Engineering at the National University of Defense Technology under the guidance of Advisor A.P. Xin Niu and [Zhiliang Tian](https://tianzhiliang.github.io/). Apart from my primary research interests, I also have a keen interest in large language models and diffusion models.
 
 Research Interests
 ======
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Fork [this repository](https://github.com/academicpages/academicpages.github.io) by clicking the "fork" button in the top right. 
-1. Go to the repository's settings (rightmost item in the tabs that start with "Code", should be below "Unwatch"). Rename the repository "[your GitHub username].github.io", which will also be your website's URL.
-1. Set site-wide configuration and create content & metadata (see below -- also see [this set of diffs](http://archive.is/3TPas) showing what files were changed to set up [an example site](https://getorg-testacct.github.io) for a user with the username "getorg-testacct")
-1. Upload any files (like PDFs, .zip files, etc.) to the files/ directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.  
-1. Check status by going to the repository settings, in the "GitHub pages" section
+1. Automated Machine Learning (AutoML)
+2. Model Compression including Knowledge Distillation, Quantization, Pruning.
+3. Neural Architecture Search (NAS)
+4. Large Language Model (LLM) 
 
 Publications
 ------
-The main configuration file for the site is in the base directory in [_config.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_config.yml), which defines the content in the sidebars and other site-wide features. You will need to replace the default variables with ones about yourself and your site's github repository. The configuration file for the top menu is in [_data/navigation.yml](https://github.com/academicpages/academicpages.github.io/blob/master/_data/navigation.yml). For example, if you don't have a portfolio or blog posts, you can remove those items from that navigation.yml file to remove them from the header. 
+ 
 
 Competitions & Awards 
 ------
