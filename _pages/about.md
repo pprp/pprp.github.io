@@ -41,7 +41,7 @@ Competitions & Awards
 - 3rd place 2022 Computer Vision and Pattern Recognition (CVPR) Third Workshop on NAS
 
 - 1st place 2022 BDCI Retail Product Recognition based on MindSpore
- (CCF Big Data \& Computing Interlligence Context 2022)
+ (CCF Big Data & Computing Interlligence Context 2022)
 
 - 1st place 2022 DCIC Intelligent Ship Detection Competition (Digital China Innovation Contest 2022)
 
@@ -64,11 +64,11 @@ Experences
 - Encompass RD-NAS and Meta-Pooling
 
 [PGONAS](https://github.com/pprp/CVPR2022-NAS-competition-Track1-3th-solution)
-- The 3$^{rd$ solution of the Neural Architecture Search Workshop. 
+- The 3rd solution of the Neural Architecture Search Workshop. 
 
 
 [GoodRecognition](https://github.com/pprp/GoodsRecognition.MindSpore)
-- The 1$^{st$ solution of BDCI Retail Product Recognition based on MindSpore
+- The 1st solution of BDCI Retail Product Recognition based on MindSpore
 
 Academic Services
 ------
