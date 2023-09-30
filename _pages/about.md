@@ -19,24 +19,67 @@ Research Interests
 
 Publications
 ------
- 
+Peijie Dong, Lujun Li, Zimian Wei. DisWOT: Student Architecture Search for Distillation without Training, The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2023.
+
+Peijie Dong, Lujun Li, Zimian Wei, Xin Niu$^*$, Zhiliang Tian, Hengyue Pan. EMQ: Evolving Training-free Proxies for Automated Mixed Precision Quantization, International Conference on Computer Vision (ICCV), 2023
+
+Peijie Dong, Xin Niu, Zhiliang Tian, etc. Progressive Meta-Pooling Learning for Lightweight Image Classification Model, IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP), 2023.
+
+Peijie Dong, Xin Niu, Lujun Li, etc. RD-NAS: Enhancing One-shot Supernet Ranking Ability via Ranking Distillation, IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP), 2023.
+
+Peijie Dong, Xin Niu, Hengyue Pan, etc. AutoRF: Auto Learning Receptive Fields with Spatial Pooling, 29th International Conference on Multimedia Modeling (MMM), 2022.
+
+Peijie Dong, Xin Niu$^*$, Lujun Li, etc. Prior-Guided One-shot Neural Architecture Search, Computer Vision and Pattern Recognition Third workshop on Neural Architecture Search (CVPRW), 2022.
+
+Lujun Li, Peijie Dong, Zimian Wei, Yang Ya. Automated Knowledge Distillation via Monte Carlo Tree Search,  International Conference on Computer Vision (ICCV), 2023
+
+Zimian Wei, Lujun Li, Peijie Dong, Hengyue Pan. Auto-Prox: Training-Free ViT Architecture Search via Automatic Proxy Discovery, International Conference on Computer Vision (ICCV), 2023
+
+Lujun Li, Peijie Dong, Zimian Wei, Shitong Shao. Auto-DAS: Automated Proxy Discovery for Training-free Distillation-aware Architecture Search, Thirty-seventh Conference on Neural Information Processing Systems (NeurIPS), 2023
+
+Lujun Li, Peijie Dong, Anggeng Li, Zimian Wei, Yang Ya. KD-Zero: Evolving Knowledge Distiller for Any Teacher-Student Pairs, Thirty-seventh Conference on Neural Information Processing Systems (NeurIPS), 2023
 
 Competitions & Awards 
 ------
-For site content, there is one markdown file for each type of content, which are stored in directories like _publications, _talks, _posts, _teaching, or _pages. For example, each talk is a markdown file in the [_talks directory](https://github.com/academicpages/academicpages.github.io/tree/master/_talks). At the top of each markdown file is structured data in YAML about the talk, which the theme will parse to do lots of cool stuff. The same structured data about a talk is used to generate the list of talks on the [Talks page](https://academicpages.github.io/talks), each [individual page](https://academicpages.github.io/talks/2012-03-01-talk-1) for specific talks, the talks section for the [CV page](https://academicpages.github.io/cv), and the [map of places you've given a talk](https://academicpages.github.io/talkmap.html) (if you run this [python file](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.py) or [Jupyter notebook](https://github.com/academicpages/academicpages.github.io/blob/master/talkmap.ipynb), which creates the HTML for the map based on the contents of the _talks directory).
+3rd place 2022 Computer Vision and Pattern Recognition (CVPR) Third Workshop on NAS
 
-**Markdown generator**
+1st place 2022 BDCI Retail Product Recognition based on MindSpore
+ (CCF Big Data \& Computing Interlligence Context 2022)
 
-I have also created [a set of Jupyter notebooks](https://github.com/academicpages/academicpages.github.io/tree/master/markdown_generator
-) that converts a CSV containing structured data about talks or presentations into individual markdown files that will be properly formatted for the academicpages template. The sample CSVs in that directory are the ones I used to create my own personal website at stuartgeiger.com. My usual workflow is that I keep a spreadsheet of my publications and talks, then run the code in these notebooks to generate the markdown files, then commit and push them to the GitHub repository.
+1st place 2022 DCIC Intelligent Ship Detection Competition (Digital China Innovation Contest 2022)
+
+2st place 2022 DCIC Intelligent Cattle Segmentation Competition (Digital China Innovation Contest 2022)
+
+1st place 2022 Baidu AI Competition - Blurred Document Image Recovery
+
+Experences
+----- 
+[AutoFormer](https://github.com/open-mmlab/mmrazor/tree/dev-1.x/configs/nas/mmcls/autoformer): 
+- Refactored the design of NAS part (Mutable and Mutator, etc). 
+- Gained proficiency in Python development tools such as Git, typehint, CI, etc.
+- Reproduce the one-shot transformer search with weight entanglement.
+- Refactor the design of Neural Architecture Search.
+- Internship in OpenMMLab MMRazor.
+
+[PicoNAS](https://github.com/pprp/PicoNAS)
+- Modularized Neural Architecture Search framework.
+- Support 5 NAS benchmarks, 6 NAS algorithms.
+- Encompass RD-NAS and Meta-Pooling
+
+[PGONAS](https://github.com/pprp/CVPR2022-NAS-competition-Track1-3th-solution)
+- The 3$^{rd$ solution of the Neural Architecture Search Workshop. 
+
+
+[GoodRecognition](https://github.com/pprp/GoodsRecognition.MindSpore)
+- The 1$^{st$ solution of BDCI Retail Product Recognition based on MindSpore
 
 Academic Services
 ------
-Many people use a git client to create files on their local computer and then push them to GitHub's servers. If you are not familiar with git, you can directly edit these configuration and markdown files directly in the github.com interface. Navigate to a file (like [this one](https://github.com/academicpages/academicpages.github.io/blob/master/_talks/2012-03-01-talk-1.md) and click the pencil icon in the top right of the content preview (to the right of the "Raw | Blame | History" buttons). You can delete a file by clicking the trashcan icon to the right of the pencil icon. You can also create new files or upload files by navigating to a directory and clicking the "Create new file" or "Upload files" buttons. 
+Reviewer: 
 
-Example: editing a markdown file for a talk
-![Editing a markdown file for a talk](/images/editing-talk.png)
+IEEE International Conference On Acoustics, Speech and Signal Processing (ICASSP), 2023, 2024
 
-Education 
-------
-More info about configuring academicpages can be found in [the guide](https://academicpages.github.io/markdown/). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful.
+Conference on Neural Information Processing Systems (NeurIPS), 2023
+
+IEEE Computational Intelligence Magazine (CIM), 2023 
+
