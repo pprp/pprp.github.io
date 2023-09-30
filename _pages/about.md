@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Peijie Dong"
+title: "Peijie Dong (董佩杰)"
 excerpt: "About me"
 author_profile: true
 redirect_from: 
@@ -9,6 +9,8 @@ redirect_from:
 ---
 
 My name is Peijie Dong, a Ph.D. student in Data Science and Analysis at the Hong Kong University of Science and Technology (Guangzhou). Under the supervision of [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen), my research focuses on auto machine learning, deep learning, and model compression. I obtained my B.S. in Software Engineering from Northwest Agriculture & Forestry University supervised by [Prof. Hongming Zhang](https://cie.nwsuaf.edu.cn/szdw/js/2008117820/index.htm) and A.P Yaojun Geng, where I ranked first in my class with a GPA of 3.78/4.0. Additionally, I completed my Master of Engineering at the National University of Defense Technology under the guidance of Advisor A.P. Xin Niu and [Zhiliang Tian](https://tianzhiliang.github.io/). Apart from my primary research interests, I also have a keen interest in large language models and diffusion models.
+
+Feel free to add me on WeChat with the ID "topeijie" for further discussions and conversations. I look forward to connecting with you!
 
 Research Interests
 ======
@@ -49,7 +51,7 @@ Competitions & Awards
 
 Experences
 ----- 
-[AutoFormer](https://github.com/open-mmlab/mmrazor/tree/dev-1.x/configs/nas/mmcls/autoformer): 
+[AutoFormer](https://github.com/open-mmlab/mmrazor/tree/dev-1.x/configs/nas/mmcls/autoformer)
 - Refactored the design of NAS part (Mutable and Mutator, etc). 
 - Gained proficiency in Python development tools such as Git, typehint, CI, etc.
 - Reproduce the one-shot transformer search with weight entanglement.
