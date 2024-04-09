@@ -68,4 +68,6 @@ Reviewer:
 - International Conference on Learning Representations (ICLR), 2024
 - Neural Information Processing Systems (NeurIPS), 2023
 - IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2024
+- IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2024
+- Information Fusion, 2024
 
