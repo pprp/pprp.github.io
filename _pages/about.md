@@ -70,4 +70,6 @@ Reviewer:
 - IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2024
 - IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2024
 - Information Fusion, 2024
+- Neural Network, 2024
+- The European Conference on Computer Vision (ECCV), 2024
 
