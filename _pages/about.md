@@ -20,6 +20,7 @@ Research Interests
 
 Publications
 ------
+- Peijie Dong, Lujun Li, Zhenheng Tang, Xiang Liu, Xinglin Pan, Qiang Wang, Xiaowen Chu. Evolving Symbolic Pruning Metric From Scratch for Large Language Models, The Forty-first International Conference on Machine Learning (ICML), 2024. 
 - Peijie Dong, Lujun Li, Zimian Wei. [DisWOT: Student Architecture Search for Distillation without Training](https://arxiv.org/abs/2303.15678), The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2023.
 - Peijie Dong, Lujun Li, Zimian Wei, Xin Niu$^*$, Zhiliang Tian, Hengyue Pan. [EMQ: Evolving Training-free Proxies for Automated Mixed Precision Quantization](https://arxiv.org/abs/2307.10554), International Conference on Computer Vision (ICCV), 2023
 - Peijie Dong, Xin Niu, Zhiliang Tian, etc. [Progressive Meta-Pooling Learning for Lightweight Image Classification Model](https://arxiv.org/abs/2301.10038), IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP), 2023.
