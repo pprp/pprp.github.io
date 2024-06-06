@@ -20,13 +20,13 @@ Research Interests
 
 Publications
 ------
-- Peijie Dong, Lujun Li, Zhenheng Tang, Xiang Liu, Xinglin Pan, Qiang Wang, Xiaowen Chu. Evolving Symbolic Pruning Metric From Scratch for Large Language Models, The Forty-first International Conference on Machine Learning (ICML), 2024. 
-- Peijie Dong, Lujun Li, Zimian Wei. [DisWOT: Student Architecture Search for Distillation without Training](https://arxiv.org/abs/2303.15678), The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2023.
-- Peijie Dong, Lujun Li, Zimian Wei, Xin Niu$^*$, Zhiliang Tian, Hengyue Pan. [EMQ: Evolving Training-free Proxies for Automated Mixed Precision Quantization](https://arxiv.org/abs/2307.10554), International Conference on Computer Vision (ICCV), 2023
+- Peijie Dong, Lujun Li, Zhenheng Tang, Xiang Liu, Xinglin Pan, Qiang Wang, Xiaowen Chu. [Pruner-Zero: Evolving Symbolic Pruning Metric From Scratch for Large Language Models](https://arxiv.org/abs/2406.02924v1), The Forty-first International Conference on Machine Learning (ICML), 2024. [Github](https://github.com/pprp/Pruner-Zero)
+- Peijie Dong, Lujun Li, Zimian Wei. [DisWOT: Student Architecture Search for Distillation without Training](https://arxiv.org/abs/2303.15678), The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2023. [Github](https://github.com/lliai/DisWOT-CVPR2023)
+- Peijie Dong, Lujun Li, Zimian Wei, Xin Niu$^*$, Zhiliang Tian, Hengyue Pan. [EMQ: Evolving Training-free Proxies for Automated Mixed Precision Quantization](https://arxiv.org/abs/2307.10554), International Conference on Computer Vision (ICCV), 2023. [Github](https://github.com/lliai/EMQ-series)
 - Peijie Dong, Xin Niu, Zhiliang Tian, etc. [Progressive Meta-Pooling Learning for Lightweight Image Classification Model](https://arxiv.org/abs/2301.10038), IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP), 2023.
 - Peijie Dong, Xin Niu, Lujun Li, etc. [RD-NAS: Enhancing One-shot Supernet Ranking Ability via Ranking Distillation](https://arxiv.org/abs/2301.09850), IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP), 2023.
 - Peijie Dong, Xin Niu, Hengyue Pan, etc. [AutoRF: Auto Learning Receptive Fields with Spatial Pooling](https://link.springer.com/chapter/10.1007/978-3-031-27818-1_56), 29th International Conference on Multimedia Modeling (MMM), 2022.
-- Peijie Dong, Xin Niu$^*$, Lujun Li, etc. [Prior-Guided One-shot Neural Architecture Search](https://arxiv.org/abs/2206.13329), Computer Vision and Pattern Recognition Third workshop on Neural Architecture Search (CVPRW), 2022.
+- Peijie Dong, Xin Niu, Lujun Li, etc. [Prior-Guided One-shot Neural Architecture Search](https://arxiv.org/abs/2206.13329), Computer Vision and Pattern Recognition Third workshop on Neural Architecture Search (CVPRW), 2022.
 - Lujun Li, Peijie Dong, Zimian Wei, Yang Ya. [Automated Knowledge Distillation via Monte Carlo Tree Search](https://openaccess.thecvf.com/content/ICCV2023/papers/Li_Automated_Knowledge_Distillation_via_Monte_Carlo_Tree_Search_ICCV_2023_paper.pdf),  International Conference on Computer Vision (ICCV), 2023
 
 
