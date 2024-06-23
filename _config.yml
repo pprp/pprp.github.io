@@ -6,58 +6,57 @@
 # `jekyll serve`. If you change this file, please restart the server process.
 
 # Site Settings
-title                    : "Zhenheng Tang"
-description              : ""
-repository               : "wizard1203/wizard1203.github.io"
-google_scholar_stats_use_cdn : true
+title: 'Peijie Dong'
+description: ''
+repository: 'pprp/pprp.github.io'
+google_scholar_stats_use_cdn: true
 
 # google analytics
-google_analytics_id      :  # get google_analytics_id from https://analytics.google.com/analytics/
+google_analytics_id: # get google_analytics_id from https://analytics.google.com/analytics/
 
 # SEO Related
-google_site_verification :  # get google_site_verification from https://search.google.com/search-console/about
-bing_site_verification   :  # get bing_site_verification from https://www.bing.com/webmasters/about
-baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.baidu.com/login/index?u=/site/index
+google_site_verification: # get google_site_verification from https://search.google.com/search-console/about
+bing_site_verification: # get bing_site_verification from https://www.bing.com/webmasters/about
+baidu_site_verification: # get baidu_site_verification from https://ziyuan.baidu.com/login/index?u=/site/index
 
 # Site Author
 author:
-  name             : "Zhenheng Tang"
-  avatar           : "images/middle_profile.png"
-  bio              : "PhD student in Computer Science, Hong Kong Baptist University"
-  location         : "Hong Kong, China"
-  employer         :
-  pubmed           : 
-  googlescholar    : "https://scholar.google.com/citations?user=FlYcrEcAAAAJ"
-  email            : "coolzhtang@gmail.com"
-  researchgate     :  # e.g., "https://www.researchgate.net/profile/yourprofile"
-  uri              :
-  bitbucket        :
-  codepen          :
-  dribbble         :
-  flickr           :
-  facebook         :
-  foursquare       :
-  github           : "wizard1203"
-  google_plus      :
-  keybase          :
-  instagram        :
-  impactstory      : # e.g., "https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
-  lastfm           :
-  linkedin         : # e.g., "linkedin username"
-  dblp             : # e.g., "https://dblp.org/pid/xx/xxxx.html"
-  orcid            : # e.g., "https://orcid.org/xxxx"
-  pinterest        :
-  soundcloud       :
-  stackoverflow    : # http://stackoverflow.com/users/123456/username
-  steam            :
-  tumblr           :
-  twitter          : "ZhenhengT"
-  vine             :
-  weibo            :
-  xing             :
-  youtube          :
-  wikipedia        :
-
+  name: 'Peijie Dong'
+  avatar: 'images/profile_picture.jpeg'
+  bio: 'PhD student in DSA, The Hong Kong University of Science and Technology (Guang Zhou)'
+  location: 'Guang Zhou, China'
+  employer:
+  pubmed:
+  googlescholar: 'https://scholar.google.com/citations?user=TqS6s4gAAAAJ'
+  email: 'dongpeijie98@gmail.com'
+  researchgate: # e.g., "https://www.researchgate.net/profile/yourprofile"
+  uri:
+  bitbucket:
+  codepen:
+  dribbble:
+  flickr:
+  facebook:
+  foursquare:
+  github: 'pprp'
+  google_plus:
+  keybase:
+  instagram:
+  impactstory: # e.g., "https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
+  lastfm:
+  linkedin: # e.g., "linkedin username"
+  dblp: # e.g., "https://dblp.org/pid/xx/xxxx.html"
+  orcid: # e.g., "https://orcid.org/xxxx"
+  pinterest:
+  soundcloud:
+  stackoverflow: # http://stackoverflow.com/users/123456/username
+  steam:
+  tumblr:
+  twitter:
+  vine:
+  weibo:
+  xing:
+  youtube:
+  wikipedia:
 
 # Reading Files
 include:
@@ -67,8 +66,8 @@ include:
 exclude:
   - docs
   - google_scholar_crawler
-  - "*.sublime-project"
-  - "*.sublime-workspace"
+  - '*.sublime-project'
+  - '*.sublime-workspace'
   - .asset-cache
   - .bundle
   - .jekyll-assets-cache
@@ -94,9 +93,8 @@ exclude:
 keep_files:
   - .git
   - .svn
-encoding: "utf-8"
-markdown_ext: "markdown,mkdown,mkdn,mkd,md"
-
+encoding: 'utf-8'
+markdown_ext: 'markdown,mkdown,mkdn,mkd,md'
 
 # Conversion
 markdown: kramdown
@@ -104,7 +102,6 @@ highlighter: rouge
 lsi: false
 excerpt_separator: "\n\n"
 incremental: false
-
 
 # Markdown Processing
 kramdown:
@@ -121,25 +118,21 @@ kramdown:
 defaults:
   # _pages
   - scope:
-      path: ""
+      path: ''
       type: pages
     values:
       layout: default
       author_profile: true
   # _publications
 
-
-
 # Sass/SCSS
 sass:
   sass_dir: _sass
   style: compressed # http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
 
-
 # Outputting
 permalink: /:categories/:title/
 timezone: Asia/Shanghai # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-
 
 # Plugins
 plugins:
@@ -156,25 +149,9 @@ whitelist:
   - jekyll-feed
   - jemoji
 
-
 # HTML Compression
 # - http://jch.penibelst.de/
 compress_html:
   clippings: all
   ignore:
     envs: development
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
