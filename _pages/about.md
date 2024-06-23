@@ -22,6 +22,11 @@ Feel free to add me on WeChat `topeijie` for further discussions. I look forward
 ## News and Updates
 
 - Jun. 2024: Two papers has been accepted by ICML'2024.
+- May. 2024: One paper has been accepted by CVPR's 2024 Workshop.
+- Mar. 2024: One paper has been accepted by AAAI'2024.
+- Oct. 2023: Two papers has been accepted by ICCV'2023.
+- Mar. 2023: One paper has been accepted by CVPR'2023.
+- Jan. 2023: One paper has been accepted by MMM'2023.
 - Feb. 2022: Three papers has been accepted by ICASSP'2022.
 - Jun. 2022: One paper has been accepted by CVPR's 2022 NAS workshop.
 
@@ -36,15 +41,7 @@ Feel free to add me on WeChat `topeijie` for further discussions. I look forward
 - Peijie Dong, Xin Niu, Lujun Li, etc. [Prior-Guided One-shot Neural Architecture Search](https://arxiv.org/abs/2206.13329), Computer Vision and Pattern Recognition Third workshop on Neural Architecture Search (CVPRW), 2022.
 - Lujun Li, Peijie Dong, Zimian Wei, Yang Ya. [Automated Knowledge Distillation via Monte Carlo Tree Search](https://openaccess.thecvf.com/content/ICCV2023/papers/Li_Automated_Knowledge_Distillation_via_Monte_Carlo_Tree_Search_ICCV_2023_paper.pdf), International Conference on Computer Vision (ICCV), 2023
 
-## Competitions & Awards
-
-- 3rd place 2022 Computer Vision and Pattern Recognition (CVPR) Third Workshop on NAS
-- 1st place 2022 BDCI Retail Product Recognition based on MindSpore (CCF Big Data & Computing Interlligence Context 2022)
-- 1st place 2022 DCIC Intelligent Ship Detection Competition (Digital China Innovation Contest 2022)
-- 2st place 2022 DCIC Intelligent Cattle Segmentation Competition (Digital China Innovation Contest 2022)
-- 1st place 2022 Baidu AI Competition - Blurred Document Image Recovery
-
-Experences
+## Experences
 
 ---
 
@@ -74,8 +71,8 @@ Experences
 
 Reviewer:
 
-- IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP), 2023 and 2024
-- Conference on Neural Information Processing Systems (NeurIPS), 2023
+- IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP), 2023, 2024
+- Conference on Neural Information Processing Systems (NeurIPS), 2023, 2024
 - IEEE Computational Intelligence Magazine (CIM), 2023
 - International Conference on Learning Representations (ICLR), 2024
 - Neural Information Processing Systems (NeurIPS), 2023
@@ -84,3 +81,23 @@ Reviewer:
 - Information Fusion, 2024
 - Neural Network, 2024
 - The European Conference on Computer Vision (ECCV), 2024
+
+## Competition & Awards:
+
+- 2016, National scholarship in NWAFU.
+- 2017, President's scholarship in NWAFU.
+- 2020, Outstanding dissertation in NWAFU.
+- 2020, Outstanding Graduates in NWAFU.
+- 2021, Outstanding MindSpore Developer.
+- 2023, Outstanding Graduates at School Level in NUDT.
+- 3rd place 2022 Computer Vision and Pattern Recognition (CVPR) Third Workshop on NAS
+- 1st place 2022 BDCI Retail Product Recognition based on MindSpore (CCF Big Data & Computing Interlligence Context 2022)
+- 1st place 2022 DCIC Intelligent Ship Detection Competition (Digital China Innovation Contest 2022)
+- 2st place 2022 DCIC Intelligent Cattle Segmentation Competition (Digital China Innovation Contest 2022)
+- 1st place 2022 Baidu AI Competition - Blurred Document Image Recovery
+
+## Skills
+
+- CET4: 569
+- CET6: 558
+- IELTS: 7.0
