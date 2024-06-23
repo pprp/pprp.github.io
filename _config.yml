@@ -21,7 +21,7 @@ future: true
 read_more: 'disabled' # if enabled, adds "Read more" links to excerpts
 talkmap_link: false #change to true to add link to talkmap on talks page
 comments:
-  provider: # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "custom"
+  provider: 'disqus' # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "custom"
   disqus:
     shortname:
   discourse:
@@ -80,8 +80,8 @@ analytics:
 author:
   name: 'Peijie Dong'
   avatar: 'profile_picture.jpeg'
-  bio: 'PhD candidate@HKUST-GZ'
-  location: 'Guangzhou, China'
+  bio: 'Researcher@HKUST-GZ'
+  location: # 'Guangzhou, China'
   employer:
   pubmed:
   googlescholar: 'https://scholar.google.com/citations?hl=zh-CN&user=TqS6s4gAAAAJ'
