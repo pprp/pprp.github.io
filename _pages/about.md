@@ -60,23 +60,25 @@ I aim to contribute to the development of more efficient and accessible ML syste
 - [2021.07] &nbsp;🎉🎉 Our paper "Data Resampling for Federated Learning with Non-IID Labels." is accepted to FTL-IJCAI workshop '21 [paper](https://federated-learning.org/fl-ijcai-2021/FTL-IJCAI21_paper_3.pdf).
 - [2020.10] &nbsp;🎉🎉 Our survey paper "A Quantitative Survey of Communication Optimizations in Distributed Deep Learning" \[[code](https://github.com/HKBU-HPML/ddl-benchmarks), [paper](https://arxiv.org/abs/2005.13247)\] has been accepted by _IEEE Network Magazine_. -->
 
-- [2024] &nbsp;🎉🎉 Pruner-Zero is accepted by ICML 2024. This work evolves symbolic pruning metrics from scratch for large language models. ([paper](https://arxiv.org/abs/2406.02924v1), [code](https://github.com/pprp/Pruner-Zero))
+- [2024.05] &nbsp;🎉🎉 Pruner-Zero is accepted by ICML 2024. This work evolves symbolic pruning metrics from scratch for large language models. ([paper](https://arxiv.org/abs/2406.02924v1), [code](https://github.com/pprp/Pruner-Zero))
 
-- [2023] &nbsp;🎉🎉 DisWOT is accepted by CVPR 2023. This work proposes student architecture search for distillation without training. ([paper](https://arxiv.org/abs/2303.15678), [code](https://github.com/lliai/DisWOT-CVPR2023))
+- [2024.03] &nbsp;🎉🎉 VMRNN is available. This work proposes the VMRNN cell, a new recurrent unit that integrates the strengths of Vision Mamba blocks with LSTM. We construct a network centered on VMRNN cells to tackle spatiotemporal prediction tasks effectively. ([paper](https://arxiv.org/abs/2403.16536), [code](https://github.com/yyyujintang/VMRNN-PyTorch))
 
-- [2023] &nbsp;🎉🎉 EMQ is accepted by ICCV 2023. This work evolves training-free proxies for automated mixed precision quantization. ([paper](https://arxiv.org/abs/2307.10554), [code](https://github.com/lliai/EMQ-series))
+- [2023.12] &nbsp;🎉🎉 KD-Zero is accepted by NeurIPS 2023. This work evolves knowledge distiller for any teacher-student pairs. ([paper](https://proceedings.neurips.cc/paper_files/paper/2023/file/dbc8ce0fdfcd55172d73fb05dbae07fc-Paper-Conference.pdf))
 
-- [2023] &nbsp;🎉🎉 KD-Zero is accepted by NeurIPS 2023. This work evolves knowledge distiller for any teacher-student pairs. ([paper](https://proceedings.neurips.cc/paper_files/paper/2023/file/dbc8ce0fdfcd55172d73fb05dbae07fc-Paper-Conference.pdf))
+- [2023.10] &nbsp;🎉🎉 EMQ is accepted by ICCV 2023. This work evolves training-free proxies for automated mixed precision quantization. ([paper](https://arxiv.org/abs/2307.10554), [code](https://github.com/lliai/EMQ-series))
 
-- [2023] &nbsp;🎉🎉 Progressive Meta-Pooling Learning is accepted by ICASSP 2023. This work proposes a lightweight image classification model. ([paper](https://arxiv.org/abs/2301.10038))
+- [2023.10] &nbsp;🎉🎉 AutoKD: Automated KD via MCTS is accepted by ICCV 2023. This work proposes automated knowledge distillation via Monte Carlo Tree Search. ([paper](https://openaccess.thecvf.com/content/ICCV2023/papers/Li_Automated_Knowledge_Distillation_via_Monte_Carlo_Tree_Search_ICCV_2023_paper.pdf))
 
-- [2023] &nbsp;🎉🎉 RD-NAS is accepted by ICASSP 2023. This work enhances one-shot supernet ranking ability via ranking distillation. ([paper](https://arxiv.org/abs/2301.09850))
+- [2023.03] &nbsp;🎉🎉 DisWOT is accepted by CVPR 2023. This work proposes student architecture search for distillation without training. ([paper](https://arxiv.org/abs/2303.15678), [code](https://github.com/lliai/DisWOT-CVPR2023))
 
-- [2022] &nbsp;🎉🎉 AutoRF is accepted by MMM 2022. This work proposes auto learning receptive fields with spatial pooling. ([paper](https://link.springer.com/chapter/10.1007/978-3-031-27818-1_56))
+- [2023.02] &nbsp;🎉🎉 Progressive Meta-Pooling Learning is accepted by ICASSP 2023. This work proposes a lightweight image classification model. ([paper](https://arxiv.org/abs/2301.10038))
 
-- [2022] &nbsp;🎉🎉 Prior-Guided One-shot NAS is accepted by CVPRW 2022. This work proposes prior-guided one-shot neural architecture search. ([paper](https://arxiv.org/abs/2206.13329))
+- [2023.02] &nbsp;🎉🎉 RD-NAS is accepted by ICASSP 2023. This work enhances one-shot supernet ranking ability via ranking distillation. ([paper](https://arxiv.org/abs/2301.09850))
 
-- [2023] &nbsp;🎉🎉 Automated KD via MCTS is accepted by ICCV 2023. This work proposes automated knowledge distillation via Monte Carlo Tree Search. ([paper](https://openaccess.thecvf.com/content/ICCV2023/papers/Li_Automated_Knowledge_Distillation_via_Monte_Carlo_Tree_Search_ICCV_2023_paper.pdf))
+- [2023.01] &nbsp;🎉🎉 AutoRF is accepted by MMM 2022. This work proposes auto learning receptive fields with spatial pooling. ([paper](https://link.springer.com/chapter/10.1007/978-3-031-27818-1_56))
+
+- [2022.06] &nbsp;🎉🎉 Prior-Guided One-shot NAS is accepted by CVPR Workshop 2022. This work proposes prior-guided one-shot neural architecture search. ([paper](https://arxiv.org/abs/2206.13329))
 
 ## 📖 Educations
 
@@ -88,13 +90,14 @@ I aim to contribute to the development of more efficient and accessible ML syste
 - _2020.09 - 2023.06_, National University of Defence Technology, Master of Engineering
 
   - Supervisor: Prof. Xin Niu
-  - Research Interests: AutoML, Neural Architecture Search, Knowledge Distillation
+  - Research Interests: AutoML, Neural Architecture Search
   - Achievement: Outstanding Graduate
 
 - _2016.09 - 2020.06_, Northwest Agriculture & Forestry University, B.S. in Software Engineering
   - GPA: 3.78/4.0 (Ranked 1st out of 93)
   - Advisor: Prof. Hongming Zhang
   - Achievements: National Scholarship, Principal's Scholarship, Outstanding Graduate
+  - Research Interests: Object Detection, Multi-Object Tracking
 
 <!-- ## 💻 Work & Research Experience
 
@@ -154,7 +157,7 @@ I aim to contribute to the development of more efficient and accessible ML syste
 
 # 📝 Publications
 
-- **P. Dong**$^*$, L. Li$^*$, Z. Tang, X. Liu, X. Pan, Q. Wang, X. Chu. Pruner-Zero: Evolving Symbolic Pruning Metric From Scratch for Large Language Models. In ICML 2024.
+- **P. Dong**, L. Li, Z. Tang, X. Liu, X. Pan, Q. Wang, X. Chu. Pruner-Zero: Evolving Symbolic Pruning Metric From Scratch for Large Language Models. In ICML 2024.
 
 - **P. Dong**, L. Li, Z. Wei. DisWOT: Student Architecture Search for Distillation without Training. In CVPR 2023.
 
