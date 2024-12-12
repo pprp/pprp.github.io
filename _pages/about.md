@@ -34,6 +34,7 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 🔥 News
 
+- [2024.12] &nbsp;🎉🎉 I was invited to give a talk to PDL about "Introduction to LLM Compression and Beyond". 
 
 - [2024.10] &nbsp;🎉🎉 FuseFL is accepted by NeurIPS 2024 (Spotlight). FuseFL: One-Shot Federated Learning through the Lens of Causality with Progressive Layer Fusion, Neural Information Processing Systems (NeurIPS) Spotlight, 2024.
 
