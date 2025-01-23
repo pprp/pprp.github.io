@@ -34,6 +34,10 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 🔥 News
 
+- [2025.01] &nbsp;🎉🎉 Our STBLLM is accepted by ICLR25. STBLLM: Breaking the 1-Bit Barrier with Structured Binary LLMs, International Conference on Learning Representations, 2025.
+
+- [2025.01] &nbsp;🎉🎉 Our ParZC is accepted by AAA25 (**Oral**). ParZC: Parametric Zero-Cost Proxies for Efficient NAS, Association for the Advancement of Artificial Intelligence, 2025. 
+
 - [2024.12] &nbsp;🎉🎉 I was invited to give a talk to PDL about "Introduction to LLM Compression and Beyond". 
 
 - [2024.10] &nbsp;🎉🎉 FuseFL is accepted by NeurIPS 2024 (Spotlight). FuseFL: One-Shot Federated Learning through the Lens of Causality with Progressive Layer Fusion, Neural Information Processing Systems (NeurIPS) Spotlight, 2024.
@@ -109,7 +113,7 @@ My goal is to contribute significantly to the development of more efficient and 
   - Machine Learning: 
     - NeurIPS'23,24, ICLR'24,25
   - Computer Vision: 
-    - CVPR'24,25, ECCV'24
+    - CVPR'24,25, ECCV'24, IJCV'25
   - Signal Processing: 
     - ICASSP'23,24,25
   - Natural Language Processing:
@@ -140,7 +144,11 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 📝 Publications
 
-First-authored and co-first-authored papers: ICMLx1, EMNLPx1, CVPRx1, ICCVx1, ICASSPx2, NeurIPSx1
+First-authored and co-first-authored papers: AAAIx1(Oral), NeurIPSx1(Spotlight), ICMLx1, EMNLPx1, CVPRx1, ICCVx1, ICASSPx2, 
+
+- **P. Dong**, L. Li, Z. Tang, X. Liu, Z. Wei, Q. Wang, X. Chu. ParZC: Parametric Zero-Cost Proxies for Efficient NAS. In AAAI2025, Oral. 
+
+- **P. Dong**, L. Li, Y. Zhong, D. Du, R. Fan, Y. Chen, Z. Tang, Q. Wang, W. Xue, Y. Guo, X. Chu. STBLLM: Breaking the 1-Bit Barrier with Structured Binary LLMs. In ICLR2025. 
 
 - L. Li, **P. Dong**, Z. Tang, X. Liu, X. Pan, X. Chu. Discovering Sparsity Allocation for Layer-wise Pruning of Large Language Models. In NeurIPS 2024.
 
