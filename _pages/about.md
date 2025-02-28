@@ -34,6 +34,8 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 🔥 News
 
+- [2025.02] &nbsp;🎉🎉 Congratulations to collaborator @RuiboFan to get "SpInfer: Leveraging Low-Level Sparsity for Efficient Large Language Model Inference on GPUs" accepted by EuroSys 2025!!!
+
 - [2025.02] &nbsp;🎉🎉 I am awarded the **Excellent Research Prize** for the 2024 DSA Excellent Research Award!!!
 
 - [2025.01] &nbsp;🎉🎉 Our STBLLM is accepted by ICLR25. STBLLM: Breaking the 1-Bit Barrier with Structured Binary LLMs, International Conference on Learning Representations, 2025.
