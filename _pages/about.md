@@ -150,6 +150,8 @@ My goal is to contribute significantly to the development of more efficient and 
 
 First-authored and co-first-authored papers: AAAIx1(Oral), NeurIPSx1(Spotlight), ICMLx1, EMNLPx1, CVPRx1, ICCVx1, ICASSPx2, 
 
+- R. Fan, X. Yu, **P. Dong**, Z. Li, G. Gong, Q. Wang, W. Wang, X. Chu. SpInfer: Leveraging Low-Level Sparsity for Efficient Large Language Model Inference on GPUs. In EuroSys2025. 
+
 - **P. Dong**, L. Li, Z. Tang, X. Liu, Z. Wei, Q. Wang, X. Chu. ParZC: Parametric Zero-Cost Proxies for Efficient NAS. In AAAI2025, Oral. 
 
 - **P. Dong**, L. Li, Y. Zhong, D. Du, R. Fan, Y. Chen, Z. Tang, Q. Wang, W. Xue, Y. Guo, X. Chu. STBLLM: Breaking the 1-Bit Barrier with Structured Binary LLMs. In ICLR2025. 
