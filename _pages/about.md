@@ -34,7 +34,7 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 🔥 News
 
-- [2025.02] &nbsp;🎉🎉 Congratulations to collaborator @RuiboFan to get "SpInfer: Leveraging Low-Level Sparsity for Efficient Large Language Model Inference on GPUs" accepted by EuroSys 2025!!!
+- [2025.02] &nbsp;🎉🎉 Congratulations to collaborator @RuiboFan to get "SpInfer: Leveraging Low-Level Sparsity for Efficient Large Language Model Inference on GPUs" accepted by EuroSys 2025 **Best Paper**!!!
 
 - [2025.02] &nbsp;🎉🎉 I am awarded the **Excellent Research Prize** for the 2024 DSA Excellent Research Award!!!
 
@@ -150,7 +150,7 @@ My goal is to contribute significantly to the development of more efficient and 
 
 First-authored and co-first-authored papers: AAAIx1(Oral), NeurIPSx1(Spotlight), ICMLx1, EMNLPx1, CVPRx1, ICCVx1, ICASSPx2, 
 
-- R. Fan, X. Yu, **P. Dong**, Z. Li, G. Gong, Q. Wang, W. Wang, X. Chu. SpInfer: Leveraging Low-Level Sparsity for Efficient Large Language Model Inference on GPUs. In EuroSys2025. 
+- R. Fan, X. Yu, **P. Dong**, Z. Li, G. Gong, Q. Wang, W. Wang, X. Chu. SpInfer: Leveraging Low-Level Sparsity for Efficient Large Language Model Inference on GPUs. In EuroSys2025, **Best Paper**. 
 
 - **P. Dong**, L. Li, Z. Tang, X. Liu, Z. Wei, Q. Wang, X. Chu. ParZC: Parametric Zero-Cost Proxies for Efficient NAS. In AAAI2025, Oral. 
 
