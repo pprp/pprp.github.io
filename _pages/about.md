@@ -34,11 +34,15 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 🔥 News
 
-- [2025.02] &nbsp;🎉🎉 Congratulations to collaborator @RuiboFan to get "SpInfer: Leveraging Low-Level Sparsity for Efficient Large Language Model Inference on GPUs" accepted by EuroSys 2025 **Best Paper**!!!
+- [2025.04] &nbsp;🎉🎉 I've been invited to be an Area Chair in NeurIPS 2025. Woohoo! Super glad to be here! 😎
+  
+- [2025.02] &nbsp;🎉🎉 Congratulations to our team (lead by @Ruibo) to get "SpInfer: Leveraging Low-Level Sparsity for Efficient Large Language Model Inference on GPUs" accepted by EuroSys 2025 as **Best Paper** !!!
 
 - [2025.02] &nbsp;🎉🎉 I am awarded the **Excellent Research Prize** for the 2024 DSA Excellent Research Award!!!
 
 - [2025.01] &nbsp;🎉🎉 Our STBLLM is accepted by ICLR25. STBLLM: Breaking the 1-Bit Barrier with Structured Binary LLMs, International Conference on Learning Representations, 2025.
+
+- [2025.01] &nbsp;🎉🎉 Our Lottery LLM Hypothesis is accepted by ICLR25 Blogpost **Oral**. The Lottery LLM Hypothesis, Rethinking What Abilities Should LLM Compression Preserve?, International Conference on Learning Representations Blog Track **Oral**, 2025.
 
 - [2025.01] &nbsp;🎉🎉 Our ParZC is accepted by AAA25 (**Oral**). ParZC: Parametric Zero-Cost Proxies for Efficient NAS, Association for the Advancement of Artificial Intelligence, 2025. 
 
@@ -148,7 +152,7 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 📝 Publications
 
-First-authored and co-first-authored papers: AAAIx1(Oral), NeurIPSx1(Spotlight), ICMLx1, EMNLPx1, CVPRx1, ICCVx1, ICASSPx2, 
+First-authored and co-first-authored papers: EuroSys(Best Paper), AAAIx1(Oral), NeurIPSx1(Spotlight), ICMLx1, EMNLPx1, CVPRx1, ICCVx1, ICASSPx2, ICLRx2(Oralx1).
 
 - R. Fan, X. Yu, **P. Dong**, Z. Li, G. Gong, Q. Wang, W. Wang, X. Chu. SpInfer: Leveraging Low-Level Sparsity for Efficient Large Language Model Inference on GPUs. In EuroSys2025, **Best Paper**. 
 
