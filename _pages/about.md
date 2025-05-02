@@ -34,6 +34,8 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 🔥 News
 
+- [2025.05] &nbsp;🎉🎉 Our Paper "Can Compressed LLMs Truly Act? An Empirical Evaluation of Agentic Capabilities in LLM Compresssion" is accepted by ICML25. We are especially grateful to the reviewer who awarded us a '5 (Strong Accept)', which meant a great deal to us.
+
 - [2025.04] &nbsp;🎉🎉 I've been invited to be an Area Chair in NeurIPS 2025. Woohoo! Super glad to be here! 😎
   
 - [2025.02] &nbsp;🎉🎉 Congratulations to our team (lead by @Ruibo) to get "SpInfer: Leveraging Low-Level Sparsity for Efficient Large Language Model Inference on GPUs" accepted by EuroSys 2025 as **Best Paper** !!!
@@ -152,7 +154,9 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 📝 Publications
 
-First-authored and co-first-authored papers: EuroSys(Best Paper), AAAIx1(Oral), NeurIPSx1(Spotlight), ICMLx1, EMNLPx1, CVPRx1, ICCVx1, ICASSPx2, ICLRx2(Oralx1).
+Selected papers: EuroSys(Best Paper), AAAIx1(Oral), NeurIPSx1(Spotlight), ICMLx2, EMNLPx1, CVPRx1, ICCVx1, ICASSPx2, ICLRx2(Oralx1).
+
+- **P. Dong**, Z. Tang, X. Liu, L. Li, X. Chu, B. Li. Can Compressed LLMs Truly Act? An Empirical Evaluation of Agentic Capabilities in LLM Compression. In ICML2025. 
 
 - R. Fan, X. Yu, **P. Dong**, Z. Li, G. Gong, Q. Wang, W. Wang, X. Chu. SpInfer: Leveraging Low-Level Sparsity for Efficient Large Language Model Inference on GPUs. In EuroSys2025, **Best Paper**. 
 
