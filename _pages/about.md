@@ -18,7 +18,7 @@ redirect_from:
 <span class='anchor' id='about-me'></span>
 
 
-I am **Peijie Dong** (董佩杰), a Ph.D. candidate in Data Science and Analysis Thrust at the Hong Kong University of Science and Technology (Guangzhou). Under the guidance of [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen). I'm currently an intern at the Shanghai AI Laboratory (https://www.shlab.org.cn/), under the guidance of Jianfei Gao (https://openreview.net/profile?id=~Jianfei_Gao1, the author of Xtuner and MMRazor). I'm deeply engaged in learning Machine Learning Systems (MLsys) and infrastructure-related knowledge. My research interests are in the fields of model compression, efficient large language models, and machine learning system. 
+I am **Peijie Dong** (董佩杰), a Ph.D. candidate in Data Science and Analysis Thrust at the Hong Kong University of Science and Technology (Guangzhou). Under the guidance of [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen). I'm currently an intern at the Shanghai AI Laboratory. I'm deeply engaged in learning Machine Learning Systems (MLsys) and infrastructure-related knowledge. My research interests are in the fields of model compression, efficient large language models, and machine learning system. 
 
 
 **Research Interests**
