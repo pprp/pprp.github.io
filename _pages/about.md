@@ -34,10 +34,12 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 🔥 News
 
+- [2025.07] &nbsp;🎉🎉 I've been invited to be the Program Chair in AAAI2026. 
+
 - [2025.05] &nbsp;🎉🎉 Our Paper "Can Compressed LLMs Truly Act? An Empirical Evaluation of Agentic Capabilities in LLM Compresssion" is accepted by ICML25. We are especially grateful to the reviewer who awarded us a '5 (Strong Accept)', which meant a great deal to us.
 
-- [2025.04] &nbsp;🎉🎉 I've been invited to be an Area Chair in NeurIPS 2025. Woohoo! Super glad to be here! 😎
-  
+- [2025.04] &nbsp;🎉🎉 I've been invited to be an Area Chair in NeurIPS 2025.
+- 
 - [2025.02] &nbsp;🎉🎉 Congratulations to our team (lead by @Ruibo) to get "SpInfer: Leveraging Low-Level Sparsity for Efficient Large Language Model Inference on GPUs" accepted by EuroSys 2025 as **Best Paper** !!!
 
 - [2025.02] &nbsp;🎉🎉 I am awarded the **Excellent Research Prize** for the 2024 DSA Excellent Research Award!!!
@@ -117,25 +119,18 @@ My goal is to contribute significantly to the development of more efficient and 
   - 2021 Spring Semester, COMP 7930, Big Data Analytics -->
 
 # 👔 Professional Activities
-
-- Invited Program Committee Member (Reviewer):
-
-  - Machine Learning: 
-    - NeurIPS'23,24, ICLR'24,25
-  - Computer Vision: 
-    - CVPR'24,25, ECCV'24, IJCV'25
-  - Signal Processing: 
-    - ICASSP'23,24,25
-  - Natural Language Processing:
-    - ACL'24
-
-- Invited Reviewer for Journals
-  - Machine Learning:
-    - TPAMI'24
-    - Neural Networks'25
-    - Information Fusion'24
-  - Signal Processing:
-    - CIM'24
+ 
+- **2022**: ICASSP
+- **2023**: NeurIPS, ICASSP, CIM
+- **2024**:
+    - *Conferences*: NeurIPS, ICLR, CVPR, ECCV, ICASSP, ACL (ARR)
+    - *Journals*: TPAMI, Neural Networks, Information Fusion, CIM
+- **2025**:
+    - *Conferences*: NeurIPS (AC), ICLR, CVPR, ECCV, ICASSP
+    - *Journals*: IJCV, Neural Networks
+- **2026**：
+    - *Conferences*: AAAI (PC), WACV
+    - *Journals*: Neural Networks
 
 # 🎖 Honors and Awards
 
