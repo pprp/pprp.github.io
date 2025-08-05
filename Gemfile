@@ -15,10 +15,16 @@ gem "jekyll"
 # Modern Sass converter
 gem "jekyll-sass-converter"
 
+# Markdown parser for GFM
+gem "kramdown-parser-gfm"
+
 gem "wdm", "~> 0.1.0" if Gem.win_platform?
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
+  gem "jekyll-paginate"
+  gem "jekyll-gist"
+  gem "jekyll-redirect-from"
   # gem "jekyll-archives"
   gem "jekyll-feed"
   gem 'jekyll-sitemap'
