@@ -95,7 +95,7 @@ prompt = tokenizer.apply_chat_template(
 | 普通推理 | `tok.apply_chat_template(messages, add_generation_prompt=True)` |
 | 工具推理 | `tok.apply_chat_template(messages, tools=tools, add_generation_prompt=True)` |
 | 训练集预处理 | `tok.apply_chat_template(chat, add_generation_prompt=False, tokenize=False)` |
-| 自定义模板 | `tok.chat_template = "{% ... %}"` |
+| 自定义模板 | `tok.chat_template = "{% raw %}{% ... %}{% endraw %}"` |
 
 ---
 
