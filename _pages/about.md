@@ -17,12 +17,9 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-
-I am **Peijie Dong** (董佩杰), a Ph.D. candidate in Data Science and Analysis Thrust at the Hong Kong University of Science and Technology (Guangzhou). Under the guidance of [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen) and [Prof.Junxian He](https://jxhe.github.io/). I'm currently an intern at the Shanghai AI Laboratory. I'm deeply engaged in learning Machine Learning Systems (MLsys) and infrastructure-related knowledge. My research interests are in the fields of model compression, efficient large language models, and machine learning system. 
-
+I am **Peijie Dong** (董佩杰), a Ph.D. candidate in Data Science and Analysis Thrust at the Hong Kong University of Science and Technology (Guangzhou). Under the guidance of [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen) and [Prof.Junxian He](https://jxhe.github.io/). I'm currently an intern at the Shanghai AI Laboratory. I'm deeply engaged in learning Machine Learning Systems (MLsys) and infrastructure-related knowledge. My research interests are in the fields of model compression, efficient large language models, and machine learning system.
 
 **Research Interests**
-
 
 My research focuses on enhancing the efficiency and accessibility of deep learning models, particularly in the following areas:
 
@@ -34,12 +31,14 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 🔥 News
 
-- [2025.07] &nbsp;🎉🎉 I've been invited to be the Program Chair in AAAI2026. 
+- [2025.08] &nbsp;🎉🎉 Our Paper "Intern-S1: A Scientific Multimodal Foundation Model" is released. Great work by Intern-S1 team.
+
+- [2025.07] &nbsp;🎉🎉 I've been invited to be the Program Chair in AAAI2026.
 
 - [2025.05] &nbsp;🎉🎉 Our Paper "Can Compressed LLMs Truly Act? An Empirical Evaluation of Agentic Capabilities in LLM Compresssion" is accepted by ICML25. We are especially grateful to the reviewer who awarded us a '5 (Strong Accept)', which meant a great deal to us.
 
 - [2025.04] &nbsp;🎉🎉 I've been invited to be an Area Chair in NeurIPS 2025.
-- 
+-
 - [2025.02] &nbsp;🎉🎉 Congratulations to our team (lead by @Ruibo) to get "SpInfer: Leveraging Low-Level Sparsity for Efficient Large Language Model Inference on GPUs" accepted by EuroSys 2025 as **Best Paper** !!!
 
 - [2025.02] &nbsp;🎉🎉 I am awarded the **Excellent Research Prize** for the 2024 DSA Excellent Research Award!!!
@@ -48,9 +47,9 @@ My goal is to contribute significantly to the development of more efficient and 
 
 - [2025.01] &nbsp;🎉🎉 Our Lottery LLM Hypothesis is accepted by ICLR25 Blogpost **Oral**. The Lottery LLM Hypothesis, Rethinking What Abilities Should LLM Compression Preserve?, International Conference on Learning Representations Blog Track **Oral**, 2025.
 
-- [2025.01] &nbsp;🎉🎉 Our ParZC is accepted by AAA25 (**Oral**). ParZC: Parametric Zero-Cost Proxies for Efficient NAS, Association for the Advancement of Artificial Intelligence, 2025. 
+- [2025.01] &nbsp;🎉🎉 Our ParZC is accepted by AAA25 (**Oral**). ParZC: Parametric Zero-Cost Proxies for Efficient NAS, Association for the Advancement of Artificial Intelligence, 2025.
 
-- [2024.12] &nbsp;🎉🎉 I was invited to give a talk to PDL about "Introduction to LLM Compression and Beyond". 
+- [2024.12] &nbsp;🎉🎉 I was invited to give a talk to PDL about "Introduction to LLM Compression and Beyond".
 
 - [2024.10] &nbsp;🎉🎉 FuseFL is accepted by NeurIPS 2024 (Spotlight). FuseFL: One-Shot Federated Learning through the Lens of Causality with Progressive Layer Fusion, Neural Information Processing Systems (NeurIPS) Spotlight, 2024.
 
@@ -67,7 +66,6 @@ My goal is to contribute significantly to the development of more efficient and 
 - [2024.03] &nbsp;🎉🎉 VMRNN is available. This work proposes the VMRNN cell, a new recurrent unit that integrates the strengths of Vision Mamba blocks with LSTM. We construct a network centered on VMRNN cells to tackle spatiotemporal prediction tasks effectively. ([paper](https://arxiv.org/abs/2403.16536), [code](https://github.com/yyyujintang/VMRNN-PyTorch))
 
 - [2023.12] &nbsp;🎉🎉 KD-Zero is accepted by NeurIPS 2023. This work evolves knowledge distiller for any teacher-student pairs. ([paper](https://proceedings.neurips.cc/paper_files/paper/2023/file/dbc8ce0fdfcd55172d73fb05dbae07fc-Paper-Conference.pdf))
-
 
 - [2023.10] &nbsp;🎉🎉 EMQ is accepted by ICCV 2023. This work evolves training-free proxies for automated mixed precision quantization. ([paper](https://arxiv.org/abs/2307.10554), [code](https://github.com/lliai/EMQ-series))
 
@@ -119,22 +117,22 @@ My goal is to contribute significantly to the development of more efficient and 
   - 2021 Spring Semester, COMP 7930, Big Data Analytics -->
 
 # 👔 Professional Activities
- 
+
 - **2022**: ICASSP
 - **2023**: NeurIPS, ICASSP, CIM
 - **2024**:
-    - *Conferences*: NeurIPS, ICLR, CVPR, ECCV, ICASSP, ACL (ARR)
-    - *Journals*: TPAMI, Neural Networks, Information Fusion, CIM
+  - _Conferences_: NeurIPS, ICLR, CVPR, ECCV, ICASSP, ACL (ARR)
+  - _Journals_: TPAMI, Neural Networks, Information Fusion, CIM
 - **2025**:
-    - *Conferences*: NeurIPS (AC), ICLR, CVPR, ECCV, ICASSP
-    - *Journals*: IJCV, Neural Networks
+  - _Conferences_: NeurIPS (AC), ICLR, CVPR, ECCV, ICASSP
+  - _Journals_: IJCV, Neural Networks
 - **2026**：
-    - *Conferences*: AAAI (PC), WACV
-    - *Journals*: Neural Networks
+  - _Conferences_: AAAI (PC), WACV
+  - _Journals_: Neural Networks
 
 # 🎖 Honors and Awards
 
-- 2024, Best Speaker in DSA Salon 2024. 
+- 2024, Best Speaker in DSA Salon 2024.
 - 2023, Outstanding Graduate at School Level, National University of Defense Technology.
 - 2022, 1st Place, BDCI Retail Product Recognition based on MindSpore (CCF Big Data & Computing Intelligence Contest).
 - 2022, 1st Place, DCIC Intelligent Ship Detection Competition (Digital China Innovation Contest).
@@ -151,13 +149,13 @@ My goal is to contribute significantly to the development of more efficient and 
 
 Selected papers: EuroSys(Best Paper), AAAIx1(Oral), NeurIPSx1(Spotlight), ICMLx2, EMNLPx1, CVPRx1, ICCVx1, ICASSPx2, ICLRx2(Oralx1).
 
-- **P. Dong**, Z. Tang, X. Liu, L. Li, X. Chu, B. Li. Can Compressed LLMs Truly Act? An Empirical Evaluation of Agentic Capabilities in LLM Compression. In ICML2025. 
+- **P. Dong**, Z. Tang, X. Liu, L. Li, X. Chu, B. Li. Can Compressed LLMs Truly Act? An Empirical Evaluation of Agentic Capabilities in LLM Compression. In ICML2025.
 
-- R. Fan, X. Yu, **P. Dong**, Z. Li, G. Gong, Q. Wang, W. Wang, X. Chu. SpInfer: Leveraging Low-Level Sparsity for Efficient Large Language Model Inference on GPUs. In EuroSys2025, **Best Paper**. 
+- R. Fan, X. Yu, **P. Dong**, Z. Li, G. Gong, Q. Wang, W. Wang, X. Chu. SpInfer: Leveraging Low-Level Sparsity for Efficient Large Language Model Inference on GPUs. In EuroSys2025, **Best Paper**.
 
-- **P. Dong**, L. Li, Z. Tang, X. Liu, Z. Wei, Q. Wang, X. Chu. ParZC: Parametric Zero-Cost Proxies for Efficient NAS. In AAAI2025, Oral. 
+- **P. Dong**, L. Li, Z. Tang, X. Liu, Z. Wei, Q. Wang, X. Chu. ParZC: Parametric Zero-Cost Proxies for Efficient NAS. In AAAI2025, Oral.
 
-- **P. Dong**, L. Li, Y. Zhong, D. Du, R. Fan, Y. Chen, Z. Tang, Q. Wang, W. Xue, Y. Guo, X. Chu. STBLLM: Breaking the 1-Bit Barrier with Structured Binary LLMs. In ICLR2025. 
+- **P. Dong**, L. Li, Y. Zhong, D. Du, R. Fan, Y. Chen, Z. Tang, Q. Wang, W. Xue, Y. Guo, X. Chu. STBLLM: Breaking the 1-Bit Barrier with Structured Binary LLMs. In ICLR2025.
 
 - L. Li, **P. Dong**, Z. Tang, X. Liu, X. Pan, X. Chu. Discovering Sparsity Allocation for Layer-wise Pruning of Large Language Models. In NeurIPS 2024.
 
