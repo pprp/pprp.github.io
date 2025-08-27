@@ -33,12 +33,10 @@ My goal is to contribute significantly to the development of more efficient and 
 
 - [2025.08] &nbsp;🎉🎉 Our Paper "Intern-S1: A Scientific Multimodal Foundation Model" is released. Great work by Intern-S1 team.
 
-- [2025.07] &nbsp;🎉🎉 I've been invited to be the Program Chair in AAAI2026.
-
 - [2025.05] &nbsp;🎉🎉 Our Paper "Can Compressed LLMs Truly Act? An Empirical Evaluation of Agentic Capabilities in LLM Compresssion" is accepted by ICML25. We are especially grateful to the reviewer who awarded us a '5 (Strong Accept)', which meant a great deal to us.
 
 - [2025.04] &nbsp;🎉🎉 I've been invited to be an Area Chair in NeurIPS 2025.
--
+
 - [2025.02] &nbsp;🎉🎉 Congratulations to our team (lead by @Ruibo) to get "SpInfer: Leveraging Low-Level Sparsity for Efficient Large Language Model Inference on GPUs" accepted by EuroSys 2025 as **Best Paper** !!!
 
 - [2025.02] &nbsp;🎉🎉 I am awarded the **Excellent Research Prize** for the 2024 DSA Excellent Research Award!!!
