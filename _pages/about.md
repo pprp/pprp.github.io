@@ -31,9 +31,11 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 🔥 News
 
-- [2025.08] &nbsp;🎉🎉 Our Paper "Intern-S1: A Scientific Multimodal Foundation Model" is released. Great work by Intern-S1 team.
+- [2025.08] &nbsp;🎉🎉 Our Paper "Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Tasks" is released to [arxiv.](https://arxiv.org/pdf/2507.19353)
 
-- [2025.05] &nbsp;🎉🎉 Our Paper "Can Compressed LLMs Truly Act? An Empirical Evaluation of Agentic Capabilities in LLM Compresssion" is accepted by ICML25. We are especially grateful to the reviewer who awarded us a '5 (Strong Accept)', which meant a great deal to us.
+- [2025.08] &nbsp;🎉🎉 Our Paper "Intern-S1: A Scientific Multimodal Foundation Model" is released to [arxiv.](https://arxiv.org/abs/2508.15763) Great work by Intern-S1 team.
+
+- [2025.05] &nbsp;🎉🎉 Our Paper "Can Compressed LLMs Truly Act? An Empirical Evaluation of Agentic Capabilities in LLM Compresssion" is accepted by ICML25. We are especially grateful to the reviewer who awarded us a '5 (Strong Accept)'.
 
 - [2025.04] &nbsp;🎉🎉 I've been invited to be an Area Chair in NeurIPS 2025.
 
