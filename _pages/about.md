@@ -17,7 +17,9 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-I am **Peijie Dong** (董佩杰), a Ph.D. candidate in Data Science and Analysis Thrust at the Hong Kong University of Science and Technology (Guangzhou). Under the guidance of [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen) and [Prof.Junxian He](https://jxhe.github.io/). I'm currently an intern at the Shanghai AI Laboratory. I'm deeply engaged in learning Machine Learning Systems (MLsys) and infrastructure-related knowledge. My research interests are in the fields of model compression, efficient large language models, and machine learning system.
+I am **Peijie Dong** (董佩杰), a Ph.D. candidate in Data Science and Analysis Thrust at the Hong Kong University of Science and Technology (Guangzhou). Under the guidance of [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen) and [Prof.Junxian He](https://jxhe.github.io/). 
+I was formerly an intern at the Shanghai AI Laboratory, where I primarily focused on MoE and RL training. My research interests are in the fields of model compression, efficient large language models, and machine learning systems.
+
 
 **Research Interests**
 
