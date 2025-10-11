@@ -17,8 +17,7 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-I am **Peijie Dong** (董佩杰), a Ph.D. candidate in Data Science and Analysis Thrust at the Hong Kong University of Science and Technology (Guangzhou). Under the guidance of [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen) and [Prof.Junxian He](https://jxhe.github.io/). 
-I was formerly an intern at the Shanghai AI Laboratory, where I primarily focused on MoE and RL training. My research interests are in the fields of model compression, efficient large language models, and machine learning systems.
+I am **Peijie Dong** (董佩杰), a Ph.D. candidate in Data Science and Analysis Thrust at the Hong Kong University of Science and Technology (Guangzhou). Under the guidance of [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen) and [Prof.Junxian He](https://jxhe.github.io/). My research interests are in the fields of model compression, efficient large language models, and machine learning systems.
 
 
 **Research Interests**
@@ -32,6 +31,8 @@ My research focuses on enhancing the efficiency and accessibility of deep learni
 My goal is to contribute significantly to the development of more efficient and accessible machine learning systems. Through my research, I strive to push the boundaries of what's possible in model compression, efficient large language models, and automated machine learning. If you share similar interests or would like to discuss potential collaborations, I warmly invite you to reach out to me. I'm always eager to connect with fellow researchers and industry professionals to exchange ideas and explore new opportunities in this exciting field.
 
 # 🔥 News
+
+- [2025.09] &nbsp;🎉🎉 Our Paper "ChunkKV: Semantic-Preserving KV Cache Compression for Efficient Long-Context LLM Inference" is accepted by NeurIPS 2025. 
 
 - [2025.08] &nbsp;🎉🎉 Our Paper "Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Tasks" is released to [arxiv.](https://arxiv.org/pdf/2507.19353)
 
@@ -102,12 +103,11 @@ My goal is to contribute significantly to the development of more efficient and 
   - Achievements: National Scholarship, Principal's Scholarship, Outstanding Graduate
   - Research Interests: Object Detection, Multi-Object Tracking
 
-<!-- ## 💻 Work & Research Experience
+## 💻 Internship
 
-- 09/2023-present: Visiting Researcher, The Hong Kong University of Science and Technology (Guangzhou), advised by [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen).
-- 02/2023-05/2023: Visiting Researcher, National University of Singapore, advised by [Prof. Bingsheng He](https://www.comp.nus.edu.sg/~hebs/).
-- 06/2022-10/2022: Research Intern, [FedML Inc](https://www.fedml.ai/), advised by [Dr. Chaoyang He](https://chaoyanghe.com/).
-- 10/2018-09/2020: Research Assistant, Hong Kong Baptist University, advised by [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen). -->
+- 10/2025–present: Intern, Alibaba – large-scale model training  
+- 03/2025–08/2025: Intern, Shanghai AI Lab – AI infrastructure for Xtuner project  
+- 05/2022–08/2022: Intern, Shanghai AI Lab – model compression with MMRazor
 
 <!-- # 📕 Teaching
 
@@ -129,7 +129,7 @@ My goal is to contribute significantly to the development of more efficient and 
   - _Conferences_: NeurIPS (AC), ICLR, CVPR, ECCV, ICASSP
   - _Journals_: IJCV, Neural Networks
 - **2026**：
-  - _Conferences_: AAAI (PC), WACV
+  - _Conferences_: AAAI (PC), WACV, NeurIPS, ICLR
   - _Journals_: Neural Networks
 
 # 🎖 Honors and Awards
