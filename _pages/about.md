@@ -34,6 +34,8 @@ My goal is to contribute significantly to the development of more efficient and 
 
 - [2025.09] &nbsp;🎉🎉 Our Paper "ChunkKV: Semantic-Preserving KV Cache Compression for Efficient Long-Context LLM Inference" is accepted by NeurIPS 2025. 
 
+- [2025.08] &nbsp;🎉🎉 Our Paper "Perovskite-LLM: Knowledge-Enhanced Large Language Models for Perovskite Solar Cell Research" is accepted by EMNLP 2025 findings. 
+
 - [2025.08] &nbsp;🎉🎉 Our Paper "Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Tasks" is released to [arxiv.](https://arxiv.org/pdf/2507.19353)
 
 - [2025.08] &nbsp;🎉🎉 Our Paper "Intern-S1: A Scientific Multimodal Foundation Model" is released to [arxiv.](https://arxiv.org/abs/2508.15763) Great work by Intern-S1 team.
