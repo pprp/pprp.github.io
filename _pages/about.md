@@ -32,6 +32,8 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 🔥 News
 
+- [2026.01] &nbsp;🎉🎉 Our Paper "Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Understanding" is accepted by ICLR2026.
+
 - [2025.11] &nbsp;🎉🎉 Two years after graduation, I was selected as an outstanding master's student at the NUDT in Hunan Province.
 
 - [2025.09] &nbsp;🎉🎉 Our Paper "ChunkKV: Semantic-Preserving KV Cache Compression for Efficient Long-Context LLM Inference" is accepted by NeurIPS 2025. 
