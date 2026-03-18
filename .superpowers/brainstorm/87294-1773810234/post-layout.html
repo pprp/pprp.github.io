@@ -1,0 +1,73 @@
+<h2>Post Reading Experience</h2>
+<p class="subtitle">How should individual blog posts look?</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f8f9fa;padding:16px;font-size:12px;border-bottom:1px solid #e2e8f0;">
+      <div style="display:flex;gap:12px;">
+        <!-- TOC sidebar -->
+        <div style="width:90px;font-size:10px;">
+          <div style="font-weight:600;margin-bottom:6px;color:#2d3748;">Contents</div>
+          <div style="color:#4299e1;margin-bottom:3px;">▶ Introduction</div>
+          <div style="color:#718096;margin-bottom:3px;padding-left:8px;">Background</div>
+          <div style="color:#718096;margin-bottom:3px;">Method</div>
+          <div style="color:#718096;margin-bottom:3px;padding-left:8px;">Architecture</div>
+          <div style="color:#718096;margin-bottom:3px;">Results</div>
+          <div style="color:#718096;">Conclusion</div>
+        </div>
+        <!-- Post content -->
+        <div style="flex:1;">
+          <div style="font-weight:700;font-size:13px;margin-bottom:4px;">轻量化LLM中的Agent</div>
+          <div style="color:#718096;font-size:10px;margin-bottom:8px;">2025-08-05 · 8 min · LLM, Agent</div>
+          <div style="font-size:10px;line-height:1.6;color:#4a5568;margin-bottom:6px;">本文探索在边缘设备上部署轻量化大语言模型的Agent能力，分析从概念到实际部署的完整流程...</div>
+          <div style="background:#2d3748;color:#e2e8f0;padding:6px 8px;border-radius:4px;font-size:9px;font-family:monospace;">model = AutoModel.from_pretrained(...)</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Sticky TOC Sidebar</h3>
+      <p>Table of contents on the left, scrolls with you. Great for long technical posts.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f8f9fa;padding:16px;font-size:12px;border-bottom:1px solid #e2e8f0;">
+      <div style="max-width:280px;margin:0 auto;">
+        <div style="font-weight:700;font-size:14px;margin-bottom:2px;">轻量化LLM中的Agent</div>
+        <div style="color:#718096;font-size:10px;margin-bottom:6px;">2025-08-05 · 8 min · LLM, Agent</div>
+        <!-- progress bar -->
+        <div style="height:2px;background:#e2e8f0;border-radius:2px;margin-bottom:8px;">
+          <div style="width:35%;height:100%;background:#4299e1;border-radius:2px;"></div>
+        </div>
+        <div style="font-size:10px;line-height:1.6;color:#4a5568;margin-bottom:6px;">本文探索在边缘设备上部署轻量化大语言模型的Agent能力，分析从概念到实际部署的完整流程...</div>
+        <div style="background:#2d3748;color:#e2e8f0;padding:6px 8px;border-radius:4px;font-size:9px;font-family:monospace;margin-bottom:6px;">model = AutoModel.from_pretrained(...)</div>
+        <div style="font-size:10px;line-height:1.6;color:#4a5568;">量化方法可以显著减少模型大小，同时保持较高的推理精度...</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Centered Reading + Progress Bar</h3>
+      <p>Clean centered column, reading progress bar at top. Focused, distraction-free.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f8f9fa;padding:16px;font-size:12px;border-bottom:1px solid #e2e8f0;">
+      <div style="max-width:280px;margin:0 auto;">
+        <div style="font-weight:700;font-size:14px;margin-bottom:2px;">轻量化LLM中的Agent</div>
+        <div style="color:#718096;font-size:10px;margin-bottom:8px;">2025-08-05 · 8 min · LLM, Agent</div>
+        <div style="font-size:10px;line-height:1.6;color:#4a5568;margin-bottom:6px;">本文探索在边缘设备上部署轻量化大语言模型的Agent能力...</div>
+        <div style="background:#2d3748;color:#e2e8f0;padding:6px 8px;border-radius:4px;font-size:9px;font-family:monospace;margin-bottom:6px;">model = AutoModel.from_pretrained(...)</div>
+        <!-- image placeholder -->
+        <div style="background:#cbd5e0;border-radius:4px;height:40px;display:flex;align-items:center;justify-content:center;color:#718096;font-size:10px;margin-bottom:6px;">🖼 Figure 1: Architecture Overview</div>
+        <div style="border-top:1px solid #e2e8f0;padding-top:6px;display:flex;justify-content:space-between;">
+          <span style="color:#4299e1;font-size:10px;">← Previous Post</span>
+          <span style="color:#4299e1;font-size:10px;">Next Post →</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Centered + Image Support + Prev/Next</h3>
+      <p>Like B but with proper image rendering, captions, and post navigation.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<h2>Visual Style</h2>
+<p class="subtitle">Which color palette and feel fits your academic blog?</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="border-bottom:1px solid #e2e8f0;">
+      <div style="background:#1a202c;padding:10px 16px;display:flex;gap:12px;align-items:center;">
+        <span style="color:#63b3ed;font-weight:700;font-size:12px;">Peijie Dong</span>
+        <span style="color:#718096;font-size:10px;">About</span>
+        <span style="color:#718096;font-size:10px;">Blog</span>
+        <span style="color:#718096;font-size:10px;">Publications</span>
+      </div>
+      <div style="background:#f7fafc;padding:12px 16px;">
+        <div style="font-size:13px;font-weight:700;color:#1a202c;margin-bottom:4px;">轻量化LLM中的Agent</div>
+        <div style="font-size:10px;color:#4299e1;margin-bottom:8px;">LLM · Agent · 8 min read</div>
+        <div style="font-size:10px;color:#4a5568;line-height:1.6;margin-bottom:8px;">本文探索在边缘设备上部署轻量化大语言模型的Agent能力...</div>
+        <div style="background:#1a202c;color:#63b3ed;padding:6px 8px;border-radius:4px;font-size:9px;font-family:monospace;">model = AutoModel.from_pretrained("...")</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Dark Nav / Light Content</h3>
+      <p>Dark masthead, clean white reading area, blue accents. Professional, high contrast.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="border-bottom:1px solid #e2e8f0;">
+      <div style="background:#f0f4f8;padding:10px 16px;display:flex;gap:12px;align-items:center;border-bottom:2px solid #4a90d9;">
+        <span style="color:#2c5282;font-weight:700;font-size:12px;">Peijie Dong</span>
+        <span style="color:#718096;font-size:10px;">About</span>
+        <span style="color:#4a90d9;font-size:10px;font-weight:600;">Blog</span>
+        <span style="color:#718096;font-size:10px;">Publications</span>
+      </div>
+      <div style="background:#ffffff;padding:12px 16px;">
+        <div style="font-size:13px;font-weight:700;color:#2d3748;margin-bottom:4px;">轻量化LLM中的Agent</div>
+        <div style="font-size:10px;color:#4a90d9;margin-bottom:8px;">LLM · Agent · 8 min read</div>
+        <div style="font-size:10px;color:#4a5568;line-height:1.6;margin-bottom:8px;">本文探索在边缘设备上部署轻量化大语言模型的Agent能力...</div>
+        <div style="background:#ebf4ff;border-left:3px solid #4a90d9;color:#2c5282;padding:6px 8px;border-radius:0 4px 4px 0;font-size:9px;font-family:monospace;">model = AutoModel.from_pretrained("...")</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Academic Blue</h3>
+      <p>Light grey nav, white content, blue accents. Classic academic/research feel.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="border-bottom:1px solid #e2e8f0;">
+      <div style="background:#ffffff;padding:10px 16px;display:flex;gap:12px;align-items:center;border-bottom:1px solid #e2e8f0;">
+        <span style="color:#2d3748;font-weight:700;font-size:12px;">Peijie Dong</span>
+        <span style="color:#a0aec0;font-size:10px;">About</span>
+        <span style="color:#2d3748;font-size:10px;font-weight:600;">Blog</span>
+        <span style="color:#a0aec0;font-size:10px;">Publications</span>
+      </div>
+      <div style="background:#fffdf7;padding:12px 16px;">
+        <div style="font-size:13px;font-weight:700;color:#2d3748;margin-bottom:4px;font-family:Georgia,serif;">轻量化LLM中的Agent</div>
+        <div style="font-size:10px;color:#805ad5;margin-bottom:8px;">LLM · Agent · 8 min read</div>
+        <div style="font-size:10px;color:#4a5568;line-height:1.6;margin-bottom:8px;font-family:Georgia,serif;">本文探索在边缘设备上部署轻量化大语言模型的Agent能力...</div>
+        <div style="background:#faf5ff;border:1px solid #d6bcfa;color:#553c9a;padding:6px 8px;border-radius:4px;font-size:9px;font-family:monospace;">model = AutoModel.from_pretrained("...")</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Warm Minimal / Serif</h3>
+      <p>Warm white background, serif headings, purple accents. Elegant, personal feel.</p>
+    </div>
+  </div>
+</div>
