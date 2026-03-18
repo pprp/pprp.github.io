@@ -203,4 +203,4 @@ Selected papers: EuroSys(Best Paper), AAAIx1(Oral), NeurIPSx1(Spotlight), ICMLx2
 
 <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=A14sfU1mQ29eKVjBuoPG6sP2CDJtNGaWlvKC81sqnrg&cl=ffffff&w=a"></script>
 
-<a href="/admin/" style="position:fixed;bottom:15px;right:15px;width:40px;height:40px;background:#f0f0f0;opacity:0.08;border-radius:4px;z-index:9999;transition:opacity 0.3s;" onmouseover="this.style.opacity='0.15'" onmouseout="this.style.opacity='0.08'" title=""></a>
+<a href="/admin/editor.html" style="position:fixed;bottom:15px;right:15px;width:40px;height:40px;background:#f0f0f0;opacity:0.08;border-radius:4px;z-index:9999;transition:opacity 0.3s;" onmouseover="this.style.opacity='0.15'" onmouseout="this.style.opacity='0.08'" title=""></a>
