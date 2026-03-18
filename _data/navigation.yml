@@ -23,6 +23,3 @@ main:
 
   - title: "Blog"
     url: "/blog/"
-
-  - title: "Diagram"
-    url: "/drawing/"

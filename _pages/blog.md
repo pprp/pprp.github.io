@@ -6,11 +6,16 @@ permalink: /blog/
 
 <h2>All Posts</h2>
 
-<ul>
+<div class="blog-grid">
   {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-      - {{ post.date | date: "%Y年%m月%d日" }}
-    </li>
+    <div class="blog-card">
+      <a href="{{ post.url }}">
+        <div class="blog-title">{{ post.title }}</div>
+        {% if post.title_en %}
+          <div class="blog-title-en">{{ post.title_en }}</div>
+        {% endif %}
+        <div class="blog-date">{{ post.date | date: "%Y年%m月%d日" }}</div>
+      </a>
+    </div>
   {% endfor %}
-</ul>
+</div>

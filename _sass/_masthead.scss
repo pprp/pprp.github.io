@@ -5,8 +5,10 @@
 .masthead {
   position: sticky;
   top: 0;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid $border-color;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   -webkit-animation: intro 0.3s both;
           animation: intro 0.3s both;
   -webkit-animation-delay: 0.15s;
@@ -16,7 +18,7 @@
   &__inner-wrap {
     @include container;
     @include clearfix;
-    padding: .5em;
+    padding: 1em;
     font-family: $sans-serif-narrow;
 
     @include breakpoint($x-large) {
@@ -29,6 +31,11 @@
 
     a {
       text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $primary-color;
+      }
     }
   }
 }
