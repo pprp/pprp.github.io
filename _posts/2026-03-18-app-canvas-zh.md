@@ -17,7 +17,7 @@ categories: tech
 
 这是人机交互终极形态的工程实现蓝图。
 
-![App对比](/app_comparison.png)
+![App对比](/images/app_comparison.png)
 *Nano Banana 2生成概念图*
 
 ## 一、核心引擎：告别"手搓代码"，走向"原子化拼装"
@@ -44,7 +44,7 @@ categories: tech
 
 **瞬间出表**： 在几十毫秒内，调度中枢完成空间装箱算法的计算。权重最高的组件优先占据画布的核心视觉区。在你眨眼之间，一个功能拉满、为你量身定制的动态界面就已经渲染完毕。
 
-![用户交互方式](/user_interaction.png)
+![用户交互方式](/images/user_interaction.png)
 *Nano Banana 2生成概念图*
 
 ## 三、跨越现实鸿沟：重塑交互习惯与商业生态
