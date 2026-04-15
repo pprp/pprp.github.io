@@ -123,7 +123,18 @@ defaults:
     values:
       layout: default
       author_profile: true
+  - scope:
+      path: ''
+      type: notes
+    values:
+      layout: post
+      author_profile: false
   # _publications
+
+collections:
+  notes:
+    output: true
+    permalink: /notes/:path/
 
 # Sass/SCSS
 sass:
