@@ -19,6 +19,7 @@ author_profile: false
         {% if note.title_en %}
           <div class="blog-title-en">{{ note.title_en }}</div>
         {% endif %}
+        <div class="blog-excerpt">{{ note.excerpt | strip_html | strip_newlines | truncate: 120 }}</div>
         <div class="blog-date">{{ note.note_source }} · {{ note.date | date: "%Y年%m月%d日" }}</div>
       </a>
     </div>

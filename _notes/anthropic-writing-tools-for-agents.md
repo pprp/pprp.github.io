@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: note
 title: "为智能体编写高效工具：借助智能体完成"
 title_en: "Writing effective tools for agents — with agents"
 date: 2025-09-11 00:00:00 +0800
@@ -7,12 +7,6 @@ categories: notes
 note_source: "Anthropic"
 original_url: "https://www.anthropic.com/engineering/writing-tools-for-agents"
 ---
-来源：Anthropic 官方英文博客
-发布日期：2025-09-11
-链接：https://www.anthropic.com/engineering/writing-tools-for-agents
-说明：中文为基于官方英文原文整理的中文译稿。
-英文原文：https://www.anthropic.com/engineering/writing-tools-for-agents
-
 [模型上下文协议（MCP）](https://modelcontextprotocol.io/docs/getting-started/intro)可以为大语言模型智能体赋予数百种工具，从而解决现实世界中的任务。但我们如何才能让这些工具发挥最大效用？
 
 在本文中，我们介绍了在各类智能体 AI 系统中提升性能的最有效技术 1。

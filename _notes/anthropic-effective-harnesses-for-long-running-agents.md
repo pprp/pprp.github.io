@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: note
 title: "面向长时运行智能体的高效 Harness"
 title_en: "Effective harnesses for long-running agents"
 date: 2025-11-26 00:00:00 +0800
@@ -7,12 +7,6 @@ categories: notes
 note_source: "Anthropic"
 original_url: "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents"
 ---
-来源：Anthropic 官方英文博客
-发布日期：2025-11-26
-链接：https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
-说明：中文为基于官方英文原文整理的中文译稿。
-英文原文：https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
-
 随着 AI 智能体的能力不断提升，开发者越来越多地让它们承担需要数小时甚至数天才能完成的复杂任务。然而，如何让智能体在多个上下文窗口中持续稳定地推进工作，仍是一个悬而未决的问题。
 
 长期运行智能体的核心挑战在于：它们必须在离散的会话中工作，而每个新会话开始时对之前发生的一切毫无记忆。想象一个软件项目由工程师轮班负责，每位新来的工程师对上一班发生的事情一无所知。由于上下文窗口有限，大多数复杂项目又无法在单个窗口内完成，智能体需要一种方式来衔接不同编码会话之间的断层。

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: note
 title: "我们如何构建多智能体研究系统"
 title_en: "How we built our multi-agent research system"
 date: 2025-06-13 00:00:00 +0800
@@ -7,12 +7,6 @@ categories: notes
 note_source: "Anthropic"
 original_url: "https://www.anthropic.com/engineering/multi-agent-research-system"
 ---
-来源：Anthropic 官方英文博客
-发布日期：2025-06-13
-链接：https://www.anthropic.com/engineering/multi-agent-research-system
-说明：中文为基于官方英文原文整理的中文译稿。
-英文原文：https://www.anthropic.com/engineering/multi-agent-research-system
-
 Claude 现在拥有[研究功能](https://www.anthropic.com/news/research)，可以跨网络、Google Workspace 及各类集成进行搜索，以完成复杂任务。
 
 这一多智能体系统从原型到生产的历程，让我们深刻认识到系统架构、工具设计和提示词工程的关键原则。多智能体系统由多个智能体（在循环中自主使用工具的大语言模型）协同工作组成。我们的研究功能包含一个智能体，它根据用户查询规划研究流程，然后使用工具创建并行子智能体，同时搜索信息。多智能体系统在智能体协调、评估和可靠性方面引入了新的挑战。

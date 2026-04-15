@@ -1,0 +1,30 @@
+---
+layout: default
+---
+<article class="note">
+  <header class="note__header">
+    <p class="note__eyebrow">Notes</p>
+    <h1 class="note__title">{{ page.title }}</h1>
+    {% if page.title_en %}
+      <p class="note__title-en">{{ page.title_en }}</p>
+    {% endif %}
+
+    <div class="note__meta">
+      {% if page.note_source %}
+        <span class="note__pill">{{ page.note_source }}</span>
+      {% endif %}
+      <span class="note__meta-item">{{ page.date | date: "%Y年%m月%d日" }}</span>
+      {% if page.original_url %}
+        <a class="note__meta-link" href="{{ page.original_url }}" rel="noopener">查看原文</a>
+      {% endif %}
+    </div>
+
+    <div class="note__notice">
+      中文翻译 / 转载笔记，保留原始文章结构，便于站内阅读与检索。
+    </div>
+  </header>
+
+  <div class="note__content">
+    {{ content }}
+  </div>
+</article>

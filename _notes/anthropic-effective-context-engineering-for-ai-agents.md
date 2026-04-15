@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: note
 title: "面向 AI 智能体的高效上下文工程"
 title_en: "Effective context engineering for AI agents"
 date: 2025-09-29 00:00:00 +0800
@@ -7,12 +7,6 @@ categories: notes
 note_source: "Anthropic"
 original_url: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
 ---
-来源：Anthropic 官方英文博客
-发布日期：2025-09-29
-链接：https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
-说明：中文为基于官方英文原文整理的中文译稿。
-英文原文：https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
-
 在提示工程作为应用 AI 关注焦点数年之后，一个新术语已崭露头角：**上下文工程**。基于语言模型的构建工作，正在从寻找合适的提示词和短语，转向回答一个更宏观的问题："什么样的上下文配置最有可能产生模型所期望的行为？"
 
 **上下文**指的是从大型语言模型（LLM）进行采样时所包含的 token 集合。当前的**工程**问题在于：在 LLM 固有约束条件下，优化这些 token 的利用价值，以持续实现预期目标。有效驾驭 LLM 往往需要_以上下文的视角思考_——换言之：综合考量 LLM 在任意时刻可用的整体状态，以及该状态可能产生哪些潜在行为。

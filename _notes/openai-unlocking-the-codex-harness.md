@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: note
 title: "解锁 Codex 运行框架：我们如何构建 App Server"
 title_en: "Unlocking the Codex harness: how we built the App Server"
 date: 2026-02-04 00:00:00 +0800
@@ -7,11 +7,6 @@ categories: notes
 note_source: "OpenAI"
 original_url: "https://openai.com/index/unlocking-the-codex-harness/"
 ---
-来源：OpenAI 官方中文页
-发布日期：2026-02-04
-链接：https://openai.com/zh-Hans-CN/index/unlocking-the-codex-harness/
-英文原文：https://openai.com/index/unlocking-the-codex-harness/
-
 Celia Chen，技术团队成员
 
 OpenAI 的编码智能体 Codex 部署于多个不同的平台：[Web 应用⁠（在新窗口中打开）](https://chatgpt.com/codex)、[CLI⁠（在新窗口中打开）](https://github.com/openai/codex)、[IDE 扩展⁠（在新窗口中打开）](https://developers.openai.com/codex/ide/)，以及[新的 Codex macOS 应用](http://openai.com/index/introducing-the-codex-app/)。其底层架构均由同一个 Codex 运行框架驱动 — 支撑着所有 Codex 体验的智能体循环和逻辑。它们之间有何重要关联？[Codex App Server⁠（在新窗口中打开）](https://developers.openai.com/codex/app-server) 是客户端友好型双向 JSON-RPC[1](http://openai.com/zh-Hans-CN/index/unlocking-the-codex-harness/#citation-bottom-1) API。

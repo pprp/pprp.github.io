@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: note
 title: "工程技术：在智能体优先的世界中利用 Codex"
 title_en: "Harness engineering: leveraging Codex in an agent-first world"
 date: 2026-02-11 00:00:00 +0800
@@ -7,11 +7,6 @@ categories: notes
 note_source: "OpenAI"
 original_url: "https://openai.com/index/harness-engineering/"
 ---
-来源：OpenAI 官方中文页
-发布日期：2026-02-11
-链接：https://openai.com/zh-Hans-CN/index/harness-engineering/
-英文原文：https://openai.com/index/harness-engineering/
-
 作者：Ryan Lopopolo，技术人员
 
 在过去五个月里，我们的团队一直在进行一项实验：构建并交付一款软件产品的内部 beta 版，**其中没有一行代码是人工编写的**。

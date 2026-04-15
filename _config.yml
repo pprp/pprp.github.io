@@ -127,7 +127,7 @@ defaults:
       path: ''
       type: notes
     values:
-      layout: post
+      layout: note
       author_profile: false
   # _publications
 

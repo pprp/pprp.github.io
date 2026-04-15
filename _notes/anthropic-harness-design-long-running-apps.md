@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: note
 title: "面向长时运行应用开发的 Harness 设计"
 title_en: "Harness design for long-running application development"
 date: 2026-03-24 00:00:00 +0800
@@ -7,12 +7,6 @@ categories: notes
 note_source: "Anthropic"
 original_url: "https://www.anthropic.com/engineering/harness-design-long-running-apps"
 ---
-来源：Anthropic 官方英文博客
-发布日期：2026-03-24
-链接：https://www.anthropic.com/engineering/harness-design-long-running-apps
-说明：中文为基于官方英文原文整理的中文译稿。
-英文原文：https://www.anthropic.com/engineering/harness-design-long-running-apps
-
 _作者：Prithvi Rajasekaran，[Labs](https://www.anthropic.com/news/introducing-anthropic-labs) 团队成员。_
 
 在过去几个月里，我一直在研究两个相互关联的问题：如何让 Claude 生成高质量的前端设计，以及如何让它在无人干预的情况下构建完整的应用程序。这项工作源于我们早期在[前端设计技能](https://github.com/anthropics/claude-code/blob/main/plugins/frontend-design/skills/frontend-design/SKILL.md)和[长时间运行的编码智能体框架](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)上的探索——我和同事通过提示工程与框架设计，将 Claude 的表现大幅提升至基线水平之上，但两者最终都遇到了瓶颈。

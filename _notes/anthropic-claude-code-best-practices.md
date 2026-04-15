@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: note
 title: "Claude Code：智能体式编码最佳实践"
 title_en: "Claude Code: Best practices for agentic coding"
 date: 2025-04-18 00:00:00 +0800
@@ -7,12 +7,6 @@ categories: notes
 note_source: "Anthropic"
 original_url: "https://www.anthropic.com/engineering/claude-code-best-practices"
 ---
-来源：Anthropic 官方英文博客
-发布日期：2025-04-18
-链接：https://www.anthropic.com/engineering/claude-code-best-practices
-说明：中文为基于官方英文原文整理的中文译稿。
-英文原文：https://www.anthropic.com/engineering/claude-code-best-practices
-
 # Claude Code 最佳实践 - Claude Code 文档
 
 [跳转到主要内容](http://www.anthropic.com/engineering/claude-code-best-practices#content-area)

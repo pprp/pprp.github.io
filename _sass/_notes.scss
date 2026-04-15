@@ -1,0 +1,98 @@
+.note {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.note__header {
+  margin: 0 0 2rem;
+  padding: 1.5rem 1.5rem 1.25rem;
+  background: linear-gradient(180deg, #fafbfc 0%, #f4f7fb 100%);
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+}
+
+.note__eyebrow {
+  margin: 0 0 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.note__title {
+  margin: 0;
+}
+
+.note__title-en {
+  margin: 0.5rem 0 0;
+  color: #64748b;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.note__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+.note__pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: #e8f3ff;
+  color: #1d4ed8;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.note__meta-link {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.note__meta-link:hover {
+  text-decoration: underline;
+}
+
+.note__notice {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.note__content {
+  max-width: 860px;
+}
+
+.note__content > :first-child {
+  margin-top: 0;
+}
+
+.note__content p,
+.note__content li {
+  line-height: 1.85;
+}
+
+.note__content img {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.blog-card .blog-excerpt {
+  margin: 0.9rem 0 1rem;
+  color: #64748b;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
