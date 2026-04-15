@@ -90,6 +90,52 @@
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
 }
 
+.note__content div.highlighter-rouge,
+.note__content figure.highlight {
+  margin: 1.6rem 0 1.8rem;
+  padding: 1.15rem 1.2rem;
+  border: 1px solid #dbe3ee;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fbfcfe 0%, #f4f7fb 100%);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.note__content div.highlighter-rouge:before,
+.note__content figure.highlight:before {
+  padding: 0.45rem 0.6rem;
+  background: #eef2f7;
+  color: #64748b;
+  border-bottom-left-radius: 10px;
+  font-size: 0.78rem;
+}
+
+.note__content .highlight {
+  font-size: 0.96rem;
+  line-height: 1.85;
+}
+
+.note__content pre {
+  margin: 0;
+  overflow-x: auto;
+}
+
+.note__content pre code {
+  font-size: inherit;
+}
+
+@media (max-width: 768px) {
+  .note__content div.highlighter-rouge,
+  .note__content figure.highlight {
+    padding: 0.95rem 1rem;
+    border-radius: 12px;
+  }
+
+  .note__content .highlight {
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+}
+
 .blog-card .blog-excerpt {
   margin: 0.9rem 0 1rem;
   color: #64748b;
