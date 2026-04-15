@@ -1,0 +1,20 @@
+.mermaid-block {
+  margin: 2rem 0;
+  padding: 1.25rem 1rem;
+  background: linear-gradient(180deg, #fbfcfe 0%, #f3f6fb 100%);
+  border: 1px solid #d8e1ec;
+  border-radius: 14px;
+  overflow-x: auto;
+  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.06);
+}
+
+.mermaid-block .mermaid {
+  min-width: min-content;
+  display: flex;
+  justify-content: center;
+}
+
+.mermaid-block svg {
+  height: auto;
+  max-width: 100%;
+}

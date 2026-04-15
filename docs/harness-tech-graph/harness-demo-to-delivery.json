@@ -1,0 +1,51 @@
+{
+  "template_type": "architecture",
+  "style": 7,
+  "width": 1120,
+  "height": 720,
+  "title": "From One-Shot Generation to Continuous Delivery",
+  "subtitle": "Why a working demo does not yet qualify as a maintainable software system",
+  "containers": [
+    { "x": 40, "y": 118, "width": 1040, "height": 108, "label": "ONE-SHOT GENERATION", "stroke": "#e2e8f0", "fill": "none" },
+    { "x": 40, "y": 258, "width": 1040, "height": 154, "label": "REAL-WORLD PRESSURE", "stroke": "#e2e8f0", "fill": "none" },
+    { "x": 40, "y": 444, "width": 1040, "height": 184, "label": "HARNESS RESPONSE", "stroke": "#e2e8f0", "fill": "none" }
+  ],
+  "nodes": [
+    { "id": "prompt", "kind": "speech", "x": 76, "y": 144, "width": 152, "height": 60, "label": "Natural-language prompt", "fill": "#ffffff", "stroke": "#dce5e3", "flat": true },
+    { "id": "model", "kind": "double_rect", "x": 312, "y": 138, "width": 208, "height": 72, "label": "Coding model", "type_label": "GENERATOR", "fill": "#ffffff", "stroke": "#10a37f" },
+    { "id": "demo", "kind": "rect", "x": 636, "y": 144, "width": 224, "height": 60, "label": "Working demo", "type_label": "VISIBLE SUCCESS", "fill": "#ffffff", "stroke": "#dce5e3", "flat": true },
+
+    { "id": "change", "kind": "rect", "x": 86, "y": 314, "width": 182, "height": 62, "label": "Requirements keep changing", "type_label": "VOLATILITY", "fill": "#ffffff", "stroke": "#dce5e3", "flat": true },
+    { "id": "legacy", "kind": "rect", "x": 332, "y": 314, "width": 182, "height": 62, "label": "Legacy code and hidden rules", "type_label": "STATE", "fill": "#ffffff", "stroke": "#dce5e3", "flat": true },
+    { "id": "ops", "kind": "rect", "x": 578, "y": 314, "width": 182, "height": 62, "label": "Permissions, deploy, rollback", "type_label": "GOVERNANCE", "fill": "#ffffff", "stroke": "#dce5e3", "flat": true },
+    { "id": "verify", "kind": "rect", "x": 824, "y": 314, "width": 182, "height": 62, "label": "Regression and verification", "type_label": "PROOF", "fill": "#ffffff", "stroke": "#dce5e3", "flat": true },
+
+    { "id": "harness", "kind": "double_rect", "x": 372, "y": 486, "width": 378, "height": 88, "label": "Harness Engineering", "type_label": "CONTROL SYSTEM", "fill": "#ffffff", "stroke": "#10a37f", "tags": [
+      { "label": "context", "fill": "#ecfdf5", "stroke": "#a7f3d0", "text_fill": "#047857" },
+      { "label": "execution", "fill": "#ecfdf5", "stroke": "#a7f3d0", "text_fill": "#047857" },
+      { "label": "validation", "fill": "#ecfdf5", "stroke": "#a7f3d0", "text_fill": "#047857" }
+    ] },
+    { "id": "delivery", "kind": "rect", "x": 792, "y": 500, "width": 202, "height": 60, "label": "Continuous delivery", "type_label": "OUTCOME", "fill": "#ffffff", "stroke": "#dce5e3", "flat": true }
+  ],
+  "arrows": [
+    { "source": "prompt", "target": "model", "source_port": "right", "target_port": "left", "flow": "control" },
+    { "source": "model", "target": "demo", "source_port": "right", "target_port": "left", "flow": "read" },
+    { "source": "demo", "target": "change", "source_port": "bottom", "target_port": "top", "flow": "feedback", "dashed": true, "route_points": [[748, 226], [748, 282], [177, 282], [177, 314]] },
+    { "source": "demo", "target": "legacy", "source_port": "bottom", "target_port": "top", "flow": "feedback", "dashed": true, "corridor_x": [423] },
+    { "source": "demo", "target": "ops", "source_port": "bottom", "target_port": "top", "flow": "feedback", "dashed": true, "corridor_x": [669] },
+    { "source": "demo", "target": "verify", "source_port": "bottom", "target_port": "top", "flow": "feedback", "dashed": true, "corridor_x": [915] },
+    { "source": "change", "target": "harness", "source_port": "bottom", "target_port": "top", "flow": "control", "route_points": [[177, 378], [177, 448], [438, 448], [438, 486]] },
+    { "source": "legacy", "target": "harness", "source_port": "bottom", "target_port": "top", "flow": "control", "corridor_x": [423] },
+    { "source": "ops", "target": "harness", "source_port": "bottom", "target_port": "top", "flow": "control", "corridor_x": [669] },
+    { "source": "verify", "target": "harness", "source_port": "bottom", "target_port": "top", "flow": "control", "route_points": [[915, 378], [915, 448], [684, 448], [684, 486]] },
+    { "source": "harness", "target": "delivery", "source_port": "right", "target_port": "left", "flow": "read", "label": "safe iteration" }
+  ],
+  "legend": [
+    { "flow": "control", "label": "Control and constraint path" },
+    { "flow": "read", "label": "Primary engineering path" },
+    { "flow": "feedback", "label": "Pressure from real-world operation" }
+  ],
+  "legend_position": "bottom-left",
+  "legend_y": 646,
+  "footer": ""
+}

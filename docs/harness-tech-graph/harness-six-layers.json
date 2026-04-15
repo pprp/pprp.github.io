@@ -1,0 +1,37 @@
+{
+  "template_type": "architecture",
+  "style": 7,
+  "width": 1120,
+  "height": 860,
+  "title": "The Six Layers of Harness Engineering",
+  "subtitle": "A practical stack for turning model capability into reliable software delivery",
+  "containers": [
+    { "x": 50, "y": 108, "width": 1020, "height": 660, "label": "HARNESS STACK", "stroke": "#e2e8f0", "fill": "none" }
+  ],
+  "nodes": [
+    { "id": "intent", "kind": "speech", "x": 410, "y": 126, "width": 300, "height": 62, "label": "User intent / task goal", "fill": "#ffffff", "stroke": "#dce5e3", "flat": true },
+    { "id": "context", "kind": "rect", "x": 210, "y": 224, "width": 560, "height": 62, "label": "Context layer — docs, specs, boundaries, maps", "type_label": "LAYER 1", "fill": "#ffffff", "stroke": "#dce5e3", "flat": true },
+    { "id": "execution", "kind": "rect", "x": 210, "y": 314, "width": 560, "height": 62, "label": "Execution layer — tools, sandbox, protocol, approvals", "type_label": "LAYER 2", "fill": "#ffffff", "stroke": "#dce5e3", "flat": true },
+    { "id": "handoff", "kind": "rect", "x": 210, "y": 404, "width": 560, "height": 62, "label": "Plan & handoff layer — feature list, init, progress logs", "type_label": "LAYER 3", "fill": "#ffffff", "stroke": "#dce5e3", "flat": true },
+    { "id": "validation", "kind": "rect", "x": 210, "y": 494, "width": 560, "height": 62, "label": "Validation layer — tests, browser checks, evals, approval", "type_label": "LAYER 4", "fill": "#ffffff", "stroke": "#dce5e3", "flat": true },
+    { "id": "observability", "kind": "rect", "x": 210, "y": 584, "width": 560, "height": 62, "label": "Observability & governance — logs, metrics, traces, policy", "type_label": "LAYER 5", "fill": "#ffffff", "stroke": "#dce5e3", "flat": true },
+    { "id": "entropy", "kind": "rect", "x": 210, "y": 674, "width": 560, "height": 62, "label": "Entropy management — lint, cleanup, doc gardening, refactor", "type_label": "LAYER 6", "fill": "#ffffff", "stroke": "#dce5e3", "flat": true },
+    { "id": "delivery", "kind": "rect", "x": 400, "y": 786, "width": 320, "height": 52, "label": "Reliable software delivery", "type_label": "OUTCOME", "fill": "#ffffff", "stroke": "#10a37f", "flat": true }
+  ],
+  "arrows": [
+    { "source": "intent", "target": "context", "source_port": "bottom", "target_port": "top", "flow": "control" },
+    { "source": "context", "target": "execution", "source_port": "bottom", "target_port": "top", "flow": "control" },
+    { "source": "execution", "target": "handoff", "source_port": "bottom", "target_port": "top", "flow": "control" },
+    { "source": "handoff", "target": "validation", "source_port": "bottom", "target_port": "top", "flow": "control" },
+    { "source": "validation", "target": "observability", "source_port": "bottom", "target_port": "top", "flow": "control" },
+    { "source": "observability", "target": "entropy", "source_port": "bottom", "target_port": "top", "flow": "control" },
+    { "source": "entropy", "target": "delivery", "source_port": "bottom", "target_port": "top", "flow": "read" }
+  ],
+  "legend": [
+    { "flow": "control", "label": "Engineering control path" },
+    { "flow": "read", "label": "Resulting delivery path" }
+  ],
+  "legend_position": "bottom-right",
+  "legend_y": 780,
+  "footer": ""
+}
