@@ -94,3 +94,56 @@ ul li, ol li {
   margin-bottom: 0.75em;
   line-height: 1.6;
 }
+
+/* Responsive guards for long-form post content */
+.post .entry {
+  overflow-wrap: anywhere;
+
+  img,
+  svg,
+  canvas,
+  iframe {
+    max-width: 100%;
+    height: auto;
+  }
+
+  pre,
+  .code-block,
+  .highlight {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    max-width: 100%;
+  }
+
+  mjx-container,
+  .MathJax,
+  math {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .post .entry {
+    overflow-x: hidden;
+
+    table {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    mjx-container,
+    .MathJax,
+    math {
+      display: block;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+}
