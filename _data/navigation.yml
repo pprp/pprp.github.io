@@ -26,3 +26,6 @@ main:
 
   - title: "Notes"
     url: "/notes/"
+
+  - title: "Production"
+    url: "/production/"
