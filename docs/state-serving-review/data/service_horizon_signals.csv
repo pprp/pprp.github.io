@@ -1,0 +1,3 @@
+system,duration_hours,note
+GLM-5.1,8,官方宣称单任务连续自主执行最长 8 小时
+Codex experiment,25,官方博客示例：约 25 小时、13M tokens

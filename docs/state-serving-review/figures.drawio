@@ -1,0 +1,534 @@
+<mxfile host="app.diagrams.net" modified="2026-04-21T00:00:00.000Z" agent="OpenAI GPT-5.4" version="24.7.17">
+  <diagram id="fig01_architecture_landscape" name="fig01_architecture_landscape">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="16" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="980" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fig01_architecture_landscape-title" value="&lt;b&gt;Figure 1. Architectural routes from long context to state-centric serving&lt;/b&gt;&lt;br/&gt;Observed system pressure, current open-model responses, and the hypothesized Linear-first end-state" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e2e8f0;strokeWidth=1.5;fontColor=#0f172a;fontSize=18;spacing=10;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="48" y="36" width="1504" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="g1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#64748B;strokeWidth=1.5;dashed=1;dashPattern=8 6;" vertex="1" parent="1">
+          <mxGeometry x="72" y="150" width="1440" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-label" value="&lt;b&gt;OBSERVED PRESSURE&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#64748B;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="88" y="128" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="g2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#1D4ED8;strokeWidth=1.5;dashed=1;dashPattern=8 6;" vertex="1" parent="1">
+          <mxGeometry x="72" y="450" width="1440" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="g2-label" value="&lt;b&gt;COMPETING RESPONSES&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#1D4ED8;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="88" y="428" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b1" value="&lt;b&gt;System bottleneck&lt;/b&gt;&lt;br/&gt;KV cache grows with context length&lt;br/&gt;prefill/decode bandwidth couples&lt;br/&gt;serving&lt;br/&gt;agent workloads turn window size&lt;br/&gt;into time-horizon cost" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="120" y="194" width="360" height="164" as="geometry" />
+        </mxCell>
+        <mxCell id="b1-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B45309;strokeColor=#B45309;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="122" y="196" width="356" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" value="&lt;b&gt;Market signal&lt;/b&gt;&lt;br/&gt;products are advertising longer service&lt;br/&gt;duration&lt;br/&gt;not just larger context windows&lt;br/&gt;planning + tool use + continuity matter&lt;br/&gt;more" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="540" y="194" width="420" height="164" as="geometry" />
+        </mxCell>
+        <mxCell id="b2-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F766E;strokeColor=#0F766E;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="542" y="196" width="416" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" value="&lt;b&gt;Research question&lt;/b&gt;&lt;br/&gt;when service length T → ∞,&lt;br/&gt;should memory remain token-addressable,&lt;br/&gt;or become state-preserving and externally&lt;br/&gt;recallable?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="194" width="420" height="164" as="geometry" />
+        </mxCell>
+        <mxCell id="b3-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7C3AED;strokeColor=#7C3AED;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1022" y="196" width="416" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b4" value="&lt;b&gt;Full attention&lt;/b&gt;&lt;br/&gt;strong exact token recall&lt;br/&gt;best-understood&lt;br/&gt;infrastructure&lt;br/&gt;but memory and bandwidth&lt;br/&gt;scale with history" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="120" y="508" width="300" height="208" as="geometry" />
+        </mxCell>
+        <mxCell id="b4-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BE123C;strokeColor=#BE123C;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="122" y="510" width="296" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b5" value="&lt;b&gt;Hybrid&lt;/b&gt;&lt;br/&gt;Qwen3.6 / Kimi Linear / OLMo&lt;br/&gt;Hybrid&lt;br/&gt;replace most layers with&lt;br/&gt;recurrent or linear state&lt;br/&gt;retain attention as a&lt;br/&gt;precision backstop" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="470" y="508" width="300" height="208" as="geometry" />
+        </mxCell>
+        <mxCell id="b5-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1D4ED8;strokeColor=#1D4ED8;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="472" y="510" width="296" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b6" value="&lt;b&gt;Sparse / MLA / SWA&lt;/b&gt;&lt;br/&gt;DeepSeek-V2/V3.x / GLM /&lt;br/&gt;sliding-window stacks&lt;br/&gt;compress or localize&lt;br/&gt;attention coverage&lt;br/&gt;preserve token-level&lt;br/&gt;addressing with better&lt;br/&gt;efficiency" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="820" y="508" width="300" height="208" as="geometry" />
+        </mxCell>
+        <mxCell id="b6-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F766E;strokeColor=#0F766E;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="822" y="510" width="296" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b7" value="&lt;b&gt;Linear-first agent&lt;br/&gt;stack&lt;/b&gt;&lt;br/&gt;bounded live state&lt;br/&gt;retrieval-triggered external&lt;br/&gt;recall&lt;br/&gt;persistent memory + tools +&lt;br/&gt;compaction" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="508" width="300" height="208" as="geometry" />
+        </mxCell>
+        <mxCell id="b7-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7C3AED;strokeColor=#7C3AED;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1172" y="510" width="296" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b8" value="&lt;b&gt;Thesis&lt;/b&gt;&lt;br/&gt;The endgame of long context is not a bigger window; it is a longer, state-centric service&lt;br/&gt;horizon." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=14;spacingTop=12;spacingLeft=18;spacingRight=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="400" y="834" width="800" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="b8-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B45309;strokeColor=#B45309;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="402" y="836" width="796" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" value="baseline" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#64748B;strokeWidth=2.5;" edge="1" parent="1" source="b1" target="b4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="300" y="420" />
+              <mxPoint x="300" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a2" value="reduce slope" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#1D4ED8;strokeWidth=2.5;" edge="1" parent="1" source="b1" target="b5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="460" y="276" />
+              <mxPoint x="520" y="276" />
+              <mxPoint x="520" y="612" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a3" value="compress cost" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#0F766E;strokeWidth=2.5;" edge="1" parent="1" source="b1" target="b6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="460" y="326" />
+              <mxPoint x="800" y="326" />
+              <mxPoint x="800" y="612" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4" value="time-horizon shift" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#7C3AED;strokeWidth=2.5;" edge="1" parent="1" source="b2" target="b7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="980" y="276" />
+              <mxPoint x="1140" y="276" />
+              <mxPoint x="1140" y="612" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#1D4ED8;strokeWidth=2.5;" edge="1" parent="1" source="b5" target="b7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="790" y="612" />
+              <mxPoint x="1140" y="612" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#0F766E;strokeWidth=2.5;" edge="1" parent="1" source="b6" target="b7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1140" y="612" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a7" value="thesis" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#B45309;strokeWidth=2.5;" edge="1" parent="1" source="b7" target="b8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1320" y="740" />
+              <mxPoint x="1320" y="876" />
+              <mxPoint x="1200" y="876" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fig01_architecture_landscape-foot-0" value="Observed evidence: model cards, serving papers, and product docs." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#475569;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="56" y="908" width="1488" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="fig01_architecture_landscape-foot-1" value="The Linear-first end-state is a forward-looking synthesis rather than an announced industry consensus." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#475569;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="56" y="930" width="1488" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="fig03_memory_stack" name="fig03_memory_stack">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="16" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="980" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fig03_memory_stack-title" value="&lt;b&gt;Figure 3. A four-layer memory stack for state-centric serving&lt;/b&gt;&lt;br/&gt;The useful distinction is not just short-term vs long-term, but parameter memory vs live state vs external memory vs tool-ground truth" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e2e8f0;strokeWidth=1.5;fontColor=#0f172a;fontSize=18;spacing=10;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="48" y="36" width="1504" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="g1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#64748B;strokeWidth=1.5;dashed=1;dashPattern=8 6;" vertex="1" parent="1">
+          <mxGeometry x="120" y="152" width="1120" height="640" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-label" value="&lt;b&gt;MEMORY HIERARCHY&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#64748B;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="136" y="130" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="n1" value="&lt;b&gt;Fast / scarce&lt;/b&gt;&lt;br/&gt;high-value state&lt;br/&gt;should stay here" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#B45309;strokeWidth=1.5;fontColor=#0F172A;fontSize=14;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="214" width="210" height="108" as="geometry" />
+        </mxCell>
+        <mxCell id="n1-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B45309;strokeColor=#B45309;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1322" y="216" width="206" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="n2" value="&lt;b&gt;Slow / rich&lt;/b&gt;&lt;br/&gt;store explicit&lt;br/&gt;artifacts and fetch&lt;br/&gt;on demand" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDFA;strokeColor=#0F766E;strokeWidth=1.5;fontColor=#0F172A;fontSize=14;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="690" width="210" height="108" as="geometry" />
+        </mxCell>
+        <mxCell id="n2-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F766E;strokeColor=#0F766E;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1322" y="692" width="206" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b1" value="&lt;b&gt;Layer 1. Weights / parameter memory&lt;/b&gt;&lt;br/&gt;general capabilities, broad priors, model identity&lt;br/&gt;slow to update, globally shared, expensive to personalize" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="220" y="208" width="920" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="b1-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1D4ED8;strokeColor=#1D4ED8;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="222" y="210" width="916" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" value="&lt;b&gt;Layer 2. Live state / active horizon&lt;/b&gt;&lt;br/&gt;task plan, current hypotheses, local variables, recent tool outcomes&lt;br/&gt;bounded by quality-cost trade-offs, not by the ambition to remember everything" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="220" y="350" width="920" height="132" as="geometry" />
+        </mxCell>
+        <mxCell id="b2-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B45309;strokeColor=#B45309;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="222" y="352" width="916" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" value="&lt;b&gt;Layer 3. External memory artifacts&lt;/b&gt;&lt;br/&gt;notes, AGENTS.md, memories, plans, retrieval indexes, structured summaries&lt;br/&gt;versionable, inspectable, shareable, and cheaper to persist than raw token history" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="220" y="528" width="920" height="132" as="geometry" />
+        </mxCell>
+        <mxCell id="b3-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F766E;strokeColor=#0F766E;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="222" y="530" width="916" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b4" value="&lt;b&gt;Layer 4. Tools and environment&lt;/b&gt;&lt;br/&gt;repo state, databases, browsers, APIs, observability, real-world systems&lt;br/&gt;final truth source when the model must verify instead of merely remember" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="220" y="706" width="920" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="b4-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7C3AED;strokeColor=#7C3AED;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="222" y="708" width="916" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b5" value="&lt;b&gt;Token-preserving&lt;/b&gt;&lt;br/&gt;mindset&lt;br/&gt;keep as much&lt;br/&gt;history as&lt;br/&gt;possible" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF1F2;strokeColor=#BE123C;strokeWidth=1.5;fontColor=#0F172A;fontSize=14;spacingTop=12;spacingLeft=18;spacingRight=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="68" y="384" width="124" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="b5-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BE123C;strokeColor=#BE123C;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="386" width="120" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b6" value="&lt;b&gt;State-preserving&lt;/b&gt;&lt;br/&gt;mindset&lt;br/&gt;retain only&lt;br/&gt;what must&lt;br/&gt;stay live" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDFA;strokeColor=#0F766E;strokeWidth=1.5;fontColor=#0F172A;fontSize=14;spacingTop=12;spacingLeft=18;spacingRight=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="384" width="132" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="b6-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F766E;strokeColor=#0F766E;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1182" y="386" width="128" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" value="initialize" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#1D4ED8;strokeWidth=2.5;" edge="1" parent="1" source="b1" target="b2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="externalize" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#B45309;strokeWidth=2.5;" edge="1" parent="1" source="b2" target="b3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" value="retrieve" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#0F766E;strokeWidth=2.5;" edge="1" parent="1" source="b3" target="b2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" value="ground" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#0F766E;strokeWidth=2.5;" edge="1" parent="1" source="b3" target="b4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1140" y="594" />
+              <mxPoint x="1180" y="594" />
+              <mxPoint x="1180" y="760" />
+              <mxPoint x="1140" y="760" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a5" value="feedback" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#7C3AED;strokeWidth=2.5;" edge="1" parent="1" source="b4" target="b2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1140" y="760" />
+              <mxPoint x="1260" y="760" />
+              <mxPoint x="1260" y="416" />
+              <mxPoint x="1140" y="416" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#BE123C;strokeWidth=2.5;" edge="1" parent="1" source="b5" target="b2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="180" y="504" />
+              <mxPoint x="220" y="504" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#0F766E;strokeWidth=2.5;" edge="1" parent="1" source="b2" target="b6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1140" y="416" />
+              <mxPoint x="1190" y="416" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fig03_memory_stack-foot-0" value="This hierarchy combines systems practice (compaction, memories, AGENTS) with research on memory-operating systems." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#475569;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="56" y="908" width="1488" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="fig03_memory_stack-foot-1" value="The active horizon H* is the operating range that stays live before external recall becomes cheaper than internal retention." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#475569;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="56" y="930" width="1488" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="fig04_state_market" name="fig04_state_market">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="16" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="980" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fig04_state_market-title" value="&lt;b&gt;Figure 4. From reusable state to a possible state-artifact economy&lt;/b&gt;&lt;br/&gt;What could become portable is not an arbitrary prompt, but a compatibility-checked state object with provenance and policy metadata" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e2e8f0;strokeWidth=1.5;fontColor=#0f172a;fontSize=18;spacing=10;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="48" y="36" width="1504" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="g1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#1D4ED8;strokeWidth=1.5;dashed=1;dashPattern=8 6;" vertex="1" parent="1">
+          <mxGeometry x="90" y="176" width="1420" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-label" value="&lt;b&gt;ARTIFACT LIFECYCLE&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#1D4ED8;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="106" y="154" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="g2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#7C3AED;strokeWidth=1.5;dashed=1;dashPattern=8 6;" vertex="1" parent="1">
+          <mxGeometry x="90" y="650" width="1420" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="g2-label" value="&lt;b&gt;WHAT REMAINS SPECULATIVE&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#7C3AED;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="106" y="628" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b1" value="&lt;b&gt;Mint&lt;/b&gt;&lt;br/&gt;prefill or initialize a&lt;br/&gt;task-specific state&lt;br/&gt;bind model hash,&lt;br/&gt;tokenizer, tools, safety&lt;br/&gt;policy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="130" y="248" width="270" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="b1-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1D4ED8;strokeColor=#1D4ED8;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="132" y="250" width="266" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" value="&lt;b&gt;State artifact&lt;/b&gt;&lt;br/&gt;prefix / context fingerprint&lt;br/&gt;compatible model family&lt;br/&gt;task schema + persona tag&lt;br/&gt;active-horizon assumptions&lt;br/&gt;provenance + version history" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="470" y="220" width="320" height="256" as="geometry" />
+        </mxCell>
+        <mxCell id="b2-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B45309;strokeColor=#B45309;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="472" y="222" width="316" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" value="&lt;b&gt;Verify&lt;/b&gt;&lt;br/&gt;compatibility,&lt;br/&gt;provenance, safety" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="860" y="220" width="260" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="b3-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F766E;strokeColor=#0F766E;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="862" y="222" width="256" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b4" value="&lt;b&gt;Compose&lt;/b&gt;&lt;br/&gt;merge with workflow&lt;br/&gt;state or org memory" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="860" y="366" width="260" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="b4-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7C3AED;strokeColor=#7C3AED;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="862" y="368" width="256" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b5" value="&lt;b&gt;Execute&lt;/b&gt;&lt;br/&gt;resume agent loop with&lt;br/&gt;tools and retrieval" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="220" width="260" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="b5-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1D4ED8;strokeColor=#1D4ED8;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1182" y="222" width="256" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b6" value="&lt;b&gt;Settle&lt;/b&gt;&lt;br/&gt;price usage, track&lt;br/&gt;value, log outcomes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="366" width="260" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="b6-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B45309;strokeColor=#B45309;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1182" y="368" width="256" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b7" value="&lt;b&gt;Important caveat&lt;/b&gt;&lt;br/&gt;This is an inference from serving constraints and memory-system design, not a current market standard." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=14;spacingTop=12;spacingLeft=18;spacingRight=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="150" y="700" width="1320" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="b7-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BE123C;strokeColor=#BE123C;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="152" y="702" width="1316" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" value="create" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#1D4ED8;strokeWidth=2.5;" edge="1" parent="1" source="b1" target="b2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="check" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#0F766E;strokeWidth=2.5;" edge="1" parent="1" source="b2" target="b3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" value="merge" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#7C3AED;strokeWidth=2.5;" edge="1" parent="1" source="b2" target="b4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" value="load" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#1D4ED8;strokeWidth=2.5;" edge="1" parent="1" source="b3" target="b5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1120" y="276" />
+              <mxPoint x="1160" y="276" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a5" value="price / account" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#B45309;strokeWidth=2.5;" edge="1" parent="1" source="b4" target="b6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1120" y="422" />
+              <mxPoint x="1160" y="422" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a6" value="outcome log" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#64748B;strokeWidth=2.5;" edge="1" parent="1" source="b5" target="b6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1310" y="330" />
+              <mxPoint x="1310" y="366" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fig04_state_market-foot-0" value="The artifact metaphor becomes plausible only if memory is explicit, versioned, and cheap to reload relative to re-creating full context." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#475569;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="56" y="908" width="1488" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="fig07_state_serving_loop" name="fig07_state_serving_loop">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="16" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="980" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fig07_state_serving_loop-title" value="&lt;b&gt;Figure 7. The state-serving loop for long-horizon agents&lt;/b&gt;&lt;br/&gt;A long-running agent is best understood as a closed-loop system that repeatedly compresses, verifies, externalizes, and resumes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e2e8f0;strokeWidth=1.5;fontColor=#0f172a;fontSize=18;spacing=10;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="48" y="36" width="1504" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="b1" value="&lt;b&gt;User /&lt;br/&gt;environment&lt;/b&gt;&lt;br/&gt;new tasks, new&lt;br/&gt;evidence, changing&lt;br/&gt;world state" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="120" y="390" width="230" height="126" as="geometry" />
+        </mxCell>
+        <mxCell id="b1-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1D4ED8;strokeColor=#1D4ED8;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="122" y="392" width="226" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" value="&lt;b&gt;Live state&lt;/b&gt;&lt;br/&gt;current plan&lt;br/&gt;working memory&lt;br/&gt;open hypotheses" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="430" y="210" width="300" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="b2-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B45309;strokeColor=#B45309;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="432" y="212" width="296" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" value="&lt;b&gt;Compaction +&lt;br/&gt;summarization&lt;/b&gt;&lt;br/&gt;shrink context while&lt;br/&gt;carrying forward&lt;br/&gt;task-relevant state" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="430" y="590" width="300" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="b3-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F766E;strokeColor=#0F766E;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="432" y="592" width="296" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b4" value="&lt;b&gt;External memory&lt;/b&gt;&lt;br/&gt;notes, artifacts, retrieval&lt;br/&gt;index, project docs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="860" y="210" width="300" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="b4-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7C3AED;strokeColor=#7C3AED;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="862" y="212" width="296" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b5" value="&lt;b&gt;Tools + verification&lt;/b&gt;&lt;br/&gt;tests, browser, logs,&lt;br/&gt;metrics, APIs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="860" y="590" width="300" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="b5-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1D4ED8;strokeColor=#1D4ED8;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="862" y="592" width="296" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b6" value="&lt;b&gt;Response /&lt;br/&gt;action&lt;/b&gt;&lt;br/&gt;answers, code&lt;br/&gt;changes, decisions,&lt;br/&gt;tool side effects" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="390" width="240" height="126" as="geometry" />
+        </mxCell>
+        <mxCell id="b6-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B45309;strokeColor=#B45309;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1242" y="392" width="236" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="n1" value="&lt;b&gt;Design criterion&lt;/b&gt;&lt;br/&gt;preserve enough state for the next competent action,&lt;br/&gt;not every token from the previous window" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF1F2;strokeColor=#BE123C;strokeWidth=1.5;fontColor=#0F172A;fontSize=14;spacingTop=12;spacingLeft=18;spacingRight=18;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="520" y="418" width="500" height="92" as="geometry" />
+        </mxCell>
+        <mxCell id="n1-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BE123C;strokeColor=#BE123C;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="522" y="420" width="496" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" value="new input" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#1D4ED8;strokeWidth=2.5;" edge="1" parent="1" source="b1" target="b2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="memory I/O" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#7C3AED;strokeWidth=2.5;" edge="1" parent="1" source="b2" target="b4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="730" y="274" />
+              <mxPoint x="796" y="274" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a3" value="retrieve" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#0F766E;strokeWidth=2.5;" edge="1" parent="1" source="b4" target="b5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" value="act" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#1D4ED8;strokeWidth=2.5;" edge="1" parent="1" source="b5" target="b6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" value="carry-over" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#B45309;strokeWidth=2.5;" edge="1" parent="1" source="b6" target="b3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1480" y="454" />
+              <mxPoint x="1520" y="454" />
+              <mxPoint x="1520" y="654" />
+              <mxPoint x="730" y="654" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a6" value="resume" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#0F766E;strokeWidth=2.5;" edge="1" parent="1" source="b3" target="b2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="580" y="590" />
+              <mxPoint x="580" y="340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a7" value="feedback" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#7C3AED;strokeWidth=2.5;" edge="1" parent="1" source="b5" target="b2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="860" y="654" />
+              <mxPoint x="812" y="654" />
+              <mxPoint x="812" y="274" />
+              <mxPoint x="730" y="274" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fig07_state_serving_loop-foot-0" value="This loop is why long-running agent systems increasingly need both memory architecture and serving architecture, not just larger windows." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#475569;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="56" y="908" width="1488" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="fig08_evaluation_map" name="fig08_evaluation_map">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="16" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="980" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fig08_evaluation_map-title" value="&lt;b&gt;Figure 8. Evaluation map for state-centric serving&lt;/b&gt;&lt;br/&gt;Long service requires measuring more than perplexity or window length: memory, tool-use, compaction, and recovery all matter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#e2e8f0;strokeWidth=1.5;fontColor=#0f172a;fontSize=18;spacing=10;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="48" y="36" width="1504" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="g1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#64748B;strokeWidth=1.5;dashed=1;dashPattern=8 6;" vertex="1" parent="1">
+          <mxGeometry x="70" y="150" width="1460" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="g1-label" value="&lt;b&gt;BENCHMARKS AND MISSING METRICS&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#64748B;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="86" y="128" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="b1" value="&lt;b&gt;LoCoMo&lt;/b&gt;&lt;br/&gt;300-turn, multi-session&lt;br/&gt;benchmark&lt;br/&gt;temporal + causal memory" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="120" y="212" width="290" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="b1-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1D4ED8;strokeColor=#1D4ED8;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="122" y="214" width="286" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" value="&lt;b&gt;LongMemEval&lt;/b&gt;&lt;br/&gt;500 QA over sustained chats&lt;br/&gt;extraction + reasoning +&lt;br/&gt;updates" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="120" y="368" width="290" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="b2-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F766E;strokeColor=#0F766E;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="122" y="370" width="286" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" value="&lt;b&gt;BEAM&lt;/b&gt;&lt;br/&gt;up to 10M tokens&lt;br/&gt;memory at ultra-long scale" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="120" y="524" width="290" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="b3-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B45309;strokeColor=#B45309;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="122" y="526" width="286" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b4" value="&lt;b&gt;MCP-Atlas / tool&lt;br/&gt;benchmarks&lt;/b&gt;&lt;br/&gt;36 real servers, 220 tools&lt;br/&gt;realistic tool&lt;br/&gt;orchestration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="120" y="680" width="290" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="b4-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7C3AED;strokeColor=#7C3AED;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="122" y="682" width="286" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b5" value="&lt;b&gt;What current benchmarks mostly&lt;br/&gt;cover&lt;/b&gt;&lt;br/&gt;1. Recall from long histories&lt;br/&gt;2. Multi-session temporal reasoning&lt;br/&gt;3. Knowledge updates and contradictions&lt;br/&gt;4. Tool-use planning in realistic&lt;br/&gt;workflows" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="500" y="212" width="420" height="588" as="geometry" />
+        </mxCell>
+        <mxCell id="b5-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#64748B;strokeColor=#64748B;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="502" y="214" width="416" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="b6" value="&lt;b&gt;What a state-serving benchmark&lt;br/&gt;should add&lt;/b&gt;&lt;br/&gt;1. State carry-over rate after compaction&lt;br/&gt;2. Retrieval-trigger precision / recall&lt;br/&gt;3. Memory write amplification and token&lt;br/&gt;overhead&lt;br/&gt;4. Error-recovery half-life after tool&lt;br/&gt;failure&lt;br/&gt;5. Cross-session identity continuity under&lt;br/&gt;new evidence&lt;br/&gt;6. Privacy and policy isolation of portable&lt;br/&gt;state" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#CBD5E1;strokeWidth=1.5;fontColor=#0F172A;fontSize=16;spacingTop=12;spacingLeft=18;spacingRight=18;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="212" width="440" height="588" as="geometry" />
+        </mxCell>
+        <mxCell id="b6-accent" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BE123C;strokeColor=#BE123C;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="1012" y="214" width="436" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" value="memory" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#1D4ED8;strokeWidth=2.5;" edge="1" parent="1" source="b1" target="b5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="interactive" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#0F766E;strokeWidth=2.5;" edge="1" parent="1" source="b2" target="b5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" value="scale" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#B45309;strokeWidth=2.5;" edge="1" parent="1" source="b3" target="b5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" value="tool use" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#7C3AED;strokeWidth=2.5;" edge="1" parent="1" source="b4" target="b5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" value="missing metrics" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#BE123C;strokeWidth=2.5;" edge="1" parent="1" source="b5" target="b6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="940" y="506" />
+              <mxPoint x="980" y="506" />
+              <mxPoint x="980" y="506" />
+              <mxPoint x="1010" y="506" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fig08_evaluation_map-foot-0" value="A state-centric system should be judged by what survives the next service window, not only by what fits inside the current one." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontColor=#475569;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="56" y="908" width="1488" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
