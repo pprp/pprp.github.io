@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980">
+<defs>
+<pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M 32 0 L 0 0 0 32" fill="none" stroke="#E2E8F0" stroke-width="1"/></pattern>
+<marker id="arrow-slate" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/></marker>
+<marker id="arrow-navy" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1D4ED8"/></marker>
+<marker id="arrow-teal" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#0F766E"/></marker>
+<marker id="arrow-amber" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#B45309"/></marker>
+<marker id="arrow-violet" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#7C3AED"/></marker>
+</defs>
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+</style>
+<rect width="1600" height="980" fill="#F8FAFC"/>
+<rect width="1600" height="980" fill="url(#grid)" opacity="0.55"/>
+<rect x="36" y="28" width="1528" height="924" rx="26" ry="26" fill="rgba(255,255,255,0.0)" stroke="#E2E8F0" stroke-width="1.5"/>
+<text x="56" y="70" font-size="32" font-weight="800" fill="#0F172A">Figure 7. The state-serving loop for long-horizon agents</text>
+<text x="56" y="102" font-size="18" font-weight="500" fill="#475569">A long-running agent is best understood as a closed-loop system that repeatedly compresses, verifies, externalizes, and resumes</text>
+<rect x="120" y="390" width="230" height="126" rx="18" ry="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<rect x="121" y="391" width="228" height="8" rx="17" ry="17" fill="#1D4ED8"/>
+<text x="148" y="426" text-anchor="start" font-size="20" font-weight="700" fill="#0F172A">User /</text>
+<text x="148" y="450" text-anchor="start" font-size="20" font-weight="700" fill="#0F172A">environment</text>
+<text x="148" y="486" text-anchor="start" font-size="16" font-weight="500" fill="#475569">new tasks, new</text>
+<text x="148" y="510" text-anchor="start" font-size="16" font-weight="500" fill="#475569">evidence, changing</text>
+<text x="148" y="534" text-anchor="start" font-size="16" font-weight="500" fill="#475569">world state</text>
+<rect x="430" y="210" width="300" height="130" rx="18" ry="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<rect x="431" y="211" width="298" height="8" rx="17" ry="17" fill="#B45309"/>
+<text x="458" y="246" text-anchor="start" font-size="24" font-weight="700" fill="#0F172A">Live state</text>
+<text x="458" y="286" text-anchor="start" font-size="18" font-weight="500" fill="#475569">current plan</text>
+<text x="458" y="312" text-anchor="start" font-size="18" font-weight="500" fill="#475569">working memory</text>
+<text x="458" y="338" text-anchor="start" font-size="18" font-weight="500" fill="#475569">open hypotheses</text>
+<rect x="430" y="590" width="300" height="130" rx="18" ry="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<rect x="431" y="591" width="298" height="8" rx="17" ry="17" fill="#0F766E"/>
+<text x="458" y="626" text-anchor="start" font-size="24" font-weight="700" fill="#0F172A">Compaction +</text>
+<text x="458" y="654" text-anchor="start" font-size="24" font-weight="700" fill="#0F172A">summarization</text>
+<text x="458" y="694" text-anchor="start" font-size="18" font-weight="500" fill="#475569">shrink context while</text>
+<text x="458" y="720" text-anchor="start" font-size="18" font-weight="500" fill="#475569">carrying forward</text>
+<text x="458" y="746" text-anchor="start" font-size="18" font-weight="500" fill="#475569">task-relevant state</text>
+<rect x="860" y="210" width="300" height="130" rx="18" ry="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<rect x="861" y="211" width="298" height="8" rx="17" ry="17" fill="#7C3AED"/>
+<text x="888" y="246" text-anchor="start" font-size="24" font-weight="700" fill="#0F172A">External memory</text>
+<text x="888" y="286" text-anchor="start" font-size="18" font-weight="500" fill="#475569">notes, artifacts,</text>
+<text x="888" y="312" text-anchor="start" font-size="18" font-weight="500" fill="#475569">retrieval index, project</text>
+<text x="888" y="338" text-anchor="start" font-size="18" font-weight="500" fill="#475569">docs</text>
+<rect x="860" y="590" width="300" height="130" rx="18" ry="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<rect x="861" y="591" width="298" height="8" rx="17" ry="17" fill="#1D4ED8"/>
+<text x="888" y="626" text-anchor="start" font-size="24" font-weight="700" fill="#0F172A">Tools +</text>
+<text x="888" y="654" text-anchor="start" font-size="24" font-weight="700" fill="#0F172A">verification</text>
+<text x="888" y="694" text-anchor="start" font-size="18" font-weight="500" fill="#475569">tests, browser, logs,</text>
+<text x="888" y="720" text-anchor="start" font-size="18" font-weight="500" fill="#475569">metrics, APIs</text>
+<rect x="1240" y="390" width="240" height="126" rx="18" ry="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<rect x="1241" y="391" width="238" height="8" rx="17" ry="17" fill="#B45309"/>
+<text x="1268" y="426" text-anchor="start" font-size="20" font-weight="700" fill="#0F172A">Response / action</text>
+<text x="1268" y="462" text-anchor="start" font-size="16" font-weight="500" fill="#475569">answers, code</text>
+<text x="1268" y="486" text-anchor="start" font-size="16" font-weight="500" fill="#475569">changes, decisions,</text>
+<text x="1268" y="510" text-anchor="start" font-size="16" font-weight="500" fill="#475569">tool side effects</text>
+<rect x="520" y="418" width="500" height="92" rx="18" ry="18" fill="#FFF1F2" stroke="#BE123C" stroke-width="2"/>
+<rect x="521" y="419" width="498" height="8" rx="17" ry="17" fill="#BE123C"/>
+<text x="770.0" y="454" text-anchor="middle" font-size="18" font-weight="700" fill="#0F172A">Design criterion</text>
+<text x="770.0" y="488" text-anchor="middle" font-size="15" font-weight="500" fill="#475569">preserve enough state for the next competent action,</text>
+<text x="770.0" y="511" text-anchor="middle" font-size="15" font-weight="500" fill="#475569">not every token from the previous window</text>
+<path d="M 350 453 L 390 453 L 390 275 L 430 275" fill="none" stroke="#1D4ED8" stroke-width="3" marker-end="url(#arrow-navy)"/>
+<rect x="394" y="243" width="120" height="30" rx="12" ry="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="408" y="263" font-size="14" font-weight="600" fill="#475569">new input</text>
+<path d="M 730 275 L 730 274 L 796 274 L 860 275" fill="none" stroke="#7C3AED" stroke-width="3" marker-end="url(#arrow-violet)"/>
+<rect x="800" y="242" width="120" height="30" rx="12" ry="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="814" y="262" font-size="14" font-weight="600" fill="#475569">memory I/O</text>
+<path d="M 1160 275 L 1010 275 L 1010 655 L 860 655" fill="none" stroke="#0F766E" stroke-width="3" marker-end="url(#arrow-teal)"/>
+<rect x="1014" y="623" width="120" height="30" rx="12" ry="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="1028" y="643" font-size="14" font-weight="600" fill="#475569">retrieve</text>
+<path d="M 1160 655 L 1200 655 L 1200 453 L 1240 453" fill="none" stroke="#1D4ED8" stroke-width="3" marker-end="url(#arrow-navy)"/>
+<rect x="1204" y="421" width="120" height="30" rx="12" ry="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="1218" y="441" font-size="14" font-weight="600" fill="#475569">act</text>
+<path d="M 1480 453 L 1480 454 L 1520 454 L 1520 654 L 730 654 L 430 655" fill="none" stroke="#B45309" stroke-width="3" marker-end="url(#arrow-amber)"/>
+<rect x="1524" y="622" width="120" height="30" rx="12" ry="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="1538" y="642" font-size="14" font-weight="600" fill="#475569">carry-over</text>
+<path d="M 730 655 L 580 590 L 580 340 L 430 275" fill="none" stroke="#0F766E" stroke-width="3" marker-end="url(#arrow-teal)"/>
+<rect x="584" y="308" width="120" height="30" rx="12" ry="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="598" y="328" font-size="14" font-weight="600" fill="#475569">resume</text>
+<path d="M 1160 655 L 860 654 L 812 654 L 812 274 L 730 274 L 430 275" fill="none" stroke="#7C3AED" stroke-width="3" marker-end="url(#arrow-violet)"/>
+<rect x="816" y="242" width="120" height="30" rx="12" ry="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="830" y="262" font-size="14" font-weight="600" fill="#475569">feedback</text>
+<line x1="1180" y1="840" x2="1206" y2="840" stroke="#1D4ED8" stroke-width="3" marker-end="url(#arrow-navy)"/>
+<text x="1220" y="845" font-size="14" font-weight="600" fill="#475569">acting</text>
+<line x1="1180" y1="862" x2="1206" y2="862" stroke="#7C3AED" stroke-width="3" marker-end="url(#arrow-violet)"/>
+<text x="1220" y="867" font-size="14" font-weight="600" fill="#475569">memory</text>
+<line x1="1180" y1="884" x2="1206" y2="884" stroke="#0F766E" stroke-width="3" marker-end="url(#arrow-teal)"/>
+<text x="1220" y="889" font-size="14" font-weight="600" fill="#475569">compaction / retrieval</text>
+<line x1="1180" y1="906" x2="1206" y2="906" stroke="#B45309" stroke-width="3" marker-end="url(#arrow-amber)"/>
+<text x="1220" y="911" font-size="14" font-weight="600" fill="#475569">residue / carry-over</text>
+<text x="56" y="908" font-size="15" font-weight="500" fill="#475569">This loop is why long-running agent systems increasingly need both memory architecture and serving architecture, not just larger windows.</text>
+</svg>

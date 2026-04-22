@@ -1,0 +1,6 @@
+model,family,context_tokens,source
+gpt-oss,Hybrid (full + sliding),128000,HF blog / OpenAI gpt-oss
+GLM-5.1,Sparse / DSA,200000,Z.AI docs
+Kimi K2.5,MLA + agent,256000,Kimi docs
+Qwen3.6-35B-A3B,Hybrid (linear + attention),1010000,HF model card
+Claude Sonnet 4.6,Frontier product signal,1000000,Anthropic blog

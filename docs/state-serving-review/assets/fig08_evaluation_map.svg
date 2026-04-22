@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980">
+<defs>
+<pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M 32 0 L 0 0 0 32" fill="none" stroke="#E2E8F0" stroke-width="1"/></pattern>
+<marker id="arrow-slate" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/></marker>
+<marker id="arrow-navy" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1D4ED8"/></marker>
+<marker id="arrow-teal" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#0F766E"/></marker>
+<marker id="arrow-amber" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#B45309"/></marker>
+<marker id="arrow-violet" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#7C3AED"/></marker>
+</defs>
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+</style>
+<rect width="1600" height="980" fill="#F8FAFC"/>
+<rect width="1600" height="980" fill="url(#grid)" opacity="0.55"/>
+<rect x="36" y="28" width="1528" height="924" rx="26" ry="26" fill="rgba(255,255,255,0.0)" stroke="#E2E8F0" stroke-width="1.5"/>
+<text x="56" y="70" font-size="32" font-weight="800" fill="#0F172A">Figure 8. Evaluation map for state-centric serving</text>
+<text x="56" y="102" font-size="18" font-weight="500" fill="#475569">Long service requires measuring more than perplexity or window length: memory, tool-use, compaction, and recovery all matter</text>
+<text x="90" y="140" font-size="16" font-weight="700" fill="#64748B" letter-spacing="1.2">BENCHMARKS AND MISSING METRICS</text>
+<rect x="70" y="150" width="1460" height="700" rx="18" ry="18" fill="none" stroke="#64748B" stroke-width="2" stroke-dasharray="8 6"/>
+<rect x="120" y="212" width="290" height="120" rx="18" ry="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<rect x="121" y="213" width="288" height="8" rx="17" ry="17" fill="#1D4ED8"/>
+<text x="148" y="248" text-anchor="start" font-size="24" font-weight="700" fill="#0F172A">LoCoMo</text>
+<text x="148" y="288" text-anchor="start" font-size="18" font-weight="500" fill="#475569">300-turn, multi-session</text>
+<text x="148" y="314" text-anchor="start" font-size="18" font-weight="500" fill="#475569">benchmark</text>
+<text x="148" y="340" text-anchor="start" font-size="18" font-weight="500" fill="#475569">temporal + causal memory</text>
+<rect x="120" y="368" width="290" height="120" rx="18" ry="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<rect x="121" y="369" width="288" height="8" rx="17" ry="17" fill="#0F766E"/>
+<text x="148" y="404" text-anchor="start" font-size="24" font-weight="700" fill="#0F172A">LongMemEval</text>
+<text x="148" y="444" text-anchor="start" font-size="18" font-weight="500" fill="#475569">500 QA over sustained</text>
+<text x="148" y="470" text-anchor="start" font-size="18" font-weight="500" fill="#475569">chats</text>
+<text x="148" y="496" text-anchor="start" font-size="18" font-weight="500" fill="#475569">extraction + reasoning +</text>
+<text x="148" y="522" text-anchor="start" font-size="18" font-weight="500" fill="#475569">updates</text>
+<rect x="120" y="524" width="290" height="120" rx="18" ry="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<rect x="121" y="525" width="288" height="8" rx="17" ry="17" fill="#B45309"/>
+<text x="148" y="560" text-anchor="start" font-size="24" font-weight="700" fill="#0F172A">BEAM</text>
+<text x="148" y="600" text-anchor="start" font-size="18" font-weight="500" fill="#475569">up to 10M tokens</text>
+<text x="148" y="626" text-anchor="start" font-size="18" font-weight="500" fill="#475569">memory at ultra-long</text>
+<text x="148" y="652" text-anchor="start" font-size="18" font-weight="500" fill="#475569">scale</text>
+<rect x="120" y="680" width="290" height="120" rx="18" ry="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<rect x="121" y="681" width="288" height="8" rx="17" ry="17" fill="#7C3AED"/>
+<text x="148" y="716" text-anchor="start" font-size="24" font-weight="700" fill="#0F172A">MCP-Atlas / tool</text>
+<text x="148" y="744" text-anchor="start" font-size="24" font-weight="700" fill="#0F172A">benchmarks</text>
+<text x="148" y="784" text-anchor="start" font-size="18" font-weight="500" fill="#475569">36 real servers, 220</text>
+<text x="148" y="810" text-anchor="start" font-size="18" font-weight="500" fill="#475569">tools</text>
+<text x="148" y="836" text-anchor="start" font-size="18" font-weight="500" fill="#475569">realistic tool</text>
+<text x="148" y="862" text-anchor="start" font-size="18" font-weight="500" fill="#475569">orchestration</text>
+<rect x="500" y="212" width="420" height="588" rx="18" ry="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<rect x="501" y="213" width="418" height="8" rx="17" ry="17" fill="#64748B"/>
+<text x="528" y="248" text-anchor="start" font-size="24" font-weight="700" fill="#0F172A">What current benchmarks</text>
+<text x="528" y="276" text-anchor="start" font-size="24" font-weight="700" fill="#0F172A">mostly cover</text>
+<text x="528" y="316" text-anchor="start" font-size="18" font-weight="500" fill="#475569">1. Recall from long histories</text>
+<text x="528" y="342" text-anchor="start" font-size="18" font-weight="500" fill="#475569">2. Multi-session temporal reasoning</text>
+<text x="528" y="368" text-anchor="start" font-size="18" font-weight="500" fill="#475569">3. Knowledge updates and</text>
+<text x="528" y="394" text-anchor="start" font-size="18" font-weight="500" fill="#475569">contradictions</text>
+<text x="528" y="420" text-anchor="start" font-size="18" font-weight="500" fill="#475569">4. Tool-use planning in realistic</text>
+<text x="528" y="446" text-anchor="start" font-size="18" font-weight="500" fill="#475569">workflows</text>
+<rect x="1010" y="212" width="440" height="588" rx="18" ry="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<rect x="1011" y="213" width="438" height="8" rx="17" ry="17" fill="#BE123C"/>
+<text x="1038" y="248" text-anchor="start" font-size="24" font-weight="700" fill="#0F172A">What a state-serving</text>
+<text x="1038" y="276" text-anchor="start" font-size="24" font-weight="700" fill="#0F172A">benchmark should add</text>
+<text x="1038" y="316" text-anchor="start" font-size="18" font-weight="500" fill="#475569">1. State carry-over rate after</text>
+<text x="1038" y="342" text-anchor="start" font-size="18" font-weight="500" fill="#475569">compaction</text>
+<text x="1038" y="368" text-anchor="start" font-size="18" font-weight="500" fill="#475569">2. Retrieval-trigger precision /</text>
+<text x="1038" y="394" text-anchor="start" font-size="18" font-weight="500" fill="#475569">recall</text>
+<text x="1038" y="420" text-anchor="start" font-size="18" font-weight="500" fill="#475569">3. Memory write amplification and</text>
+<text x="1038" y="446" text-anchor="start" font-size="18" font-weight="500" fill="#475569">token overhead</text>
+<text x="1038" y="472" text-anchor="start" font-size="18" font-weight="500" fill="#475569">4. Error-recovery half-life after tool</text>
+<text x="1038" y="498" text-anchor="start" font-size="18" font-weight="500" fill="#475569">failure</text>
+<text x="1038" y="524" text-anchor="start" font-size="18" font-weight="500" fill="#475569">5. Cross-session identity continuity</text>
+<text x="1038" y="550" text-anchor="start" font-size="18" font-weight="500" fill="#475569">under new evidence</text>
+<text x="1038" y="576" text-anchor="start" font-size="18" font-weight="500" fill="#475569">6. Privacy and policy isolation of</text>
+<text x="1038" y="602" text-anchor="start" font-size="18" font-weight="500" fill="#475569">portable state</text>
+<path d="M 410 272 L 455 272 L 455 506 L 500 506" fill="none" stroke="#1D4ED8" stroke-width="3" marker-end="url(#arrow-navy)"/>
+<rect x="459" y="474" width="120" height="30" rx="12" ry="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="473" y="494" font-size="14" font-weight="600" fill="#475569">memory</text>
+<path d="M 410 428 L 455 428 L 455 506 L 500 506" fill="none" stroke="#0F766E" stroke-width="3" marker-end="url(#arrow-teal)"/>
+<rect x="459" y="474" width="121" height="30" rx="12" ry="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="473" y="494" font-size="14" font-weight="600" fill="#475569">interactive</text>
+<path d="M 410 584 L 455 584 L 455 506 L 500 506" fill="none" stroke="#B45309" stroke-width="3" marker-end="url(#arrow-amber)"/>
+<rect x="459" y="474" width="120" height="30" rx="12" ry="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="473" y="494" font-size="14" font-weight="600" fill="#475569">scale</text>
+<path d="M 410 740 L 455 740 L 455 506 L 500 506" fill="none" stroke="#7C3AED" stroke-width="3" marker-end="url(#arrow-violet)"/>
+<rect x="459" y="474" width="120" height="30" rx="12" ry="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="473" y="494" font-size="14" font-weight="600" fill="#475569">tool use</text>
+<path d="M 920 506 L 940 506 L 980 506 L 980 506 L 1010 506 L 1010 506" fill="none" stroke="#BE123C" stroke-width="3" marker-end="url(#arrow-rose)"/>
+<rect x="984" y="474" width="157" height="30" rx="12" ry="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="998" y="494" font-size="14" font-weight="600" fill="#475569">missing metrics</text>
+<line x1="1070" y1="860" x2="1096" y2="860" stroke="#1D4ED8" stroke-width="3" marker-end="url(#arrow-navy)"/>
+<text x="1110" y="865" font-size="14" font-weight="600" fill="#475569">conversational memory</text>
+<line x1="1070" y1="882" x2="1096" y2="882" stroke="#0F766E" stroke-width="3" marker-end="url(#arrow-teal)"/>
+<text x="1110" y="887" font-size="14" font-weight="600" fill="#475569">interactive memory</text>
+<line x1="1070" y1="904" x2="1096" y2="904" stroke="#B45309" stroke-width="3" marker-end="url(#arrow-amber)"/>
+<text x="1110" y="909" font-size="14" font-weight="600" fill="#475569">ultra-long history</text>
+<line x1="1070" y1="926" x2="1096" y2="926" stroke="#7C3AED" stroke-width="3" marker-end="url(#arrow-violet)"/>
+<text x="1110" y="931" font-size="14" font-weight="600" fill="#475569">tool use</text>
+<line x1="1070" y1="948" x2="1096" y2="948" stroke="#BE123C" stroke-width="3" marker-end="url(#arrow-rose)"/>
+<text x="1110" y="953" font-size="14" font-weight="600" fill="#475569">missing metrics</text>
+<text x="56" y="908" font-size="15" font-weight="500" fill="#475569">A state-centric system should be judged by what survives the next service window, not only by what fits inside the current one.</text>
+</svg>
