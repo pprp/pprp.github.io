@@ -1,0 +1,58 @@
+<mxfile host="65bd71144e">
+    <diagram id="4gYRaNbeKyfvONwcVxEy" name="Page-1">
+        <mxGraphModel dx="1241" dy="783" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="980" pageHeight="620" math="0" shadow="1">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="node-1" value="输入压力&lt;br&gt;1M context + test-time scaling + long-horizon agent" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;strokeWidth=2;fontSize=14;fontStyle=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontColor=#0F172A;spacing=12;spacingTop=10;spacingBottom=10;arcSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="228" width="210" height="82" as="geometry"/>
+                </mxCell>
+                <mxCell id="node-2" value="混合注意力&lt;br&gt;CSA: 轻压缩 + top-k&lt;br&gt;HCA: 重压缩 + dense&lt;br&gt;SWA: 近处细节" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;strokeWidth=2;fontSize=13;fillColor=#FFFFFF;strokeColor=#2563EB;fontColor=#0F172A;spacing=12;spacingTop=10;spacingBottom=10;arcSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="70" width="230" height="118" as="geometry"/>
+                </mxCell>
+                <mxCell id="node-3" value="深层稳定性&lt;br&gt;mHC residual mixing&lt;br&gt;Birkhoff 约束 + Sinkhorn" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;strokeWidth=2;fontSize=13;fillColor=#FFFFFF;strokeColor=#2563EB;fontColor=#0F172A;spacing=12;spacingTop=10;spacingBottom=10;arcSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="220" width="230" height="96" as="geometry"/>
+                </mxCell>
+                <mxCell id="node-4" value="训练与低精度&lt;br&gt;Muon optimizer&lt;br&gt;FP4 QAT for experts / indexer&lt;br&gt;stability tricks" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;strokeWidth=2;fontSize=13;fillColor=#FFFFFF;strokeColor=#2563EB;fontColor=#0F172A;spacing=12;spacingTop=10;spacingBottom=10;arcSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="350" width="230" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="node-5" value="推理服务&lt;br&gt;heterogeneous KV cache&lt;br&gt;state cache + classical cache&lt;br&gt;on-disk prefix reuse" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;strokeWidth=2;fontSize=13;fillColor=#F8FAFC;strokeColor=#475569;fontColor=#0F172A;spacing=12;spacingTop=10;spacingBottom=10;arcSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="610" y="130" width="230" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="node-6" value="Post-training / Agent&lt;br&gt;specialists + OPD&lt;br&gt;interleaved thinking&lt;br&gt;Quick Instruction + tools" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;strokeWidth=2;fontSize=13;fillColor=#F8FAFC;strokeColor=#475569;fontColor=#0F172A;spacing=12;spacingTop=10;spacingBottom=10;arcSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="610" y="350" width="230" height="112" as="geometry"/>
+                </mxCell>
+                <mxCell id="node-7" value="输出能力&lt;br&gt;更低 FLOPs / KV cache&lt;br&gt;更可部署的 1M context&lt;br&gt;更长程的 agent 任务" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;strokeWidth=2;fontSize=14;fontStyle=1;fillColor=#ECFDF5;strokeColor=#059669;fontColor=#064E3B;spacing=12;spacingTop=10;spacingBottom=10;arcSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="910" y="221" width="230" height="109" as="geometry"/>
+                </mxCell>
+                <mxCell id="label-1" value="DeepSeek-V4 的关键不是单点优化，而是把模型、训练、推理和 agent runtime 放到同一条成本链路里。" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;fontStyle=1;fontColor=#0F172A;" parent="1" vertex="1">
+                    <mxGeometry x="160" y="480" width="750" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#2563EB;endArrow=blockThin;endFill=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="node-1" target="node-2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#2563EB;endArrow=blockThin;endFill=1;" parent="1" source="node-1" target="node-3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#2563EB;endArrow=blockThin;endFill=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="node-1" target="node-4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#64748B;endArrow=blockThin;endFill=1;" parent="1" source="node-2" target="node-5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#64748B;endArrow=blockThin;endFill=1;" parent="1" source="node-3" target="node-5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#64748B;endArrow=blockThin;endFill=1;" parent="1" source="node-4" target="node-6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#059669;endArrow=blockThin;endFill=1;" parent="1" source="node-5" target="node-7" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#059669;endArrow=blockThin;endFill=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="node-6" target="node-7" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
