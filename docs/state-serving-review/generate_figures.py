@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import html
+import math
 import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -416,6 +417,144 @@ def export_png(svg_path: Path) -> None:
     )
 
 
+def log_interp(value: float, low: float, high: float, start: int, end: int) -> float:
+    return start + (math.log10(value) - math.log10(low)) / (math.log10(high) - math.log10(low)) * (end - start)
+
+
+def state_break_even_rows() -> list[tuple[int, float, float, float, float, float]]:
+    ratios = [
+        128, 128, 4, 128, 4, 128, 4, 128, 4, 128, 4, 128, 4, 128, 4, 128,
+        4, 128, 4, 128, 4, 128, 4, 128, 4, 128, 4, 128, 4, 128, 4, 128,
+        4, 128, 4, 128, 4, 128, 4, 128, 4, 128, 4, 128, 4, 128, 4, 128,
+        4, 128, 4, 128, 4, 128, 4, 128, 4, 128, 4, 128, 4, 0,
+    ]
+    contexts = [1_000, 4_000, 16_000, 64_000, 128_000, 256_000, 512_000, 1_000_000, 1_048_576, 2_000_000, 4_000_000, 8_000_000, 16_000_000]
+    bytes_per_kv_entry = 2 * 512 * 2
+    full_slope = 61 * bytes_per_kv_entry
+    rows = []
+    for tokens in contexts:
+        ds_bytes = sum(math.ceil(tokens / ratio) for ratio in ratios if ratio > 0) * bytes_per_kv_entry
+        full_bytes = tokens * full_slope
+        rows.append(
+            (
+                tokens,
+                ds_bytes / 1024**3,
+                full_bytes / 1024**3,
+                8.0,
+                16.0,
+                32.0,
+            )
+        )
+    return rows
+
+
+def svg_polyline(points: list[tuple[float, float]], color: str, width: float = 4, dashed: bool = False) -> str:
+    dash = ' stroke-dasharray="12 9"' if dashed else ""
+    points_str = " ".join(f"{x:.1f},{y:.1f}" for x, y in points)
+    return f'<polyline points="{points_str}" fill="none" stroke="{color}" stroke-width="{width}" stroke-linejoin="round" stroke-linecap="round"{dash}/>'
+
+
+def write_state_break_even_figure() -> None:
+    rows = state_break_even_rows()
+    csv_lines = [
+        "context_tokens,deepseek_v4_compressed_kv_gib,uncompressed_mqa_kv_gib,fixed_state_8gib,fixed_state_16gib,fixed_state_32gib"
+    ]
+    for row in rows:
+        csv_lines.append(",".join([str(row[0]), *[f"{value:.6f}" for value in row[1:]]]))
+    data_dir = ROOT / "data"
+    data_dir.mkdir(exist_ok=True)
+    write_text(data_dir / "deepseek_state_break_even.csv", "\n".join(csv_lines))
+
+    width, height = 1600, 980
+    plot_x0, plot_y0, plot_x1, plot_y1 = 150, 164, 1460, 800
+    x_min, x_max = 1_000, 16_000_000
+    y_min, y_max = 0.01, 3000
+
+    def x(tokens: float) -> float:
+        return log_interp(tokens, x_min, x_max, plot_x0, plot_x1)
+
+    def y(gib: float) -> float:
+        return plot_y1 - (math.log10(gib) - math.log10(y_min)) / (math.log10(y_max) - math.log10(y_min)) * (plot_y1 - plot_y0)
+
+    ds_points = [(x(tokens), y(ds_gib)) for tokens, ds_gib, *_ in rows]
+    full_points = [(x(tokens), y(full_gib)) for tokens, _, full_gib, *_ in rows]
+    state8_points = [(x(tokens), y(8.0)) for tokens, *_ in rows]
+    state16_points = [(x(tokens), y(16.0)) for tokens, *_ in rows]
+    state32_points = [(x(tokens), y(32.0)) for tokens, *_ in rows]
+
+    x_ticks = [(1_000, "1K"), (16_000, "16K"), (128_000, "128K"), (1_000_000, "1M"), (4_000_000, "4M"), (16_000_000, "16M")]
+    y_ticks = [(0.1, "0.1"), (1, "1"), (8, "8"), (16, "16"), (32, "32"), (128, "128"), (1024, "1024")]
+    crossings = [(8, 541_747), (16, 1_083_493), (32, 2_166_987)]
+
+    content = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
+        "<defs>",
+        f'<pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M 32 0 L 0 0 0 32" fill="none" stroke="{THEME["grid"]}" stroke-width="1"/></pattern>',
+        "</defs>",
+        "<style>text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif; }</style>",
+        f'<rect width="{width}" height="{height}" fill="{THEME["bg"]}"/>',
+        f'<rect width="{width}" height="{height}" fill="url(#grid)" opacity="0.5"/>',
+        f'<rect x="36" y="28" width="{width - 72}" height="{height - 56}" rx="26" ry="26" fill="rgba(255,255,255,0.0)" stroke="{THEME["grid"]}" stroke-width="1.5"/>',
+        f'<text x="56" y="70" font-size="32" font-weight="800" fill="{THEME["text"]}">Figure 9. DeepSeek-V4 cache growth vs fixed recurrent state</text>',
+        f'<text x="56" y="102" font-size="18" font-weight="500" fill="{THEME["muted"]}">Break-even depends on state size: below the crossing, fixed state can be larger; above it, length-related KV dominates</text>',
+        f'<rect x="{plot_x0}" y="{plot_y0}" width="{plot_x1 - plot_x0}" height="{plot_y1 - plot_y0}" fill="#FFFFFF" stroke="{THEME["border"]}" stroke-width="1.5" rx="12" ry="12"/>',
+    ]
+
+    for value, label in y_ticks:
+        yy = y(value)
+        content.append(f'<line x1="{plot_x0}" y1="{yy:.1f}" x2="{plot_x1}" y2="{yy:.1f}" stroke="{THEME["grid"]}" stroke-width="1"/>')
+        content.append(f'<text x="{plot_x0 - 18}" y="{yy + 5:.1f}" text-anchor="end" font-size="14" font-weight="600" fill="{THEME["muted"]}">{label}</text>')
+    for value, label in x_ticks:
+        xx = x(value)
+        content.append(f'<line x1="{xx:.1f}" y1="{plot_y0}" x2="{xx:.1f}" y2="{plot_y1}" stroke="{THEME["grid"]}" stroke-width="1"/>')
+        content.append(f'<text x="{xx:.1f}" y="{plot_y1 + 34}" text-anchor="middle" font-size="14" font-weight="600" fill="{THEME["muted"]}">{label}</text>')
+
+    content.extend(
+        [
+            svg_polyline(full_points, THEME["rose"], 3, dashed=True),
+            svg_polyline(ds_points, THEME["navy"], 5),
+            svg_polyline(state8_points, THEME["teal"], 3),
+            svg_polyline(state16_points, THEME["amber"], 3),
+            svg_polyline(state32_points, THEME["violet"], 3),
+        ]
+    )
+
+    for gib, tokens in crossings:
+        xx, yy = x(tokens), y(gib)
+        content.append(f'<circle cx="{xx:.1f}" cy="{yy:.1f}" r="7" fill="#FFFFFF" stroke="{THEME["text"]}" stroke-width="2"/>')
+        label = f"{gib} GiB ≈ {tokens / 1_000_000:.2f}M"
+        content.append(f'<text x="{xx + 12:.1f}" y="{yy - 12:.1f}" font-size="14" font-weight="700" fill="{THEME["text"]}">{label}</text>')
+
+    legend_x, legend_y = 905, 202
+    legend_items = [
+        (THEME["navy"], "DeepSeek-V4 compressed KV, BF16"),
+        (THEME["rose"], "Uncompressed MQA KV with same layer/head width"),
+        (THEME["teal"], "Fixed recurrent state: 8 GiB"),
+        (THEME["amber"], "Fixed recurrent state: 16 GiB"),
+        (THEME["violet"], "Fixed recurrent state: 32 GiB"),
+    ]
+    content.append(f'<rect x="{legend_x - 24}" y="{legend_y - 32}" width="500" height="178" rx="12" ry="12" fill="#FFFFFF" stroke="{THEME["grid"]}" stroke-width="1.2"/>')
+    for idx, (color, label) in enumerate(legend_items):
+        yy = legend_y + idx * 30
+        dash = ' stroke-dasharray="10 7"' if idx == 1 else ""
+        content.append(f'<line x1="{legend_x}" y1="{yy}" x2="{legend_x + 44}" y2="{yy}" stroke="{color}" stroke-width="4" stroke-linecap="round"{dash}/>')
+        content.append(f'<text x="{legend_x + 58}" y="{yy + 5}" font-size="15" font-weight="600" fill="{THEME["muted"]}">{html.escape(label)}</text>')
+
+    content.extend(
+        [
+            f'<text x="{(plot_x0 + plot_x1) / 2}" y="{plot_y1 + 76}" text-anchor="middle" font-size="16" font-weight="700" fill="{THEME["text"]}">Context tokens, log scale</text>',
+            f'<text x="58" y="{(plot_y0 + plot_y1) / 2}" transform="rotate(-90 58 {(plot_y0 + plot_y1) / 2})" text-anchor="middle" font-size="16" font-weight="700" fill="{THEME["text"]}">Runtime memory per sequence (GiB), log scale</text>',
+            f'<text x="56" y="904" font-size="15" font-weight="500" fill="{THEME["muted"]}">Assumption: DeepSeek-V4-Pro config, 61 compressed layers, one KV head, head_dim=512, BF16 cache; SWA/tail state is only tens of MiB at this scale.</text>',
+            f'<text x="56" y="928" font-size="15" font-weight="500" fill="{THEME["muted"]}">Interpretation: fixed state above the blue line is more memory-heavy than DeepSeek-V4 cache at that context length; below the blue line it is cheaper.</text>',
+            "</svg>",
+        ]
+    )
+
+    svg_path = ASSETS / "fig09_deepseek_state_break_even.svg"
+    write_text(svg_path, "\n".join(content))
+    export_png(svg_path)
+
+
 def figures() -> Iterable[Figure]:
     yield Figure(
         name="fig01_architecture_landscape",
@@ -597,6 +736,7 @@ def main() -> None:
         svg_path = ASSETS / f"{fig.name}.svg"
         write_text(svg_path, svg_for_figure(fig))
         export_png(svg_path)
+    write_state_break_even_figure()
     write_text(ROOT / "figures.drawio", build_drawio(figures_list))
 
 
