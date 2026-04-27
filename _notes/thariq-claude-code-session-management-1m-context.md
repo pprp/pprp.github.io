@@ -7,13 +7,13 @@ categories: notes
 note_source: "Thariq / X"
 original_url: "https://x.com/trq212/status/2044548257058328723"
 ---
-这是一份围绕 Claude Code 长会话管理的实战指南。重点不在于“把 1M context 用满”，而在于当上下文窗口大到足以承载超长任务时，如何避免噪声、失败路径和过时信息把模型一步步拖偏。
+这是一份围绕 Claude Code 长会话管理的实战指南。它的重点不在于“把 1M context 用满”，而在于当上下文窗口大到足以承载超长任务时，如何避免噪声、失败路径和过时信息把模型一步步拖偏。长上下文不是越满越好，真正的能力来自对上下文的取舍。
 
 ![配图：Using Claude Code - Session Management & 1M Context](https://raw.githubusercontent.com/shanraisshan/claude-code-best-practice/main/tips/assets/thariq-16-apr-26/2.png)
 
 ## 上下文、压缩与上下文退化
 
-上下文窗口，指的是模型在生成下一条回复时“同时看得到”的全部信息。它不仅包括系统提示词和当前对话，还包括每一次工具调用的输出、已经读过的文件，以及会话里已经发生过的中间推理。
+上下文窗口，指的是模型在生成下一条回复时“同时看得到”的全部信息。它不仅包括系统提示词和当前对话，还包括每一次工具调用的输出、已经读过的文件，以及会话里已经发生过的中间过程。
 
 在 Claude Code 里，这个窗口现在可以达到 **100 万 token**。这确实让更长、更复杂的任务变得可行，但代价是会出现 **上下文退化（context rot）**：上下文越长，注意力越分散，越老、越无关的信息越容易干扰当前任务。对 1M context 模型来说，这种退化大致会在 **30 万到 40 万 token** 左右开始明显出现，但它强依赖任务类型，不能当成硬阈值。
 

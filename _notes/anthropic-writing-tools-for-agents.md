@@ -7,23 +7,23 @@ categories: notes
 note_source: "Anthropic"
 original_url: "https://www.anthropic.com/engineering/writing-tools-for-agents"
 ---
-[模型上下文协议（MCP）](https://modelcontextprotocol.io/docs/getting-started/intro)可以为大语言模型智能体赋予数百种工具，从而解决现实世界中的任务。但我们如何才能让这些工具发挥最大效用？
+[模型上下文协议（MCP）](https://modelcontextprotocol.io/docs/getting-started/intro)可以为大语言模型智能体连接数百种工具，让它们处理现实世界中的任务。但工具越多，不等于智能体越强。真正的问题是：怎样让这些工具被模型正确理解、正确选择，并以较低上下文成本发挥作用？
 
-在本文中，我们介绍了在各类智能体 AI 系统中提升性能的最有效技术 1。
+本文总结了在各类智能体 AI 系统中提升工具使用效果的关键方法。
 
 我们首先介绍如何：
 
-*   构建并测试工具原型
-*   与智能体协同创建并运行对工具的全面评估
-*   借助 Claude Code 等智能体自动提升工具性能
+- 构建并测试工具原型
+- 与智能体协同创建并运行对工具的全面评估
+- 借助 Claude Code 等智能体自动提升工具性能
 
 最后，我们总结了在此过程中归纳出的高质量工具编写核心原则：
 
-*   选择正确的工具来实现（以及哪些不应实现）
-*   通过命名空间定义工具功能的清晰边界
-*   从工具向智能体返回有意义的上下文
-*   优化工具响应的 token 效率
-*   对工具描述和规范进行提示词工程
+- 选择正确的工具来实现（以及哪些不应实现）
+- 通过命名空间定义工具功能的清晰边界
+- 从工具向智能体返回有意义的上下文
+- 优化工具响应的 token 效率
+- 对工具描述和规范进行提示词工程
 
 ![图1：该图展示了工程师如何使用 Claude Code 评估智能体工具有效性。](https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2Fcdc027ad2730e4732168bb198fc9363678544f99-1920x1080.png&w=3840&q=75)
 
@@ -73,15 +73,15 @@ original_url: "https://www.anthropic.com/engineering/writing-tools-for-agents"
 
 以下是一些优质任务示例：
 
-*   安排下周与 Jane 的会议，讨论我们最新的 Acme Corp 项目。附上上次项目规划会议的记录，并预订一间会议室。
-*   客户 ID 9182 反映其单次购买操作被重复扣款三次。查找所有相关日志条目，并确认是否有其他客户受到同一问题的影响。
-*   客户 Sarah Chen 刚刚提交了取消订阅申请。请准备一份挽留方案，确定：（1）她离开的原因；（2）最具吸引力的挽留方案；（3）在提出方案前需注意的风险因素。
+- 安排下周与 Jane 的会议，讨论我们最新的 Acme Corp 项目。附上上次项目规划会议的记录，并预订一间会议室。
+- 客户 ID 9182 反映其单次购买操作被重复扣款三次。查找所有相关日志条目，并确认是否有其他客户受到同一问题的影响。
+- 客户 Sarah Chen 刚刚提交了取消订阅申请。请准备一份挽留方案，确定：（1）她离开的原因；（2）最具吸引力的挽留方案；（3）在提出方案前需注意的风险因素。
 
 以下是一些较弱的任务示例：
 
-*   安排下周与 jane@acme.corp 的会议。
-*   在支付日志中搜索 `purchase_complete` 和 `customer_id=9182`。
-*   查找客户 ID 45892 的取消订阅申请。
+- 安排下周与 jane@acme.corp 的会议。
+- 在支付日志中搜索 `purchase_complete` 和 `customer_id=9182`。
+- 查找客户 ID 45892 的取消订阅申请。
 
 每个评估提示词都应配备可验证的响应或结果。验证器可以简单到将真实答案与采样响应进行精确字符串比较，也可以复杂到邀请 Claude 对响应进行评判。避免使用过于严格的验证器，以免因格式、标点或有效的替代表述等细微差异而拒绝正确响应。
 
@@ -137,9 +137,9 @@ original_url: "https://www.anthropic.com/engineering/writing-tools-for-agents"
 
 以下是一些示例：
 
-*   与其实现 `list_users`、`list_events` 和 `create_event` 工具，不如考虑实现一个 `schedule_event` 工具，由它负责查找空闲时间并安排事件。
-*   与其实现 `read_logs` 工具，不如考虑实现一个 `search_logs` 工具，只返回相关日志行及其上下文。
-*   与其实现 `get_customer_by_id`、`list_transactions` 和 `list_notes` 工具，不如实现一个 `get_customer_context` 工具，一次性汇总客户所有近期相关信息。
+- 与其实现 `list_users`、`list_events` 和 `create_event` 工具，不如考虑实现一个 `schedule_event` 工具，由它负责查找空闲时间并安排事件。
+- 与其实现 `read_logs` 工具，不如考虑实现一个 `search_logs` 工具，只返回相关日志行及其上下文。
+- 与其实现 `get_customer_by_id`、`list_transactions` 和 `list_notes` 工具，不如实现一个 `get_customer_context` 工具，一次性汇总客户所有近期相关信息。
 
 确保你构建的每个工具都有清晰、明确的用途。工具应使智能体能够以人类在获得相同底层资源时的方式来分解和解决任务，同时减少中间输出所消耗的上下文。
 
