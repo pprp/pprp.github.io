@@ -8,6 +8,12 @@ layout: default
   </div>
 
   <div class="date">
-    Written on {{ page.date | date: "%Y年%m月%d日" }}
+    {% if page.author %}
+      作者：{{ page.author }} ·
+    {% endif %}
+    发布于：{{ page.date | date: "%Y年%m月%d日 %H:%M" }}
+    {% if page.last_modified_at %}
+      · 修订于：{{ page.last_modified_at | date: "%Y年%m月%d日 %H:%M" }}
+    {% endif %}
   </div>
 </article>
