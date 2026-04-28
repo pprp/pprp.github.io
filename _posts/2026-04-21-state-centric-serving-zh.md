@@ -1156,3 +1156,21 @@ state artifact 也类似。
 如果必须把整篇文章压成一句话，我会保留下面这一句：
 
 > **大模型的下一阶段，不是“更大的上下文窗口”，而是“更长的状态连续服务”。**
+
+## 引用
+
+若想引用本文，请使用：
+
+```bibtex
+@misc{dong2026statecentricservingzh,
+  author = {Peijie Dong},
+  title = {长上下文的终局，不是更大的窗口},
+  year = {2026},
+  month = apr,
+  day = {21},
+  howpublished = {\url{https://pprp.github.io/tech/state-centric-serving-zh/}},
+  url = {https://pprp.github.io/tech/state-centric-serving-zh/},
+  note = {Blog post. Accessed: 2026-04-28},
+  language = {Chinese}
+}
+```

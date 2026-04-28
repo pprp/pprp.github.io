@@ -134,3 +134,21 @@ prompt = tokenizer.apply_chat_template(
 最后可以把这件事理解成三层：Chat Template 管消息格式，Tool-Use Template 管行动协议，特殊 token 管边界语义。模型本身负责生成，下游系统负责解释和执行，中间靠模板把两边对齐。
 
 这也是为什么格式问题不应该被当作接入细节。对普通聊天应用来说，它决定回答质量；对 Agent 系统来说，它决定工具调用、状态流转和错误恢复是否可靠。掌握这三层，才谈得上把开源模型安全、无损、可扩展地接入真实系统。
+
+## 引用
+
+若想引用本文，请使用：
+
+```bibtex
+@misc{dong2025chattemplate,
+  author = {Peijie Dong},
+  title = {大模型对话格式全景},
+  year = {2025},
+  month = aug,
+  day = {22},
+  howpublished = {\url{https://pprp.github.io/tech/chat-template/}},
+  url = {https://pprp.github.io/tech/chat-template/},
+  note = {Blog post. Accessed: 2026-04-28},
+  language = {Chinese}
+}
+```

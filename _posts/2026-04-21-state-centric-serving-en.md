@@ -1167,3 +1167,21 @@ The list below is organized by reading sequence rather than chronology.
 If the entire essay had to be collapsed into one sentence, I would keep this one:
 
 > **the next stage of large models is not simply “bigger context windows,” but longer state-continuous service.**
+
+## 引用
+
+若想引用本文，请使用：
+
+```bibtex
+@misc{dong2026statecentricservingen,
+  author = {Peijie Dong},
+  title = {From Ultra-Long Context to Lifelong Service: Why Open Models Are Likely to Become State-Centric Serving Systems},
+  year = {2026},
+  month = apr,
+  day = {21},
+  howpublished = {\url{https://pprp.github.io/tech/state-centric-serving-en/}},
+  url = {https://pprp.github.io/tech/state-centric-serving-en/},
+  note = {Blog post. Accessed: 2026-04-28},
+  language = {English}
+}
+```

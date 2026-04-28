@@ -105,3 +105,21 @@ Async Multi-Agent architectures provide the mechanism: parallel agents gather co
 What changes is not just the number of icons on the home screen. What changes is the direction of adaptation. Instead of humans learning the logic of machines, machines begin adapting to the shape of human intent.
 
 The apps are fading. Long live the Canvas.
+
+## 引用
+
+若想引用本文，请使用：
+
+```bibtex
+@misc{dong2026deathoftheapp,
+  author = {Peijie Dong},
+  title = {The Death of the App: Why the "Intent Canvas" is the Endgame of Operating Systems},
+  year = {2026},
+  month = mar,
+  day = {18},
+  howpublished = {\url{https://pprp.github.io/tech/death-of-the-app-en/}},
+  url = {https://pprp.github.io/tech/death-of-the-app-en/},
+  note = {Blog post. Accessed: 2026-04-28},
+  language = {English}
+}
+```
