@@ -6,6 +6,7 @@ date: 2026-04-24 00:00:00 +0800
 last_modified_at: 2026-04-27 00:00:00 +0800
 author: pprp
 categories: tech
+topics: [paper-reading, long-context, llm-systems]
 ---
 
 *这篇文章基于论文《DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence》和原始中文整理稿重写。它不是逐段翻译，而是把论文重新组织成一条更适合阅读的技术主线：为什么百万 token 上下文困难，DeepSeek-V4 怎么把它做得更便宜，以及这些设计对长程 agent 和 test-time scaling 意味着什么。*

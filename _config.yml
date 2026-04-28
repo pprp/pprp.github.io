@@ -71,6 +71,7 @@ exclude:
   - .asset-cache
   - .bundle
   - .jekyll-assets-cache
+  - .playwright-mcp
   - .sass-cache
   - .github
   - CHANGELOG

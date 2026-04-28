@@ -6,6 +6,7 @@ date: 2026-04-16 00:00:00 +0800
 last_modified_at: 2026-04-27 00:00:00 +0800
 author: pprp
 categories: tech
+topics: [agent, source-reading]
 ---
 
 ## 读 Claude Code，不能只追“源码事件”

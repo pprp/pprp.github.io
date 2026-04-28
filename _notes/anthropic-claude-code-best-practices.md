@@ -4,6 +4,7 @@ title: "Claude Code：智能体式编码最佳实践"
 title_en: "Claude Code: Best practices for agentic coding"
 date: 2025-04-18 00:00:00 +0800
 categories: notes
+topics: [agent, coding-agent, workflow]
 note_source: "Anthropic"
 original_url: "https://www.anthropic.com/engineering/claude-code-best-practices"
 ---

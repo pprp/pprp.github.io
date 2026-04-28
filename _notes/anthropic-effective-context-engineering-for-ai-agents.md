@@ -4,6 +4,7 @@ title: "面向 AI 智能体的高效上下文工程"
 title_en: "Effective context engineering for AI agents"
 date: 2025-09-29 00:00:00 +0800
 categories: notes
+topics: [agent, context-engineering]
 note_source: "Anthropic"
 original_url: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
 ---

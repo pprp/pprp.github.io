@@ -136,8 +136,10 @@
   font-size: $type-size-4;
 }
 
-.author__bio {
+.sidebar .author__bio {
   margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.6;
 
   @include breakpoint($large) {
     margin-top: 10px;

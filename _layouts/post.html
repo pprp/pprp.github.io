@@ -1,19 +1,61 @@
 ---
 layout: default
 ---
-<article class="post">
-  <h1>{{ page.title }}</h1>
-  <div class="entry">
-    {{ content }}
+<article class="reading-shell reading-shell--post">
+  <header class="reading-hero">
+    <a class="reading-hero__back" href="{{ '/blog/' | relative_url }}">Writing</a>
+    <h1>{{ page.title }}</h1>
+    {% if page.title_en %}
+      <p class="reading-hero__subtitle">{{ page.title_en }}</p>
+    {% endif %}
+
+    <div class="reading-meta">
+      {% if page.author %}
+        <span>作者：{{ page.author }}</span>
+      {% endif %}
+      <span>发布：{{ page.date | date: "%Y年%m月%d日" }}</span>
+      {% if page.last_modified_at %}
+        <span>修订：{{ page.last_modified_at | date: "%Y年%m月%d日" }}</span>
+      {% endif %}
+      {% assign _rt_words = content | strip_html | number_of_words %}
+      {% assign _rt_min = _rt_words | divided_by: 300 | at_least: 1 %}
+      <span>{{ _rt_min }} min read</span>
+    </div>
+
+    {% if page.topics %}
+      <div class="reading-tags">
+        {% for topic in page.topics %}
+          <a href="{{ '/blog/' | relative_url }}?topic={{ topic | slugify }}">{{ topic | replace: "-", " " }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </header>
+
+  <div class="reading-layout">
+    <aside class="reading-toc" aria-label="Table of contents">
+      <p>Contents</p>
+      <ol data-toc-list></ol>
+    </aside>
+
+    <div class="entry reading-content">
+      {{ content }}
+    </div>
   </div>
 
-  <div class="date">
-    {% if page.author %}
-      作者：{{ page.author }} ·
+  <nav class="reading-nav" aria-label="Post navigation">
+    {% if page.previous %}
+      <a href="{{ page.previous.url | relative_url }}">
+        <span>Older</span>
+        {{ page.previous.title }}
+      </a>
     {% endif %}
-    发布于：{{ page.date | date: "%Y年%m月%d日 %H:%M" }}
-    {% if page.last_modified_at %}
-      · 修订于：{{ page.last_modified_at | date: "%Y年%m月%d日 %H:%M" }}
+    {% if page.next %}
+      <a href="{{ page.next.url | relative_url }}">
+        <span>Newer</span>
+        {{ page.next.title }}
+      </a>
     {% endif %}
-  </div>
+  </nav>
 </article>
+
+<script src="{{ '/assets/js/content-index.js' | relative_url }}"></script>

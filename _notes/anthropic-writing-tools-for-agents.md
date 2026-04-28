@@ -4,6 +4,7 @@ title: "为智能体编写高效工具：借助智能体完成"
 title_en: "Writing effective tools for agents — with agents"
 date: 2025-09-11 00:00:00 +0800
 categories: notes
+topics: [agent, tool-design]
 note_source: "Anthropic"
 original_url: "https://www.anthropic.com/engineering/writing-tools-for-agents"
 ---

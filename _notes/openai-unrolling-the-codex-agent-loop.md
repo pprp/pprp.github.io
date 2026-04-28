@@ -4,11 +4,11 @@ title: "深入解析 Codex 智能体循环"
 title_en: "Unrolling the Codex agent loop"
 date: 2026-01-23 00:00:00 +0800
 categories: notes
+topics: [codex, agent-loop, harness]
 note_source: "OpenAI"
+original_author: "Michael Bolin"
 original_url: "https://openai.com/index/unrolling-the-codex-agent-loop/"
 ---
-作者：Michael Bolin，技术团队成员
-
 这篇文章是理解 Codex 的入口：它不从模型能力讲起，而是先拆解一个编码智能体最基本、也最容易被忽视的结构——智能体循环。
 
 [Codex CLI](https://developers.openai.com/codex/cli) 是 OpenAI 打造的跨平台本地软件智能体，目标是在你的计算机上安全、高效地运行，并交付高质量、可靠的软件变更。[自四月首次发布该 CLI 以来](https://openai.com/index/introducing-o3-and-o4-mini/)，团队在构建先进软件智能体方面积累了大量经验。本文是系列开篇，将解释 Codex 如何运作、为什么这样设计，以及这些经验对构建软件智能体意味着什么。（如需了解 Codex CLI 的底层实现细节，可查看开源仓库：[https://github.com/openai/codex](https://github.com/openai/codex)。许多设计决策也记录在 GitHub 的议题和 Pull Request 中。）

@@ -4,6 +4,7 @@ title: "我们如何构建多智能体研究系统"
 title_en: "How we built our multi-agent research system"
 date: 2025-06-13 00:00:00 +0800
 categories: notes
+topics: [multi-agent, research-system]
 note_source: "Anthropic"
 original_url: "https://www.anthropic.com/engineering/multi-agent-research-system"
 ---

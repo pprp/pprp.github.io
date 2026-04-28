@@ -4,11 +4,11 @@ title: "工程技术：在智能体优先的世界中利用 Codex"
 title_en: "Harness engineering: leveraging Codex in an agent-first world"
 date: 2026-02-11 00:00:00 +0800
 categories: notes
+topics: [agent, harness, software-engineering]
 note_source: "OpenAI"
+original_author: "Ryan Lopopolo"
 original_url: "https://openai.com/index/harness-engineering/"
 ---
-作者：Ryan Lopopolo，技术人员
-
 在过去五个月里，我们的团队一直在进行一项实验：构建并交付一款软件产品的内部 beta 版，**其中没有一行代码由人类手写**。
 
 该产品有内部日常活跃用户和外部 Alpha 测试者，也经历了交付、部署、故障和修复的完整过程。不同之处在于，每一行代码——从应用逻辑、测试、CI 配置、文档、可观察性到内部工具——全都由 Codex 编写。据估计，我们只用了手工编写代码所需大约 1/10 的时间就完成了这项工作。

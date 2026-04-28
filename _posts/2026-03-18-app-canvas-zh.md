@@ -5,6 +5,7 @@ date: 2026-03-18 00:00:00 +0800
 last_modified_at: 2026-04-27 10:05:00 +0800
 author: pprp
 categories: tech
+topics: [product-thinking, agent]
 ---
 
 今天最荒诞的技术错位是：我们口袋里的手机已经具备运行百亿参数大模型的端侧算力，但我们与这台"超级计算机"的交互方式，依然停留在上世纪 90 年代的"九宫格"逻辑里。

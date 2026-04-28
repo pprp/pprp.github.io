@@ -1,30 +1,54 @@
 ---
 layout: default
 ---
-<article class="note">
-  <header class="note__header">
-    <p class="note__eyebrow">Notes</p>
+<article class="reading-shell reading-shell--note note">
+  <header class="reading-hero note__header">
+    <a class="reading-hero__back" href="{{ '/notes/' | relative_url }}">Notes</a>
+    <p class="note__eyebrow">Reading Note</p>
     <h1 class="note__title">{{ page.title }}</h1>
     {% if page.title_en %}
-      <p class="note__title-en">{{ page.title_en }}</p>
+      <p class="reading-hero__subtitle note__title-en">{{ page.title_en }}</p>
     {% endif %}
 
-    <div class="note__meta">
+    <div class="reading-meta note__meta">
       {% if page.note_source %}
-        <span class="note__pill">{{ page.note_source }}</span>
+        <span>来源：{{ page.note_source }}</span>
       {% endif %}
-      <span class="note__meta-item">{{ page.date | date: "%Y年%m月%d日" }}</span>
+      {% if page.original_author %}
+        <span>原文作者：{{ page.original_author }}</span>
+      {% endif %}
+      <span>发布：{{ page.date | date: "%Y年%m月%d日" }}</span>
+      {% assign _rt_words = content | strip_html | number_of_words %}
+      {% assign _rt_min = _rt_words | divided_by: 300 | at_least: 1 %}
+      <span>{{ _rt_min }} min read</span>
       {% if page.original_url %}
-        <a class="note__meta-link" href="{{ page.original_url }}" rel="noopener">查看原文</a>
+        <a class="note__meta-link" href="{{ page.original_url }}" rel="noopener">原文链接</a>
       {% endif %}
     </div>
+
+    {% if page.topics %}
+      <div class="reading-tags">
+        {% for topic in page.topics %}
+          <span>{{ topic | replace: "-", " " }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
 
     <div class="note__notice">
       中文翻译 / 转载笔记，保留原始文章结构，便于站内阅读与检索。
     </div>
   </header>
 
-  <div class="note__content">
-    {{ content }}
+  <div class="reading-layout">
+    <aside class="reading-toc" aria-label="Table of contents">
+      <p>Contents</p>
+      <ol data-toc-list></ol>
+    </aside>
+
+    <div class="note__content reading-content">
+      {{ content }}
+    </div>
   </div>
 </article>
+
+<script src="{{ '/assets/js/content-index.js' | relative_url }}"></script>

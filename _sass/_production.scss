@@ -139,7 +139,9 @@
 
   &__copy,
   &__detail {
+    max-width: 46rem;
     color: var(--production-muted);
+    line-height: 1.72;
   }
 
   &__copy {
@@ -201,6 +203,41 @@
       align-items: start;
       gap: 1.25rem;
       padding: 1.45rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    margin-top: 0.5rem;
+
+    &__hero {
+      padding: 1.5rem 1.1rem;
+      border-radius: 16px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      line-height: 1.16;
+    }
+
+    &__signals {
+      gap: 0.5rem;
+    }
+
+    &__signals span {
+      font-size: 0.78rem;
+    }
+
+    &__card {
+      border-radius: 16px;
+    }
+
+    &__copy,
+    &__detail {
+      font-size: 0.98rem;
+    }
+
+    &__button {
+      width: 100%;
     }
   }
 }

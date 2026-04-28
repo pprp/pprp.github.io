@@ -5,6 +5,7 @@ date: 2025-08-22 11:00:00 +0800
 last_modified_at: 2026-04-27 00:00:00 +0800
 author: pprp
 categories: tech
+topics: [llm-systems, engineering]
 ---
 
 # 大模型对话格式全景：从 Chat Template 到 Tool-Use，再到跨阶段 Token 设计

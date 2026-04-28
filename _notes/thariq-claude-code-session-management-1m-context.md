@@ -4,6 +4,7 @@ title: "Claude Code：会话管理与 1M 上下文"
 title_en: "Using Claude Code: Session Management & 1M Context"
 date: 2026-04-16 00:00:00 +0800
 categories: notes
+topics: [claude-code, session-management, long-context]
 note_source: "Thariq / X"
 original_url: "https://x.com/trq212/status/2044548257058328723"
 ---

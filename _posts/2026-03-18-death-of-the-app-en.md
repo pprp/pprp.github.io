@@ -5,6 +5,7 @@ date: 2026-03-18 00:00:00 +0800
 last_modified_at: 2026-04-27 00:00:00 +0800
 author: pprp
 categories: tech
+topics: [product-thinking, agent]
 ---
 
 We carry supercomputers in our pockets, yet we still interact with them like 1990s filing cabinets.

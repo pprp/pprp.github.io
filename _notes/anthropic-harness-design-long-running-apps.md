@@ -4,11 +4,11 @@ title: "面向长时运行应用开发的 Harness 设计"
 title_en: "Harness design for long-running application development"
 date: 2026-03-24 00:00:00 +0800
 categories: notes
+topics: [harness, software-engineering]
 note_source: "Anthropic"
+original_author: "Prithvi Rajasekaran"
 original_url: "https://www.anthropic.com/engineering/harness-design-long-running-apps"
 ---
-_作者：Prithvi Rajasekaran，[Labs](https://www.anthropic.com/news/introducing-anthropic-labs) 团队成员。_
-
 在过去几个月里，我一直在研究两个相互关联的问题：如何让 Claude 生成高质量的前端设计，以及如何让它在无人干预的情况下构建完整的应用程序。这项工作源于我们早期在[前端设计技能](https://github.com/anthropics/claude-code/blob/main/plugins/frontend-design/skills/frontend-design/SKILL.md)和[长时间运行的编码智能体框架](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)上的探索——我和同事通过提示工程与框架设计，将 Claude 的表现大幅提升至基线水平之上，但两者最终都遇到了瓶颈。
 
 为了突破瓶颈，我寻找能够跨越两个截然不同领域的新型 AI 工程方法：一个以主观审美为核心，另一个以可验证的正确性和可用性为核心。受[生成对抗网络](https://en.wikipedia.org/wiki/Generative_adversarial_network)（GAN）的启发，我设计了一种包含**生成器**与**评估器**智能体的多智能体架构。要构建一个能够可靠且有品位地评分的评估器，首先需要制定一套标准，将"这个设计好吗？"这样的主观判断转化为具体可评分的维度。

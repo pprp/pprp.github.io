@@ -9,7 +9,7 @@
   padding-left: 1em;
   padding-right: 1em;
   animation: intro 0.3s both;
-  animation-delay: 0.35s;
+  animation-delay: 0.08s;
 
   @include breakpoint($x-large) {
     max-width: $x-large;
@@ -121,6 +121,22 @@
   blockquote + .small {
     margin-top: -1.5em;
     padding-left: 1.25rem;
+  }
+}
+
+.page:not(.page--wide) {
+  .page__content {
+    max-width: 760px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #main,
+  .masthead,
+  .breadcrumbs,
+  .page__hero,
+  .page__hero--overlay {
+    animation: none !important;
   }
 }
 
