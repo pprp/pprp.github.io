@@ -1,0 +1,69 @@
+<mxfile host="Electron">
+  <diagram id="fig07-state-serving-loop" name="Figure 7. State-Serving Loop">
+    <mxGraphModel dx="1376" dy="1014" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1600" pageHeight="980" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="label-title" value="Figure 7. The state-serving loop for long-horizon agents" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=20;fontColor=#0F172A;" vertex="1" parent="1">
+          <mxGeometry x="56" y="30" width="1400" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="label-sub" value="A long-running agent is best understood as a closed-loop system that repeatedly compresses, verifies, externalizes, and resumes" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#64748B;" vertex="1" parent="1">
+          <mxGeometry x="56" y="62" width="1450" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="node-1" value="&lt;b&gt;User / environment&lt;/b&gt;&lt;br&gt;new tasks, new evidence, changing world state" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=1.5;fontSize=13;fillColor=#EFF6FF;strokeColor=#94A3B8;fontColor=#0F172A;spacing=10;spacingTop=8;spacingBottom=8;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="120" y="360" width="230" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="node-2" value="&lt;b&gt;Live state&lt;/b&gt;&lt;br&gt;current plan&lt;br&gt;working memory&lt;br&gt;open hypotheses" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=13;fillColor=#DBEAFE;strokeColor=#2563EB;fontStyle=1;fontColor=#0F172A;spacing=10;spacingTop=8;spacingBottom=8;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="430" y="180" width="300" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="node-3" value="&lt;b&gt;Compaction + summarization&lt;/b&gt;&lt;br&gt;Shrink context while carrying forward task-relevant state" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=1.5;fontSize=13;fillColor=#EFF6FF;strokeColor=#94A3B8;fontColor=#0F172A;spacing=10;spacingTop=8;spacingBottom=8;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="170" y="710" width="300" height="116" as="geometry" />
+        </mxCell>
+        <mxCell id="node-4" value="&lt;b&gt;External memory&lt;/b&gt;&lt;br&gt;notes, artifacts, retrieval index, project docs" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=1.5;fontSize=13;fillColor=#EFF6FF;strokeColor=#94A3B8;fontColor=#0F172A;spacing=10;spacingTop=8;spacingBottom=8;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="860" y="180" width="300" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="node-5" value="&lt;b&gt;Tools + verification&lt;/b&gt;&lt;br&gt;tests, browser, logs, metrics, APIs" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=1.5;fontSize=13;fillColor=#EFF6FF;strokeColor=#94A3B8;fontColor=#0F172A;spacing=10;spacingTop=8;spacingBottom=8;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="860" y="560" width="300" height="116" as="geometry" />
+        </mxCell>
+        <mxCell id="node-6" value="&lt;b&gt;Response / action&lt;/b&gt;&lt;br&gt;answers, code changes, decisions, tool side effects" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=1.5;fontSize=13;fillColor=#EFF6FF;strokeColor=#94A3B8;fontColor=#0F172A;spacing=10;spacingTop=8;spacingBottom=8;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="360" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="node-7" value="&lt;b&gt;Design criterion&lt;/b&gt;&lt;br&gt;Preserve enough state for the next competent action, not every token from the previous window" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=1.5;fontSize=13;fillColor=#FEF3C7;strokeColor=#B45309;fontColor=#0F172A;spacing=10;spacingTop=8;spacingBottom=8;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="506" y="390" width="500" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" value="new input" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#1D4ED8;endArrow=blockThin;endFill=1;fontSize=12;fontColor=#475569;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="node-1" target="node-2" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-2" value="memory I/O" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#7C3AED;endArrow=blockThin;endFill=1;fontSize=12;fontColor=#475569;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="node-2" target="node-4" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-3" value="retrieve" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#0F766E;endArrow=blockThin;endFill=1;fontSize=12;fontColor=#475569;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" source="node-4" target="node-5" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-4" value="act" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#1D4ED8;endArrow=blockThin;endFill=1;fontSize=12;fontColor=#475569;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="node-5" target="node-6" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-5" value="carry-over" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#B45309;endArrow=blockThin;endFill=1;fontSize=12;fontColor=#475569;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" source="node-6" target="node-3" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1360" y="880" />
+              <mxPoint x="320" y="880" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge-6" value="resume" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#0F766E;endArrow=blockThin;endFill=1;fontSize=12;fontColor=#475569;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" edge="1" source="node-3" target="node-2" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-7" value="feedback" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.25;strokeColor=#94A3B8;endArrow=blockThin;endFill=1;dashed=1;dashPattern=6 4;fontSize=12;fontColor=#475569;" edge="1" source="node-5" target="node-2" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label-legend" value="→ acting (navy)  ·  → memory (violet)  ·  → compaction / retrieval (teal)  ·  → residue / carry-over (amber)  ·  -- feedback (gray dashed)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#64748B;" vertex="1" parent="1">
+          <mxGeometry x="56" y="910" width="800" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="label-footnote" value="This loop is why long-running agent systems increasingly need both memory architecture and serving architecture, not just larger windows." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#64748B;" vertex="1" parent="1">
+          <mxGeometry x="56" y="940" width="1400" height="22" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

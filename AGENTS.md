@@ -4,6 +4,8 @@
 
 This repo is a Jekyll-based personal site. Core content lives in `_pages/` for standalone pages and `_posts/` for dated blog posts named `YYYY-MM-DD-slug.md`. Shared templates are in `_layouts/` and `_includes/`, site data is in `_data/`, and styling is split between `assets/css/main.scss` and `_sass/` partials. Static media belongs in `images/`; supporting docs and design notes live in `docs/`. The `google_scholar_crawler/` folder is a separate Python utility for citation data. Treat `_site/`, `vendor/`, `.bundle/`, and `.sass-cache/` as generated output, not source.
 
+Do not use SVG as a plotted figure format under `images/`. Keep editable diagrams as `.drawio` source files and publish rendered figures as `.png`.
+
 博客最下方应该添加引用，仿照：
 
 ```

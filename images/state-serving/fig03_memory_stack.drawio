@@ -1,0 +1,69 @@
+<mxfile host="Electron">
+  <diagram id="fig03-memory-stack" name="Figure 3. Memory Stack">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1600" pageHeight="980" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="label-title" value="Figure 3. A four-layer memory stack for state-centric serving" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=20;fontColor=#0F172A;" vertex="1" parent="1">
+          <mxGeometry x="56" y="30" width="1400" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="label-sub" value="The useful distinction is not just short-term vs long-term, but parameter memory vs live state vs external memory vs tool-grounded truth" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#64748B;" vertex="1" parent="1">
+          <mxGeometry x="56" y="62" width="1450" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="group-1" value="MEMORY HIERARCHY" style="text;html=1;strokeColor=#94A3B8;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;arcSize=3;dashed=1;dashPattern=8 6;fontSize=13;fontStyle=1;fontColor=#64748B;" vertex="1" parent="1">
+          <mxGeometry x="120" y="100" width="1120" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="node-1" value="&lt;b&gt;Fast / scarce&lt;/b&gt;&lt;br&gt;high-value state should stay here" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=1.5;fontSize=13;fillColor=#FEF3C7;strokeColor=#B45309;fontColor=#0F172A;spacing=10;spacingTop=8;spacingBottom=8;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="190" width="210" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="node-2" value="&lt;b&gt;Slow / rich&lt;/b&gt;&lt;br&gt;store explicit artifacts and fetch on demand" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=1.5;fontSize=13;fillColor=#ECFDF5;strokeColor=#0F766E;fontColor=#0F172A;spacing=10;spacingTop=8;spacingBottom=8;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="720" width="210" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="node-3" value="&lt;b&gt;Layer 1. Weights / parameter memory&lt;/b&gt;&lt;br&gt;General capabilities, broad priors, model identity&lt;br&gt;Slow to update, globally shared, expensive to personalize" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=1.5;fontSize=13;fillColor=#EFF6FF;strokeColor=#94A3B8;fontColor=#0F172A;spacing=10;spacingTop=8;spacingBottom=8;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="220" y="152" width="920" height="106" as="geometry" />
+        </mxCell>
+        <mxCell id="node-4" value="&lt;b&gt;Layer 2. Live state / active horizon&lt;/b&gt;&lt;br&gt;Task plan, current hypotheses, local variables, recent tool outcomes&lt;br&gt;Bounded by quality-cost trade-offs, not by the ambition to remember everything" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=13;fillColor=#DBEAFE;strokeColor=#2563EB;fontStyle=1;fontColor=#0F172A;spacing=10;spacingTop=8;spacingBottom=8;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="220" y="296" width="920" height="128" as="geometry" />
+        </mxCell>
+        <mxCell id="node-5" value="&lt;b&gt;Layer 3. External memory artifacts&lt;/b&gt;&lt;br&gt;Notes, AGENTS.md, memories, plans, retrieval indexes, structured summaries&lt;br&gt;Versionable, inspectable, shareable, and cheaper to persist than raw token history" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fontSize=13;fillColor=#DBEAFE;strokeColor=#2563EB;fontStyle=1;fontColor=#0F172A;spacing=10;spacingTop=8;spacingBottom=8;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="220" y="474" width="920" height="128" as="geometry" />
+        </mxCell>
+        <mxCell id="node-6" value="&lt;b&gt;Layer 4. Tools and environment&lt;/b&gt;&lt;br&gt;Repo state, databases, browsers, APIs, observability, real-world systems&lt;br&gt;Final truth source when the model must verify instead of merely remember" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=1.5;fontSize=13;fillColor=#EFF6FF;strokeColor=#94A3B8;fontColor=#0F172A;spacing=10;spacingTop=8;spacingBottom=8;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="220" y="652" width="920" height="106" as="geometry" />
+        </mxCell>
+        <mxCell id="node-7" value="&lt;b&gt;Token-preserving&lt;/b&gt;&lt;br&gt;mindset: keep as much history as possible" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=1.5;fontSize=12;fillColor=#FFF1F2;strokeColor=#BE123C;fontColor=#0F172A;spacing=10;spacingTop=8;spacingBottom=8;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="68" y="330" width="124" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="node-8" value="&lt;b&gt;State-preserving&lt;/b&gt;&lt;br&gt;mindset: retain only what must stay live" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=1.5;fontSize=12;fillColor=#F0FDFA;strokeColor=#0F766E;fontColor=#0F172A;spacing=10;spacingTop=8;spacingBottom=8;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="330" width="132" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-1" value="initialize" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#1D4ED8;endArrow=blockThin;endFill=1;fontSize=12;fontColor=#475569;" edge="1" source="node-3" target="node-4" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-2" value="externalize" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#B45309;endArrow=blockThin;endFill=1;fontSize=12;fontColor=#475569;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" source="node-4" target="node-5" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-3" value="retrieve" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#0F766E;endArrow=blockThin;endFill=1;fontSize=12;fontColor=#475569;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" edge="1" source="node-5" target="node-4" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-4" value="ground" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#0F766E;endArrow=blockThin;endFill=1;fontSize=12;fontColor=#475569;" edge="1" source="node-5" target="node-6" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge-5" value="feedback" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#7C3AED;endArrow=blockThin;endFill=1;fontSize=12;fontColor=#475569;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" source="node-6" target="node-4" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="140" y="705" />
+              <mxPoint x="140" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label-legend" value="→ live-state retention (amber)  ·  → external memory flow (teal)  ·  → tool-grounded correction (violet)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#64748B;" vertex="1" parent="1">
+          <mxGeometry x="56" y="878" width="700" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="label-footnote" value="This hierarchy combines systems practice (compaction, memories, AGENTS) with research on memory-operating systems. The active horizon H* is the operating range that stays live before external recall becomes cheaper than internal retention." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#64748B;" vertex="1" parent="1">
+          <mxGeometry x="56" y="910" width="1400" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
