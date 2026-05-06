@@ -159,7 +159,7 @@ My goal is to contribute significantly to the development of more efficient and 
 
 Selected papers: EuroSys(Best Paper), AAAIx1(Oral), NeurIPSx1(Spotlight), ICMLx5, EMNLPx1, CVPRx1, ICCVx1, ICASSPx2, ICLRx2(Oralx1).
 
-- **P. Dong**, X. Liu, Z. Tang, H. Chen, Z. Li, X. Zhou, B. Li, X. Hu, X. Chu. Semantic Integrity Matters: Benchmarking and Preserving High-Density Reasoning in KV Cache Compression. In ICML 2026.
+- X. Liu, Z. Tang, H. Chen, **P. Dong**, Z. Li, X. Zhou, B. Li, X. Hu, X. Chu. Semantic Integrity Matters: Benchmarking and Preserving High-Density Reasoning in KV Cache Compression. In ICML 2026.
 
 - X. Su, **P. Dong**, Z. Tang, S. Tang, Y. Zhai, K. Lin, L. Chen, Y. Gai, Y. Luo, Q. Wang, X. Chu. VCG-Bench: Towards A Unified Visual-Centric Benchmark for Structured Generation and Editing. In ICML 2026.
 
