@@ -32,7 +32,11 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 🔥 News
 
-- [2026.05.01] &nbsp;🎉🎉 Congratulations on our three ICML 2026 papers: "Semantic Integrity Matters: Benchmarking and Preserving High-Density Reasoning in KV Cache Compression", "VCG-Bench: Towards A Unified Visual-Centric Benchmark for Structured Generation and Editing", and "Identifying and Mitigating Errors in Gradient Aggregation of Distributed Data Parallel Training".
+- [2026.05] &nbsp;🎉🎉 Our paper "Semantic Integrity Matters: Benchmarking and Preserving High-Density Reasoning in KV Cache Compression" is accepted by ICML 2026.
+
+- [2026.05] &nbsp;🎉🎉 Our paper "VCG-Bench: Towards A Unified Visual-Centric Benchmark for Structured Generation and Editing" is accepted by ICML 2026.
+
+- [2026.05] &nbsp;🎉🎉 Our paper "Identifying and Mitigating Errors in Gradient Aggregation of Distributed Data Parallel Training" is accepted by ICML 2026.
 
 - [2026.01] &nbsp;🎉🎉 Our Paper "Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Understanding" is accepted by ICLR2026.
 
