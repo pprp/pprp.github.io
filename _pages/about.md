@@ -32,6 +32,8 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 🔥 News
 
+- [2026.05.01] &nbsp;🎉🎉 Congratulations on our three ICML 2026 papers: "Semantic Integrity Matters: Benchmarking and Preserving High-Density Reasoning in KV Cache Compression", "VCG-Bench: Towards A Unified Visual-Centric Benchmark for Structured Generation and Editing", and "Identifying and Mitigating Errors in Gradient Aggregation of Distributed Data Parallel Training".
+
 - [2026.01] &nbsp;🎉🎉 Our Paper "Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Understanding" is accepted by ICLR2026.
 
 - [2025.11] &nbsp;🎉🎉 Two years after graduation, I was selected as an outstanding master's student at the NUDT in Hunan Province.
@@ -155,7 +157,13 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 📝 Publications
 
-Selected papers: EuroSys(Best Paper), AAAIx1(Oral), NeurIPSx1(Spotlight), ICMLx2, EMNLPx1, CVPRx1, ICCVx1, ICASSPx2, ICLRx2(Oralx1).
+Selected papers: EuroSys(Best Paper), AAAIx1(Oral), NeurIPSx1(Spotlight), ICMLx5, EMNLPx1, CVPRx1, ICCVx1, ICASSPx2, ICLRx2(Oralx1).
+
+- **P. Dong**, X. Liu, Z. Tang, H. Chen, Z. Li, X. Zhou, B. Li, X. Hu, X. Chu. Semantic Integrity Matters: Benchmarking and Preserving High-Density Reasoning in KV Cache Compression. In ICML 2026.
+
+- X. Su, **P. Dong**, Z. Tang, S. Tang, Y. Zhai, K. Lin, L. Chen, Y. Gai, Y. Luo, Q. Wang, X. Chu. VCG-Bench: Towards A Unified Visual-Centric Benchmark for Structured Generation and Editing. In ICML 2026.
+
+- Z. Tang, J. Huang, Z. Tang, X. Kang, Y. Wang, **P. Dong**, S. Shi, X. Chu, B. Li. Identifying and Mitigating Errors in Gradient Aggregation of Distributed Data Parallel Training. In ICML 2026.
 
 - **P. Dong**, Z. Tang, X. Liu, L. Li, X. Chu, B. Li. Can Compressed LLMs Truly Act? An Empirical Evaluation of Agentic Capabilities in LLM Compression. In ICML2025.
 
