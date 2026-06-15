@@ -32,6 +32,10 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 🔥 News
 
+- [2026.06] &nbsp;🎉🎉 Our paper "GreenMoE: Exploiting Dynamic Load Imbalance for Energy-Efficient Long-Context MoE Training" is accepted by ICML 2026 Workshop AdaptFM.
+
+- [2026.06] &nbsp;🎉🎉 Our paper "Parameters as Agentic Memory: Internalizing Long-Horizon Memories for Efficient LLM Agents" is accepted by ICML 2026 Workshop on Agents in the Wild.
+
 - [2026.05] &nbsp;🎉🎉 Our paper "Semantic Integrity Matters: Benchmarking and Preserving High-Density Reasoning in KV Cache Compression" is accepted by ICML 2026.
 
 - [2026.05] &nbsp;🎉🎉 Our paper "VCG-Bench: Towards A Unified Visual-Centric Benchmark for Structured Generation and Editing" is accepted by ICML 2026.
