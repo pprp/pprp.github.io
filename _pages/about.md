@@ -123,7 +123,8 @@ My goal is to contribute significantly to the development of more efficient and 
 
 ## 💻 Internship
 
-- 10/2025–present: Intern, Alibaba – large-scale model training  
+- 06/2026-present: Intern, Tencent CSIG - coding agent
+- 10/2025–02/2026: Intern, Alibaba – large-scale model training  
 - 03/2025–08/2025: Intern, Shanghai AI Lab – AI infrastructure for Xtuner project  
 - 05/2022–08/2022: Intern, Shanghai AI Lab – model compression with MMRazor
 
