@@ -32,6 +32,8 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 🔥 News
 
+- [2026.07] &nbsp;🎉🎉 Our paper "An Empirical Study of Reasoning Degradation in Quantized Multimodal Large Language Models" is accepted by ACM MM 2026. 
+
 - [2026.06] &nbsp;🎉🎉 Our paper "GreenMoE: Exploiting Dynamic Load Imbalance for Energy-Efficient Long-Context MoE Training" is accepted by ICML 2026 AdaptFM Workshop.
 
 - [2026.06] &nbsp;🎉🎉 Our paper "Parameters as Agentic Memory: Internalizing Long-Horizon Memories for Efficient LLM Agents" is accepted by ICML 2026 AIWILD Workshop.
