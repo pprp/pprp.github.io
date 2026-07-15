@@ -7,7 +7,9 @@
 
 # Site Settings
 title: 'Peijie Dong'
-description: ''
+description: 'Research and technical writing on efficient LLMs, agent systems, long-context serving, and model compression.'
+url: 'https://pprp.github.io'
+baseurl: ''
 repository: 'pprp/pprp.github.io'
 google_scholar_stats_use_cdn: true
 
@@ -23,8 +25,8 @@ baidu_site_verification: # get baidu_site_verification from https://ziyuan.baidu
 author:
   name: 'Peijie Dong'
   avatar: '/images/profile_picture.jpeg'
-  bio: 'PhD student in DSA, The Hong Kong University of Science and Technology (Guang Zhou)'
-  location: 'Guang Zhou, China'
+  bio: 'PhD student in DSA, The Hong Kong University of Science and Technology (Guangzhou)'
+  location: 'Guangzhou, China'
   employer:
   pubmed:
   googlescholar: 'https://scholar.google.com/citations?user=TqS6s4gAAAAJ'

@@ -83,6 +83,7 @@
 }
 
 .content-index__search input {
+  box-sizing: border-box;
   width: 100%;
   min-height: 2.8rem;
   padding: 0.65rem 0.85rem;

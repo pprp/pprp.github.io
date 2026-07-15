@@ -17,8 +17,14 @@ layout: default
       {% if page.last_modified_at %}
         <span>修订：{{ page.last_modified_at | date: "%Y年%m月%d日" }}</span>
       {% endif %}
-      {% assign _rt_words = content | strip_html | number_of_words %}
-      {% assign _rt_min = _rt_words | divided_by: 300 | at_least: 1 %}
+      {% assign _rt_text = content | strip_html | strip_newlines %}
+      {% if page.language == "en" %}
+        {% assign _rt_units = _rt_text | number_of_words %}
+        {% assign _rt_min = _rt_units | divided_by: 220 | at_least: 1 %}
+      {% else %}
+        {% assign _rt_units = _rt_text | size %}
+        {% assign _rt_min = _rt_units | divided_by: 500 | at_least: 1 %}
+      {% endif %}
       <span>{{ _rt_min }} min read</span>
     </div>
 

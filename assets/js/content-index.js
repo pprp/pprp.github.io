@@ -75,6 +75,7 @@
       return normalize(button.dataset.filterValue) === activeTopic;
     })) {
       activeTopic = "all";
+      updateUrlTopic(activeTopic);
     }
 
     applyFilter();
