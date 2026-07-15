@@ -6,6 +6,7 @@ last_modified_at: 2026-04-29 00:00:00 +0800
 author: pprp
 categories: tech
 topics: [agent, skill, harness, education, memory]
+excerpt: '区分 Skill 化、Harness 化与超长周期 Agent：专家能力如何被封装、约束和持续学习，以及人在其中如何避免能力被动退化。'
 ---
 
 过去两年，关于 AI 最流行的焦虑集中在一个错误的问题上：模型会不会替代我的工作？

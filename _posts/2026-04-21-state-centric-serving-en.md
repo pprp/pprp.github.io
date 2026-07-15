@@ -6,6 +6,8 @@ last_modified_at: 2026-04-27 00:00:00 +0800
 author: pprp
 categories: tech
 topics: [long-context, llm-systems, agent]
+language: en
+excerpt: 'Why the long-context race is becoming a state-serving problem involving service lifetime, external memory, recovery, verification, and sustainable inference cost.'
 ---
 
 *A research-style blog on architectural divergence, long-horizon agents, external memory, and possible state assets.*

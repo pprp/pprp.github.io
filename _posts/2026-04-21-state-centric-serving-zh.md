@@ -6,6 +6,7 @@ last_modified_at: 2026-04-27 00:00:00 +0800
 author: pprp
 categories: tech
 topics: [long-context, llm-systems, agent]
+excerpt: '长上下文竞争正在从窗口大小转向状态连续服务：真正关键的是服务寿命、外部记忆、状态恢复、工具验证与长期推理成本。'
 ---
 
 *一篇关于长时 Agent、推理成本、外部记忆与状态资产化的产业技术评论。*

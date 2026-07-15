@@ -6,6 +6,8 @@ last_modified_at: 2026-04-27 00:00:00 +0800
 author: pprp
 categories: tech
 topics: [product-thinking, agent]
+language: en
+excerpt: 'A systems blueprint for moving beyond isolated apps toward an intent-driven canvas assembled by asynchronous agents and reliable UI primitives.'
 ---
 
 We carry supercomputers in our pockets, yet we still interact with them like 1990s filing cabinets.

@@ -6,6 +6,7 @@ last_modified_at: 2026-04-27 00:00:00 +0800
 author: pprp
 categories: tech
 topics: [llm-systems, engineering]
+excerpt: '把 Chat Template 视为模型输入协议，解释角色、工具调用、特殊 token 和训练阶段边界如何共同决定对话系统的正确性。'
 ---
 
 # 大模型对话格式全景：从 Chat Template 到 Tool-Use，再到跨阶段 Token 设计

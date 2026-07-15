@@ -8,6 +8,7 @@ topics: [agent, harness, software-engineering]
 note_source: "OpenAI"
 original_author: "Ryan Lopopolo"
 original_url: "https://openai.com/index/harness-engineering/"
+excerpt: "OpenAI 如何围绕 Codex 重构软件工程环境：让代码、文档、日志、验证和组织知识都变成智能体可检查、可操作的反馈系统。"
 ---
 在过去五个月里，我们的团队一直在进行一项实验：构建并交付一款软件产品的内部 beta 版，**其中没有一行代码由人类手写**。
 

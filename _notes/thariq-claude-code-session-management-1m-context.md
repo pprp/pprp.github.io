@@ -7,6 +7,7 @@ categories: notes
 topics: [claude-code, session-management, long-context]
 note_source: "Thariq / X"
 original_url: "https://x.com/trq212/status/2044548257058328723"
+excerpt: "面对 1M 上下文，重点不是把窗口塞满，而是选择继续、回退、清空、压缩或委派，在长会话中主动控制噪声与上下文退化。"
 ---
 这是一份围绕 Claude Code 长会话管理的实战指南。它的重点不在于“把 1M context 用满”，而在于当上下文窗口大到足以承载超长任务时，如何避免噪声、失败路径和过时信息把模型一步步拖偏。长上下文不是越满越好，真正的能力来自对上下文的取舍。
 

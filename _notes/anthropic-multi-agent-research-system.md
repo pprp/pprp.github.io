@@ -7,6 +7,7 @@ categories: notes
 topics: [multi-agent, research-system]
 note_source: "Anthropic"
 original_url: "https://www.anthropic.com/engineering/multi-agent-research-system"
+excerpt: "Anthropic 多智能体研究系统的设计复盘：主智能体如何分解问题、并行委派检索、压缩结果，并在性能、成本与可靠性之间取舍。"
 ---
 Claude 的[研究功能](https://www.anthropic.com/news/research)可以跨网络、Google Workspace 及各类集成进行搜索，用来完成复杂的信息型任务。这篇文章真正值得读的地方，不只是“用了多个智能体”，而是它解释了多智能体系统何时有效、为什么昂贵，以及从原型走向生产时会遇到哪些工程问题。
 

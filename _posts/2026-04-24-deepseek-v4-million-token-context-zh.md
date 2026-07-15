@@ -7,6 +7,7 @@ last_modified_at: 2026-04-27 00:00:00 +0800
 author: pprp
 categories: tech
 topics: [paper-reading, long-context, llm-systems]
+excerpt: '从系统工程视角解读 DeepSeek-V4：百万 Token 上下文如何同时依赖稀疏注意力、KV Cache 压缩、通信隐藏与后训练协同。'
 ---
 
 *这篇文章基于论文《DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence》和原始中文整理稿重写。它不是逐段翻译，而是把论文重新组织成一条更适合阅读的技术主线：为什么百万 token 上下文困难，DeepSeek-V4 怎么把它做得更便宜，以及这些设计对长程 agent 和 test-time scaling 意味着什么。*

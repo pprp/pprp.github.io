@@ -7,6 +7,7 @@ categories: notes
 topics: [agent, tool-design]
 note_source: "Anthropic"
 original_url: "https://www.anthropic.com/engineering/writing-tools-for-agents"
+excerpt: "从 Agent 的视角设计工具：通过清晰边界、合适返回值、评测驱动迭代和智能体辅助分析，减少工具调用中的歧义与上下文浪费。"
 ---
 [模型上下文协议（MCP）](https://modelcontextprotocol.io/docs/getting-started/intro)可以为大语言模型智能体连接数百种工具，让它们处理现实世界中的任务。但工具越多，不等于智能体越强。真正的问题是：怎样让这些工具被模型正确理解、正确选择，并以较低上下文成本发挥作用？
 

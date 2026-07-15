@@ -7,6 +7,7 @@ categories: notes
 topics: [agent, context-engineering]
 note_source: "Anthropic"
 original_url: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
+excerpt: "从提示工程走向上下文工程：如何在有限注意力预算内选择、维护和压缩信息，让 Agent 在多轮任务中持续朝正确目标行动。"
 ---
 在提示工程作为应用 AI 的关注焦点数年之后，一个新术语开始浮现：**上下文工程**。构建语言模型应用，正在从“怎样写出更好的提示词”，转向一个更宏观的问题：**什么样的上下文配置，最可能让模型产生我们想要的行为？**
 

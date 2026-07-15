@@ -7,9 +7,8 @@ categories: notes
 topics: [agent, coding-agent, workflow]
 note_source: "Anthropic"
 original_url: "https://www.anthropic.com/engineering/claude-code-best-practices"
+excerpt: "一套面向真实编码任务的 Claude Code 工作法：管理上下文、提供验证标准、配置权限与工具，并在多会话协作中保持可控交付。"
 ---
-# Claude Code 最佳实践
-
 这份笔记整理自 Anthropic 的 Claude Code 最佳实践文档。它的核心不是提示词技巧清单，而是一套围绕上下文、验证、权限、环境和多会话协作的工程工作法。
 
 Claude Code 是一个具有智能体能力的编码环境。与那种回答问题然后等待的聊天机器人不同，Claude Code 能够读取你的文件、运行命令、进行修改，并在你观察、引导或完全离开的情况下自主解决问题。这改变了你的工作方式。你不再需要自己编写代码后让 Claude 来审查，而是描述你想要什么，由 Claude 来决定如何构建。Claude 会自主探索、规划并实现。但这种自主性仍然有一条学习曲线。Claude 在某些你需要理解的约束条件下工作。本指南涵盖了在 Anthropic 内部团队以及在各种代码库、语言和环境中使用 Claude Code 的工程师中被证明有效的模式。关于智能体循环在底层的工作原理，请参阅 [Claude Code 的工作原理](http://www.anthropic.com/docs/en/how-claude-code-works)。

@@ -1,19 +1,22 @@
 ---
 layout: post
-title: "Claude Code 源码解读阅读地图"
-title_en: "A Reading Map for Claude Code Source Analysis"
+title: "Claude Code 与 Agent Harness 阅读地图"
+title_en: "A Reading Map for Claude Code and Agent Harnesses"
 date: 2026-04-16 00:00:00 +0800
-last_modified_at: 2026-04-27 00:00:00 +0800
+last_modified_at: 2026-07-15 00:00:00 +0800
 author: pprp
 categories: tech
 topics: [agent, source-reading]
+excerpt: '一张理解 Claude Code 与 Agent Harness 的分层阅读地图：从智能体循环和 App Server 出发，再进入上下文、工具、长任务与多智能体系统。'
 ---
 
-## 读 Claude Code，不能只追“源码事件”
+## 读 Claude Code，不能只盯着模型或客户端
 
-Claude Code 这一轮社区讨论里，最容易被吸走注意力的是“源码从哪里来”“source map 暴露了什么”。这些问题当然重要，但如果只盯着事件本身，很容易错过更值得学习的东西：一个生产级 coding agent 到底由哪些外部系统托住。
+理解 Claude Code 最容易走入两个极端：要么把它当成“更会写代码的模型”，只讨论提示词与模型能力；要么把注意力全部放在 CLI、编辑器或某段实现细节上。两种视角都只覆盖了局部。
 
-我现在把 Claude Code 相关资料拆成「多篇 notes + 一篇 blog」，原因也在这里。社区材料信息量很大，但类型很杂：有些偏事件回顾，有些偏系统架构，有些偏记忆系统，有些偏运行时行为，还有一些其实更适合归类为 clean-room 教程或研究档案。如果把它们全部压进一篇 notes，阅读时会很方便，但检索和后续扩展会变差。
+生产级 Coding Agent 是一个系统：模型负责推理，智能体循环协调工具，权限与沙盒限制动作，协议连接不同客户端，上下文与制品维持任务状态，测试和评估器提供反馈。只有把这些层放在一起，才能解释为什么同一个模型在不同 Harness 中会表现出完全不同的可靠性。
+
+我把相关资料拆成「多篇 notes + 一篇 blog」，正是因为这些材料分别回答运行时、上下文、工具、长任务和多智能体等不同问题。逐篇笔记便于追溯原始来源；这篇文章则负责给出阅读顺序和跨文结论。
 
 更合理的结构是：
 
@@ -22,95 +25,51 @@ Claude Code 这一轮社区讨论里，最容易被吸走注意力的是“源�
 
 所以这篇文章不再逐段翻译某一篇原文，而是回答一个更实用的问题：
 
-**如果你想系统理解 Claude Code，应该先读什么，后读什么，每篇到底解决了什么问题？**
+**如果你想系统理解 Claude Code 与 Agent Harness，应该先读什么，后读什么，每篇到底解决了什么问题？**
 
-## 先把资料分成三类，阅读才不会散
+## 先把资料分成三层，阅读才不会散
 
-目前我把资料分成三组。
+### 1. 运行时骨架：Agent 到底怎样循环
 
-### 1. 入门与方法论：先学会怎么看
+- [深入解析 Codex 智能体循环](/notes/openai-unrolling-the-codex-agent-loop/)
+- [解锁 Codex 运行框架：我们如何构建 App Server](/notes/openai-unlocking-the-codex-harness/)
+- [Harness Engineering：在智能体优先的世界中利用 Codex](/notes/openai-harness-engineering/)
 
-- [Claude Code：如何开始做源码探索](/notes/claudecoding-get-started/)
-- [Claude Code：所谓“源码泄露”其实早有公开线索](/notes/afterpack-claude-code-source-public/)
+这三篇回答的是同一个问题的不同尺度：单轮内部如何在模型与工具之间循环，核心能力如何通过协议提供给多个客户端，以及整个代码库与工程组织如何改造成 Agent 可理解、可操作、可验证的环境。
 
-这两篇最适合放在最前面，因为它们解决的是“怎么看”而不是“看到了什么”。
+先建立这层骨架，才能看清 CLI 或编辑器只是入口；真正决定系统能力的是循环、协议、工具、权限、状态和反馈回路。
 
-第一篇告诉你如何从 npm 分发物、`cli.js`、格式化阅读和运行行为交叉验证开始；第二篇则把几个经常被混淆的概念拆开了：bundle、minify、obfuscation、source map 分别意味着什么。没有这一步，后面很多“源码解读”会读得很飘。
+### 2. 日常工作法：怎样让 Coding Agent 稳定产出
 
-### 2. 系统结构与核心机制：把它看成 runtime
+- [Claude Code：智能体式编码最佳实践](/notes/anthropic-claude-code-best-practices/)
+- [Claude Code：会话管理与 1M 上下文](/notes/thariq-claude-code-session-management-1m-context/)
+- [面向 AI 智能体的高效上下文工程](/notes/anthropic-effective-context-engineering-for-ai-agents/)
+- [为智能体编写高效工具：借助智能体完成](/notes/anthropic-writing-tools-for-agents/)
 
-- [Claude Code：Harness Engineering 完全指南](/notes/qingkeai-claude-code-guide/)
-- [Claude Code：生产级 AI Agent 到底怎么运作](/notes/karan-claude-code-actually-works/)
-- [Claude Code：一次 source map 暴露了什么](/notes/rushi-claude-code-sourcemap/)
+这一层从系统结构转向操作者视角：怎样给出可验证目标，什么时候继续当前会话，什么时候回退、压缩或清空，哪些信息值得进入上下文，以及工具接口怎样减少歧义和无效 token。
 
-这三篇是理解 Claude Code 内部结构的主干。
+这组材料最可复用的结论是：Agent 的上限不只取决于模型，也取决于它能否获得清晰任务、紧凑上下文、合适工具和及时验证。
 
-青稞社区那篇更像总览型教材，把 Claude Code 放到 Harness Engineering 框架里；Karan 那篇是最密、最硬核的工程长文，适合深入看启动流程、权限、上下文压缩、多智能体和 feature flags；Rushi 则更像一篇站在事件时间点上的结构说明，适合你理解 2026 年这波分析潮到底从哪里开始。
+### 3. 长任务与多智能体：怎样跨会话持续交付
 
-### 3. 专题与可复用仓库：沿着具体问题继续挖
+- [面向长时运行智能体的高效 Harness](/notes/anthropic-effective-harnesses-for-long-running-agents/)
+- [面向长时运行应用开发的 Harness 设计](/notes/anthropic-harness-design-long-running-apps/)
+- [我们如何构建多智能体研究系统](/notes/anthropic-multi-agent-research-system/)
 
-- [Claude Code：记忆系统与 CLAUDE.md](/notes/chooseai-claude-code-memory/)
-- [learn Claude Code：把源码解读变成 Harness 教程](/notes/learn-claude-code/)
-- [claude-code-reverse：从运行时行为反推 Claude Code](/notes/claude-code-reverse-runtime/)
-- [claude-code-analysis：把一次源码事件整理成研究档案](/notes/claude-code-analysis-archive/)
+这一层讨论单个上下文窗口之外的问题。初始化制品、进度日志和 Git 历史负责交接；规划器、生成器和评估器形成质量闭环；主智能体与子智能体通过任务分解和结果压缩控制并行研究成本。
 
-这一组更偏“继续研究”和“动手复现”。
+这里需要特别区分两件事：多智能体不是目的，角色分工也不是越多越好。只有当任务可以并行、上下文需要隔离，或评估必须独立于生成时，额外 Agent 才能带来稳定收益。
 
-ChooseAI 的文章适合单独看记忆系统；`learn-claude-code` 不是镜像源码，而是把 Claude Code 的机制重新教给你；`claude-code-reverse` 提供了运行时视角；`claude-code-analysis` 则像参考手册，适合后续查某个子系统。
+## 推荐阅读顺序：先建立循环，再扩展时间尺度
 
-## 推荐阅读顺序：先校准，再下钻
+如果你第一次系统理解 Coding Agent，可以按下面四步阅读：
 
-如果你是第一次接触 Claude Code 的内部机制，我建议按下面这个顺序来。
+1. **看懂基本循环。** 先读 [Codex 智能体循环](/notes/openai-unrolling-the-codex-agent-loop/)，明确输入、推理、工具调用、观察与最终响应怎样组成一轮。
+2. **把循环放进产品。** 再读 [Codex App Server](/notes/openai-unlocking-the-codex-harness/) 与 [Harness Engineering](/notes/openai-harness-engineering/)，理解协议边界和 Agent-friendly 环境。
+3. **掌握日常控制面。** 接着读 [Claude Code 最佳实践](/notes/anthropic-claude-code-best-practices/)、[会话管理](/notes/thariq-claude-code-session-management-1m-context/) 和 [上下文工程](/notes/anthropic-effective-context-engineering-for-ai-agents/)。
+4. **进入长时与并行任务。** 最后读 [长时运行 Harness](/notes/anthropic-effective-harnesses-for-long-running-agents/)、[三智能体应用开发](/notes/anthropic-harness-design-long-running-apps/) 与 [多智能体研究系统](/notes/anthropic-multi-agent-research-system/)。
 
-### 第一阶段：先纠正想象，避免把事件当本质
-
-先读：
-
-- [Claude Code：如何开始做源码探索](/notes/claudecoding-get-started/)
-- [Claude Code：所谓“源码泄露”其实早有公开线索](/notes/afterpack-claude-code-source-public/)
-
-这两篇会帮你放下两个常见误区。
-
-第一个误区是把 Claude Code 想成“神秘黑盒”；第二个误区是把所谓“源码泄露”理解成一夜之间从完全不可见变成完全可见。事实并不是这样。Claude Code 很多应用层逻辑原本就以打包形式公开分发，真正新增的是 source map 对结构理解的增益。
-
-### 第二阶段：建立总图，把聊天框还原成系统
-
-再读：
-
-- [Claude Code：Harness Engineering 完全指南](/notes/qingkeai-claude-code-guide/)
-- [Claude Code：一次 source map 暴露了什么](/notes/rushi-claude-code-sourcemap/)
-
-这一步的目标不是背细节，而是先建立脑中的总图。你要开始把 Claude Code 理解成一套 runtime，而不是一个“会在终端里写代码的聊天框”。
-
-到这里你应该能明确几个关键词：工具平面、权限门控、上下文工程、记忆系统、Hooks、settings、多智能体。
-
-### 第三阶段：进入硬核工程细节，看系统如何跑起来
-
-然后读：
-
-- [Claude Code：生产级 AI Agent 到底怎么运作](/notes/karan-claude-code-actually-works/)
-
-Karan 这篇长文最适合在你已经有总图之后读。否则它的信息密度会显得过高。等你已经知道 Claude Code 大体由哪些层组成，再看启动序列、权限流水线、上下文压缩、React 终端渲染和多代理 IPC，就会清楚得多。
-
-### 第四阶段：按主题深挖，把结论变成自己的设计判断
-
-最后按你自己的兴趣分叉。
-
-如果你关心记忆和长期上下文，就读：
-
-- [Claude Code：记忆系统与 CLAUDE.md](/notes/chooseai-claude-code-memory/)
-
-如果你关心运行时行为和“子代理为什么有用”，就读：
-
-- [claude-code-reverse：从运行时行为反推 Claude Code](/notes/claude-code-reverse-runtime/)
-
-如果你想自己做一个类似风格的 harness，就读：
-
-- [learn Claude Code：把源码解读变成 Harness 教程](/notes/learn-claude-code/)
-
-如果你想把某个具体子系统当文档查，就读：
-
-- [claude-code-analysis：把一次源码事件整理成研究档案](/notes/claude-code-analysis-archive/)
+这条顺序背后的逻辑是：先理解一轮怎样正确执行，再理解多轮怎样保持状态，最后才讨论多个 Agent 怎样分工。跳过前两层直接堆叠多智能体，往往只会把单 Agent 的模糊性并行放大。
 
 ## 放在一起看，真正的线索是 harness
 
@@ -166,13 +125,14 @@ Claude Code 当然依赖强模型，但社区真正反复学到的，是模型�
 ```bibtex
 @misc{dong2026claudecodereadingmap,
   author = {Peijie Dong},
-  title = {Claude Code 源码解读阅读地图},
+  title = {Claude Code 与 Agent Harness 阅读地图},
   year = {2026},
   month = apr,
   day = {16},
   howpublished = {\url{https://pprp.github.io/tech/claude-code-reading-map/}},
   url = {https://pprp.github.io/tech/claude-code-reading-map/},
-  note = {Blog post. Accessed: 2026-04-28},
+  urldate = {2026-07-15},
+  note = {Blog post. Accessed: 2026-07-15},
   language = {Chinese}
 }
 ```

@@ -8,6 +8,7 @@ topics: [codex, agent-loop, harness]
 note_source: "OpenAI"
 original_author: "Michael Bolin"
 original_url: "https://openai.com/index/unrolling-the-codex-agent-loop/"
+excerpt: "逐层拆解 Codex 智能体循环：从用户输入、模型推理和工具调用，到沙盒执行、状态更新与最终响应之间的完整控制流。"
 ---
 这篇文章是理解 Codex 的入口：它不从模型能力讲起，而是先拆解一个编码智能体最基本、也最容易被忽视的结构——智能体循环。
 

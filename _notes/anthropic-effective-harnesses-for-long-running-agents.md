@@ -8,6 +8,7 @@ topics: [agent, harness, long-running]
 note_source: "Anthropic"
 original_author: "Justin Young"
 original_url: "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents"
+excerpt: "长时运行 Agent 如何跨越上下文窗口稳定推进：用初始化智能体、进度制品、Git 历史与增量交付机制解决会话断层和过早收工。"
 ---
 随着 AI 智能体能力提升，开发者越来越多地让它们承担需要数小时甚至数天才能完成的复杂任务。但真正困难的地方，不是让智能体开始工作，而是让它跨越多个上下文窗口后仍能持续、稳定、可交接地推进。
 

@@ -6,6 +6,7 @@ last_modified_at: 2026-04-29 00:00:00 +0800
 author: pprp
 categories: tech
 topics: [agent, data, marketplace, rl]
+excerpt: '把 Agent 执行轨迹视为能力资产：分析高价值 trace 的供给、验证、定价与交易机制，并推演 Trace Data Foundry 的产品边界。'
 ---
 
 *这篇文章是对"agent trace 商品化"这一方向的竞品分析与产品设计推演。它不是一篇论文综述，而是试图回答一个具体问题：在 SWE-Gym、SWE-smith、AgentRR、Datacurve 等工作已经出现的背景下，一个"verified agent trace 交易平台"的差异化空间在哪里？*

@@ -8,6 +8,7 @@ topics: [codex, harness, app-server]
 note_source: "OpenAI"
 original_author: "Celia Chen"
 original_url: "https://openai.com/index/unlocking-the-codex-harness/"
+excerpt: "Codex App Server 的架构与协议设计：如何把核心智能体循环封装成稳定接口，支撑 CLI、编辑器和其他客户端共享同一套能力。"
 ---
 Codex 同时存在于 Web 应用、CLI、IDE 扩展和 macOS 应用里。表面上看，它们是不同产品形态；更深一层看，它们共享的是同一个 Codex 运行框架，也就是支撑所有 Codex 体验的智能体循环和执行逻辑。[Codex App Server](https://developers.openai.com/codex/app-server) 正是把这套运行框架暴露给客户端的双向 JSON-RPC[1](http://openai.com/zh-Hans-CN/index/unlocking-the-codex-harness/#citation-bottom-1) API。
 

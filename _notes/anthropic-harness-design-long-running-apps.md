@@ -8,6 +8,7 @@ topics: [harness, software-engineering]
 note_source: "Anthropic"
 original_author: "Prithvi Rajasekaran"
 original_url: "https://www.anthropic.com/engineering/harness-design-long-running-apps"
+excerpt: "用规划器、生成器和评估器组成三智能体 Harness，把主观审美与可验证正确性转化为长时间自主应用开发的反馈回路。"
 ---
 在过去几个月里，我一直在研究两个相互关联的问题：如何让 Claude 生成高质量的前端设计，以及如何让它在无人干预的情况下构建完整的应用程序。这项工作源于我们早期在[前端设计技能](https://github.com/anthropics/claude-code/blob/main/plugins/frontend-design/skills/frontend-design/SKILL.md)和[长时间运行的编码智能体框架](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)上的探索——我和同事通过提示工程与框架设计，将 Claude 的表现大幅提升至基线水平之上，但两者最终都遇到了瓶颈。
 
