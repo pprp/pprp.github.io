@@ -17,7 +17,7 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-I am **Peijie Dong** (董佩杰), a Ph.D. candidate in Data Science and Analysis Thrust at the Hong Kong University of Science and Technology (Guangzhou). Under the guidance of [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen) and [Prof.Junxian He](https://jxhe.github.io/). My research interests are in the fields of model compression, efficient large language models, and machine learning systems. I am currently an intern in Tencent CSIG workbuddy/codebuddy team. 
+I am **Peijie Dong** (董佩杰), the final year Ph.D. candidate in Data Science and Analysis Thrust at the Hong Kong University of Science and Technology (Guangzhou). Under the guidance of [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen) and [Prof.Junxian He](https://jxhe.github.io/). My research interests are in the fields of model compression, efficient large language models, and machine learning systems. I am currently an intern in Tencent CSIG workbuddy/codebuddy team. 
 
 
 **Research Interests**
