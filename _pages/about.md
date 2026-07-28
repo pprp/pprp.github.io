@@ -32,6 +32,8 @@ My goal is to contribute significantly to the development of more efficient and 
 
 # 🔥 News
 
+- [2026.07] &nbsp;🎉🎉 Our tech report "Tencent WorkBuddy Bench: A Multi-Domain Coding-Agent Benchmark with Contamination-Resistant Task Construction" is released to Arxiv.
+
 - [2026.07] &nbsp;🎉🎉 Our paper "An Empirical Study of Reasoning Degradation in Quantized Multimodal Large Language Models" is accepted by ACM MM 2026. 
 
 - [2026.06] &nbsp;🎉🎉 Our paper "GreenMoE: Exploiting Dynamic Load Imbalance for Energy-Efficient Long-Context MoE Training" is accepted by ICML 2026 AdaptFM Workshop.
@@ -56,7 +58,7 @@ My goal is to contribute significantly to the development of more efficient and 
 
 - [2025.08] &nbsp;🎉🎉 Our Paper "Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Tasks" is released to [arxiv.](https://arxiv.org/pdf/2507.19353)
 
-- [2025.08] &nbsp;🎉🎉 Our Paper "Intern-S1: A Scientific Multimodal Foundation Model" is released to [arxiv.](https://arxiv.org/abs/2508.15763) Great work by Intern-S1 team.
+- [2025.08] &nbsp;🎉🎉 Our tech report "Intern-S1: A Scientific Multimodal Foundation Model" is released to [arxiv.](https://arxiv.org/abs/2508.15763) Great work by Intern-S1 team.
 
 - [2025.05] &nbsp;🎉🎉 Our Paper "Can Compressed LLMs Truly Act? An Empirical Evaluation of Agentic Capabilities in LLM Compresssion" is accepted by ICML25. We are especially grateful to the reviewer who awarded us a '5 (Strong Accept)'.
 
