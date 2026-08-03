@@ -17,18 +17,19 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-I am **Peijie Dong** (董佩杰), the final year Ph.D. candidate in Data Science and Analysis Thrust at the Hong Kong University of Science and Technology (Guangzhou). Under the guidance of [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen) and [Prof.Junxian He](https://jxhe.github.io/). My research interests are in the fields of model compression, efficient large language models, and machine learning systems. I am currently an intern in Tencent CSIG workbuddy/codebuddy team. 
+I am **Peijie Dong** (董佩杰), a final-year Ph.D. candidate in the Data Science and Analytics Thrust at the Hong Kong University of Science and Technology (Guangzhou), advised by [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen) and [Prof. Junxian He](https://jxhe.github.io/). I am currently a research intern with the WorkBuddy/CodeBuddy Coding Agent team at Tencent CSIG, where I work on **post-training and evaluation for long-horizon coding agents**.
 
 
 **Research Interests**
 
-My research focuses on enhancing the efficiency and accessibility of deep learning models, particularly in the following areas:
+My research focuses on improving the ability of coding agents to solve long-horizon, repository-level software engineering tasks. I am particularly interested in transforming interaction trajectories and environment feedback into effective training signals. My current research interests include:
 
-- Model Compression: Exploring pruning, quantization, and knowledge distillation techniques to reduce model size and computational demands.
-- Efficient Large Language Models: Optimizing LLM training and inference through innovative architectures and deployment strategies.
-- Automated Machine Learning (AutoML): Developing methods to streamline the ML pipeline, from architecture search to hyperparameter optimization.
+- Coding Agent Post-Training: Developing data and training recipes for coding agents, including trajectory curation, supervised fine-tuning, reinforcement learning, and reward design.
+- Long-Horizon Agent Evaluation: Building benchmarks and agent harnesses to study planning, tool use, repository navigation, error recovery, and end-to-end task completion.
+- Agent Data and Training-Evaluation Loops: Diagnosing behavioral failures from agent trajectories and translating them into targeted data, objectives, and evaluation signals.
+- Efficient Large Language Models: Improving the efficiency of LLM training and inference through model compression, low-precision training, efficient architectures, and systems optimization.
 
-My goal is to contribute significantly to the development of more efficient and accessible machine learning systems. Through my research, I strive to push the boundaries of what's possible in model compression, efficient large language models, and automated machine learning. If you share similar interests or would like to discuss potential collaborations, I warmly invite you to reach out to me. I'm always eager to connect with fellow researchers and industry professionals to exchange ideas and explore new opportunities in this exciting field.
+My long-term goal is to build coding agents that can learn from complete interaction trajectories and reliably improve through real-world task feedback. I welcome discussions and collaborations on coding agents, post-training, evaluation, and efficient LLMs.
 
 # 🔥 News
 
@@ -127,7 +128,7 @@ My goal is to contribute significantly to the development of more efficient and 
 
 ## 💻 Internship
 
-- 06/2026-present: Intern, Tencent CSIG - coding agent
+- 06/2026-present: Research Intern, Tencent CSIG WorkBuddy/CodeBuddy - post-training and evaluation for long-horizon coding agents
 - 10/2025–02/2026: Intern, Alibaba – large-scale model training  
 - 03/2025–08/2025: Intern, Shanghai AI Lab – AI infrastructure for Xtuner project  
 - 05/2022–08/2022: Intern, Shanghai AI Lab – model compression with MMRazor
