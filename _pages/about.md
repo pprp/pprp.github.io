@@ -33,6 +33,8 @@ My long-term goal is to build coding agents that can learn from complete interac
 
 # 🔥 News
 
+- [2026.08] &nbsp;🎉🎉 Our paper "Architecture-Aware Reinforcement Learning Makes Sliding-Window Attention Competitive in Math Reasoning" is accepted by EMNLP 2026 Main Conference.
+
 - [2026.07] &nbsp;🎉🎉 Our tech report "Tencent WorkBuddy Bench: A Multi-Domain Coding-Agent Benchmark with Contamination-Resistant Task Construction" is released to Arxiv.
 
 - [2026.07] &nbsp;🎉🎉 Our paper "An Empirical Study of Reasoning Degradation in Quantized Multimodal Large Language Models" is accepted by ACM MM 2026. 
@@ -173,7 +175,9 @@ My long-term goal is to build coding agents that can learn from complete interac
 
 # 📝 Publications
 
-Selected papers: EuroSys(Best Paper), AAAIx1(Oral), NeurIPSx1(Spotlight), ICMLx5, EMNLPx1, CVPRx1, ICCVx1, ICASSPx2, ICLRx2(Oralx1).
+Selected papers: EuroSys(Best Paper), AAAIx1(Oral), NeurIPSx1(Spotlight), ICMLx5, EMNLPx2, CVPRx1, ICCVx1, ICASSPx2, ICLRx2(Oralx1).
+
+- K. Liu, **P. Dong**, X. Xie, J. Gao, Q. Guo, X. Chu, S. Zhang, K. Chen. Architecture-Aware Reinforcement Learning Makes Sliding-Window Attention Competitive in Math Reasoning. In EMNLP 2026 Main Conference.
 
 - X. Liu, Z. Tang, H. Chen, **P. Dong**, Z. Li, X. Zhou, B. Li, X. Hu, X. Chu. Semantic Integrity Matters: Benchmarking and Preserving High-Density Reasoning in KV Cache Compression. In ICML 2026.
 
