@@ -51,8 +51,7 @@
 
 /* News section styling */
 .page__content {
-  h1[id="news"],
-  h1:contains("News") {
+  h1[id="-news"] {
     + ul {
       list-style: none;
       padding-left: 0;
@@ -96,7 +95,7 @@ ul li, ol li {
 }
 
 /* Responsive guards for long-form post content */
-.post .entry {
+.reading-content {
   overflow-wrap: anywhere;
 
   img,
@@ -127,7 +126,7 @@ ul li, ol li {
 }
 
 @media (max-width: 767px) {
-  .post .entry {
+  .reading-content {
     overflow-x: hidden;
 
     table {
