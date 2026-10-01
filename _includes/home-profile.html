@@ -1,0 +1,13 @@
+{% assign profile = site.author %}
+<header class="home-profile">
+    <img class="home-profile__avatar" src="{{ profile.avatar | relative_url }}" alt="{{ profile.name | escape }}">
+    <div>
+        <h1 class="home-profile__name">{{ profile.name }} <span lang="zh">董佩杰</span></h1>
+        <p class="home-profile__bio">{{ profile.bio }}</p>
+        <nav class="home-profile__links" aria-label="Contact and academic profiles">
+            {% if profile.email %}<a href="mailto:{{ profile.email }}">Email</a>{% endif %}
+            {% if profile.github %}<a href="https://github.com/{{ profile.github }}">GitHub</a>{% endif %}
+            {% if profile.googlescholar %}<a href="{{ profile.googlescholar }}">Google Scholar</a>{% endif %}
+        </nav>
+    </div>
+</header>

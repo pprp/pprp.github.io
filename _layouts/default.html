@@ -9,17 +9,18 @@ layout: compress
     {% include head/custom.html %}
   </head>
 
-  <body>
+  <body{% if page.homepage_style == 'bookish' %} class="home-bookish"{% endif %}>
 
     {% include browser-upgrade.html %}
     {% include masthead.html %}
 
     <div id="main" role="main">
-      {% include sidebar.html %}
+      {% unless page.homepage_style == 'bookish' %}{% include sidebar.html %}{% endunless %}
     
       <article class="page{% if page.wide or page.layout == 'post' or page.layout == 'note' %} page--wide{% endif %}" itemscope itemtype="http://schema.org/CreativeWork">
         {% if page.title %}<meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
         <div class="page__inner-wrap">
+          {% if page.homepage_style == 'bookish' %}{% include home-profile.html %}{% endif %}
           <section class="page__content" itemprop="text">
             {{ content }}
           </section>
