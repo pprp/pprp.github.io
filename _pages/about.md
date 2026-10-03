@@ -18,8 +18,15 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-I am **Peijie Dong** (董佩杰), a final-year Ph.D. candidate in the Data Science and Analytics Thrust at the Hong Kong University of Science and Technology (Guangzhou), advised by [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen) and [Prof. Junxian He](https://jxhe.github.io/). I am currently a research intern with the WorkBuddy/CodeBuddy Coding Agent team at Tencent CSIG, where I work on **post-training and evaluation for long-horizon coding agents**.
+I am **Peijie Dong** (董佩杰), a final-year Ph.D. candidate in the Data Science and Analytics Thrust at the Hong Kong University of Science and Technology (Guangzhou), with **expected graduation in 2027**, advised by [Prof. Xiaowen Chu](https://sites.google.com/view/chuxiaowen) and [Prof. Junxian He](https://jxhe.github.io/). I am currently a research intern with the WorkBuddy/CodeBuddy Coding Agent team at Tencent CSIG, where I work on **post-training and evaluation for long-horizon coding agents**.
 
+<div class="notice--info" markdown="1">
+**Open to full-time opportunities · 2027 graduate**
+
+I am currently seeking full-time opportunities through the fall recruitment cycle. Please feel free to contact me at [{{ site.author.email }}](mailto:{{ site.author.email }}) for relevant opportunities or referrals.
+
+**正在参加秋招，预计 2027 年博士毕业。** 欢迎交流全职岗位机会或内推，可通过上述邮箱联系我。
+</div>
 
 **Research Interests**
 
@@ -125,6 +132,7 @@ My long-term goal is to build coding agents that can learn from complete interac
 
 - _2023.09 - now_, The Hong Kong University of Science and Technology (Guangzhou), PhD Candidate in Computer Science
 
+  - Expected Graduation: 2027
   - Supervisor: Prof. Xiaowen Chu
   - Research Interests: Large Language Models, Model Compression
 
