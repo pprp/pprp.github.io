@@ -43,6 +43,8 @@ My long-term goal is to build coding agents that can learn from complete interac
 
 <div class="home-news" markdown="1">
 
+- <time class="news-date" datetime="2026-10">2026.10</time> <span class="news-text">🎉🎉 I've been invited to serve on the Program Committee (PC) of the **36th International Joint Conference on Artificial Intelligence (IJCAI)**.</span>
+
 - <time class="news-date" datetime="2026-10">2026.10</time> <span class="news-text">🎉🎉 Our paper "[CPA: Efficient and Stable FP4 RL Training via Cross-Precision Alignment](https://openreview.net/forum?id=jCqn6PPPpi)" is accepted by **NeurIPS 2026**.</span>
 
 - <time class="news-date" datetime="2026-08">2026.08</time> <span class="news-text">🎉🎉 Our paper "Architecture-Aware Reinforcement Learning Makes Sliding-Window Attention Competitive in Math Reasoning" is accepted by EMNLP 2026 Main Conference.</span>
@@ -175,7 +177,7 @@ My long-term goal is to build coding agents that can learn from complete interac
   - _Conferences_: NeurIPS (AC), ICLR, CVPR, ECCV, ICASSP
   - _Journals_: IJCV, Neural Networks
 - **2026**：
-  - _Conferences_: AAAI (PC), WACV, NeurIPS, ICLR
+  - _Conferences_: AAAI (PC), IJCAI (PC), WACV, NeurIPS, ICLR
   - _Journals_: Neural Networks
 
 # 🎖 Honors and Awards
